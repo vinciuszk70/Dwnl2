@@ -1,0 +1,2631 @@
+local Prefix = "-"
+local Connect = {}
+local Cmds = {}
+local Lk = {}
+local Players = game.Players
+local LPlayer = game.Players.LocalPlayer
+local Run = game:GetService("RunService")
+local Replicate = game:GetService("ReplicatedStorage")
+local ShootEvent = Replicate.ShootEvent
+local ItemHandler = workspace.Remote.ItemHandler
+local ItemGiver = workspace.Prison_ITEMS.giver
+local ItemSingle = workspace.Prison_ITEMS.single
+local ItemClothes = workspace.Prison_ITEMS.clothes
+local TeamEvent = workspace.Remote.TeamEvent
+local RobloxGui = game.CoreGui.RobloxGui
+local StarterGui = game:GetService("StarterGui")
+local Marketplace = game:GetService("MarketplaceService")
+local CheckGamePass = Marketplace:UserOwnsGamePassAsync(tonumber((LPlayer.CharacterAppearance):split('=')[#((LPlayer.CharacterAppearance):split('='))]), 96651)
+local SayMessageRequest = Replicate.DefaultChatSystemChatEvents.SayMessageRequest
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local Owner1 = Players:FindFirstChild("viniciuszk70")
+local Owner2 = Players:FindFirstChild("takkan007")
+local Selecting
+
+local BrickColors = {
+'White', 'Grey', 'Light yellow', 'Brick yellow',
+'Light green (Mint)', 'Light reddish violet', 'Pastel Blue',
+'Light orange brown', 'Nougat', 'Bright red', 'Med. reddish violet',
+'Bright blue', 'Bright yellow', 'Earth orange', 'Black',
+'Dark grey', 'Dark green', 'Medium green', 'Lig. Yellowich orange',
+'Bright green', 'Dark orange', 'Light bluish violet', 'Transparent',
+'Tr. Red', 'Tr. Lg blue', 'Tr. Blue', 'Tr. Yellow', 'Light blue',
+'Tr. Flu. Reddish orange', 'Tr. Green', 'Tr. Flu. Green', 'Phosph. White',
+'Light red', 'Medium red', 'Medium blue', 'Light grey', 'Bright violet',
+'Br. yellowish orange', 'Bright orange', 'Bright bluish green', 'Earth yellow',
+'Bright bluish violet', 'Tr. Brown', 'Medium bluish violet', 'Tr. Medi. reddish violet',
+'Med. yellowish green', 'Med. bluish green', 'Light bluish green',
+'Br. yellowish green', 'Lig. yellowish green', 'Med. yellowish orange',
+'Br. reddish orange', 'Bright reddish violet', 'Light orange',
+'Tr. Bright bluish violet', 'Gold', 'Dark nougat', 'Silver',
+'Neon orange', 'Neon green', 'Sand blue', 'Sand violet',
+'Medium orange', 'Sand yellow', 'Earth blue', 'Earth green',
+'Tr. Flu. Blue', 'Sand blue metallic', 'Sand violet metallic',
+'Sand yellow metallic', 'Dark grey metallic', 'Black metallic',
+'Light grey metallic', 'Sand green', 'Sand red', 'Dark red',
+'Tr. Flu. Yellow', 'Tr. Flu. Red', 'Gun metallic', 'Red flip/flop',
+'Yellow flip/flop', 'Silver flip/flop', 'Curry', 'Fire Yellow',
+'Flame yellowish orange', 'Reddish brown', 'Flame reddish orange',
+'Medium stone grey', 'Royal blue', 'Dark Royal blue',
+'Bright reddish lilac', 'Dark stone grey', 'Lemon metalic',
+'Light stone grey', 'Dark Curry', 'Faded green', 'Turquoise',
+'Light Royal blue', 'Medium Royal blue', 'Rust', 'Brown',
+'Reddish lilac', 'Lilac', 'Light lilac', 'Bright purple',
+'Light purple', 'Light pink', 'Light brick yellow',
+'Warm yellowish orange', 'Cool yellow', 'Dove blue', 'Medium lilac',
+'Slime green', 'Smoky grey', 'Dark blue', 'Parsley green',
+'Steel blue', 'Storm blue', 'Lapis', 'Dark indigo', 'Sea green',
+'Shamrock', 'Fossil', 'Mulberry', 'Forest green', 'Cadet blue',
+'Electric blue', 'Eggplant', 'Moss', 'Artichoke', 'Sage green', 
+'Ghost grey', 'Lilac', 'Plum', 'Olivine', 'Laurel green',
+'Quill grey', 'Crimson', 'Mint', 'Baby blue', 'Carnation pink',
+'Persimmon', 'Maroon', 'Gold', 'Daisy orange', 'Pearl',
+'Fog', 'Salmon', 'Terra Cotta', 'Cocoa', 'Wheat', 'Buttermilk',
+'Mauve', 'Sunrise','Tawny', 'Rust', 'Cashmere', 'Khaki',
+'Lily white', 'Seashell', 'Burgundy', 'Cork', 'Burlap',
+'Beige', 'Oyster', 'Pine Cone', 'Fawn brown', 'Hurricane grey',
+'Cloudy grey', 'Linen', 'Copper', 'Medium brown', 'Bronze',
+'Flint', 'Dark taupe', 'Burnt Sienna', 'Institutional white',
+'Mid gray', 'Really black', 'Really red', 'Deep orange',
+'Alder', 'Dusty Rose', 'Olive', 'New Yeller', 'Really blue',
+'Navy blue', 'Deep blue', 'Cyan', 'CGA brown', 'Magenta',
+'Pink', 'Deep orange', 'Teal', 'Toothpaste', 'Lime green',
+'Camo', 'Grime', 'Lavender', 'Pastel light blue', 'Pastel orange',
+'Pastel violet', 'Pastel blue-green', 'Pastel green',
+'Pastel yellow', 'Pastel brown', 'Royal purple','Hot pink',
+'1', '2', '3', '4', '5', '6', '8',
+'9', '11', '12', '18', '21', '23',
+'24', '25', '26', '27', '28', '29', '36',
+'37', '38', '39', '40', '41', '42', '43',
+'44', '45', '46', '47', '48', '49', '50',
+'100', '101', '103', '104', '105', '106',
+'107', '108', '110', '111', '112', '113',
+'115', '116', '118', '119', '120', '121',
+'122', '123', '124', '125', '126', '127',
+'128', '131', '133', '134', '135', '136',
+'137', '138', '140', '141', '143', '145',
+'146', '147', '148', '149', '150', '151',
+'150', '151', '153', '154', '157', '158',
+'168', '176', '178', '179', '180', '190',
+'191', '192', '193', '194', '195', '196',
+'198', '199', '200', '208', '209', '210',
+'211', '212', '213', '216', '217', '218',
+'219', '220', '221', '222', '223', '224',
+'225', '226', '232', '232', '268', '301',
+'302', '303', '304', '305', '306', '307',
+'308', '309', '310', '311', '310', '311',
+'312', '313', '314', '315', '316', '317',
+'318', '319', '320', '321', '322', '323',
+'324', '325', '327', '328', '329', '330',
+'330', '331', '332', '333', '335', '335',
+'336', '337', '338', '339', '340', '341',
+'342', '343', '344', '345', '346', '347',
+'348', '349', '350', '351', '352', '353',
+'354', '355', '356', '357', '358', '359',
+'360', '361', '362', '363', '364', '365',
+'1001', '1002', '1003', '1004', '1005',
+'1006', '1007', '1008', '1009', '1010',
+'1011', '1013', '1014', '1015', '1016',
+'1017', '1018', '1019', '1020', '1021',
+'1022', '1023', '1024', '1025', '1026',
+'1027', '1028', '1029', '1030', '1031',
+'1032'
+}
+
+-- Gui --
+
+local MsdAdminV2 = Instance.new("ScreenGui")
+local AdminFrame = Instance.new("Frame")
+local UICorner_3 = Instance.new("UICorner")
+local MsdLabel = Instance.new("TextLabel")
+local UICorner_9 = Instance.new("UICorner")
+local CmdBox = Instance.new("TextBox")
+local UICorner_10 = Instance.new("UICorner")
+local OptionsAdmin = Instance.new("Frame")
+local C = Instance.new("TextButton")
+local S = Instance.new("TextButton")
+local UICorner_11 = Instance.new("UICorner")
+local T2 = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local UICorner_13 = Instance.new("UICorner")
+local Commands = Instance.new("Frame")
+local CmdHandler = Instance.new("ScrollingFrame")
+local CmdText = Instance.new("TextLabel")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local TextLabel = Instance.new("TextLabel")
+local UICorner_14 = Instance.new("UICorner")
+local Close_2 = Instance.new("TextButton")
+local UICorner_15 = Instance.new("UICorner")
+local UICorner_16 = Instance.new("UICorner")
+local SpamGui = Instance.new("Frame")
+local Crim_2 = Instance.new("TextButton")
+local UICorner_17 = Instance.new("UICorner")
+local SpamToggle = Instance.new("TextButton")
+local UICorner_18 = Instance.new("UICorner")
+local TextLabel_2 = Instance.new("TextLabel")
+local UICorner_19 = Instance.new("UICorner")
+local Power = Instance.new("TextBox")
+local UICorner_20 = Instance.new("UICorner")
+local Player_2 = Instance.new("TextBox")
+local UICorner_21 = Instance.new("UICorner")
+local Close_3 = Instance.new("TextButton")
+local UICorner_22 = Instance.new("UICorner")
+local Crim2 = Instance.new("TextButton")
+local UICorner_23 = Instance.new("UICorner")
+local UICorner_24 = Instance.new("UICorner")
+local StatusFrame = Instance.new("Frame")
+local ImageLabel = Instance.new("ImageLabel")
+local UICorner_25 = Instance.new("UICorner")
+local Display = Instance.new("TextLabel")
+local Nick = Instance.new("TextLabel")
+local User_Id = Instance.new("TextLabel")
+local Life = Instance.new("TextLabel")
+local Team = Instance.new("TextLabel")
+local Ammo = Instance.new("TextLabel")
+local Killed_innocents = Instance.new("TextLabel")
+local Players2 = Instance.new("TextLabel")
+local Fps2 = Instance.new("TextLabel")
+local Friendsontheserver = Instance.new("TextLabel")
+local Theownerisontheserver = Instance.new("TextLabel")
+local UICorner_26 = Instance.new("UICorner")
+local UICorner_27 = Instance.new("UICorner")
+local ToggleFrame = Instance.new("Frame")
+local AT = Instance.new("TextLabel")
+local UIConer_29 = Instance.new("UICorner")
+local WT = Instance.new("TextLabel")
+local UIConer_30 = Instance.new("UICorner")
+local ST = Instance.new("TextLabel")
+local UIConer_31 = Instance.new("UICorner")
+local DT = Instance.new("TextLabel")
+local UIConer_32 = Instance.new("UICorner")
+local Back_Space = Instance.new("TextLabel")
+local UIConer_33 = Instance.new("UICorner")
+local UIConer_28 = Instance.new("UICorner")
+local UICorner_35 = Instance.new("UICorner")
+
+MsdAdminV2.Name = "Msd Admin V2"
+MsdAdminV2.Parent = game.CoreGui
+MsdAdminV2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+AdminFrame.Name = "AdminFrame"
+AdminFrame.Parent = MsdAdminV2
+AdminFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AdminFrame.BackgroundTransparency = 100
+AdminFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+AdminFrame.Position = UDim2.new(0.012, 0, 0.807, 0)
+AdminFrame.Size = UDim2.new(0, 234, 0, 28)
+AdminFrame.Active = true
+AdminFrame.Draggable = true
+
+MsdLabel.Name = "MsdLabel"
+MsdLabel.Parent = AdminFrame
+MsdLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MsdLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+MsdLabel.Size = UDim2.new(0, 260, 0, 23)
+MsdLabel.Font = Enum.Font.GothamBlack
+MsdLabel.Text = "Msd Admin V2"
+MsdLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+MsdLabel.TextSize = 14.000
+
+UICorner_9.Parent = MsdLabel
+
+CmdBox.Name = "CmdBox"
+CmdBox.Parent = AdminFrame
+CmdBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CmdBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
+CmdBox.Position = UDim2.new(0, 0, 0.97, 0)
+CmdBox.Size = UDim2.new(0, 260, 0, 23)
+CmdBox.Font = Enum.Font.GothamBlack
+CmdBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+CmdBox.PlaceholderText = "Type your commands here."
+CmdBox.Text = ""
+CmdBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+CmdBox.TextSize = 14.000
+
+UICorner_10.Parent = CmdBox
+
+C.Name = "C"
+C.Parent = AdminFrame
+C.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+C.BorderColor3 = Color3.fromRGB(255, 255, 255)
+C.Position = UDim2.new(0.01, 0, 0.0647, 0)
+C.Size = UDim2.new(0, 30, 0, 20)
+C.Font = Enum.Font.GothamBlack
+C.Text = "C"
+C.TextColor3 = Color3.fromRGB(255, 255, 255)
+C.TextSize = 14.000
+C.MouseButton1Click:Connect(function()
+if Commands.Visible ~= true then
+Commands.Visible = true
+else
+Commands.Visible = false
+end
+end)
+
+UICorner_11.Parent = C
+
+S.Name = "S"
+S.Parent = AdminFrame
+S.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+S.BorderColor3 = Color3.fromRGB(255, 255, 255)
+S.Position = UDim2.new(0.17, 0, 0.0647, 0)
+S.Size = UDim2.new(0, 30, 0, 20)
+S.Font = Enum.Font.GothamBlack
+S.Text = "S"
+S.TextColor3 = Color3.fromRGB(255, 255, 255)
+S.TextSize = 14.000
+S.MouseButton1Click:Connect(function()
+if StatusFrame.Visible ~= true then
+StatusFrame.Visible = true
+else
+StatusFrame.Visible = false
+end
+end)
+
+UICorner_27.Parent = S
+
+T2.Name = "T2"
+T2.Parent = AdminFrame
+T2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+T2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+T2.Position = UDim2.new(0.81, 0, 0.0647, 0)
+T2.Size = UDim2.new(0, 30, 0, 20)
+T2.Font = Enum.Font.GothamBlack
+T2.Text = "T"
+T2.TextColor3 = Color3.fromRGB(255, 255, 255)
+T2.TextSize = 14.000
+T2.MouseButton1Click:Connect(function()
+if ToggleFrame.Visible ~= true then
+ToggleFrame.Visible = true
+else
+ToggleFrame.Visible = false
+end
+end)
+
+UICorner_35.Parent = T2
+
+UICorner_3.Parent = AdminFrame
+
+Commands.Name = "Commands"
+Commands.Parent = MsdAdminV2
+Commands.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Commands.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Commands.BorderSizePixel = 3
+Commands.Position = UDim2.new(0.0123499107, 0, 0.333410233, 0)
+Commands.Size = UDim2.new(0, 366, 0, 310)
+Commands.Visible = false
+Commands.Active = true
+Commands.Draggable = true
+
+CmdHandler.Name = "CmdHandler"
+CmdHandler.Parent = Commands
+CmdHandler.Active = true
+CmdHandler.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CmdHandler.BackgroundTransparency = 1.000
+CmdHandler.BorderSizePixel = 0
+CmdHandler.AutomaticCanvasSize = "Y"
+CmdHandler.Position = UDim2.new(0, 0, 0.1, 0)
+CmdHandler.Size = UDim2.new(0, 361, 0, 270)
+CmdHandler.ScrollBarThickness = 7
+
+CmdText.Name = "CmdText"
+CmdText.Parent = nil
+CmdText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CmdText.BackgroundTransparency = 1.000
+CmdText.BorderSizePixel = 0
+CmdText.Size = UDim2.new(0, 366, 0, 27)
+CmdText.Font = Enum.Font.GothamBlack
+CmdText.Text = "Text"
+CmdText.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+CmdText.TextSize = 19.000
+CmdText.TextWrapped = true
+
+UIListLayout_2.Parent = CmdHandler
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+
+TextLabel.Parent = Commands
+TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BorderSizePixel = 3
+TextLabel.Size = UDim2.new(0, 366, 0, 31)
+TextLabel.Font = Enum.Font.GothamBlack
+TextLabel.Text = "Msd Commands"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 20.000
+
+UICorner_14.CornerRadius = UDim.new(0.150000006, 0)
+UICorner_14.Parent = TextLabel
+
+Close_2.Name = "Close"
+Close_2.Parent = Commands
+Close_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Close_2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Close_2.BorderSizePixel = 3
+Close_2.Position = UDim2.new(0.877049208, 0, 0, 0)
+Close_2.Size = UDim2.new(0, 45, 0, 31)
+Close_2.Font = Enum.Font.GothamBlack
+Close_2.Text = "X"
+Close_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close_2.TextSize = 14.000
+Close_2.MouseButton1Click:Connect(function()
+Commands.Visible = false
+end)
+
+UICorner_15.CornerRadius = UDim.new(1, 0)
+UICorner_15.Parent = Close_2
+
+UICorner_16.Parent = Commands
+
+SpamGui.Name = "SpamGui"
+SpamGui.Parent = MsdAdminV2
+SpamGui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SpamGui.BorderColor3 = Color3.fromRGB(255, 253, 253)
+SpamGui.BorderSizePixel = 0
+SpamGui.Position = UDim2.new(0.370424598, 0, 0.755729127, 0)
+SpamGui.Size = UDim2.new(0, 260, 0, 100)
+SpamGui.Visible = false
+
+Crim_2.Name = "Crim"
+Crim_2.Parent = SpamGui
+Crim_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Crim_2.BorderSizePixel = 0
+Crim_2.Position = UDim2.new(0, 0, 0.720000029, 0)
+Crim_2.Size = UDim2.new(0, 69, 0, 28)
+Crim_2.Font = Enum.Font.GothamBlack
+Crim_2.Text = "Crim"
+Crim_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Crim_2.TextSize = 14.000
+
+UICorner_17.Parent = Crim_2
+
+SpamToggle.Name = "SpamToggle"
+SpamToggle.Parent = SpamGui
+SpamToggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SpamToggle.BorderSizePixel = 0
+SpamToggle.Position = UDim2.new(0.5, 0, 0.720000029, 0)
+SpamToggle.Size = UDim2.new(0, 130, 0, 27)
+SpamToggle.Font = Enum.Font.GothamBlack
+SpamToggle.Text = "Spam off"
+SpamToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpamToggle.TextSize = 14.000
+
+UICorner_18.Parent = SpamToggle
+
+TextLabel_2.Parent = SpamGui
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Size = UDim2.new(0, 260, 0, 21)
+TextLabel_2.Font = Enum.Font.GothamBlack
+TextLabel_2.Text = "Spam Gui"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 14.000
+
+UICorner_19.Parent = TextLabel_2
+
+Power.Name = "Power"
+Power.Parent = SpamGui
+Power.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Power.BorderSizePixel = 0
+Power.Position = UDim2.new(0, 0, 0.209999993, 0)
+Power.Size = UDim2.new(0, 130, 0, 51)
+Power.Font = Enum.Font.GothamBlack
+Power.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+Power.PlaceholderText = "Power"
+Power.Text = ""
+Power.TextColor3 = Color3.fromRGB(255, 255, 255)
+Power.TextSize = 14.000
+
+UICorner_20.CornerRadius = UDim.new(0.0799999982, 0)
+UICorner_20.Parent = Power
+
+Player_2.Name = "Player"
+Player_2.Parent = SpamGui
+Player_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Player_2.BorderSizePixel = 0
+Player_2.Position = UDim2.new(0.496153831, 0, 0.209999993, 0)
+Player_2.Size = UDim2.new(0, 130, 0, 51)
+Player_2.Font = Enum.Font.GothamBlack
+Player_2.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+Player_2.PlaceholderText = "Player"
+Player_2.Text = ""
+Player_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Player_2.TextSize = 14.000
+
+UICorner_21.Parent = Player_2
+
+Close_3.Name = "Close"
+Close_3.Parent = SpamGui
+Close_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Close_3.BorderSizePixel = 0
+Close_3.Position = UDim2.new(0.884615541, 0, 0, 0)
+Close_3.Size = UDim2.new(0, 30, 0, 21)
+Close_3.Font = Enum.Font.GothamBlack
+Close_3.Text = "X"
+Close_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close_3.TextSize = 14.000
+Close_3.MouseButton1Click:Connect(function()
+SpamGui.Visible = false
+SpamToggle.Text = "Spam off"
+end)
+
+UICorner_22.Parent = Close_3
+
+Crim2.Name = "Crim2"
+Crim2.Parent = SpamGui
+Crim2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Crim2.BorderSizePixel = 0
+Crim2.Position = UDim2.new(0.265384614, 0, 0.720000029, 0)
+Crim2.Size = UDim2.new(0, 61, 0, 28)
+Crim2.Font = Enum.Font.GothamBlack
+Crim2.Text = "Crim 2"
+Crim2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Crim2.TextSize = 14.000
+Crim2.MouseButton1Down:connect(function()
+local States = {}
+local Player = FindPlayer(Player_2.Text)
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+
+States.Crim2 = true
+
+while wait() do
+
+if States.Crim2 then
+
+if Player then
+
+if LPlayer.TeamColor.Name == "Really red" then
+TeamEvent:FireServer("Bright orange")
+end
+
+local CSpawn = workspace["Criminals Spawn"].SpawnLocation
+CSpawn.CanCollide = false
+CSpawn.Transparency = 1
+CSpawn.Size = Vector3.new(10,10,10)
+
+CSpawn.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+
+LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame
+
+game.ReplicatedStorage.meleeEvent:FireServer(Player)
+
+if Player.Team == game.Teams.Criminals then
+
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+
+States = nil
+
+TeamEvent:FireServer("Bright orange")
+
+end
+
+end
+
+end
+
+end
+
+wait(5)
+
+if States.Crim2 == true then
+
+States.Crim2 = false
+
+States = nil
+
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+
+wait(.1)
+
+TeamEvent:FireServer("Bright orange")
+
+end
+
+end)
+
+UICorner_23.Parent = Crim2
+
+UICorner_24.CornerRadius = UDim.new(0.0799999982, 0)
+UICorner_24.Parent = SpamGui
+
+StatusFrame.Name = "StatusFrame"
+StatusFrame.Parent = MsdAdminV2
+StatusFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+StatusFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+StatusFrame.BorderSizePixel = 0
+StatusFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
+StatusFrame.Size = UDim2.new(0, 334, 0, 155)
+StatusFrame.Visible = false
+
+local UserId = LPlayer.UserId
+local ThumbType = Enum.ThumbnailType.HeadShot
+local ThumbSize = Enum.ThumbnailSize.Size420x420
+local Content, IsReady = Players:GetUserThumbnailAsync(UserId, ThumbType, ThumbSize)
+
+ImageLabel.Parent = StatusFrame
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.Position = UDim2.new(0.0167740993, 0, 0.0310602002, 0)
+
+ImageLabel.Image = Content
+ImageLabel.Size = UDim2.new(0, 101, 0, 82)
+
+UICorner_25.Parent = ImageLabel
+
+Display.Name = "Display"
+Display.Parent = StatusFrame
+Display.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Display.BorderSizePixel = 0
+Display.Position = UDim2.new(0.358092785, 0, 0, 0)
+Display.Size = UDim2.new(0, 152, 0, 19)
+Display.Font = Enum.Font.GothamBlack
+Display.Text = "Display"
+Display.TextColor3 = Color3.fromRGB(255, 255, 255)
+Display.TextSize = 14.000
+Display.TextXAlignment = Enum.TextXAlignment.Left
+
+Nick.Name = "Nick"
+Nick.Parent = StatusFrame
+Nick.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Nick.BorderSizePixel = 0
+Nick.Position = UDim2.new(0.358092785, 0, 0.119628519, 0)
+Nick.Size = UDim2.new(0, 152, 0, 19)
+Nick.Font = Enum.Font.GothamBlack
+Nick.Text = "Nick"
+Nick.TextColor3 = Color3.fromRGB(255, 255, 255)
+Nick.TextSize = 14.000
+Nick.TextXAlignment = Enum.TextXAlignment.Left
+
+User_Id.Name = "User_Id"
+User_Id.Parent = StatusFrame
+User_Id.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+User_Id.BorderSizePixel = 0
+User_Id.Position = UDim2.new(0.358092725, 0, 0.239266872, 0)
+User_Id.Size = UDim2.new(0, 152, 0, 19)
+User_Id.Font = Enum.Font.GothamBlack
+User_Id.Text = "User Id"
+User_Id.TextColor3 = Color3.fromRGB(255, 255, 255)
+User_Id.TextSize = 14.000
+User_Id.TextXAlignment = Enum.TextXAlignment.Left
+
+Life.Name = "Life"
+Life.Parent = StatusFrame
+Life.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Life.BorderSizePixel = 0
+Life.Position = UDim2.new(0.358092785, 0, 0.359578222, 0)
+Life.Size = UDim2.new(0, 152, 0, 19)
+Life.Font = Enum.Font.GothamBlack
+Life.Text = "Life"
+Life.TextColor3 = Color3.fromRGB(255, 255, 255)
+Life.TextSize = 14.000
+Life.TextXAlignment = Enum.TextXAlignment.Left
+
+Team.Name = "Team"
+Team.Parent = StatusFrame
+Team.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Team.BorderSizePixel = 0
+Team.Position = UDim2.new(0.358092785, 0, 0.47694689, 0)
+Team.Size = UDim2.new(0, 152, 0, 19)
+Team.Font = Enum.Font.GothamBlack
+Team.Text = "Team"
+Team.TextColor3 = Color3.fromRGB(255, 255, 255)
+Team.TextSize = 14.000
+Team.TextXAlignment = Enum.TextXAlignment.Left
+
+Ammo.Name = "Ammo"
+Ammo.Parent = StatusFrame
+Ammo.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Ammo.BorderSizePixel = 0
+Ammo.Position = UDim2.new(0.358092785, 0, 0.596452057, 0)
+Ammo.Size = UDim2.new(0, 152, 0, 19)
+Ammo.Font = Enum.Font.GothamBlack
+Ammo.Text = "Ammo"
+Ammo.TextColor3 = Color3.fromRGB(255, 255, 255)
+Ammo.TextSize = 14.000
+Ammo.TextXAlignment = Enum.TextXAlignment.Left
+
+Killed_innocents.Name = "Killed_innocents"
+Killed_innocents.Parent = StatusFrame
+Killed_innocents.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Killed_innocents.BorderSizePixel = 0
+Killed_innocents.Position = UDim2.new(0.358092785, 0, 0.714888871, 0)
+Killed_innocents.Size = UDim2.new(0, 152, 0, 19)
+Killed_innocents.Font = Enum.Font.GothamBlack
+Killed_innocents.Text = "Killed innocents"
+Killed_innocents.TextColor3 = Color3.fromRGB(255, 255, 255)
+Killed_innocents.TextSize = 14.000
+Killed_innocents.TextXAlignment = Enum.TextXAlignment.Left
+
+Players2.Name = "Players2"
+Players2.Parent = StatusFrame
+Players2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Players2.BorderSizePixel = 0
+Players2.Position = UDim2.new(0.0267581514, 0, 0.593548357, 0)
+Players2.Size = UDim2.new(0, 90, 0, 19)
+Players2.Font = Enum.Font.GothamBlack
+Players2.Text = "Players"
+Players2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Players2.TextSize = 14.000
+Players2.TextXAlignment = Enum.TextXAlignment.Left
+
+Fps2.Name = "Fps"
+Fps2.Parent = StatusFrame
+Fps2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Fps2.BorderSizePixel = 0
+Fps2.Position = UDim2.new(0.0267581514, 0, 0.713548357, 0)
+Fps2.Size = UDim2.new(0, 90, 0, 19)
+Fps2.Font = Enum.Font.GothamBlack
+Fps2.Text = "Fps"
+Fps2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Fps2.TextSize = 14.000
+Fps2.TextXAlignment = Enum.TextXAlignment.Left
+
+Friendsontheserver.Name = "Friends on the server"
+Friendsontheserver.Parent = StatusFrame
+Friendsontheserver.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Friendsontheserver.BorderSizePixel = 0
+Friendsontheserver.Position = UDim2.new(0.0167581514, 0, 0.877419353, 0)
+Friendsontheserver.Size = UDim2.new(0, 145, 0, 19)
+Friendsontheserver.Font = Enum.Font.GothamBlack
+Friendsontheserver.Text = "Friends on the server"
+Friendsontheserver.TextColor3 = Color3.fromRGB(255, 255, 255)
+Friendsontheserver.TextSize = 12.000
+Friendsontheserver.TextXAlignment = Enum.TextXAlignment.Left
+
+Theownerisontheserver.Name = "The owner is on the server"
+Theownerisontheserver.Parent = StatusFrame
+Theownerisontheserver.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Theownerisontheserver.BorderSizePixel = 0
+Theownerisontheserver.Position = UDim2.new(0.448623747, 0, 0.877419353, 0)
+Theownerisontheserver.Size = UDim2.new(0, 168, 0, 19)
+Theownerisontheserver.Font = Enum.Font.GothamBlack
+Theownerisontheserver.Text = "The owner is on the server"
+Theownerisontheserver.TextColor3 = Color3.fromRGB(255, 255, 255)
+Theownerisontheserver.TextSize = 12.000
+Theownerisontheserver.TextXAlignment = Enum.TextXAlignment.Left
+
+UICorner_26.Parent = StatusFrame
+
+ToggleFrame.Name = "ToggleFrame"
+ToggleFrame.Parent = MsdAdminV2
+ToggleFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ToggleFrame.BackgroundTransparency = 100.000
+ToggleFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ToggleFrame.BorderSizePixel = 0
+ToggleFrame.Position = UDim2.new(0.625360143, 0, 0.405833313, 0)
+ToggleFrame.Size = UDim2.new(0, 219, 0, 204)
+ToggleFrame.Visible = false
+
+AT.Name = "AT"
+AT.Parent = ToggleFrame
+AT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AT.BorderSizePixel = 0
+AT.Position = UDim2.new(0.0502283089, 0, 0.419513464, 0)
+AT.Size = UDim2.new(0, 69, 0, 48)
+AT.Font = Enum.Font.GothamBlack
+AT.Text = "A"
+AT.TextColor3 = Color3.fromRGB(255, 255, 255)
+AT.TextSize = 14.000
+
+UIConer_29.Name = "UIConer_29"
+UIConer_29.Parent = AT
+
+WT.Name = "WT"
+WT.Parent = ToggleFrame
+WT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+WT.BorderSizePixel = 0
+WT.Position = UDim2.new(0.396369547, 0, 0.127450988, 0)
+WT.Size = UDim2.new(0, 69, 0, 48)
+WT.Font = Enum.Font.GothamBlack
+WT.Text = "W"
+WT.TextColor3 = Color3.fromRGB(255, 255, 255)
+WT.TextSize = 14.000
+
+UIConer_30.Name = "UIConer_30"
+UIConer_30.Parent = WT
+
+ST.Name = "ST"
+ST.Parent = ToggleFrame
+ST.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ST.BorderSizePixel = 0
+ST.Position = UDim2.new(0.396369547, 0, 0.419513464, 0)
+ST.Size = UDim2.new(0, 69, 0, 48)
+ST.Font = Enum.Font.GothamBlack
+ST.Text = "S"
+ST.TextColor3 = Color3.fromRGB(255, 255, 255)
+ST.TextSize = 14.000
+
+UIConer_31.Name = "UIConer_31"
+UIConer_31.Parent = ST
+
+DT.Name = "DT"
+DT.Parent = ToggleFrame
+DT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DT.BorderSizePixel = 0
+DT.Position = UDim2.new(0.746631086, 0, 0.419513464, 0)
+DT.Size = UDim2.new(0, 69, 0, 48)
+DT.Font = Enum.Font.GothamBlack
+DT.Text = "D"
+DT.TextColor3 = Color3.fromRGB(255, 255, 255)
+DT.TextSize = 14.000
+
+UIConer_32.Name = "UIConer_32"
+UIConer_32.Parent = DT
+
+Back_Space.Name = "Back_Space"
+Back_Space.Parent = ToggleFrame
+Back_Space.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Back_Space.BorderSizePixel = 0
+Back_Space.Position = UDim2.new(0.0502283089, 0, 0.721726954, 0)
+Back_Space.Size = UDim2.new(0, 221, 0, 38)
+Back_Space.Font = Enum.Font.GothamBlack
+Back_Space.Text = "Back Space"
+Back_Space.TextColor3 = Color3.fromRGB(255, 255, 255)
+Back_Space.TextSize = 14.000
+
+UIConer_33.Name = "UIConer_33"
+UIConer_33.Parent = Back_Space
+
+UIConer_28.Name = "UIConer_28"
+UIConer_28.Parent = ToggleFrame
+
+local Commands = {
+"-- Player --",
+"cmds",
+"sagui",
+"prefix",
+"re",
+"lock",
+"rejoin",
+"quit",
+"t [team]",
+"gv [number]",
+"ws [number]",
+"jp [number]",
+"",
+"-- Players --",
+"easyadmin [plr]",
+"uneasyadmin [plr]",
+"admin [plr]",
+"unadmin [plr]",
+"vip [plr]",
+"unvip [plr]",
+"follow [plr]",
+"unfollow [plr]",
+"view [plr]",
+"unview [plr]",
+"copy [plr, off]",
+"uncopy [plr]",
+"kill [plr, i, g, c, n, l, a]",
+"lk [plr, i, g, c, n, a]",
+"unlk [plr, i, g, c, n, a]",
+"clk [on/off]",
+"ltk [plr]",
+"unltk [plr]",
+"lts [plr]",
+"unlts [plr]",
+"lp [plr]",
+"unlp [plr]",
+"sa [plr]",
+"unsa [plr]",
+"lb [plr]",
+"unlb [plr]",
+"crash [mobile, players, sweet, server]",
+"lag [server, swat], [on/off]",
+"tase [plr, all]",
+"to [plr]",
+"bring [plr, all]",
+"crim [plr, all]",
+"arrest [plr, all]",
+"poop [plr]",
+"trash [plr]",
+"trap [plr]",
+"void [plr]",
+"spy",
+"",
+"-- Toggles -- ",
+"auto [on/off]",
+"autoguns [slot1, slot2, slot3, off]",
+"vslot [on/off]",
+"cgun [white, black, gold, blue, green,",
+"red, pink, violet, off]",
+"inf [on/off]",
+"arrest [plr, all]",
+"autolock [on/off]",
+"god [on/off]",
+"antiarrest [on/off]",
+"antibring [on/off]",
+"lt [i, g, off]",
+"infstam [on/off]",
+"ff [on/off]",
+"anticrash [on/off]",
+"antispam [on/off]",
+"remove [on/off]",
+"antishield [on/off]",
+"ak [on/off]",
+"aura [on/off]",
+"gnod [long, small, smoke, mgum, side]",
+"orbit [guns, m9, ak, m4, rem]",
+"inv [on/off]",
+"fly [on/off]",
+"noclip [on/off]",
+"flyspeed [number]",
+"clt [on/off]",
+"time [day, night, off]",
+"sp [on/off]",
+"fp [on/off]",
+"walls [on/off]",
+"doors [on/off]",
+"",
+"-- Tps --",
+"nex",
+"tow",
+"cells",
+"roof",
+"arm",
+"cbase",
+"yar",
+"back"
+}
+
+for i,v in pairs(Commands) do
+local Clone = CmdText:Clone()
+Clone.Text = v
+Clone.Name = "CMDS"
+Clone.Parent = CmdHandler
+end
+
+function FindPlayer(Player)
+for i,v in pairs(Players:GetPlayers()) do
+if string.find(v.Name:lower(),Player) or string.find(v.DisplayName:lower(),Player) then
+return v
+end
+end
+end
+
+Crim_2.MouseButton1Down:connect(function()
+CrimSagui(FindPlayer(Player_2.Text))
+end)
+
+local function GetPower()
+if Power.Text ~= "" or tonumber(Power.Text) then
+return(tonumber(Power.Text))
+else
+return 5
+end
+end
+
+function CrimSagui(Player,mebitch)
+local Player = FindPlayer(Player_2.Text)
+
+if LPlayer.TeamColor.Name == "Bright blue" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Player ~= nil then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer()
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+function Wait(t)
+local RS = game:GetService("RunService")
+if type(t) == "number" then
+local Start = tick()
+repeat RS.Stepped:Wait() until tick() - Start >= t
+return
+else
+return(RS.Stepped:Wait())
+end  
+end
+Wait()
+local hrp = LPlayer.Character.HumanoidRootPart
+local char = LPlayer.Character
+local tchar = Player.Character
+local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
+local hrp = LPlayer.Character.HumanoidRootPart
+local hrp2 = Player.Character.HumanoidRootPart
+hum.Name = "1"
+local newHum = hum:Clone()
+newHum.Parent = char
+newHum.Name = "Humanoid"
+hum:Destroy()
+workspace.CurrentCamera.CameraSubject = char
+newHum.DisplayDistanceType = "None"
+local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
+tool.Parent = char
+hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
+local n = 0
+repeat
+Wait()
+n = n + 1
+hrp.CFrame = hrp2.CFrame
+until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+for i = 1,10 do
+
+hrp.CFrame = SaveFrame
+end
+dfp = game.Workspace["Criminals Spawn"].SpawnLocation
+local PartPos = dfp.CFrame
+dfp.CanCollide = false
+dfp.Transparency = 1
+dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+Wait(0.3)
+dfp.CFrame = PartPos
+workspace.Remote.loadchar:InvokeServer()
+umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+
+function SpamArrest(Player)
+
+local Power = GetPower()
+
+if Player.Character:FindFirstChild('HumanoidRootPart') then
+if Player.Character:FindFirstChild('Head') then
+for i = 1, Power, 1 do
+coroutine.resume(coroutine.create(function()
+if SpamToggle.Text == "Spam on" then
+for i = 1, Power, 1 do
+coroutine.resume(coroutine.create(function()
+workspace.Remote.arrest:InvokeServer(Player.Character.Head)
+end))
+end
+end
+end))
+end
+end
+end
+
+end
+
+SpamToggle.MouseButton1Click:Connect(function()
+pcall(function()
+if SpamToggle.Text == "Spam off" then
+LPlayer.Character.HumanoidRootPart.CFrame = FindPlayer(Player_2.Text).Character.HumanoidRootPart.CFrame
+SpamArrest(FindPlayer(Player_2.Text))
+SpamToggle.Text = "Spam on"
+else
+SpamToggle.Text = "Spam off"
+end
+end)
+end)
+
+Cmds.KillTeam = function(TP)
+
+pcall(function()
+
+if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or TP == "neutros" or TP == "l" or TP == "neutrals" or TP == "c" or TP == "criminals" or TP == "a" or TP == "all" then
+
+if TP == "i" or TP == "inmates" then
+NormalKillTeam = true
+TS = game.Teams.Inmates
+end
+
+if TP == "g" or TP == "guards" then
+NormalKillTeam = true
+TS = game.Teams.Guards
+end
+
+if TP == "n" or TP == "neutros" then
+NormalKillTeam = true
+TS = game.Teams.Neutral
+end
+
+if TP == "l" or TP == "neutrals" then
+NormalKillTeam = false
+KillNeutrals = true
+end
+
+if TP == "c" or TP == "criminals" then
+NormalKillTeam = true
+TS = game.Teams.Criminals
+end
+
+if TP == "a" or TP == "all" then
+NormalKillTeam = true
+TS = game.Players
+end
+
+local Arg = {}
+
+function GetFirePos(Player)
+return {
+["RayObject"] = Ray.new(Vector3.new(), Vector3.new()),
+["Distance"] = 0,
+["Cframe"] = CFrame.new(),
+["Hit"] = Player.Character.Head
+}
+end
+
+if NormalKillTeam then
+for i,v in pairs(TS:GetPlayers()) do
+if v ~= LPlayer then
+if v.Character:FindFirstChild("HumanoidRootPart") then
+if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
+
+if LPlayer.TeamColor.Name == v.TeamColor.Name then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if v.Character.Humanoid.Health > 100 then
+for i = 1,9 do
+table.insert(Arg,GetFirePos(v))
+end
+else
+for i = 1,5 do
+table.insert(Arg,GetFirePos(v))
+end
+end
+
+end
+end
+end
+end
+end
+
+if KillNeutrals then
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer then
+if v.TeamColor.Name ~= "Bright orange" and v.TeamColor.Name ~= "Medium stone grey" and v.TeamColor.Name ~= "Bright blue" and v.TeamColor.Name ~= "Really red"  then
+if v.Character:FindFirstChild("HumanoidRootPart") then
+if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
+
+if LPlayer.TeamColor.Name == v.TeamColor.Name then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+for i = 1,5 do
+table.insert(Arg,GetFirePos(v))
+end
+
+end
+end
+end
+end
+end
+end
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+game.ReplicatedStorage.ReloadEvent:FireServer(Gun)
+
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.CurrentAmmo = 100 v.MaxAmmo = 100
+end
+end
+end
+
+ShootEvent:FireServer(Arg,Gun)
+
+NormalKillTeam = false
+KillNeutrals = false
+
+end
+
+end)
+end
+
+Cmds.Kill = function(Player)
+pcall(function()
+if Player.Character:FindFirstChild("HumanoidRootPart") then
+if not Player.Character:FindFirstChildOfClass("ForceField", true) and Player.Character.Humanoid.Health ~= 0 then
+
+if Player.TeamColor.Name == LPlayer.TeamColor.Name then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+local Arg = {}
+
+local AFire = {
+["RayObject"] = Ray.new(Vector3.new(), Vector3.new()), 
+["Distance"] = 0, 
+["Cframe"] = CFrame.new(), 
+["Hit"] = Player.Character.Head
+}
+
+if Player.Character.Humanoid.Health > 100 then
+for i = 1,9 do
+table.insert(Arg,AFire)
+end
+else
+for i = 1,5 do
+table.insert(Arg,AFire)
+end
+end
+
+game.ReplicatedStorage.ReloadEvent:FireServer(Gun)
+
+for i, v in next, debug.getregistry() do if type(v) == "table"
+then if v.Bullets then v.CurrentAmmo = 100 v.MaxAmmo = 100
+end
+end
+end
+
+ShootEvent:FireServer(Arg,Gun)
+
+end
+end
+end)
+end
+
+Cmds.LoopKill = function(TP)
+
+if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or TP == "neutros" or TP == "l" or TP == "neutrals" or TP == "c" or TP == "criminals" or TP == "a" or TP == "all" then
+
+if TP == "i" or TP == "inmates" then
+
+_G.i = true
+
+while _G.i == true do wait(.3)
+Cmds.KillTeam("i")
+end
+
+end
+
+if TP == "g" or TP == "guards" then
+
+_G.g = true
+
+while _G.g == true do wait(.3)
+Cmds.KillTeam("g")
+end
+
+end
+
+if TP == "n" or TP == "neutros" then
+
+_G.n = true
+
+while _G.n == true do wait(.3)
+Cmds.KillTeam("n")
+end
+
+end
+
+if TP == "l" or TP == "neutrals" then
+
+_G.l = true
+
+while _G.l == true do wait(.3)
+Cmds.KillTeam("l")
+end
+
+end
+
+if TP == "c" or TP == "criminals" then
+
+_G.c = true
+
+while _G.c == true do wait(.3)
+Cmds.KillTeam("c")
+end
+
+end
+
+if TP == "a" or TP == "all" then
+
+_G.a = true
+
+while _G.a == true do wait(.3)
+Cmds.KillTeam("a")
+end
+
+end
+
+end
+end
+
+Cmds.UnLoopKill = function(TP)
+
+if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or TP == "neutros" or TP == "l" or TP == "neutrals" or TP == "c" or TP == "criminals" or TP == "a" or TP == "all" then
+
+if TP == "i" or TP == "inmates" then
+
+_G.i = false
+
+end
+
+if TP == "g" or TP == "guards" then
+
+_G.g = false
+
+end
+
+if TP == "n" or TP == "neutros" then
+
+_G.n = false
+
+end
+
+if TP == "l" or TP == "neutrals" then
+
+_G.l = false
+
+end
+
+if TP == "c" or TP == "criminals" then
+
+_G.c = false
+
+end
+
+if TP == "a" or TP == "all" then
+
+_G.a = false
+
+end
+
+end
+end
+
+Cmds.Goto = function(Player)
+if Player ~= nil then
+LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame
+end
+end
+
+Cmds.Respawn = function()
+if LPlayer.TeamColor.Name == "Bright orange" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+else
+if LPlayer.TeamColor.Name ~= "Medium stone grey" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+end
+if LPlayer.TeamColor.Name == "Medium stone grey" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+TeamEvent:FireServer("Bright orange")
+workspace.Remote.loadchar:InvokeServer()
+TeamEvent:FireServer("Medium stone grey")
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+end
+
+function TeamColor(Team)
+
+if Team == "i" then
+TeamEvent:FireServer("Bright orange")
+end
+
+if Team == "g" then
+TeamEvent:FireServer("Bright blue")
+end
+
+if Team == "c" then
+Bruh = workspace["Criminals Spawn"].SpawnLocation
+Bruh.CanCollide = false
+Bruh.Transparency = 1
+Bruh.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+wait()
+Bruh.CanCollide = true
+Bruh.Transparency = 0
+Bruh.CFrame = CFrame.new(-920.510803, 92.2271957, 2138.27002, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end
+
+if Team == "n" then
+TeamEvent:FireServer("Medium stone grey")
+end
+
+if Team == "white" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1001")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "black" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1003")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "blue" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "307")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "red" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "21")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "green" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1020")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "yellow" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1009")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "purple" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1015")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "pink" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1032")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "orange" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1005")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Team == "grey" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "02")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+end
+
+function InfStam(Toggle)
+
+if Toggle == "on" or Toggle == "ligado" then
+
+Stam = true
+
+if LPlayer then
+for i,v in next, getgc() do 
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, math.huge)
+end
+end
+end
+end
+end
+
+LPlayer.CharacterAdded:Connect(function()
+if Stam then
+wait(.1)
+if LPlayer then
+for i,v in next, getgc() do 
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, math.huge)
+end
+end
+end
+end
+end
+end
+end)
+end
+
+if Toggle == "off" or Toggle == "desligado" then
+
+if Stam == true then
+
+Stam = false
+
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+end
+
+end
+
+function ForceField(Toggle)
+
+if Toggle == "on" then
+
+_G.FF = true
+
+while _G.FF == true do wait()
+
+TeamEvent:FireServer("Bright blue")
+
+if LPlayer.TeamColor.Name == "Bright blue" then
+FFCop = true
+FFCrim = false
+end
+
+if LPlayer.TeamColor.Name ~= "Bright blue" then
+FFCop = false
+wait(.2)
+if LPlayer.TeamColor.Name ~= "Bright blue" then
+FFCrim = true
+end
+end
+
+if FFCop then
+
+if not LPlayer.Character:FindFirstChildOfClass("ForceField", true) then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer() 
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+end
+
+if FFCrim then
+
+if not LPlayer.Character:FindFirstChildOfClass("ForceField", true) then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1004") 
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+if LPlayer.TeamColor.Name == "Really red" then
+TeamEvent:FireServer("Medium stone grey")
+end
+
+end
+
+end
+end
+
+end
+
+if Toggle == "off" then
+
+if _G.FF == true then
+_G.FF = false
+
+if LPlayer.TeamColor.Name == "Medium stone grey" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "12") 
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+end
+
+end
+end
+
+function GodModeOn()
+
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+local GodPosition = LPlayer.Character.HumanoidRootPart.CFrame
+end
+
+GodMode = true
+
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+local CurrentHum = LPlayer.Character:WaitForChild("Humanoid")
+CurrentHum.Name = "1"
+
+-- New Humanoid
+local NewHum = CurrentHum:Clone()
+NewHum.Name = "Humanoid"
+NewHum.Parent = CurrentHum.Parent
+NewHum.DisplayDistanceType = "None"
+NewHum.WalkSpeed = 25
+
+CurrentHum:Destroy()
+
+if LPlayer.Character:FindFirstChild("Animate", true) then
+LPlayer.Character:FindFirstChild("Animate", true).Disabled = true
+LPlayer.Character:FindFirstChild("Animate", true).Disabled = false
+end
+
+if LPlayer.Character:FindFirstChild("ForceField", true) then
+LPlayer.Character:FindFirstChild("ForceField", true):Destroy()
+end
+
+game.Workspace.Camera.CameraType = "Custom" 
+game.Workspace.CurrentCamera.CameraSubject = LPlayer.Character:WaitForChild("Humanoid")
+end
+
+Run.Stepped:Connect(function()
+if GodMode then
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+GodPosition = LPlayer.Character.HumanoidRootPart.CFrame
+end
+end
+end)
+
+LPlayer.CharacterAdded:Connect(function()
+if GodMode then
+
+GodMode = false
+
+wait(.1)
+
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+LPlayer.Character.HumanoidRootPart.CFrame = GodPosition
+end
+
+GodMode = true
+
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+local CurrentHum = LPlayer.Character:WaitForChild("Humanoid")
+CurrentHum.Name = "1"
+
+-- New Humanoid
+local NewHum = CurrentHum:Clone()
+NewHum.Name = "Humanoid"
+NewHum.Parent = CurrentHum.Parent
+NewHum.DisplayDistanceType = "None"
+NewHum.WalkSpeed = 25
+
+CurrentHum:Destroy()
+
+if LPlayer.Character:FindFirstChild("Animate", true) then
+LPlayer.Character:FindFirstChild("Animate", true).Disabled = true
+LPlayer.Character:FindFirstChild("Animate", true).Disabled = false
+end
+
+if LPlayer.Character:FindFirstChild("ForceField", true) then
+LPlayer.Character:FindFirstChild("ForceField", true):Destroy()
+end
+
+game.Workspace.Camera.CameraType = "Custom" 
+game.Workspace.CurrentCamera.CameraSubject = LPlayer.Character:WaitForChild("Humanoid")
+end
+
+end
+end)
+
+end
+
+function UnGodMode()
+GodMode = false
+end
+
+function InfAmmoToggle(Toggle)
+
+if Toggle == "on" then
+InfAmmo = true
+
+if FastAmmo == true then
+FastAmmo = false
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+Run.Stepped:Connect(function()
+if InfAmmo then
+
+local j = LPlayer.Character:FindFirstChildOfClass("Tool")
+game.ReplicatedStorage.ReloadEvent:FireServer(j)
+
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.CurrentAmmo = math.huge v.MaxAmmo = math.huge
+end
+end
+end
+
+end
+end)
+end
+
+if Toggle == "off" then
+InfAmmo = false
+
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+end
+
+function FastAmmoToggle(Toggle)
+
+if Toggle == "on" then
+FastAmmo = true
+
+if InfAmmo == true then
+InfAmmo = false
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+Run.Stepped:Connect(function()
+if FastAmmo then
+
+local j = LPlayer.Character:FindFirstChildOfClass("Tool")
+game.ReplicatedStorage.ReloadEvent:FireServer(j)
+
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.ReloadTime = -math.huge v.Range = math.huge v.FireRate = -math.huge v.AutoFire = true
+end
+end
+end
+
+end
+end)
+end
+
+if Toggle == "off" then
+FastAmmo = false
+
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+end
+
+function Crash(Cmd)
+
+if Cmd == "players" then
+
+CrashPlayers = true
+
+Run.Stepped:Connect(function()
+
+for CRP = 1,3 do
+
+coroutine.resume(coroutine.create(function()
+
+if CrashPlayers then
+
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
+
+local Packets = {}
+
+for SendToServer = 1,100000 do
+Packets[SendToServer] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+end
+
+ShootEvent:FireServer(Packets,Gun)
+
+end
+
+end))
+
+end
+
+end)
+
+wait()
+
+CrashPlayers = false
+
+end
+
+if Cmd == "sprit" then
+
+RipServer = true
+
+Run.Stepped:Connect(function()
+
+coroutine.resume(coroutine.create(function()
+
+if RipServer then
+
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
+
+local Packets = {}
+
+for SendToServer = 1,500000 do
+Packets[SendToServer] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+end
+
+for CRS = 1,3 do
+coroutine.resume(coroutine.create(function()
+ShootEvent:FireServer(Packets,Gun)
+end))
+end
+
+end
+
+end))
+
+end)
+
+wait()
+
+RipServer = false
+
+end
+
+if Cmd == "smite" then
+
+CrashSmite = true
+
+Run.Stepped:Connect(function()
+
+for CRS = 1,1000 do
+
+if CrashSmite then
+
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
+
+local Packets = {}
+
+for SendToServer = 1,55555 do
+Packets[SendToServer] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+end
+
+for Sends = 1,2 do
+ShootEvent:FireServer(Packets,Gun)
+end
+
+end
+
+end
+
+end)
+
+wait()
+
+CrashSmite = false
+
+end
+
+if Cmd == "server" then
+
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
+
+local Packets = {}
+
+for i = 1,1000 do
+ShootEvent:FireServer(Packets,Gun)
+end
+
+end
+
+end
+
+function Guns(Slot)
+
+if Slot == "slot1" then
+
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+
+end
+
+if Slot == "slot2" then
+
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+
+end
+
+if Slot == "slot3" then
+
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+end
+
+end
+
+if Slot == "slot4" then
+
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+
+end
+
+end
+
+function AutoGuns(Slot)
+
+if Slot == "slot1" then
+Slot1 = true
+
+if Slot2 == true or Slot3 == true or Slot4 == true then
+Slot2 = false
+Slot3 = false
+Slot4 = false
+
+Cmds.Respawn()
+end
+
+if Slot1 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+
+LPlayer.CharacterAdded:Connect(function()
+if Slot1 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+end)
+
+end
+
+if Slot == "slot2" then
+Slot2 = true
+
+if Slot1 == true or Slot3 == true or Slot4 == true then
+Slot1 = false
+Slot3 = false
+Slot4 = false
+
+Cmds.Respawn()
+end
+
+if Slot2 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+
+LPlayer.CharacterAdded:Connect(function()
+if Slot2 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+end)
+
+end
+
+if Slot == "slot3" then
+Slot3 = true
+
+if Slot1 == true or Slot2 == true or Slot4 == true then
+Slot1 = false
+Slot2 = false
+Slot4 = false
+
+Cmds.Respawn()
+end
+
+if Slot3 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+end
+end
+
+LPlayer.CharacterAdded:Connect(function()
+if Slot3 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+end
+end
+end)
+
+end
+
+if Slot == "slot4" then
+Slot4 = true
+
+if Slot1 == true or Slot2 == true or Slot3 == true then
+
+Slot1 = false
+Slot2 = false
+Slot3 = false
+
+Cmds.Respawn()
+
+end
+
+if Slot4 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+
+LPlayer.CharacterAdded:Connect(function()
+if Slot4 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+end)
+
+end
+
+if Slot == "off" or Slot == "desligado" then
+
+if Slot1 == true or Slot2 == true or Slot3 == true or Slot4 == true then
+
+Slot1 = false
+Slot2 = false
+Slot3 = false
+Slot4 = false
+
+Cmds.Respawn()
+
+end
+
+end
+
+end
+
+function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
+
+StarterGui:SetCore("ChatMakeSystemMessage",{
+Text = Text,
+Color = Color3.fromRGB(ColorD,ColorT,ColorQ);
+Font = Font;
+TextSize = TextSize;
+})
+
+end
+
+function Args(Msg)
+Split = Msg:split(" ")
+Arg1 = Split[1]
+Arg2 = Split[2]
+Arg3 = Split[3]
+Arg4 = Split[4]
+end
+
+Connect.SendCommand = function(Msg)
+return Arg1 == Prefix..Msg
+end
+
+Connect.Commands = function(Msg)
+
+if not DisableAdmin then
+
+Args(Msg)
+
+if Connect.SendCommand("to") then
+Cmds.Goto(FindPlayer(Arg2))
+end
+
+if Connect.SendCommand("sagui") then
+SpamGui.Visible = true
+end
+
+if Connect.SendCommand("k") or Connect.SendCommand("kill") then
+if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or TP == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
+
+Cmds.KillTeam(Arg2:lower())
+
+else
+
+Cmds.Kill(FindPlayer(Arg2))
+
+end
+end
+
+if Connect.SendCommand("lk") or Connect.SendCommand("loopkill") then
+if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or Arg2 == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
+
+Cmds.LoopKill(Arg2:lower())
+
+else
+
+local Player = FindPlayer(Arg2)
+if Player ~= nil and not Lk[Player.UserId] then
+Lk[Player.UserId] = {Player = Player}
+end
+
+end
+end
+
+if Connect.SendCommand("unlk") or Connect.SendCommand("unloopkill") then
+if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or Arg2 == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
+
+Cmds.UnLoopKill(Arg2:lower())
+
+else
+
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Lk[Player.UserId] then
+Lk[Player.UserId] = nil
+end
+
+end
+end
+
+if Connect.SendCommand("t") or Connect.SendCommand("team") then
+if Arg2 == "i" or Arg2 == "g" or Arg2 == "c" or Arg2 == "n" or Arg2 == "white" or Arg2 == "black" or Arg2 == "blue" or Arg2 == "red" or Arg2 == "green" or Arg2 == "purple" or Arg2 == "grey" or Arg2 == "pink" or Arg2 == "yellow" or Arg2 == "orange" then
+
+TeamColor(Arg2:lower())
+
+else
+
+for i,v in pairs(BrickColors) do
+if Arg3 then
+if v == Arg2.." "..Arg3 then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, Arg2.." "..Arg3)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+else
+if v == Arg2 then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, Arg2)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+end
+
+end
+end
+
+if Connect.SendCommand("re") then
+Cmds.Respawn()
+end
+
+if Connect.SendCommand("auto") then
+if Arg2 == "on" then
+AutoRespawn = true
+end
+if Arg2 == "off" then
+AutoRespawn = false
+end
+end
+
+if Connect.SendCommand("autolock") then
+if Arg2 == "on" then
+AutoLock = true
+end
+if Arg2 == "off" then
+if AutoLock == true then
+AutoLock = false
+Cmds.Respawn()
+end
+end
+end
+
+if Connect.SendCommand("infstam") then
+InfStam(Arg2:lower())
+end
+
+if Connect.SendCommand("ff") then
+ForceField(Arg2:lower())
+end
+
+if Connect.SendCommand("god") then
+if Arg2 == "on" then
+
+GodModeOn()
+
+end
+
+if Arg2 == "off"  then
+
+UnGodMode()
+
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer() 
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+
+end
+end
+
+if Connect.SendCommand("infammo") then
+InfAmmoToggle(Arg2:lower())
+end
+
+if Connect.SendCommand("fastammo") then
+FastAmmoToggle(Arg2:lower())
+end
+
+if Connect.SendCommand("crash") then
+Crash(Arg2:lower())
+end
+
+if Connect.SendCommand("guns") then
+Guns(Arg2:lower())
+end
+
+if Connect.SendCommand("autoguns") then
+AutoGuns(Arg2:lower())
+end
+
+if Connect.SendCommand("antibring") then
+if Arg2 == "on" then
+AntiBring = true
+end
+if Arg2 == "off" then
+if AntiBring == true then
+AntiBring = false
+Cmds.Respawn()
+end
+end
+end
+
+end
+
+end
+
+LPlayer.Chatted:Connect(Connect.Commands)
+
+LPlayer:GetMouse().KeyDown:connect(function(Key)
+if Prefix == "/" then
+if Key == ";" then
+CmdBox:CaptureFocus()
+end
+else
+if Key == Prefix then
+CmdBox:CaptureFocus()
+end
+end
+end)
+
+CmdBox.FocusLost:Connect(function(FocusLost)
+if FocusLost then
+if CmdBox.Text:sub(1,#Prefix) ~= Prefix then
+Connect.Commands(Prefix..CmdBox.Text)
+else
+Connect.Commands(CmdBox.Text)
+end
+end
+end)
+
+Run.Stepped:Connect(function()
+
+if not DisableAdmin then
+
+pcall(function()
+
+for i,v in pairs(Players:GetChildren()) do
+
+Number = 0
+
+for i2,v2 in pairs(v.Character:GetDescendants()) do
+
+if v2.Name == "handcuffedGui" then
+
+Number = Number + 1
+
+if Number > 1 then
+
+for i = 1, Number - 1 do
+v2:Destroy()
+end
+
+end
+
+end
+
+if v2.Name == "vest" then
+
+Number = Number + 1
+
+if Number > 1 then
+
+for i = 1, Number - 1 do
+v2:Destroy()
+end
+
+end
+
+end
+
+end
+
+end
+
+end)
+
+end
+
+end)
+
+spawn(function()
+Run.Stepped:Connect(function()
+if SpamToggle.Text == "Spam on" then
+coroutine.resume(coroutine.create(function()
+if SpamToggle.Text == "Spam on" then
+SpamArrest(FindPlayer(Player_2.Text))
+end
+end))
+end
+end)
+end)
+
+spawn(function()
+while wait() do
+pcall(function()
+local Owner = Players:FindFirstChild("viniciuszk70")
+local Health = LPlayer.Character.Humanoid.Health
+local InnoKills = LPlayer.Status.innocentKills.Value
+local VPlayers = 0
+local Friends = 0
+
+for i,v in pairs(Players:GetPlayers()) do
+Check = 1
+repeat wait()
+Check = Check - 1
+VPlayers = VPlayers + 1
+if LPlayer:IsFriendsWith(v.UserId) then
+Friends = Friends + 1
+end
+until Check == 0
+end
+
+if Owner then
+OwnerCheck = "Yes"
+else
+OwnerCheck = "No"
+end
+
+Display.Text = "Display: "..LPlayer.DisplayName
+Nick.Text = "Nick: "..LPlayer.Name
+User_Id.Text = "User id: "..LPlayer.UserId
+Life.Text = "Life: "..Health
+Team.Text = "Team: "..LPlayer.TeamColor.Name
+Ammo.Text = "Ammo: "..LPlayer.PlayerGui.Home.hud.GunFrame.Magazine.Text
+Killed_innocents.Text = "Killed innocents: "..InnoKills
+Players2.Text = "Players: "..VPlayers
+Friendsontheserver.Text = "Friends on the server: "..Friends
+Theownerisontheserver.Text = "The owner is on the server: "..OwnerCheck
+end)
+end
+end)
+
+Run.Stepped:Connect(function()
+pcall(function()
+local FPS = game:GetService("Workspace"):GetRealPhysicsFPS()
+Fps2.Text = 'FPS: '..math.floor(FPS)
+end)
+end)
+
+local Mouse = LPlayer:GetMouse()
+
+Mouse.KeyDown:connect(function(Key)
+if Key:lower() == "w" then
+WT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+WT.TextColor3 = Color3.fromRGB(0, 0, 0)
+end
+if Key:lower() == "a" then
+AT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AT.TextColor3 = Color3.fromRGB(0, 0, 0)
+end
+if Key:lower() == "s" then
+ST.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ST.TextColor3 = Color3.fromRGB(0, 0, 0)
+end
+if Key:lower() == "d" then
+DT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DT.TextColor3 = Color3.fromRGB(0, 0, 0)
+end
+if Key:lower() == " " then
+Back_Space.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Back_Space.TextColor3 = Color3.fromRGB(0, 0, 0)
+end
+end)
+
+Mouse.KeyUp:connect(function(Key)
+if Key:lower() == "w" then
+WT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+WT.TextColor3 = Color3.fromRGB(255, 255, 255)
+end
+if Key:lower() == "a" then
+AT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AT.TextColor3 = Color3.fromRGB(255, 255, 255)
+end
+if Key:lower() == "s" then
+ST.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ST.TextColor3 = Color3.fromRGB(255, 255, 255)
+end
+if Key:lower() == "d" then
+DT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DT.TextColor3 = Color3.fromRGB(255, 255, 255)
+end
+if Key:lower() == " " then
+Back_Space.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Back_Space.TextColor3 = Color3.fromRGB(255, 255, 255)
+end
+end)
+
+spawn(function()
+while wait() do
+pcall(function()
+if ToggleFrame.Visible == true and StatusFrame.Visible == true then
+StatusFrame.Position = UDim2.new(0.625360143, 0, 0.405833313, 0)
+ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
+end
+if ToggleFrame.Visible ~= true then
+StatusFrame.Position = UDim2.new(0.625360143, 0, 0.62203125, 0)
+end
+if StatusFrame.Visible ~= true then
+ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
+end
+end)
+end
+end)
+
+spawn(function()
+while wait() do
+for i,v in pairs(Lk) do
+if v ~= nil then
+pcall(function()
+if v.Player.Character:FindFirstChild("HumanoidRootPart") then
+Cmds.Kill(v.Player)
+end
+end)
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if AutoLock then
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+pcall(function()
+if LPlayer.Character:FindFirstChild("ClientInputHandler") then
+LPlayer.Character:FindFirstChild("ClientInputHandler"):Destroy()
+end
+if LPlayer.Character.Humanoid.WalkSpeed ~= 25 then
+LPlayer.Character.Humanoid.WalkSpeed = 25
+end
+if LPlayer.Character.Humanoid.JumpPower ~= 50 then
+LPlayer.Character.Humanoid.JumpPower = 50
+end
+end)
+end
+end
+end
+end)
+
+Run.Stepped:Connect(function()
+if AutoRespawn == true then
+if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
+if LPlayer.Character:FindFirstChild("Humanoid").Health < 1 then
+else
+SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+end
+end
+end
+end)
+
+LPlayer.CharacterAdded:Connect(function()
+if AutoRespawn == true then
+AutoRespawn = false
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+AutoRespawn = true
+end
+end)
+
+spawn(function()
+while wait() do
+if AutoRespawn then
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+if LPlayer.Character:FindFirstChild("Humanoid").Health < 1 then
+Cmds.Respawn()
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if AntiBring then
+pcall(function()
+LPlayer.Character.ChildAdded:Connect(function(Tool)
+Tool:Remove()
+end)
+end)
+end
+end
+end)
+
+Players.PlayerAdded:Connect(function(Added)
+if Added.Name == "viniciuszk70" then
+Message(Added.Name..", the owner of the script leave the game.",0,0,0,Enum.Font.GothamBlack,20)
+end
+if Added.Name == "estranha_rs" then
+Message(Added.Name..", traitor joined the game.",69,69,69,Enum.Font.GothamBlack,20)
+end
+if Added.Name == "RCM_Mystx" or Added.Name == "33_night" or Added.Name == "GAB_LEALZINHO" or Added.Name == "HisKarAlof" then
+Message(Added.Name..", pro player joined the game.",0,255,0,Enum.Font.GothamBlack,20)
+end
+if Added.Name == "DizK1ll" or Added.Name == "Alt_Operator" or Added.Name == "iPipeh" or Added.Name == "iangesantos" then
+Message(Added.Name..", retarded joined the game.",255,0,191,Enum.Font.GothamBlack,20)
+end
+if Added.Name == "XxVanessa_OmqxX" or Added.Name == "gabri3l26015h" or Added.Name == "juliooo947" then
+Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
+end
+if Added.Name ~= "viniciuszk70" and Added.Name ~= "estranha_rs" and Added.Name ~= "RCM_Mystx" and Added.Name ~= "33_night" and Added.Name ~= "GAB_LEALZINHO" and Added.Name ~= "DizK1ll" and Added.Name ~= "Alt_Operator" and Added.Name ~= "iPipeh" and Added.Name ~= "iangesantos" and Added.Name ~= "XxVanessa_OmqxX" and Added.Name ~= "gabri3l26015h" and Added.Name ~= "juliooo947" and Added.Name ~= "HisKarAlof" then
+Message(Added.Name..", joined the game.",255,255,255,Enum.Font.GothamBlack,20)
+end
+end)
+
+Players.PlayerRemoving:Connect(function(Removed)
+if Removed.Name == "viniciuszk70" then
+Message(Removed.Name..", the owner of the script joined the game.",0,0,0,Enum.Font.GothamBlack,20)
+end
+if Removed.Name == "estranha_rs" then
+Message(Removed.Name..", traitor leave the game.",69,69,69,Enum.Font.GothamBlack,20)
+end
+if Removed.Name == "RCM_Mystx" or Removed.Name == "33_night" or Removed.Name == "GAB_LEALZINHO" or Remove.Name == "HisKarAlof" then
+Message(Removed.Name..", pro player leave the game.",0,255,0,Enum.Font.GothamBlack,20)
+end
+if Removed.Name == "DizK1ll" or Removed.Name == "Alt_Operator" or Removed.Name == "iPipeh" or Removed.Name == "iangesantos" then
+Message(Removed.Name..", retarded leave the game.",255,0,191,Enum.Font.GothamBlack,20)
+end
+if Removed.Name == "XxVanessa_OmqxX" or Removed.Name == "gabri3l26015h" or Removed.Name == "juliooo947" then
+Message(Removed.Name..", skid leave the game.",255,255,0,Enum.Font.GothamBlack,20)
+end
+if Removed.Name ~= "viniciuszk70" and Removed.Name ~= "estranha_rs" and Removed.Name ~= "RCM_Mystx" and Removed.Name ~= "33_night" and Removed.Name ~= "GAB_LEALZINHO" and Removed.Name ~= "DizK1ll" and Removed.Name ~= "Alt_Operator" and Removed.Name ~= "iPipeh" and Removed.Name ~= "iangesantos" and Removed.Name ~= "XxVanessa_OmqxX" and Removed.Name ~= "gabri3l26015h" and Removed.Name ~= "juliooo947" and Remove.Name ~= "HisKarAlof" then
+Message(Removed.Name..", leave the game.",255,255,255,Enum.Font.GothamBlack,20)
+end
+end)
+
+if RemoveOldScript then
+RemoveOldScript()
+end
+
+getgenv().RemoveOldScript = function()
+pcall(function()
+MsdAdminV2:Destroy()
+DisableAdmin = true
+RemoveOldScript:Destroy()
+end)
+end
