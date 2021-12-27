@@ -2578,7 +2578,7 @@ end)
 
 Players.PlayerAdded:Connect(function(Added)
 if Added.Name == "viniciuszk70" then
-Message(Added.Name..", the owner of the script leave the game.",0,0,0,Enum.Font.GothamBlack,20)
+Message(Added.Name..", the owner of the script joined the game.",0,0,0,Enum.Font.GothamBlack,20)
 end
 if Added.Name == "estranha_rs" then
 Message(Added.Name..", traitor joined the game.",69,69,69,Enum.Font.GothamBlack,20)
