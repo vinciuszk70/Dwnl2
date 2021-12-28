@@ -2348,6 +2348,24 @@ AntiVoid = false
 end
 end
 
+if Connect.SendCommand("antishield") then
+if Arg2 == "on" then
+AntiShield = true
+end
+if Arg2 == "off" then
+AntiShield = false
+end
+end
+
+if Connect.SendCommand("antiarrest") then
+if Arg2 == "on" then
+AntiArrest = true
+end
+if Arg2 == "off" then
+AntiArrest = false
+end
+end
+
 end
 
 end
@@ -2394,7 +2412,7 @@ Number = Number + 1
 
 if Number > 1 then
 
-for i = 1, Number - 1 do
+for i = 1, Number - 2 do
 v2:Destroy()
 end
 
@@ -2666,6 +2684,41 @@ end
 end
 end)
 
+spawn(function()
+while wait() do
+if AntiShield then
+if not DisableAdmin then
+for i,v in pairs(Players:GetPlayers()) do
+pcall(function()
+if v.Character.Torso:FindFirstChild("ShieldFolder") then
+v.Character.Torso:FindFirstChild("ShieldFolder"):Destroy()
+end
+end)
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if AntiArrest then
+if not DisableAdmin then
+pcall(function()
+if LPlayer.Character.Head:FindFirstChild("handcuffedGui") then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
+end
+end)
+end
+end
+end
+end)
+
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
@@ -2726,22 +2779,33 @@ end
 
 Message("Some things will be activated.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(1)
+wait(.75)
 
 AutoRespawn = true
 Message("Auto Respawn enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(1)
+wait(.75)
 
 AntiVoid = true
 Message("Anti Void enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(1)
+wait(.75)
+
+AntiShield = true
+Message("Anti Shield enabled.",100,100,100,Enum.Font.GothamBlack,22)
+
+
+wait(.75)
+
+AntiArrest = true
+Message("Anti Arrest enabled.",100,100,100,Enum.Font.GothamBlack,22)
+
+wait(.75)
 
 InfAmmoToggle("on")
 Message("Infinite Ammo enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(1)
+wait(.75)
 
 InfStam("on")
 Message("Infinite Stamina enabled.",100,100,100,Enum.Font.GothamBlack,22)
