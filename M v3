@@ -2144,7 +2144,7 @@ SpamGui.Visible = true
 end
 
 if Connect.SendCommand("k") or Connect.SendCommand("kill") then
-if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or TP == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
+if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or Arg2 == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
 
 Cmds.KillTeam(Arg2:lower())
 
