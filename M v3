@@ -2779,33 +2779,33 @@ end
 
 Message("Some things will be activated.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(.75)
+wait(.4)
 
 AutoRespawn = true
 Message("Auto Respawn enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(.75)
+wait(.4)
 
 AntiVoid = true
 Message("Anti Void enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(.75)
+wait(.4)
 
 AntiShield = true
 Message("Anti Shield enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 
-wait(.75)
+wait(.4)
 
 AntiArrest = true
 Message("Anti Arrest enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(.75)
+wait(.4)
 
 InfAmmoToggle("on")
 Message("Infinite Ammo enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
-wait(.75)
+wait(.4)
 
 InfStam("on")
 Message("Infinite Stamina enabled.",100,100,100,Enum.Font.GothamBlack,22)
