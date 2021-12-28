@@ -462,64 +462,8 @@ Crim2.Text = "Crim 2"
 Crim2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Crim2.TextSize = 14.000
 Crim2.MouseButton1Down:connect(function()
-local States = {}
-local Player = FindPlayer(Player_2.Text)
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 
-States.Crim2 = true
-
-while wait() do
-
-if States.Crim2 then
-
-if Player then
-
-if LPlayer.TeamColor.Name == "Really red" then
-TeamEvent:FireServer("Bright orange")
-end
-
-local CSpawn = workspace["Criminals Spawn"].SpawnLocation
-CSpawn.CanCollide = false
-CSpawn.Transparency = 1
-CSpawn.Size = Vector3.new(10,10,10)
-
-CSpawn.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
-
-LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame
-
-game.ReplicatedStorage.meleeEvent:FireServer(Player)
-
-if Player.Team == game.Teams.Criminals then
-
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-
-States = nil
-
-TeamEvent:FireServer("Bright orange")
-
-end
-
-end
-
-end
-
-end
-
-wait(5)
-
-if States.Crim2 == true then
-
-States.Crim2 = false
-
-States = nil
-
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-
-wait(.1)
-
-TeamEvent:FireServer("Bright orange")
-
-end
+CrimPlayer2(FindPlayer(Player_2.Text))
 
 end)
 
@@ -961,6 +905,72 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 end
 end
 
+function CrimPlayer2(Player)
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local Status = {}
+
+if Player ~= nil then
+
+Status.Crim2 = true
+
+Run.Stepped:Connect(function()
+
+pcall(function()
+
+if Status.Crim2 then
+
+if not DisableAdmin then
+
+if LPlayer.TeamColor.Name == "Really red" then
+TeamEvent:FireServer("Bright orange")
+end
+
+local CSpawn = workspace["Criminals Spawn"].SpawnLocation
+local CSpawnFrame = CSpawn.CFrame
+CSpawn.CanCollide = false
+CSpawn.Transparency = 1
+CSpawn.Size = Vector3.new(10,10,10)
+
+CSpawn.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+
+LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame
+
+for i = 1,3 do
+game.ReplicatedStorage.meleeEvent:FireServer(Player)
+end
+
+end
+
+end
+
+end)
+
+end)
+
+if Player.TeamColor.Name == "Really red" or wait(5) then
+
+pcall(function()
+
+Status.Crim2 = false
+
+Status = nil
+
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+
+TeamEvent:FireServer("Bright orange")
+
+CSpawn.CFrame = CSpawnFrame
+
+TeamEvent:FireServer("Bright orange")
+
+end)
+
+end
+
+end
+
+end
+
 function SpamArrest(Player)
 
 local Power = GetPower()
@@ -1182,7 +1192,9 @@ if TP == "i" or TP == "inmates" then
 _G.i = true
 
 while _G.i == true do wait(.3)
+if not DisableAdmin then
 Cmds.KillTeam("i")
+end
 end
 
 end
@@ -1192,7 +1204,9 @@ if TP == "g" or TP == "guards" then
 _G.g = true
 
 while _G.g == true do wait(.3)
+if not DisableAdmin then
 Cmds.KillTeam("g")
+end
 end
 
 end
@@ -1202,7 +1216,9 @@ if TP == "n" or TP == "neutros" then
 _G.n = true
 
 while _G.n == true do wait(.3)
+if not DisableAdmin then
 Cmds.KillTeam("n")
+end
 end
 
 end
@@ -1212,7 +1228,9 @@ if TP == "l" or TP == "neutrals" then
 _G.l = true
 
 while _G.l == true do wait(.3)
+if not DisableAdmin then
 Cmds.KillTeam("l")
+end
 end
 
 end
@@ -1222,7 +1240,9 @@ if TP == "c" or TP == "criminals" then
 _G.c = true
 
 while _G.c == true do wait(.3)
+if not DisableAdmin then
 Cmds.KillTeam("c")
+end
 end
 
 end
@@ -1232,7 +1252,9 @@ if TP == "a" or TP == "all" then
 _G.a = true
 
 while _G.a == true do wait(.3)
+if not DisableAdmin then
 Cmds.KillTeam("a")
+end
 end
 
 end
@@ -1445,6 +1467,7 @@ end
 
 LPlayer.CharacterAdded:Connect(function()
 if Stam then
+if not DisableAdmin then
 wait(.1)
 if LPlayer then
 for i,v in next, getgc() do 
@@ -1452,6 +1475,7 @@ if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.
 for i2,v2 in next, debug.getupvalues(v) do 
 if type(v2) == "number" then 
 debug.setupvalue(v, i2, math.huge)
+end
 end
 end
 end
@@ -1484,6 +1508,8 @@ if Toggle == "on" then
 _G.FF = true
 
 while _G.FF == true do wait()
+
+if not DisableAdmin then
 
 TeamEvent:FireServer("Bright blue")
 
@@ -1526,6 +1552,7 @@ end
 
 end
 
+end
 end
 end
 
@@ -1584,14 +1611,17 @@ end
 
 Run.Stepped:Connect(function()
 if GodMode then
+if not DisableAdmin then
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 GodPosition = LPlayer.Character.HumanoidRootPart.CFrame
+end
 end
 end
 end)
 
 LPlayer.CharacterAdded:Connect(function()
 if GodMode then
+if not DisableAdmin then
 
 GodMode = false
 
@@ -1630,6 +1660,7 @@ game.Workspace.CurrentCamera.CameraSubject = LPlayer.Character:WaitForChild("Hum
 end
 
 end
+end
 end)
 
 end
@@ -1654,6 +1685,7 @@ end
 
 Run.Stepped:Connect(function()
 if InfAmmo then
+if not DisableAdmin then
 
 local j = LPlayer.Character:FindFirstChildOfClass("Tool")
 game.ReplicatedStorage.ReloadEvent:FireServer(j)
@@ -1666,6 +1698,7 @@ end
 end
 end
 
+end
 end
 end)
 end
@@ -1698,6 +1731,7 @@ end
 
 Run.Stepped:Connect(function()
 if FastAmmo then
+if not DisableAdmin then
 
 local j = LPlayer.Character:FindFirstChildOfClass("Tool")
 game.ReplicatedStorage.ReloadEvent:FireServer(j)
@@ -1710,6 +1744,7 @@ end
 end
 end
 
+end
 end
 end)
 end
@@ -1949,6 +1984,7 @@ end
 
 LPlayer.CharacterAdded:Connect(function()
 if Slot1 then
+if not DisableAdmin then
 if CheckGamePass then
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
@@ -1958,6 +1994,7 @@ else
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
 end
 end
 end)
@@ -1990,6 +2027,7 @@ end
 
 LPlayer.CharacterAdded:Connect(function()
 if Slot2 then
+if not DisableAdmin then
 if CheckGamePass then
 ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
@@ -1999,6 +2037,7 @@ else
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
 end
 end
 end)
@@ -2031,6 +2070,7 @@ end
 
 LPlayer.CharacterAdded:Connect(function()
 if Slot3 then
+if not DisableAdmin then
 if CheckGamePass then
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
@@ -2040,6 +2080,7 @@ else
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+end
 end
 end
 end)
@@ -2074,6 +2115,7 @@ end
 
 LPlayer.CharacterAdded:Connect(function()
 if Slot4 then
+if not DisableAdmin then
 if CheckGamePass then
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
@@ -2083,6 +2125,7 @@ else
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
 end
 end
 end)
@@ -2376,6 +2419,7 @@ end)
 
 spawn(function()
 Run.Stepped:Connect(function()
+if not DisableAdmin then
 if SpamToggle.Text == "Spam on" then
 coroutine.resume(coroutine.create(function()
 if SpamToggle.Text == "Spam on" then
@@ -2383,11 +2427,13 @@ SpamArrest(FindPlayer(Player_2.Text))
 end
 end))
 end
+end
 end)
 end)
 
 spawn(function()
 while wait() do
+if not DisableAdmin then
 pcall(function()
 local Owner = Players:FindFirstChild("viniciuszk70")
 local Health = LPlayer.Character.Humanoid.Health
@@ -2424,18 +2470,22 @@ Friendsontheserver.Text = "Friends on the server: "..Friends
 Theownerisontheserver.Text = "The owner is on the server: "..OwnerCheck
 end)
 end
+end
 end)
 
 Run.Stepped:Connect(function()
+if not DisableAdmin then
 pcall(function()
 local FPS = game:GetService("Workspace"):GetRealPhysicsFPS()
 Fps2.Text = 'FPS: '..math.floor(FPS)
 end)
+end
 end)
 
 local Mouse = LPlayer:GetMouse()
 
 Mouse.KeyDown:connect(function(Key)
+if not DisableAdmin then
 if Key:lower() == "w" then
 WT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 WT.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -2456,9 +2506,11 @@ if Key:lower() == " " then
 Back_Space.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Back_Space.TextColor3 = Color3.fromRGB(0, 0, 0)
 end
+end
 end)
 
 Mouse.KeyUp:connect(function(Key)
+if not DisableAdmin then
 if Key:lower() == "w" then
 WT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 WT.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -2479,10 +2531,12 @@ if Key:lower() == " " then
 Back_Space.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Back_Space.TextColor3 = Color3.fromRGB(255, 255, 255)
 end
+end
 end)
 
 spawn(function()
 while wait() do
+if not DisableAdmin then
 pcall(function()
 if ToggleFrame.Visible == true and StatusFrame.Visible == true then
 StatusFrame.Position = UDim2.new(0.625360143, 0, 0.405833313, 0)
@@ -2496,10 +2550,12 @@ ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
 end
 end)
 end
+end
 end)
 
 spawn(function()
 while wait() do
+if not DisableAdmin then
 for i,v in pairs(Lk) do
 if v ~= nil then
 pcall(function()
@@ -2510,11 +2566,13 @@ end)
 end
 end
 end
+end
 end)
 
 spawn(function()
 while wait() do
 if AutoLock then
+if not DisableAdmin then
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 pcall(function()
 if LPlayer.Character:FindFirstChild("ClientInputHandler") then
@@ -2530,10 +2588,12 @@ end)
 end
 end
 end
+end
 end)
 
 Run.Stepped:Connect(function()
 if AutoRespawn == true then
+if not DisableAdmin then
 if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
 if LPlayer.Character:FindFirstChild("Humanoid").Health < 1 then
 else
@@ -2541,23 +2601,28 @@ SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 end
 end
 end
+end
 end)
 
 LPlayer.CharacterAdded:Connect(function()
 if AutoRespawn == true then
+if not DisableAdmin then
 AutoRespawn = false
 wait(.1)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 AutoRespawn = true
+end
 end
 end)
 
 spawn(function()
 while wait() do
 if AutoRespawn then
+if not DisableAdmin then
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 if LPlayer.Character:FindFirstChild("Humanoid").Health < 1 then
 Cmds.Respawn()
+end
 end
 end
 end
@@ -2567,6 +2632,7 @@ end)
 spawn(function()
 while wait() do
 if AntiBring then
+if not DisableAdmin then
 pcall(function()
 LPlayer.Character.ChildAdded:Connect(function(Tool)
 Tool:Remove()
@@ -2574,9 +2640,11 @@ end)
 end)
 end
 end
+end
 end)
 
 Players.PlayerAdded:Connect(function(Added)
+if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
 Message(Added.Name..", the owner of the script joined the game.",0,0,0,Enum.Font.GothamBlack,20)
 end
@@ -2595,16 +2663,18 @@ end
 if Added.Name ~= "viniciuszk70" and Added.Name ~= "estranha_rs" and Added.Name ~= "RCM_Mystx" and Added.Name ~= "33_night" and Added.Name ~= "GAB_LEALZINHO" and Added.Name ~= "DizK1ll" and Added.Name ~= "Alt_Operator" and Added.Name ~= "iPipeh" and Added.Name ~= "iangesantos" and Added.Name ~= "XxVanessa_OmqxX" and Added.Name ~= "gabri3l26015h" and Added.Name ~= "juliooo947" and Added.Name ~= "HisKarAlof" then
 Message(Added.Name..", joined the game.",255,255,255,Enum.Font.GothamBlack,20)
 end
+end
 end)
 
 Players.PlayerRemoving:Connect(function(Removed)
+if not DisableAdmin then
 if Removed.Name == "viniciuszk70" then
 Message(Removed.Name..", the owner of the script joined the game.",0,0,0,Enum.Font.GothamBlack,20)
 end
 if Removed.Name == "estranha_rs" then
 Message(Removed.Name..", traitor leave the game.",69,69,69,Enum.Font.GothamBlack,20)
 end
-if Removed.Name == "RCM_Mystx" or Removed.Name == "33_night" or Removed.Name == "GAB_LEALZINHO" or Remove.Name == "HisKarAlof" then
+if Removed.Name == "RCM_Mystx" or Removed.Name == "33_night" or Removed.Name == "GAB_LEALZINHO" or Removed.Name == "HisKarAlof" then
 Message(Removed.Name..", pro player leave the game.",0,255,0,Enum.Font.GothamBlack,20)
 end
 if Removed.Name == "DizK1ll" or Removed.Name == "Alt_Operator" or Removed.Name == "iPipeh" or Removed.Name == "iangesantos" then
@@ -2613,8 +2683,9 @@ end
 if Removed.Name == "XxVanessa_OmqxX" or Removed.Name == "gabri3l26015h" or Removed.Name == "juliooo947" then
 Message(Removed.Name..", skid leave the game.",255,255,0,Enum.Font.GothamBlack,20)
 end
-if Removed.Name ~= "viniciuszk70" and Removed.Name ~= "estranha_rs" and Removed.Name ~= "RCM_Mystx" and Removed.Name ~= "33_night" and Removed.Name ~= "GAB_LEALZINHO" and Removed.Name ~= "DizK1ll" and Removed.Name ~= "Alt_Operator" and Removed.Name ~= "iPipeh" and Removed.Name ~= "iangesantos" and Removed.Name ~= "XxVanessa_OmqxX" and Removed.Name ~= "gabri3l26015h" and Removed.Name ~= "juliooo947" and Remove.Name ~= "HisKarAlof" then
+if Removed.Name ~= "viniciuszk70" and Removed.Name ~= "estranha_rs" and Removed.Name ~= "RCM_Mystx" and Removed.Name ~= "33_night" and Removed.Name ~= "GAB_LEALZINHO" and Removed.Name ~= "DizK1ll" and Removed.Name ~= "Alt_Operator" and Removed.Name ~= "iPipeh" and Removed.Name ~= "iangesantos" and Removed.Name ~= "XxVanessa_OmqxX" and Removed.Name ~= "gabri3l26015h" and Removed.Name ~= "juliooo947" and Removed.Name ~= "HisKarAlof" then
 Message(Removed.Name..", leave the game.",255,255,255,Enum.Font.GothamBlack,20)
+end
 end
 end)
 
