@@ -2339,6 +2339,15 @@ end
 end
 end
 
+if Connect.SendCommand("antivoid") then
+if Arg2 == "on" then
+AntiVoid = true
+end
+if Arg2 == "off" then
+AntiVoid = false
+end
+end
+
 end
 
 end
