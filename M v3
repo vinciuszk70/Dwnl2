@@ -1306,9 +1306,11 @@ end
 end
 
 Cmds.Goto = function(Player)
+pcall(function()
 if Player ~= nil then
 LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame
 end
+end)
 end
 
 Cmds.Respawn = function()
@@ -2988,7 +2990,7 @@ end
 end)
 
 spawn(function()
-while wait() do
+while wait(.3) do
 if AntiBring then
 if not DisableAdmin then
 pcall(function()
