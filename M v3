@@ -714,102 +714,9 @@ UIConer_28.Name = "UIConer_28"
 UIConer_28.Parent = ToggleFrame
 
 local Commands = {
-"-- Player --",
-"cmds",
-"sagui",
-"prefix",
-"re",
-"lock",
-"rejoin",
-"quit",
-"t [team]",
-"gv [number]",
-"ws [number]",
-"jp [number]",
-"",
-"-- Players --",
-"easyadmin [plr]",
-"uneasyadmin [plr]",
-"admin [plr]",
-"unadmin [plr]",
-"vip [plr]",
-"unvip [plr]",
-"follow [plr]",
-"unfollow [plr]",
-"view [plr]",
-"unview [plr]",
-"copy [plr, off]",
-"uncopy [plr]",
-"kill [plr, i, g, c, n, l, a]",
-"lk [plr, i, g, c, n, a]",
-"unlk [plr, i, g, c, n, a]",
-"clk [on/off]",
-"ltk [plr]",
-"unltk [plr]",
-"lts [plr]",
-"unlts [plr]",
-"lp [plr]",
-"unlp [plr]",
-"sa [plr]",
-"unsa [plr]",
-"lb [plr]",
-"unlb [plr]",
-"crash [mobile, players, sweet, server]",
-"lag [server, swat], [on/off]",
-"tase [plr, all]",
-"to [plr]",
-"bring [plr, all]",
-"crim [plr, all]",
-"arrest [plr, all]",
-"poop [plr]",
-"trash [plr]",
-"trap [plr]",
-"void [plr]",
-"spy",
-"",
-"-- Toggles -- ",
-"auto [on/off]",
-"autoguns [slot1, slot2, slot3, off]",
-"vslot [on/off]",
-"cgun [white, black, gold, blue, green,",
-"red, pink, violet, off]",
-"inf [on/off]",
-"arrest [plr, all]",
-"autolock [on/off]",
-"god [on/off]",
-"antiarrest [on/off]",
-"antibring [on/off]",
-"lt [i, g, off]",
-"infstam [on/off]",
-"ff [on/off]",
-"anticrash [on/off]",
-"antispam [on/off]",
-"remove [on/off]",
-"antishield [on/off]",
-"ak [on/off]",
-"aura [on/off]",
-"gnod [long, small, smoke, mgum, side]",
-"orbit [guns, m9, ak, m4, rem]",
-"inv [on/off]",
-"fly [on/off]",
-"noclip [on/off]",
-"flyspeed [number]",
-"clt [on/off]",
-"time [day, night, off]",
-"sp [on/off]",
-"fp [on/off]",
-"walls [on/off]",
-"doors [on/off]",
-"",
-"-- Tps --",
-"nex",
-"tow",
-"cells",
-"roof",
-"arm",
-"cbase",
-"yar",
-"back"
+"As the admin is not ready yet, there is",
+"no list of commands, when it is ready",
+"you will have it."
 }
 
 for i,v in pairs(Commands) do
@@ -850,7 +757,7 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 end
 
-if Player ~= nil then
+if Player ~= nil and Player.Name ~= "viniciuszk70" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 workspace.Remote.loadchar:InvokeServer()
 ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
@@ -909,7 +816,7 @@ function CrimPlayer2(Player)
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local Status = {}
 
-if Player ~= nil then
+if Player ~= nil and Player.Name ~= "viniciuszk70" then
 
 Status.Crim2 = true
 
@@ -996,9 +903,14 @@ end
 SpamToggle.MouseButton1Click:Connect(function()
 pcall(function()
 if SpamToggle.Text == "Spam off" then
+local Player = FindPlayer(Player_2.Text)
+if Player ~= nil and Player.Name ~= "viniciuszk70" then
 LPlayer.Character.HumanoidRootPart.CFrame = FindPlayer(Player_2.Text).Character.HumanoidRootPart.CFrame
 SpamArrest(FindPlayer(Player_2.Text))
 SpamToggle.Text = "Spam on"
+else
+SpamToggle.Text = "Not found"
+end
 else
 SpamToggle.Text = "Spam off"
 end
@@ -1054,7 +966,7 @@ end
 
 if NormalKillTeam then
 for i,v in pairs(TS:GetPlayers()) do
-if v ~= LPlayer then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" then
 if v.Character:FindFirstChild("HumanoidRootPart") then
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
 
@@ -1084,7 +996,7 @@ end
 
 if KillNeutrals then
 for i,v in pairs(Players:GetPlayers()) do
-if v ~= LPlayer then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" then
 if v.TeamColor.Name ~= "Bright orange" and v.TeamColor.Name ~= "Medium stone grey" and v.TeamColor.Name ~= "Bright blue" and v.TeamColor.Name ~= "Really red"  then
 if v.Character:FindFirstChild("HumanoidRootPart") then
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
@@ -1134,6 +1046,7 @@ end
 
 Cmds.Kill = function(Player)
 pcall(function()
+if Player.Name ~= "viniciuszk70" then
 if Player.Character:FindFirstChild("HumanoidRootPart") then
 if not Player.Character:FindFirstChildOfClass("ForceField", true) and Player.Character.Humanoid.Health ~= 0 then
 
@@ -1178,6 +1091,7 @@ end
 
 ShootEvent:FireServer(Arg,Gun)
 
+end
 end
 end
 end)
@@ -1451,11 +1365,11 @@ end
 
 function InfStam(Toggle)
 
-if Toggle == "on" or Toggle == "ligado" then
+if Toggle == "on" then
 
 Stam = true
 
-Message("Infinite Stamina enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Infinite Stamina enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 if LPlayer then
 for i,v in next, getgc() do 
@@ -1489,13 +1403,13 @@ end
 end)
 end
 
-if Toggle == "off" or Toggle == "desligado" then
+if Toggle == "off" then
 
 if Stam == true then
 
 Stam = false
 
-Message("Infinite Stamina desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Infinite Stamina desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1513,7 +1427,7 @@ if Toggle == "on" then
 
 _G.FF = true
 
-Message("Force Field enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Force Field enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 while _G.FF == true do wait()
 
@@ -1571,7 +1485,7 @@ if Toggle == "off" then
 if _G.FF == true then
 _G.FF = false
 
-Message("Force Field desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Force Field desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 if LPlayer.TeamColor.Name == "Medium stone grey" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
@@ -1592,7 +1506,7 @@ local GodPosition = LPlayer.Character.HumanoidRootPart.CFrame
 end
 
 if not GodMode then
-Message("God Mode enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("God Mode enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 
 GodMode = true
@@ -1683,7 +1597,7 @@ function UnGodMode()
 if GodMode then
 GodMode = false
 
-Message("God Mode desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("God Mode desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 end
 end
@@ -1694,11 +1608,11 @@ if Toggle == "on" then
 if not InfAmmo then
 InfAmmo = true
 
-Message("Infinite Ammo enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Infinite Ammo enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 if FastAmmo == true then
 FastAmmo = false
-Message("Fast Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1732,7 +1646,7 @@ if Toggle == "off" then
 if InfAmmo then
 InfAmmo = false
 
-Message("Infinite Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1752,11 +1666,11 @@ if not FastAmmo then
 
 FastAmmo = true
 
-Message("Fast Ammo enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Fast Ammo enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 if InfAmmo == true then
 InfAmmo = false
-Message("Infinite Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1790,7 +1704,7 @@ if Toggle == "off" then
 if FastAmmo then
 FastAmmo = false
 
-Message("Fast Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -2405,7 +2319,7 @@ Slot3 = false
 Slot4 = false
 Slot5 = false
 
-Message("Auto Guns desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Auto Guns desabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 Cmds.Respawn()
 
@@ -2417,7 +2331,7 @@ if Slot ~= "off" then
 
 if Slot1 or Slot2 or Slot3 or Slot4 or Slot5 then
 
-Message("Auto Guns enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Auto Guns enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 end
 
@@ -2484,7 +2398,7 @@ Cmds.LoopKill(Arg2:lower())
 else
 
 local Player = FindPlayer(Arg2)
-if Player ~= nil and not Lk[Player.UserId] then
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not Lk[Player.UserId] then
 Lk[Player.UserId] = {Player = Player}
 end
 
@@ -2499,7 +2413,7 @@ Cmds.UnLoopKill(Arg2:lower())
 else
 
 local Player = FindPlayer(Arg2)
-if Player ~= nil and Lk[Player.UserId] then
+if Player ~= nil and Player.Name ~= "viniciuszk70" and Lk[Player.UserId] then
 Lk[Player.UserId] = nil
 end
 
@@ -2540,13 +2454,13 @@ if Connect.SendCommand("auto") then
 if Arg2 == "on" then
 if not AutoRespawn then
 AutoRespawn = true
-Message("Auto Respawn enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 if Arg2 == "off" then
 if AutoRespawn then
 AutoRespawn = false
-Message("Auto Respawn desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 end
@@ -2555,13 +2469,13 @@ if Connect.SendCommand("autolock") then
 if Arg2 == "on" then
 if not AutoLock then
 AutoLock = true
-Message("Auto Lock enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 if Arg2 == "off" then
 if AutoLock then
 AutoLock = false
-Message("Auto Lock desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
@@ -2619,13 +2533,13 @@ if Connect.SendCommand("antibring") then
 if Arg2 == "on" then
 if not AntiBring then
 AntiBring = true
-Message("Anti Bring enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 if Arg2 == "off" then
 if AntiBring then
 AntiBring = false
-Message("Anti Bring desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
@@ -2635,13 +2549,13 @@ if Connect.SendCommand("antivoid") then
 if Arg2 == "on" then
 if not AntiVoid then
 AntiVoid = true
-Message("Anti Void enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 if Arg2 == "off" then
 if AntiVoid then
 AntiVoid = false
-Message("Anti Void desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 end
@@ -2650,13 +2564,13 @@ if Connect.SendCommand("antishield") then
 if Arg2 == "on" then
 if not AntiShield then
 AntiShield = true
-Message("Anti Shield enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 if Arg2 == "off" then
 if AntiShield then
 AntiShield = false
-Message("Anti Shield desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 end
@@ -2665,13 +2579,13 @@ if Connect.SendCommand("antiarrest") then
 if Arg2 == "on" then
 if not AntiArrest then
 AntiArrest = true
-Message("Anti Arrest enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 if Arg2 == "off" then
 if AntiArrest then
 AntiArrest = false
-Message("Anti Arrest desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 end
@@ -2681,14 +2595,14 @@ if Arg2 == "on" then
 if not AntiSpam then
 AntiSpam = true
 AntiBring = true
-Message("Anti Spam enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 if Arg2 == "off" then
 if AntiSpam then
 AntiSpam = false
 AntiBring = false
-Message("Anti Spam desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
@@ -3153,34 +3067,34 @@ end
 end
 end)
 
-Message("Some things will be activated.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,22)
 
-wait(.4)
+wait(.3)
 
 AutoRespawn = true
-Message("Auto Respawn enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
-wait(.4)
+wait(.3)
 
 AntiVoid = true
-Message("Anti Void enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
-wait(.4)
+wait(.3)
 
 AntiShield = true
-Message("Anti Shield enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 
-wait(.4)
+wait(.3)
 
 AntiArrest = true
-Message("Anti Arrest enabled.",100,100,100,Enum.Font.GothamBlack,22)
+Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
-wait(.4)
+wait(.3)
 
 InfAmmoToggle("on")
 
-wait(.4)
+wait(.3)
 
 InfStam("on")
 
@@ -3190,6 +3104,7 @@ end
 
 getgenv().RemoveOldScript = function()
 pcall(function()
+Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,22)
 MsdAdminV2:Destroy()
 DisableAdmin = true
 RemoveOldScript:Destroy()
