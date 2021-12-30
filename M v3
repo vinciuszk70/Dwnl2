@@ -1191,7 +1191,7 @@ if TP == "i" or TP == "inmates" then
 
 _G.i = true
 
-while _G.i == true do wait(.3)
+while _G.i == true do wait()
 if not DisableAdmin then
 Cmds.KillTeam("i")
 end
@@ -1203,7 +1203,7 @@ if TP == "g" or TP == "guards" then
 
 _G.g = true
 
-while _G.g == true do wait(.3)
+while _G.g == true do wait()
 if not DisableAdmin then
 Cmds.KillTeam("g")
 end
@@ -1215,7 +1215,7 @@ if TP == "n" or TP == "neutros" then
 
 _G.n = true
 
-while _G.n == true do wait(.3)
+while _G.n == true do wait()
 if not DisableAdmin then
 Cmds.KillTeam("n")
 end
@@ -1227,7 +1227,7 @@ if TP == "l" or TP == "neutrals" then
 
 _G.l = true
 
-while _G.l == true do wait(.3)
+while _G.l == true do wait()
 if not DisableAdmin then
 Cmds.KillTeam("l")
 end
@@ -1239,7 +1239,7 @@ if TP == "c" or TP == "criminals" then
 
 _G.c = true
 
-while _G.c == true do wait(.3)
+while _G.c == true do wait()
 if not DisableAdmin then
 Cmds.KillTeam("c")
 end
@@ -1251,7 +1251,7 @@ if TP == "a" or TP == "all" then
 
 _G.a = true
 
-while _G.a == true do wait(.3)
+while _G.a == true do wait()
 if not DisableAdmin then
 Cmds.KillTeam("a")
 end
@@ -1453,6 +1453,8 @@ if Toggle == "on" or Toggle == "ligado" then
 
 Stam = true
 
+Message("Infinite Stamina enabled.",100,100,100,Enum.Font.GothamBlack,22)
+
 if LPlayer then
 for i,v in next, getgc() do 
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
@@ -1491,6 +1493,8 @@ if Stam == true then
 
 Stam = false
 
+Message("Infinite Stamina desabled.",100,100,100,Enum.Font.GothamBlack,22)
+
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
 workspace.Remote.loadchar:InvokeServer()
@@ -1506,6 +1510,8 @@ function ForceField(Toggle)
 if Toggle == "on" then
 
 _G.FF = true
+
+Message("Force Field enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 while _G.FF == true do wait()
 
@@ -1563,6 +1569,8 @@ if Toggle == "off" then
 if _G.FF == true then
 _G.FF = false
 
+Message("Force Field desabled.",100,100,100,Enum.Font.GothamBlack,22)
+
 if LPlayer.TeamColor.Name == "Medium stone grey" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1579,6 +1587,10 @@ function GodModeOn()
 
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 local GodPosition = LPlayer.Character.HumanoidRootPart.CFrame
+end
+
+if not GodMode then
+Message("God Mode enabled.",100,100,100,Enum.Font.GothamBlack,22)
 end
 
 GodMode = true
@@ -1666,16 +1678,26 @@ end)
 end
 
 function UnGodMode()
+if GodMode then
 GodMode = false
+
+Message("God Mode desabled.",100,100,100,Enum.Font.GothamBlack,22)
+
+end
 end
 
 function InfAmmoToggle(Toggle)
 
 if Toggle == "on" then
+if not InfAmmo then
 InfAmmo = true
+
+Message("Infinite Ammo enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 if FastAmmo == true then
 FastAmmo = false
+Message("Fast Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
+
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
 workspace.Remote.loadchar:InvokeServer()
@@ -1702,9 +1724,13 @@ end
 end
 end)
 end
+end
 
 if Toggle == "off" then
+if InfAmmo then
 InfAmmo = false
+
+Message("Infinite Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1712,16 +1738,24 @@ workspace.Remote.loadchar:InvokeServer()
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 end
+end
 
 end
 
 function FastAmmoToggle(Toggle)
 
 if Toggle == "on" then
+
+if not FastAmmo then
+
 FastAmmo = true
+
+Message("Fast Ammo enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 if InfAmmo == true then
 InfAmmo = false
+Message("Infinite Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
+
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
 workspace.Remote.loadchar:InvokeServer()
@@ -1748,15 +1782,20 @@ end
 end
 end)
 end
+end
 
 if Toggle == "off" then
+if FastAmmo then
 FastAmmo = false
+
+Message("Fast Ammo desabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
 workspace.Remote.loadchar:InvokeServer()
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
+end
 end
 
 end
@@ -1885,6 +1924,74 @@ end)
 wait()
 
 CrashMkan = false
+
+end
+
+if Cmd == "nwe" then
+
+function CrashNwe()
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+local Packets = {}
+
+for SendToServer = 1,200000 do
+coroutine.resume(coroutine.create(function()
+Packets[SendToServer] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+end))
+end
+
+coroutine.resume(coroutine.create(function()
+ShootEvent:FireServer(Packets,Gun)
+end))
+
+end
+
+for ReplicateCrash = 1,3 do
+coroutine.resume(coroutine.create(function()
+CrashNwe()
+end))
+end
+
+end
+
+if Cmd == "pnl" then
+
+function CrashPnl()
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+local Packets = {}
+
+for SendToServer = 1,200000 do
+coroutine.resume(coroutine.create(function()
+Packets[SendToServer] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+end))
+end
+
+for ReplicateSends = 1,3 do
+coroutine.resume(coroutine.create(function()
+ShootEvent:FireServer(Packets,Gun)
+end))
+end
+
+end
+
+for ReplicateCrash = 1,3 do
+coroutine.resume(coroutine.create(function()
+CrashPnl()
+end))
+end
 
 end
 
@@ -2042,17 +2149,36 @@ end
 
 end
 
+if Slot == "slot5" then
+
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+
+end
+
 end
 
 function AutoGuns(Slot)
 
+if Slot == "slot1" or Slot == "slot2" or Slot == "slot3" or Slot == "slot4" or Slot == "slot5" or Slot == "off" then
+
 if Slot == "slot1" then
 Slot1 = true
 
-if Slot2 == true or Slot3 == true or Slot4 == true then
+if Slot2 or Slot3 or Slot4 or Slot5 then
+
 Slot2 = false
 Slot3 = false
 Slot4 = false
+Slot5 = false
 
 Cmds.Respawn()
 end
@@ -2088,10 +2214,12 @@ end
 if Slot == "slot2" then
 Slot2 = true
 
-if Slot1 == true or Slot3 == true or Slot4 == true then
+if Slot1 or Slot3 or Slot4 or Slot5 then
+
 Slot1 = false
 Slot3 = false
 Slot4 = false
+Slot5 = false
 
 Cmds.Respawn()
 end
@@ -2131,10 +2259,12 @@ end
 if Slot == "slot3" then
 Slot3 = true
 
-if Slot1 == true or Slot2 == true or Slot4 == true then
+if Slot1 or Slot2 or Slot4 or Slot5 then
+
 Slot1 = false
 Slot2 = false
 Slot4 = false
+Slot5 = false
 
 Cmds.Respawn()
 end
@@ -2174,11 +2304,12 @@ end
 if Slot == "slot4" then
 Slot4 = true
 
-if Slot1 == true or Slot2 == true or Slot3 == true then
+if Slot1 or Slot2 or Slot3 or Slot5 then
 
 Slot1 = false
 Slot2 = false
 Slot3 = false
+Slot5 = false
 
 Cmds.Respawn()
 
@@ -2216,9 +2347,10 @@ end)
 
 end
 
-if Slot == "off" or Slot == "desligado" then
+if Slot == "slot5" then
+Slot5 = true
 
-if Slot1 == true or Slot2 == true or Slot3 == true or Slot4 == true then
+if Slot1 or Slot2 or Slot3 or Slot4 then
 
 Slot1 = false
 Slot2 = false
@@ -2226,6 +2358,66 @@ Slot3 = false
 Slot4 = false
 
 Cmds.Respawn()
+
+end
+
+if Slot5 then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+
+LPlayer.CharacterAdded:Connect(function()
+if Slot5 then
+if not DisableAdmin then
+if CheckGamePass then
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M4A1"].ITEMPICKUP)
+else
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+end
+end
+end
+end)
+
+end
+
+if Slot == "off" then
+
+if Slot1 or Slot2 or Slot3 or Slot4 or Slot5 then
+
+Slot1 = false
+Slot2 = false
+Slot3 = false
+Slot4 = false
+Slot5 = false
+
+Message("Auto Guns desabled.",100,100,100,Enum.Font.GothamBlack,22)
+
+Cmds.Respawn()
+
+end
+
+end
+
+if Slot ~= "off" then
+
+if Slot1 or Slot2 or Slot3 or Slot4 or Slot5 then
+
+Message("Auto Guns enabled.",100,100,100,Enum.Font.GothamBlack,22)
+
+end
 
 end
 
@@ -2345,19 +2537,23 @@ end
 if Connect.SendCommand("auto") then
 if Arg2 == "on" then
 AutoRespawn = true
+Message("Auto Respawn enabled.",100,100,100,Enum.Font.GothamBlack,22)
 end
 if Arg2 == "off" then
 AutoRespawn = false
+Message("Auto Respawn desabled.",100,100,100,Enum.Font.GothamBlack,22)
 end
 end
 
 if Connect.SendCommand("autolock") then
 if Arg2 == "on" then
 AutoLock = true
+Message("Auto Lock enabled.",100,100,100,Enum.Font.GothamBlack,22)
 end
 if Arg2 == "off" then
 if AutoLock == true then
 AutoLock = false
+Message("Auto Lock desabled.",100,100,100,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
@@ -2413,11 +2609,15 @@ end
 
 if Connect.SendCommand("antibring") then
 if Arg2 == "on" then
+if not AntiBring then
 AntiBring = true
+Message("Anti Bring enabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
 end
 if Arg2 == "off" then
-if AntiBring == true then
+if AntiBring then
 AntiBring = false
+Message("Anti Bring desabled.",100,100,100,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
@@ -2425,28 +2625,64 @@ end
 
 if Connect.SendCommand("antivoid") then
 if Arg2 == "on" then
+if not AntiVoid then
 AntiVoid = true
+Message("Anti Void enabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
 end
 if Arg2 == "off" then
+if AntiVoid then
 AntiVoid = false
+Message("Anti Void desabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
 end
 end
 
 if Connect.SendCommand("antishield") then
 if Arg2 == "on" then
+if not AntiShield then
 AntiShield = true
+Message("Anti Shield enabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
 end
 if Arg2 == "off" then
+if AntiShield then
 AntiShield = false
+Message("Anti Shield desabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
 end
 end
 
 if Connect.SendCommand("antiarrest") then
 if Arg2 == "on" then
+if not AntiArrest then
 AntiArrest = true
+Message("Anti Arrest enabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
 end
 if Arg2 == "off" then
+if AntiArrest then
 AntiArrest = false
+Message("Anti Arrest desabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("antispam") then
+if Arg2 == "on" then
+if not AntiSpam then
+AntiSpam = true
+AntiBring = true
+Message("Anti Spam enabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if AntiSpam then
+AntiSpam = false
+AntiBring = false
+Message("Anti Spam desabled.",100,100,100,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
 end
 end
 
@@ -2708,7 +2944,7 @@ if AutoRespawn then
 if not DisableAdmin then
 pcall(function()
 if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
-if LPlayer.Character:FindFirstChild("Humanoid").Health == 0 then
+if LPlayer.Character:FindFirstChild("Humanoid").Health ~= 0 then
 SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 end
 end
@@ -2719,12 +2955,18 @@ end
 end)
 
 LPlayer.CharacterAdded:Connect(function()
-if AutoRespawn then
+if AutoRespawn == true then
 if not DisableAdmin then
 AutoRespawn = false
 wait(.1)
+if CheckAntiSpam == false then
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 AutoRespawn = true
+CheckDiedAutoRespawn = false
+else
+CheckAntiSpam = false
+AutoRespawn = true
+end
 end
 end
 end)
@@ -2795,11 +3037,14 @@ if not DisableAdmin then
 AntiArrest = false
 wait(.1)
 if not CheckDiedAntiArrest then
+if CheckAntiSpam == false then
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 AntiArrest = true
 else
 CheckDiedAntiArrest = false
+CheckAntiSpam = false
 AntiArrest = true
+end
 end
 end
 end
@@ -2809,6 +3054,7 @@ spawn(function()
 while wait() do
 if AntiArrest then
 if not DisableAdmin then
+if CheckAntiSpam == false then
 pcall(function()
 if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
 if not LPlayer.Character.Head:FindFirstChild('handcuffedGui') then
@@ -2824,6 +3070,28 @@ workspace.Remote.loadchar:InvokeServer()
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 end
+end
+end)
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if AntiSpam then
+if not DisableAdmin then
+pcall(function()
+if LPlayer.TeamColor.Name == "Really red" then
+CheckAntiSpam = true
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
+end
+if LPlayer.Character.Head:FindFirstChild("handcuffedGui") then
+CheckAntiSpam = true
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
 end
 end)
 end
@@ -2903,12 +3171,10 @@ Message("Anti Arrest enabled.",100,100,100,Enum.Font.GothamBlack,22)
 wait(.4)
 
 InfAmmoToggle("on")
-Message("Infinite Ammo enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 wait(.4)
 
 InfStam("on")
-Message("Infinite Stamina enabled.",100,100,100,Enum.Font.GothamBlack,22)
 
 if RemoveOldScript then
 RemoveOldScript()
