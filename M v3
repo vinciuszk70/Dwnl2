@@ -2538,22 +2538,28 @@ end
 
 if Connect.SendCommand("auto") then
 if Arg2 == "on" then
+if not AutoRespawn then
 AutoRespawn = true
 Message("Auto Respawn enabled.",100,100,100,Enum.Font.GothamBlack,22)
 end
+end
 if Arg2 == "off" then
+if AutoRespawn then
 AutoRespawn = false
 Message("Auto Respawn desabled.",100,100,100,Enum.Font.GothamBlack,22)
+end
 end
 end
 
 if Connect.SendCommand("autolock") then
 if Arg2 == "on" then
+if not AutoLock then
 AutoLock = true
 Message("Auto Lock enabled.",100,100,100,Enum.Font.GothamBlack,22)
 end
+end
 if Arg2 == "off" then
-if AutoLock == true then
+if AutoLock then
 AutoLock = false
 Message("Auto Lock desabled.",100,100,100,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
