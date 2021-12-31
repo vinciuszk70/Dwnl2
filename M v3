@@ -1377,36 +1377,18 @@ end
 function InfStam(Toggle)
 
 if Toggle == "on" then
-
+if not Stam then
 Stam = true
 
 Message("Infinite Stamina enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 if LPlayer then
+pcall(function()
 for i,v in next, getgc() do 
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
 for i2,v2 in next, debug.getupvalues(v) do 
 if type(v2) == "number" then 
 debug.setupvalue(v, i2, math.huge)
-end
-end
-end
-end
-end
-
-LPlayer.CharacterAdded:Connect(function()
-if Stam then
-if not DisableAdmin then
-wait(.1)
-if LPlayer then
-for i,v in next, getgc() do 
-if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
-for i2,v2 in next, debug.getupvalues(v) do 
-if type(v2) == "number" then 
-debug.setupvalue(v, i2, math.huge)
-end
-end
-end
 end
 end
 end
@@ -1414,9 +1396,32 @@ end
 end)
 end
 
+LPlayer.CharacterAdded:Connect(function()
+if Stam then
+if not DisableAdmin then
+wait(.1)
+if LPlayer then
+pcall(function()
+for i,v in next, getgc() do
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, math.huge)
+end
+end
+end
+end
+end)
+end
+end
+end
+end)
+end
+end
+
 if Toggle == "off" then
 
-if Stam == true then
+if Stam then
 
 Stam = false
 
@@ -1435,6 +1440,7 @@ end
 function ForceField(Toggle)
 
 if Toggle == "on" then
+if not _G.FF then
 
 _G.FF = true
 
@@ -1490,10 +1496,11 @@ end
 end
 
 end
+end
 
 if Toggle == "off" then
 
-if _G.FF == true then
+if _G.FF then
 _G.FF = false
 
 Message("Force Field desabled.",70,70,70,Enum.Font.GothamBlack,22)
@@ -2421,7 +2428,7 @@ end
 
 function Bring(Player, Position)
 pcall(function()
-if Player == nil or Position == nil then return end
+if Player == nil and Player.Name ~= "viniciuszk70" and Position == nil then return end
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 
@@ -2469,7 +2476,7 @@ pcall(function()
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 for i,v in pairs(Players:GetPlayers()) do
-if v ~= LPlayer and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
 local i = 1
 repeat wait()
 i = i-1
@@ -2523,6 +2530,8 @@ function Crim(Player, mebitch)
 pcall(function()
 local Player = FindPlayer(Arg2)
 
+if Player ~= nil and Player.Name ~= "viniciuszk70" then
+
 if LPlayer.TeamColor.Name == "Bright blue" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -2531,7 +2540,6 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 end
 
-if Player ~= nil then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 workspace.Remote.loadchar:InvokeServer()
 ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
@@ -2593,7 +2601,7 @@ if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
 for i,v in pairs(Players:GetPlayers()) do
-if v ~= LPlayer and v.TeamColor.Name ~= "Really red" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" and v.TeamColor.Name ~= "Really red" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
 local i = 1
 repeat wait()
 i = i-1
@@ -2984,28 +2992,28 @@ end
 
 if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and not Sa[Player.UserId] then
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
 Sa[Player.UserId] = {Player = Player}
 end
 end
 
 if Connect.SendCommand("unsa") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and Sa[Player.UserId] then
+if Player ~= nil and Player.Name ~= "viniciuszk70"  and Sa[Player.UserId] then
 Sa[Player.UserId] = nil
 end
 end
 
 if Connect.SendCommand("ultrasa") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and not Sa[Player.UserId] then
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
 Sa[Player.UserId] = {Player = Player}
 end
 end
 
 if Connect.SendCommand("unultrasa") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and Sa[Player.UserId] then
+if Player ~= nil and Player.Name ~= "viniciuszk70" and Sa[Player.UserId] then
 Sa[Player.UserId] = nil
 end
 end
