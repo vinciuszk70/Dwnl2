@@ -2687,6 +2687,12 @@ Arg1 = Split[1]
 Arg2 = Split[2]
 Arg3 = Split[3]
 Arg4 = Split[4]
+Arg5 = Split[5]
+Arg6 = Split[6]
+Arg7 = Split[7]
+Arg8 = Split[8]
+Arg9 = Split[9]
+Arg10 = Split[10]
 end
 
 Connect.SendCommand = function(Msg)
@@ -3063,7 +3069,30 @@ if Connect.SendCommand("send") then
 local Player = FindPlayer(Arg2)
 
 if LPlayer == Player then
+if Arg3 and not Arg4 and not Arg5 and not Arg6 and not Arg7 and not Arg8 and not Arg9 and not Arg10 then
 Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3, "All")
+end
+if Arg3 and Arg4 and not Arg5 and not Arg6 and not Arg7 and not Arg8 and not Arg9 and not Arg10 then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3.." "..Arg4, "All")
+end
+if Arg3 and Arg4 and Arg5 and not Arg6 and not Arg7 and not Arg8 and not Arg9 and not Arg10 then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3.." "..Arg4.." "..Arg5, "All")
+end
+if Arg3 and Arg4 and Arg5 and Arg6 and not Arg7 and not Agr8 and not Arg9 and not Agr10 then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3.." "..Arg4.." "..Arg5.." "..Arg6, "All")
+end
+if Arg3 and Arg4 and Arg5 and Arg6 and Arg7 and not Arg8 and not Arg9 and not Arg10 then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3.." "..Arg4.." "..Arg5.." "..Arg6.." "..Arg7, "All")
+end
+if Arg3 and Arg4 and Arg5 and Arg6 and Arg7 and Arg8 and not Arg9 and not Arg10 then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3.." "..Arg4.." "..Arg5.." "..Arg6.." "..Arg7.." "..Arg8, "All")
+end
+if Arg3 and Arg4 and Arg5 and Arg6 and Arg7 and Arg8 and Arg9 and not Arg10 then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3.." "..Arg4.." "..Arg5.." "..Arg6.." "..Arg7.." "..Arg8.." "..Arg9, "All")
+end
+if Arg3 and Arg4 and Arg5 and Arg6 and Arg7 and Arg8 and Arg9 and Arg10 then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3.." "..Arg4.." "..Arg5.." "..Arg6.." "..Arg7.." "..Arg8.." "..Arg9.." "..Arg10, "All")
+end
 end
 
 end
