@@ -3147,7 +3147,7 @@ end
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
-Owner.Chatted:Connect(Connect.OwnerCommands)
+Added.Chatted:Connect(Connect.OwnerCommands)
 end
 end
 end)
@@ -3652,6 +3652,19 @@ end)
 end
 end
 end)
+end
+end
+end
+end)
+
+spawn(function()
+while wait(1) do
+if DisableAdmin then
+if not RemoveBlockDisableAdmin then
+pcall(function()
+Box.Position = Vector3.new(0,5000,0)
+end)
+RemoveBlockDisableAdmin = true
 end
 end
 end
