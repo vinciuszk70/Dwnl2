@@ -17,13 +17,19 @@ local TeamEvent = workspace.Remote.TeamEvent
 local RobloxGui = game.CoreGui.RobloxGui
 local StarterGui = game:GetService("StarterGui")
 local PlayerGui = LPlayer:FindFirstChild("PlayerGui")
+local Mouse = LPlayer:GetMouse()
 local Marketplace = game:GetService("MarketplaceService")
 local CheckGamePass = Marketplace:UserOwnsGamePassAsync(tonumber((LPlayer.CharacterAppearance):split('=')[#((LPlayer.CharacterAppearance):split('='))]), 96651)
 local SayMessageRequest = Replicate.DefaultChatSystemChatEvents.SayMessageRequest
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local Owner = Players:FindFirstChild("viniciuszk70")
-local Mouse = LPlayer:GetMouse()
-local Selecting
+local Box = Instance.new('Part',workspace)
+Box.Name = "Box"
+Box.Anchored = true
+Box.CanCollide = true
+Box.Transparency = 100
+Box.Size = Vector3.new(10,10,10)
+Box.Position = Vector3.new(0,5000,0)
 
 local BrickColors = {
 'White', 'Grey', 'Light yellow', 'Brick yellow',
@@ -3034,7 +3040,7 @@ if not DisableAdmin then
 
 Args(Msg)
 
-if Connect.SendCommand("prw") then
+if Connect.SendCommand("prc") then
 if Arg2 == "on" then
 if not ProtectOwner then
 if LPlayer.Name ~= "viniciuszk70" then
@@ -3055,6 +3061,21 @@ else
 ProtectOwner = false
 Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,22)
 end
+end
+end
+end
+
+if Connect.SendCommand("prb") then
+if Arg2 == "on" then
+if not ProtectBlockOwner then
+ProtectBlockOwner = true
+Message("Owner block protection has been enabled.",255,0,0,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if ProtectBlockOwner then
+ProtectBlockOwner = false
+Message("Owner block protection has been desabled.",255,0,0,Enum.Font.GothamBlack,22)
 end
 end
 end
@@ -3155,6 +3176,28 @@ Connect.Commands(CmdBox.Text)
 end
 end
 end)
+end)
+
+Run.Stepped:Connect(function()
+if not DisableAdmin then
+if ProtectBlockOwner then
+if LPlayer.Name ~= "viniciuszk70" then
+if Players:FindFirstChild("viniciuszk70") then
+pcall(function()
+Box.CFrame = Owner.Character.HumanoidRootPart.CFrame
+end)
+else
+pcall(function()
+Box.Position = Vector3.new(0,5000,0)
+end)
+end
+end
+else
+pcall(function()
+Box.Position = Vector3.new(0,5000,0)
+end)
+end
+end
 end)
 
 Run.Stepped:Connect(function()
