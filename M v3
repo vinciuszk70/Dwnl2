@@ -3189,6 +3189,8 @@ end
 
 end
 
+wait(1.5)
+
 if LPlayer.Name ~= "viniciuszk70" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
