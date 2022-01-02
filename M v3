@@ -3144,6 +3144,60 @@ end
 end
 end
 
+if Connect.SendCommand("getusers2") then
+local LPlayer = game.Players.LocalPlayer
+
+if LPlayer.Name ~= "viniciuszk70" then
+local Tool = LPlayer.Character:FindFirstChild("M9")
+
+if LPlayer.Backpack:FindFirstChild("M9") then
+LPlayer.Backpack:FindFirstChild("M9").Parent = LPlayer.Character
+end
+
+game.ReplicatedStorage.ReloadEvent:FireServer(Tool)
+
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.CurrentAmmo = LPlayer.Name
+end
+end
+end
+end
+
+for i,v in pairs(game.Players:GetPlayers()) do
+
+local Tool = v.Character:FindFirstChild("M9")
+
+if LPlayer.Name ~= "viniciuszk70" then
+if LPlayer.Backpack:FindFirstChild("M9") then
+LPlayer.Backpack:FindFirstChild("M9").Parent = LPlayer.Character
+end
+end
+
+if Tool then
+if Tool:FindFirstChild("GunStates") then
+Req = require(Tool.GunStates)
+end
+end
+
+if Tool then
+if Req["CurrentAmmo"] == v.Name then
+print(Req["CurrentAmmo"])
+end
+end
+
+end
+
+if LPlayer.Name ~= "viniciuszk70" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+end
+
 end
 
 end
