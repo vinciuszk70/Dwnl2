@@ -4,7 +4,6 @@ local Cmds = {}
 local Lk = {}
 local Sa = {}
 local UltraSa = {}
-local Packets = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -1745,7 +1744,7 @@ function Crash(Cmd)
 
 if Cmd == "players" then
 
-Packets = {}
+local Packets = {}
 
 CrashPlayers = true
 
@@ -1786,7 +1785,7 @@ end
 
 if Cmd == "sprit" then
 
-Packets = {}
+local Packets = {}
 
 CrashSprit = true
 
@@ -1827,7 +1826,7 @@ end
 
 if Cmd == "mkan" then
 
-Packets = {}
+local Packets = {}
 
 CrashMkan = true
 
@@ -1870,7 +1869,7 @@ end
 
 if Cmd == "nwe" then
 
-Packets = {}
+local Packets = {}
 
 function CrashNwe()
 
@@ -1903,7 +1902,7 @@ end
 
 if Cmd == "pnl" then
 
-Packets = {}
+local Packets = {}
 
 function CrashPnl()
 
@@ -1938,7 +1937,7 @@ end
 
 if Cmd == "force" then
 
-Packets = {}
+local Packets = {}
 
 CrashForceServerDie = true
 
@@ -2003,48 +2002,9 @@ CrashForceServerDie = false
 
 end
 
-if Cmd == "smite" then
-
-Packets = {}
-
-CrashSmite = true
-
-Run.Stepped:Connect(function()
-
-for ReplicateCrash = 1,1000 do
-
-if CrashSmite then
-
-ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
-
-local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-for SendToServer = 1,55555 do
-Packets[SendToServer] = {
-Cframe = CFrame.new(),
-Hit = workspace:FindFirstChildOfClass("Part")
-}
-end
-
-for ReplicateSends = 1,2 do
-ShootEvent:FireServer(Packets,Gun)
-end
-
-end
-
-end
-
-end)
-
-wait()
-
-CrashSmite = false
-
-end
-
 if Cmd == "dest" then
 
-Packets = {}
+local Packets = {}
 
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 
@@ -2082,6 +2042,45 @@ end
 for ReplicateSends = 1,5 do
 ShootEvent:FireServer(Packets,Gun)
 end
+
+end
+
+if Cmd == "smite" then
+
+local Packets = {}
+
+CrashSmite = true
+
+Run.Stepped:Connect(function()
+
+for ReplicateCrash = 1,1000 do
+
+if CrashSmite then
+
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
+
+for SendToServer = 1,55555 do
+Packets[SendToServer] = {
+Cframe = CFrame.new(),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+end
+
+for ReplicateSends = 1,2 do
+ShootEvent:FireServer(Packets,Gun)
+end
+
+end
+
+end
+
+end)
+
+wait()
+
+CrashSmite = false
 
 end
 
@@ -2128,7 +2127,7 @@ end
 
 if Cmd == "server" then
 
-Packets = {}
+local Packets = {}
 
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
@@ -2848,6 +2847,22 @@ AutoRespawn = false
 Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
+if Arg2 == nil then
+if not AutoRespawn then
+AutoRespawn = true
+Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AutoRespawn = false
+Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unauto") then
+if AutoRespawn then
+AutoRespawn = false
+Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
 end
 
 if Connect.SendCommand("autolock") then
@@ -2864,17 +2879,72 @@ Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
+if Arg2 == nil then
+if not AutoLock then
+AutoLock = true
+Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AutoLock = false
+Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
+end
+end
+
+if Connect.SendCommand("unautolock") then
+if AutoLock then
+AutoLock = false
+Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
 end
 
 if Connect.SendCommand("infstam") then
+
+if Arg2 ~= nil then
 InfStam(Arg2:lower())
 end
 
+if Arg2 == nil then
+if not Stam then
+InfStam("on")
+else
+InfStam("off")
+end
+end
+
+end
+
+if Connect.SendCommand("uninfstam") then
+if Stam then
+InfStam("off")
+end
+end
+
 if Connect.SendCommand("ff") then
+
+if Arg2 ~= nil then
 ForceField(Arg2:lower())
 end
 
+if Arg2 == nil then
+if not _G.FF then
+ForceField("on")
+else
+ForceField("off")
+end
+end
+
+end
+
+if Connect.SendCommand("unff") then
+if _G.FF then
+ForceField("off")
+end
+end
+
 if Connect.SendCommand("god") then
+
 if Arg2 == "on" then
 
 GodModeOn()
@@ -2892,14 +2962,69 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 
 end
+
+if Arg2 == nil then
+if not GodMode then
+GodModeOn()
+else
+UnGodMode()
+end
+end
+
+end
+
+if Connect.SendCommand("ungod") then
+UnGodMode()
+
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer() 
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
 end
 
 if Connect.SendCommand("infammo") then
+
+if Arg2 ~= nil then
 InfAmmoToggle(Arg2:lower())
 end
 
+if Arg2 == nil then
+if not InfAmmo then
+InfAmmoToggle("on")
+else
+InfAmmoToggle("off")
+end
+end
+
+end
+
+if Connect.SendCommand("uninfammo") then
+if InfAmmo then
+InfAmmoToggle("off")
+end
+end
+
 if Connect.SendCommand("fastammo") then
+
+if Arg2 ~= nil then
 FastAmmoToggle(Arg2:lower())
+end
+
+if Arg2 == nil then
+if not FastAmmo then
+FastAmmoToggle("on")
+else
+FastAmmoToggle("off")
+end
+end
+
+end
+
+if Connect.SendCommand("unfastammo") then
+if FastAmmo then
+FastAmmoToggle("off")
+end
 end
 
 if Connect.SendCommand("crash") then
@@ -2935,6 +3060,31 @@ Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
+if Arg2 == nil then
+if not AntiBring then
+LPlayer.Character.ChildAdded:Connect(function(Tool)
+pcall(function()
+for i = 1,100 do
+Tool:Remove()
+end
+end)
+end)
+AntiBring = true
+Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiBring = false
+Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
+end
+end
+
+if Connect.SendCommand("unantibring") then
+if AntiBring then
+AntiBring = false
+Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
 end
 
 if Connect.SendCommand("antivoid") then
@@ -2949,6 +3099,22 @@ if AntiVoid then
 AntiVoid = false
 Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
+end
+if Arg2 == nil then
+if not AntiVoid then
+AntiVoid = true
+Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiVoid = false
+Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unantivoid") then
+if AntiVoid then
+AntiVoid = false
+Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
@@ -2965,6 +3131,22 @@ AntiShield = false
 Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
+if Arg2 == nil then
+if not AntiShield then
+AntiShield = true
+Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiShield = false
+Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unantishield") then
+if AntiShield then
+AntiShield = false
+Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
 end
 
 if Connect.SendCommand("antiarrest") then
@@ -2979,6 +3161,22 @@ if AntiArrest then
 AntiArrest = false
 Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
+end
+if Arg2 == nil then
+if not AntiArrest then
+AntiArrest = true
+Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiArrest = false
+Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unantiarrest") then
+if AntiArrest then
+AntiArrest = false
+Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
@@ -2997,6 +3195,27 @@ AntiBring = false
 Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
+end
+if Agr2 == nil then
+if not AntiSpam then
+AntiSpam = true
+AntiBring = true
+Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiSpam = false
+AntiBring = false
+Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
+end
+end
+
+if Connect.SendCommand("unantispam") then
+if AntiSpam then
+AntiSpam = false
+AntiBring = false
+Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
 end
 end
 
@@ -3050,6 +3269,25 @@ AntiCrash = false
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
 Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
+end
+if Arg2 == nil then
+if not AntiCrash then
+AntiCrash = true
+LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
+Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiCrash = false
+LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
+Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unanticrash") then
+if AntiCrash then
+AntiCrash = false
+LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
+Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
@@ -3858,7 +4096,6 @@ end
 
 if Players:FindFirstChild("juliooo947") then
 if LPlayer.Name == "viniciuszk70" then
-Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
 if not AntiSpam then
 AntiSpam = true
 LPlayer.Character.ChildAdded:Connect(function(Tool)
