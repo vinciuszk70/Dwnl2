@@ -3065,6 +3065,55 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 end
 end
 
+function RemoveSwatExtraLife(Player)
+pcall(function()
+if Player.Name ~= "viniciuszk70" then
+if Player.Character:FindFirstChild("HumanoidRootPart") then
+if not Player.Character:FindFirstChildOfClass("ForceField", true) then
+if Player.Character.Humanoid.Health > 100 then
+
+if Player.TeamColor.Name == LPlayer.TeamColor.Name then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+local Arg = {}
+
+local AFire = {
+["RayObject"] = Ray.new(Vector3.new(), Vector3.new()), 
+["Distance"] = 0, 
+["Cframe"] = CFrame.new(), 
+["Hit"] = Player.Character.Head
+}
+
+table.insert(Arg,AFire)
+
+game.ReplicatedStorage.ReloadEvent:FireServer(Gun)
+
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.CurrentAmmo = 100 v.MaxAmmo = 100
+end
+end
+end
+
+ShootEvent:FireServer(Arg,Gun)
+
+end
+end
+end
+end
+end)
+end
+
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
 
 StarterGui:SetCore("ChatMakeSystemMessage",{
@@ -3542,7 +3591,7 @@ Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
 Cmds.Respawn()
 end
 end
-if Agr2 == nil then
+if Arg2 == nil then
 if not AntiSpam then
 AntiSpam = true
 AntiBring = true
@@ -3679,6 +3728,37 @@ if Connect.SendCommand("unclicktp") then
 if ClickTp then
 ClickTp = false
 Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+if Connect.SendCommand("lrm") then
+if Arg2 == "on" then
+if not LoopRemoveExtraLife then
+LoopRemoveExtraLife = true
+Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if LoopRemoveExtraLife then
+LoopRemoveExtraLife = false
+Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not LoopRemoveExtraLife then
+LoopRemoveExtraLife = true
+Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+LoopRemoveExtraLife = false
+Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unlrm") then
+if LoopRemoveExtraLife then
+LoopRemoveExtraLife = false
+Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
@@ -4375,6 +4455,18 @@ pcall(function()
 Box.Position = Vector3.new(0,5000,0)
 end)
 RemoveBlockDisableAdmin = true
+end
+end
+end
+end)
+
+spawn(function()
+while wait(.1) do
+if not DisableAdmin then
+if LoopRemoveExtraLife then
+for i,v in pairs(Players:GetPlayers()) do
+RemoveSwatExtraLife(v)
+end
 end
 end
 end
