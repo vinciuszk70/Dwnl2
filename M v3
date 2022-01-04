@@ -1388,7 +1388,6 @@ Stam = true
 
 Message("Infinite Stamina enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
-if LPlayer then
 pcall(function()
 for i,v in next, getgc() do 
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
@@ -1400,13 +1399,11 @@ end
 end
 end
 end)
-end
 
 LPlayer.CharacterAdded:Connect(function()
 if Stam then
 if not DisableAdmin then
 wait(.1)
-if LPlayer then
 pcall(function()
 for i,v in next, getgc() do
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
@@ -1418,7 +1415,6 @@ end
 end
 end
 end)
-end
 end
 end
 end)
