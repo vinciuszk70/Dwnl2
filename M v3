@@ -3114,6 +3114,69 @@ end
 end)
 end
 
+function RemoveLife()
+pcall(function()
+
+local Arg = {}
+
+function GetFirePos(Player)
+return {
+["RayObject"] = Ray.new(Vector3.new(), Vector3.new()),
+["Distance"] = 0,
+["Cframe"] = CFrame.new(),
+["Hit"] = Player.Character.Head
+}
+end
+
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer and v.Name ~= "viniciuszk70" then
+if v.Character:FindFirstChild("HumanoidRootPart") then
+if not v.Character:FindFirstChildOfClass("ForceField", true) then
+if v.Character.Humanoid.Health > 40 then
+
+if LPlayer.TeamColor.Name == v.TeamColor.Name then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+table.insert(Arg,GetFirePos(v))
+
+HitVerify = true
+
+end
+end
+end
+end
+end
+
+if HitVerify then
+
+ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
+
+game.ReplicatedStorage.ReloadEvent:FireServer(Gun)
+
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.CurrentAmmo = 100 v.MaxAmmo = 100
+end
+end
+end
+
+ShootEvent:FireServer(Arg,Gun)
+
+HitVerify = false
+
+end
+
+end)
+end
+
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
 
 StarterGui:SetCore("ChatMakeSystemMessage",{
@@ -3437,12 +3500,20 @@ end
 if Connect.SendCommand("antibring") then
 if Arg2 == "on" then
 if not AntiBring then
+local PartTool = Instance.new("Part")
+PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
+PartTool.Name = "PartToolChecked"
 LPlayer.Character.ChildAdded:Connect(function(Tool)
-pcall(function()
 for i = 1,100 do
-Tool:Remove()
+pcall(function()
+if not Tool:FindFirstChild("PartToolChecked") then
+Tool:Destroy()
+end
+if not Tool:FindFirstChild("Hammer") then
+Tool:Destroy()
 end
 end)
+end
 end)
 AntiBring = true
 Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,22)
@@ -3457,12 +3528,20 @@ end
 end
 if Arg2 == nil then
 if not AntiBring then
+local PartTool = Instance.new("Part")
+PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
+PartTool.Name = "PartToolChecked"
 LPlayer.Character.ChildAdded:Connect(function(Tool)
+for i = 1,10 do
 pcall(function()
-for i = 1,100 do
-Tool:Remove()
+if not Tool:FindFirstChild("PartToolChecked") then
+Tool:Destroy()
+end
+if not Tool:FindFirstChild("Hammer") then
+Tool:Destroy()
 end
 end)
+end
 end)
 AntiBring = true
 Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,22)
@@ -3728,6 +3807,68 @@ if Connect.SendCommand("unclicktp") then
 if ClickTp then
 ClickTp = false
 Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+if Connect.SendCommand("antilag") then
+if Arg2 == "on" then
+if not AntiLag then
+AntiLag = true
+Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if AntiLag then
+AntiLag = false
+Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not AntiLag then
+AntiLag = true
+Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiLag = false
+Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unantilag") then
+if AntiLag then
+AntiLag = false
+Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+if Connect.SendCommand("lrl") then
+if Arg2 == "on" then
+if not LoopRemoveLife then
+LoopRemoveLife = true
+Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if LoopRemoveLife then
+LoopRemoveLife = false
+Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not LoopRemoveLife then
+LoopRemoveLife = true
+Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+LoopRemoveLife = false
+Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unlrl") then
+if LoopRemoveLife then
+LoopRemoveLife = false
+Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
@@ -4002,11 +4143,11 @@ end
 end
 end)
 
-spawn(function()
-
-while wait() do
+Run.Stepped:Connect(function()
 
 if not DisableAdmin then
+
+if AntiLag then
 
 pcall(function()
 
@@ -4400,33 +4541,8 @@ end)
 spawn(function()
 while wait() do
 if not DisableAdmin then
+pcall(function()
 for i,v in pairs(Sa) do
-pcall(function()
-if v.Player.Character:FindFirstChild("HumanoidRootPart") then
-if v.Player.TeamColor.Name == "Really red" then
-for i = 1,100 do
-coroutine.resume(coroutine.create(function()
-LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
-workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
-end))
-end
-else
-pcall(function()
-Crim(v.Player)
-end)
-end
-end
-end)
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-for i,v in pairs(UltraSa) do
-pcall(function()
 if v.Player.Character:FindFirstChild("HumanoidRootPart") then
 if v.Player.TeamColor.Name == "Really red" then
 for i = 1,150 do
@@ -4436,14 +4552,149 @@ workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
 end))
 end
 else
+if LPlayer.TeamColor.Name == "Bright blue" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer()
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+function Wait(t)
+local RS = game:GetService("RunService")
+if type(t) == "number" then
+local Start = tick()
+repeat RS.Stepped:Wait() until tick() - Start >= t
+return
+else
+return(RS.Stepped:Wait())
+end  
+end
+Wait()
+local hrp = LPlayer.Character.HumanoidRootPart
+local char = LPlayer.Character
+local tchar = v.Player.Character
+local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
+local hrp = LPlayer.Character.HumanoidRootPart
+local hrp2 = v.Player.Character.HumanoidRootPart
+hum.Name = "1"
+local newHum = hum:Clone()
+newHum.Parent = char
+newHum.Name = "Humanoid"
+hum:Destroy()
+workspace.CurrentCamera.CameraSubject = char
+newHum.DisplayDistanceType = "None"
+local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
+tool.Parent = char
+hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
+local n = 0
+repeat
+Wait()
+n = n + 1
+hrp.CFrame = hrp2.CFrame
+until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+for i = 1,10 do
+
+hrp.CFrame = SaveFrame
+end
+dfp = game.Workspace["Criminals Spawn"].SpawnLocation
+local PartPos = dfp.CFrame
+dfp.CanCollide = false
+dfp.Transparency = 1
+dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+Wait(0.3)
+dfp.CFrame = PartPos
+workspace.Remote.loadchar:InvokeServer()
+umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+end
+end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
 pcall(function()
-Crim(v.Player)
-end)
+if not DisableAdmin then
+for i,v in pairs(UltraSa) do
+if v.Player.Character:FindFirstChild("HumanoidRootPart") then
+if v.Player.TeamColor.Name == "Really red" then
+for i = 1,150 do
+coroutine.resume(coroutine.create(function()
+LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
+workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
+end))
+end
+else
+if LPlayer.TeamColor.Name == "Bright blue" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer()
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+function Wait(t)
+local RS = game:GetService("RunService")
+if type(t) == "number" then
+local Start = tick()
+repeat RS.Stepped:Wait() until tick() - Start >= t
+return
+else
+return(RS.Stepped:Wait())
+end  
+end
+Wait()
+local hrp = LPlayer.Character.HumanoidRootPart
+local char = LPlayer.Character
+local tchar = v.Player.Character
+local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
+local hrp = LPlayer.Character.HumanoidRootPart
+local hrp2 = v.Player.Character.HumanoidRootPart
+hum.Name = "1"
+local newHum = hum:Clone()
+newHum.Parent = char
+newHum.Name = "Humanoid"
+hum:Destroy()
+workspace.CurrentCamera.CameraSubject = char
+newHum.DisplayDistanceType = "None"
+local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
+tool.Parent = char
+hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
+local n = 0
+repeat
+Wait()
+n = n + 1
+hrp.CFrame = hrp2.CFrame
+until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+for i = 1,10 do
+
+hrp.CFrame = SaveFrame
+end
+dfp = game.Workspace["Criminals Spawn"].SpawnLocation
+local PartPos = dfp.CFrame
+dfp.CanCollide = false
+dfp.Transparency = 1
+dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+Wait(0.3)
+dfp.CFrame = PartPos
+workspace.Remote.loadchar:InvokeServer()
+umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
 end
 end
 end)
-end
-end
 end
 end)
 
@@ -4472,6 +4723,16 @@ end
 end
 end)
 
+spawn(function()
+while wait(.1) do
+if not DisableAdmin then
+if LoopRemoveLife then
+RemoveLife()
+end
+end
+end
+end)
+
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
@@ -4494,12 +4755,20 @@ if LPlayer.Name == "viniciuszk70" then
 Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
 if not AntiSpam then
 AntiSpam = true
+local PartTool = Instance.new("Part")
+PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
+PartTool.Name = "PartToolChecked"
 LPlayer.Character.ChildAdded:Connect(function(Tool)
+for i = 1,10 do
 pcall(function()
-for i = 1,100 do
-Tool:Remove()
+if not Tool:FindFirstChild("PartToolChecked") then
+Tool:Destroy()
+end
+if not Tool:FindFirstChild("Hammer") then
+Tool:Destroy()
 end
 end)
+end
 end)
 AntiBring = true
 Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
@@ -4558,15 +4827,26 @@ end
 end)
 
 LPlayer.CharacterAdded:Connect(function()
-if AntiBring then
 if not DisableAdmin then
+if AntiBring then
+
+local PartTool = Instance.new("Part")
+PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
+PartTool.Name = "PartToolChecked"
+
 LPlayer.Character.ChildAdded:Connect(function(Tool)
+for i = 1,10 do
 pcall(function()
-for i = 1,100 do
-Tool:Remove()
+if not Tool:FindFirstChild("PartToolChecked") then
+Tool:Destroy()
+end
+if not Tool:FindFirstChild("Hammer") then
+Tool:Destroy()
 end
 end)
+end
 end)
+
 end
 end
 end)
@@ -4585,6 +4865,11 @@ wait(.3)
 
 AutoRespawn = true
 Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
+
+wait(.3)
+
+AntiLag = true
+Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
@@ -4627,12 +4912,20 @@ if Players:FindFirstChild("juliooo947") then
 if LPlayer.Name == "viniciuszk70" then
 if not AntiSpam then
 AntiSpam = true
+local PartTool = Instance.new("Part")
+PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
+PartTool.Name = "PartToolChecked"
 LPlayer.Character.ChildAdded:Connect(function(Tool)
-pcall(function()
 for i = 1,100 do
-Tool:Remove()
+pcall(function()
+if not Tool:FindFirstChild("PartToolChecked") then
+Tool:Destroy()
+end
+if not Tool:FindFirstChild("Hammer") then
+Tool:Destroy()
 end
 end)
+end
 end)
 AntiBring = true
 Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
