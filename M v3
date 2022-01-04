@@ -2558,56 +2558,46 @@ end
 
 end
 
-function Bring(Player, Position)
+function BringT(TP)
+
 pcall(function()
-if Player == nil and Player.Name ~= "viniciuszk70" and Position == nil then return end
 
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or TP == "neutros" or TP == "l" or TP == "neutrals" or TP == "c" or TP == "criminals" or TP == "a" or TP == "all" then
 
-if LPlayer.TeamColor.Name == "Bright blue" then
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-local SaveCam = workspace.CurrentCamera.CFrame
-workspace.Remote.loadchar:InvokeServer(nil, "12")
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-workspace.CurrentCamera.CFrame = SaveCam
+if TP == "i" or TP == "inmates" then
+BringNormal = true
+TS = game.Teams.Inmates
 end
 
-workspace.Remote.loadchar:InvokeServer()
-wait(.1)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
-LPlayer.Character.Humanoid.Name = "1"
-local C = LPlayer.Character["1"]:Clone()
-C.Name = "Humanoid"
-C.Parent = LPlayer.Character
-LPlayer.Character["1"]:Destroy()
-game.Workspace.CurrentCamera.CameraSubject = LPlayer.Character
-LPlayer.Character.Animate.Disabled = true
-wait()
-LPlayer.Character.Animate.Disabled = false
-LPlayer.Character.Humanoid.DisplayDistanceType = "None"
-LPlayer:FindFirstChild("Backpack"):FindFirstChild("Hammer").Parent = LPlayer.Character
-local STOP = 0
-repeat wait(.1)
-STOP = STOP + 1
-LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0.75)
-until (not LPlayer.Character:FindFirstChild("Hammer") or not LPlayer.Character.HumanoidRootPart or not Player.Character.HumanoidRootPart or not LPlayer.Character.HumanoidRootPart.Parent or not Player.Character.HumanoidRootPart.Parent or STOP > 500) and STOP > 3
-local STOP_2 = 0
-repeat wait()
-STOP_2 = STOP_2 + 1
-LPlayer.Character.HumanoidRootPart.CFrame = Position
-until STOP_2 > 10
-workspace.Remote.loadchar:InvokeServer()
-wait(.1)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-end)
+if TP == "g" or TP == "guards" then
+BringNormal = true
+TS = game.Teams.Guards
 end
 
-function BringA()
-pcall(function()
+if TP == "n" or TP == "neutros" then
+BringNormal = true
+TS = game.Teams.Neutral
+end
+
+if TP == "l" or TP == "neutrals" then
+BringNormal = false
+BringNeutrals = true
+end
+
+if TP == "c" or TP == "criminals" then
+BringNormal = true
+TS = game.Teams.Criminals
+end
+
+if TP == "a" or TP == "all" then
+BringNormal = true
+TS = game.Players
+end
+
+if BringNormal then
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-for i,v in pairs(Players:GetPlayers()) do
+for i,v in pairs(TS:GetPlayers()) do
 if v ~= LPlayer and v.Name ~= "viniciuszk70" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
 local i = 1
 repeat wait()
@@ -2654,6 +2644,303 @@ until i == 0
 end
 end
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+
+if BringNeutrals then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer and v.Name ~= "viniciuszk70" then
+if v.TeamColor.Name ~= "Bright orange" and v.TeamColor.Name ~= "Medium stone grey" and v.TeamColor.Name ~= "Bright blue" and v.TeamColor.Name ~= "Really red" then
+if v.Character:FindFirstChild("HumanoidRootPart") then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+local i = 1
+repeat wait()
+i = i-1
+if v.Character:FindFirstChild("HumanoidRootPart") then
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Sit = false
+end
+
+if LPlayer.TeamColor.Name == "Bright blue" then
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.Humanoid.Name = "1"
+local C = LPlayer.Character["1"]:Clone()
+C.Name = "Humanoid"
+C.Parent = LPlayer.Character
+LPlayer.Character["1"]:Destroy()
+game.Workspace.CurrentCamera.CameraSubject = LPlayer.Character
+LPlayer.Character.Animate.Disabled = true
+wait()
+LPlayer.Character.Animate.Disabled = false
+LPlayer.Character.Humanoid.DisplayDistanceType = "None"
+LPlayer:FindFirstChild("Backpack"):FindFirstChild("Hammer").Parent = LPlayer.Character
+local STOP = 0
+repeat wait(.1)
+STOP = STOP + 1
+LPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0.75)
+until (not LPlayer.Character:FindFirstChild("Hammer") or not LPlayer.Character.HumanoidRootPart or not v.Character.HumanoidRootPart or not LPlayer.Character.HumanoidRootPart.Parent or not v.Character.HumanoidRootPart.Parent or STOP > 500) and STOP > 3
+local STOP_2 = 0
+repeat wait()
+STOP_2 = STOP_2 + 1
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+until STOP_2 > 10
+workspace.Remote.loadchar:InvokeServer()
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+until i == 0
+end
+end
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+end
+end
+end
+
+end
+end)
+end
+
+function Bring(Player, Position)
+pcall(function()
+if Player == nil and Player.Name ~= "viniciuszk70" and Position == nil then return end
+
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+
+if LPlayer.TeamColor.Name == "Bright blue" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+workspace.Remote.loadchar:InvokeServer()
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.Humanoid.Name = "1"
+local C = LPlayer.Character["1"]:Clone()
+C.Name = "Humanoid"
+C.Parent = LPlayer.Character
+LPlayer.Character["1"]:Destroy()
+game.Workspace.CurrentCamera.CameraSubject = LPlayer.Character
+LPlayer.Character.Animate.Disabled = true
+wait()
+LPlayer.Character.Animate.Disabled = false
+LPlayer.Character.Humanoid.DisplayDistanceType = "None"
+LPlayer:FindFirstChild("Backpack"):FindFirstChild("Hammer").Parent = LPlayer.Character
+local STOP = 0
+repeat wait(.1)
+STOP = STOP + 1
+LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0.75)
+until (not LPlayer.Character:FindFirstChild("Hammer") or not LPlayer.Character.HumanoidRootPart or not Player.Character.HumanoidRootPart or not LPlayer.Character.HumanoidRootPart.Parent or not Player.Character.HumanoidRootPart.Parent or STOP > 500) and STOP > 3
+local STOP_2 = 0
+repeat wait()
+STOP_2 = STOP_2 + 1
+LPlayer.Character.HumanoidRootPart.CFrame = Position
+until STOP_2 > 10
+workspace.Remote.loadchar:InvokeServer()
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end)
+end
+
+function CrimT(TP)
+
+pcall(function()
+
+if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or TP == "neutros" or TP == "l" or TP == "neutrals" or TP == "c" or TP == "criminals" or TP == "a" or TP == "all" then
+
+if TP == "i" or TP == "inmates" then
+CrimNormal = true
+TS = game.Teams.Inmates
+end
+
+if TP == "g" or TP == "guards" then
+CrimNormal = true
+TS = game.Teams.Guards
+end
+
+if TP == "n" or TP == "neutros" then
+CrimNormal = true
+TS = game.Teams.Neutral
+end
+
+if TP == "l" or TP == "neutrals" then
+CrimNormal = false
+CrimNeutrals = true
+end
+
+if TP == "c" or TP == "criminals" then
+CrimNormal = true
+TS = game.Teams.Criminals
+end
+
+if TP == "a" or TP == "all" then
+CrimNormal = true
+TS = game.Players
+end
+
+if CrimNormal then
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+for i,v in pairs(TS:GetPlayers()) do
+if v ~= LPlayer and v.Name ~= "viniciuszk70" and v.TeamColor.Name ~= "Really red" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
+local i = 1
+repeat wait()
+i = i-1
+if LPlayer.TeamColor.Name == "Bright blue" then
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if v ~= nil then
+workspace.Remote.loadchar:InvokeServer()
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+function Wait(t)
+local RS = game:GetService("RunService")
+if type(t) == "number" then
+local Start = tick()
+repeat RS.Stepped:Wait() until tick() - Start >= t
+return
+else
+return(RS.Stepped:Wait())
+end  
+end
+Wait()
+local hrp = LPlayer.Character.HumanoidRootPart
+local char = LPlayer.Character
+local tchar = v.Character
+local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
+local hrp = LPlayer.Character.HumanoidRootPart
+local hrp2 = v.Character.HumanoidRootPart
+hum.Name = "1"
+local newHum = hum:Clone()
+newHum.Parent = char
+newHum.Name = "Humanoid"
+hum:Destroy()
+workspace.CurrentCamera.CameraSubject = char
+newHum.DisplayDistanceType = "None"
+local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
+tool.Parent = char
+hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
+local n = 0
+repeat
+Wait()
+n = n + 1
+hrp.CFrame = hrp2.CFrame
+until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+for i = 1,10 do
+
+hrp.CFrame = SaveFrame
+end
+dfp = game.Workspace["Criminals Spawn"].SpawnLocation
+local PartPos = dfp.CFrame
+dfp.CanCollide = false
+dfp.Transparency = 1
+dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+Wait(0.3)
+dfp.CFrame = PartPos
+workspace.Remote.loadchar:InvokeServer()
+umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+until i == 0
+end
+end
+end
+end
+
+if CrimNeutrals then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer and v.Name ~= "viniciuszk70" then
+if v.TeamColor.Name ~= "Bright orange" and v.TeamColor.Name ~= "Medium stone grey" and v.TeamColor.Name ~= "Bright blue" and v.TeamColor.Name ~= "Really red" then
+if v.Character:FindFirstChild("HumanoidRootPart") then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" and v.TeamColor.Name ~= "Really red" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
+local i = 1
+repeat wait()
+i = i-1
+if LPlayer.TeamColor.Name == "Bright blue" then
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+
+if v ~= nil then
+workspace.Remote.loadchar:InvokeServer()
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+function Wait(t)
+local RS = game:GetService("RunService")
+if type(t) == "number" then
+local Start = tick()
+repeat RS.Stepped:Wait() until tick() - Start >= t
+return
+else
+return(RS.Stepped:Wait())
+end  
+end
+Wait()
+local hrp = LPlayer.Character.HumanoidRootPart
+local char = LPlayer.Character
+local tchar = v.Character
+local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
+local hrp = LPlayer.Character.HumanoidRootPart
+local hrp2 = v.Character.HumanoidRootPart
+hum.Name = "1"
+local newHum = hum:Clone()
+newHum.Parent = char
+newHum.Name = "Humanoid"
+hum:Destroy()
+workspace.CurrentCamera.CameraSubject = char
+newHum.DisplayDistanceType = "None"
+local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
+tool.Parent = char
+hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
+local n = 0
+repeat
+Wait()
+n = n + 1
+hrp.CFrame = hrp2.CFrame
+until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+for i = 1,10 do
+
+hrp.CFrame = SaveFrame
+end
+dfp = game.Workspace["Criminals Spawn"].SpawnLocation
+local PartPos = dfp.CFrame
+dfp.CanCollide = false
+dfp.Transparency = 1
+dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+Wait(0.3)
+dfp.CFrame = PartPos
+workspace.Remote.loadchar:InvokeServer()
+umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+until i == 0
+end
+end
+end
+end
+end
+end
+
 end
 end)
 end
@@ -2723,81 +3010,6 @@ dfp.CFrame = PartPos
 workspace.Remote.loadchar:InvokeServer()
 umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-end
-end)
-end
-
-function CrimA()
-pcall(function()
-if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-local SaveCam = workspace.CurrentCamera.CFrame
-for i,v in pairs(Players:GetPlayers()) do
-if v ~= LPlayer and v.Name ~= "viniciuszk70" and v.TeamColor.Name ~= "Really red" and v.Character.Humanoid.Health ~= 0 and v.Character.Humanoid.Sit ~= true then
-local i = 1
-repeat wait()
-i = i-1
-if LPlayer.TeamColor.Name == "Bright blue" then
-workspace.Remote.loadchar:InvokeServer(nil, "12")
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-workspace.CurrentCamera.CFrame = SaveCam
-end
-
-if v ~= nil then
-workspace.Remote.loadchar:InvokeServer()
-ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-function Wait(t)
-local RS = game:GetService("RunService")
-if type(t) == "number" then
-local Start = tick()
-repeat RS.Stepped:Wait() until tick() - Start >= t
-return
-else
-return(RS.Stepped:Wait())
-end  
-end
-Wait()
-local hrp = LPlayer.Character.HumanoidRootPart
-local char = LPlayer.Character
-local tchar = v.Character
-local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
-local hrp = LPlayer.Character.HumanoidRootPart
-local hrp2 = v.Character.HumanoidRootPart
-hum.Name = "1"
-local newHum = hum:Clone()
-newHum.Parent = char
-newHum.Name = "Humanoid"
-hum:Destroy()
-workspace.CurrentCamera.CameraSubject = char
-newHum.DisplayDistanceType = "None"
-local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
-tool.Parent = char
-hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
-local n = 0
-repeat
-Wait()
-n = n + 1
-hrp.CFrame = hrp2.CFrame
-until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
-for i = 1,10 do
-
-hrp.CFrame = SaveFrame
-end
-dfp = game.Workspace["Criminals Spawn"].SpawnLocation
-local PartPos = dfp.CFrame
-dfp.CanCollide = false
-dfp.Transparency = 1
-dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
-Wait(0.3)
-dfp.CFrame = PartPos
-workspace.Remote.loadchar:InvokeServer()
-umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-end
-until i == 0
-end
-end
 end
 end)
 end
@@ -3373,9 +3585,9 @@ end
 
 if Connect.SendCommand("bring") then
 
-if Arg2 == "all" or Arg2 == "a" then
+if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or Arg2 == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
 
-BringA()
+BringT(Arg2:lower())
 
 else
 
@@ -3387,9 +3599,9 @@ end
 
 if Connect.SendCommand("crim") then
 
-if Arg2 == "all" or Arg2 == "a" then
+if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or Arg2 == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
 
-CrimA()
+CrimT(Arg2:lower())
 
 else
 
