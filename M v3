@@ -1388,8 +1388,7 @@ Stam = true
 
 Message("Infinite Stamina enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
-pcall(function()
-for i,v in next, getgc() do 
+for i,v in next, getgc() do
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
 for i2,v2 in next, debug.getupvalues(v) do 
 if type(v2) == "number" then 
@@ -1398,7 +1397,6 @@ end
 end
 end
 end
-end)
 
 LPlayer.CharacterAdded:Connect(function()
 if Stam then
@@ -3061,56 +3059,7 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 end
 end
 
-function RemoveSwatExtraLife(Player)
-pcall(function()
-if Player.Name ~= "viniciuszk70" then
-if Player.Character:FindFirstChild("HumanoidRootPart") then
-if not Player.Character:FindFirstChildOfClass("ForceField", true) then
-if Player.Character.Humanoid.Health > 100 then
-
-if Player.TeamColor.Name == LPlayer.TeamColor.Name then
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-local SaveCam = workspace.CurrentCamera.CFrame
-workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-workspace.CurrentCamera.CFrame = SaveCam
-end
-
-ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
-
-local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
-
-local Arg = {}
-
-local AFire = {
-["RayObject"] = Ray.new(Vector3.new(), Vector3.new()), 
-["Distance"] = 0, 
-["Cframe"] = CFrame.new(), 
-["Hit"] = Player.Character.Head
-}
-
-table.insert(Arg,AFire)
-
-game.ReplicatedStorage.ReloadEvent:FireServer(Gun)
-
-for i, v in next, debug.getregistry() do
-if type(v) == "table" then
-if v.Bullets then
-v.CurrentAmmo = 100 v.MaxAmmo = 100
-end
-end
-end
-
-ShootEvent:FireServer(Arg,Gun)
-
-end
-end
-end
-end
-end)
-end
-
-function RemoveLife()
+function RemoveLife(Life)
 pcall(function()
 
 local Arg = {}
@@ -3128,7 +3077,7 @@ for i,v in pairs(Players:GetPlayers()) do
 if v ~= LPlayer and v.Name ~= "viniciuszk70" then
 if v.Character:FindFirstChild("HumanoidRootPart") then
 if not v.Character:FindFirstChildOfClass("ForceField", true) then
-if v.Character.Humanoid.Health > 40 then
+if v.Character.Humanoid.Health > Life then
 
 if LPlayer.TeamColor.Name == v.TeamColor.Name then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
@@ -4711,9 +4660,7 @@ spawn(function()
 while wait(.1) do
 if not DisableAdmin then
 if LoopRemoveExtraLife then
-for i,v in pairs(Players:GetPlayers()) do
-RemoveSwatExtraLife(v)
-end
+RemoveLife(100)
 end
 end
 end
@@ -4723,7 +4670,7 @@ spawn(function()
 while wait(.1) do
 if not DisableAdmin then
 if LoopRemoveLife then
-RemoveLife()
+RemoveLife(40)
 end
 end
 end
