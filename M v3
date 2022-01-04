@@ -2045,6 +2045,89 @@ end
 
 end
 
+if Cmd == "lest" then
+
+local Packets = {}
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+for SendToServer = 1,12499 do
+Packets[SendToServer] = {
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+},
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+},
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+},
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+},
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+},
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+},
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+},
+},
+{
+{
+RayObject = Ray.new(Vector3.new(-1, -1, -1), Vector3.new(1, 1, 1)),
+Distance = 2048,
+Cframe = CFrame.new(0, 0, 0),
+Hit = workspace:FindFirstChildOfClass("Part")
+}
+}
+}
+end
+
+for ReplicateSends = 1,5 do
+ShootEvent:FireServer(Packets,Gun)
+end
+
+end
+
 if Cmd == "smite" then
 
 local Packets = {}
@@ -2719,6 +2802,61 @@ end
 end)
 end
 
+function Arrest(Player)
+pcall(function()
+if Player then
+
+local PHumanoid = Player.Character:FindFirstChild("HumanoidRootPart")
+local PCharacter = Player.Character
+
+if Player.TeamColor.Name == "Really red" then
+
+if PHumanoid then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+
+repeat
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Jump = true
+end
+LPlayer.Character.HumanoidRootPart.CFrame = PCharacter.HumanoidRootPart.CFrame
+workspace.Remote.arrest:InvokeServer(PCharacter.Head)
+until PCharacter.Head:FindFirstChild("handcuffedGui") or PCharacter.Humanoid.Health < 1 or Player.TeamColor.Name ~= "Really red"
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Jump = true
+end
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+end
+end)
+end
+
+function ArrestA()
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+for i,v in pairs(game.Teams.Criminals:GetPlayers()) do
+if v.Name ~= LPlayer.Name then
+local i = 10
+repeat
+wait()
+i = i-1
+if v.Character:FindFirstChild("HumanoidRootPart") then
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Jump = true
+end
+game.Workspace.Remote.arrest:InvokeServer(v.Character.HumanoidRootPart)
+LPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.3)
+end
+until i == 0
+end
+end
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Jump = true
+end
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
 
 StarterGui:SetCore("ChatMakeSystemMessage",{
@@ -3219,6 +3357,20 @@ Cmds.Respawn()
 end
 end
 
+if Connect.SendCommand("arrest") then
+
+if Arg2 == "all" or Arg2 == "a" then
+
+ArrestA()
+
+else
+
+Arrest(FindPlayer(Arg2))
+
+end
+
+end
+
 if Connect.SendCommand("bring") then
 
 if Arg2 == "all" or Arg2 == "a" then
@@ -3291,6 +3443,37 @@ Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
+if Connect.SendCommand("clicktp") then
+if Arg2 == "on" then
+if not ClickTp then
+ClickTp = true
+Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if ClickTp then
+ClickTp = false
+Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not ClickTp then
+ClickTp = true
+Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+ClickTp = false
+Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unclicktp") then
+if ClickTp then
+ClickTp = false
+Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
 if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
@@ -3317,6 +3500,38 @@ local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and UltraSa[Player.UserId] then
 UltraSa[Player.UserId] = nil
 end
+end
+
+if Connect.SendCommand("nex") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
+end
+
+if Connect.SendCommand("yar") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(741.261047, 97.9999466, 2492.76489, 0.763113737, -3.04473318e-08, -0.646264195, 8.35157437e-08, 1, 5.15032106e-08, 0.646264195, -9.32760429e-08, 0.763113737)
+end
+
+if Connect.SendCommand("arm") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(785.045959, 99.9899826, 2303.15771, 0.752894104, -1.96128198e-08, -0.658141673, 2.25219967e-08, 1, -4.03582145e-09, 0.658141673, -1.17841177e-08, 0.752894104)
+end
+
+if Connect.SendCommand("cbase") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-887.588074, 94.1287842, 2057.02002, 0.00147999532, 8.10747949e-08, 0.999998927, -7.46522844e-08, 1, -8.09643979e-08, -0.999998927, -7.45323732e-08, 0.00147999532)
+end
+
+if Connect.SendCommand("tow") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(823.122253, 130.039902, 2591.04395, 0.999989033, -1.02459341e-09, -0.0046874485, 1.00193409e-09, 1, -4.8364055e-09, 0.0046874485, 4.83165596e-09, 0.999989033)
+end
+
+if Connect.SendCommand("cells") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(917.017029, 99.9899673, 2495.43433, 0.999990046, 1.99618473e-08, -0.00445514917, -1.99925339e-08, 1, -6.84309587e-09, 0.00445514917, 6.93209756e-09, 0.999990046)
+end
+
+if Connect.SendCommand("roof") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(745.16571, 123.989983, 2336.21118, -0.796045244, -6.26395824e-09, -0.605237067, 3.79174914e-08, 1, -6.02210264e-08, 0.605237067, -7.08877366e-08, -0.796045244)
+end
+
+if Connect.SendCommand("back") then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(983.116028, 99.9899826, 2304.86841, -0.999903977, -1.35454073e-07, -0.0138590187, -1.35731895e-07, 1, 1.91052276e-08, 0.0138590187, 2.09845048e-08, -0.999903977)
 end
 
 end
@@ -3499,7 +3714,9 @@ end
 end
 end)
 
-Run.Stepped:Connect(function()
+spawn(function()
+
+while wait() do
 
 if not DisableAdmin then
 
@@ -3544,6 +3761,8 @@ end
 end
 
 end)
+
+end
 
 end
 
@@ -3605,12 +3824,14 @@ end
 end
 end)
 
-Run.Stepped:Connect(function()
+spawn(function()
+while wait() do
 if not DisableAdmin then
 pcall(function()
 local FPS = game:GetService("Workspace"):GetRealPhysicsFPS()
 Fps2.Text = 'FPS: '..math.floor(FPS)
 end)
+end
 end
 end)
 
@@ -4047,6 +4268,14 @@ end
 end)
 end)
 end
+end
+end)
+
+Mouse.Button1Down:connect(function()
+if ClickTp then
+local Pos = Mouse.Hit + Vector3.new(0,2.5,0)
+Pos = CFrame.new(Pos.X,Pos.Y,Pos.Z)
+LPlayer.Character.HumanoidRootPart.CFrame = Pos
 end
 end)
 
