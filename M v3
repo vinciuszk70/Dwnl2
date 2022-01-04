@@ -2759,7 +2759,7 @@ function CrimT(TP)
 
 pcall(function()
 
-if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or TP == "neutros" or TP == "l" or TP == "neutrals" or TP == "c" or TP == "criminals" or TP == "a" or TP == "all" then
+if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or TP == "neutros" or TP == "l" or TP == "neutrals" or TP == "a" or TP == "all" then
 
 if TP == "i" or TP == "inmates" then
 CrimNormal = true
@@ -2781,10 +2781,6 @@ CrimNormal = false
 CrimNeutrals = true
 end
 
-if TP == "c" or TP == "criminals" then
-CrimNormal = true
-TS = game.Teams.Criminals
-end
 
 if TP == "a" or TP == "all" then
 CrimNormal = true
@@ -3599,7 +3595,7 @@ end
 
 if Connect.SendCommand("crim") then
 
-if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or Arg2 == "neutrals" or Arg2 == "c" or Arg2 == "criminals" or Arg2 == "a" or Arg2 == "all" then
+if Arg2 == "i" or Arg2 == "inmates" or Arg2 == "g" or Arg2 == "guards" or Arg2 == "n" or Arg2 == "neutros" or Arg2 == "l" or Arg2 == "neutrals" or Arg2 == "a" or Arg2 == "all" then
 
 CrimT(Arg2:lower())
 
