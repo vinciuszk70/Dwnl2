@@ -4734,6 +4734,18 @@ end
 end
 end)
 
+spawn(function()
+while wait() do
+if not DisableAdmin then
+pcall(function()
+if game.CoreGui.RobloxGui.Backpack.Visible == false then
+game.CoreGui.RobloxGui.Backpack.Visible = true
+end
+end)
+end
+end
+end)
+
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
