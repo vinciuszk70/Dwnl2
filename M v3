@@ -3129,10 +3129,10 @@ Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
 if Humanoid.Health < OldHealth then
 for i,v in pairs(Players:GetPlayers()) do
 pcall(function()
-if v ~= LPlayer then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" then
 local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
 if Distance <= 5 then
-for i = 1,15 do
+for i = 1,14 do
 game.ReplicatedStorage.meleeEvent:FireServer(v)
 end
 end
