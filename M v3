@@ -3122,6 +3122,28 @@ end
 end)
 end
 
+function ExecuteAntiPunch()
+local Humanoid = LPlayer.Character.Humanoid
+local OldHealth = Humanoid.Health
+Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+if Humanoid.Health < OldHealth then
+for i,v in pairs(Players:GetPlayers()) do
+pcall(function()
+if v ~= LPlayer then
+local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+for i = 1,15 do
+game.ReplicatedStorage.meleeEvent:FireServer(v)
+end
+end
+end
+end)
+end
+end
+OldHealth = Humanoid.Health
+end)
+end
+
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
 
 StarterGui:SetCore("ChatMakeSystemMessage",{
@@ -3845,6 +3867,42 @@ if Connect.SendCommand("unlrm") then
 if LoopRemoveExtraLife then
 LoopRemoveExtraLife = false
 Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+if Connect.SendCommand("antipunch") then
+if Arg2 == "on" then
+if not AntiPunch then
+ExecuteAntiPunch()
+AntiPunch = true
+Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if AntiPunch then
+AntiPunch = false
+Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
+end
+if Arg2 == nil then
+if not AntiPunch then
+ExecuteAntiPunch()
+AntiPunch = true
+Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiPunch = false
+Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
+end
+end
+end
+
+if Connect.SendCommand("unantipunch") then
+if AntiPunch then
+AntiPunch = false
+Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Cmds.Respawn()
 end
 end
 
@@ -4802,6 +4860,19 @@ LPlayer.Character.HumanoidRootPart.CFrame = Pos
 end
 end)
 
+LPlayer.CharacterAdded:Connect(function()
+if not DisableAdmin then
+if AntiPunch then
+wait(.1)
+pcall(function()
+if LPlayer.Character:FindFirstChild("Humanoid") then
+ExecuteAntiPunch()
+end
+end)
+end
+end
+end)
+
 Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
@@ -4829,6 +4900,12 @@ wait(.3)
 
 AntiArrest = true
 Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+
+wait(.3)
+
+ExecuteAntiPunch()
+AntiPunch = true
+Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
