@@ -4306,8 +4306,6 @@ for i2,v2 in pairs(v.Character:GetDescendants()) do
 
 if v2.Name == "handcuffedGui" then
 
-if #v2 > 1 then
-
 Number = Number + 1
 
 if Number > 1 then
@@ -4320,11 +4318,7 @@ end
 
 end
 
-end
-
 if v2.Name == "vest" then
-
-if #v2 > 1 then
 
 Number = Number + 1
 
@@ -4332,8 +4326,6 @@ if Number > 1 then
 
 for i = 1, Number - 1 do
 v2:Destroy()
-end
-
 end
 
 end
