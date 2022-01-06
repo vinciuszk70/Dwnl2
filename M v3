@@ -4,7 +4,6 @@ local Cmds = {}
 local Lk = {}
 local Sa = {}
 local UltraSa = {}
-local Safes = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -986,7 +985,6 @@ end
 if NormalKillTeam then
 for i,v in pairs(TS:GetPlayers()) do
 if v ~= LPlayer and v.Name ~= "viniciuszk70" then
-if v ~= LPlayer and v.Name ~= "viniciuszk70" then
 if v.Character:FindFirstChild("HumanoidRootPart") then
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
 
@@ -1008,7 +1006,6 @@ table.insert(Arg,GetFirePos(v))
 end
 end
 
-end
 end
 end
 end
@@ -3974,6 +3971,21 @@ if Connect.SendCommand("unprts") then
 if ProtectTase then
 ProtectTase = false
 Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+
+if Connect.SendCommand("sa") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
+Sa[Player.UserId] = {Player = Player}
+end
+end
+
+if Connect.SendCommand("unsa") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70" and Sa[Player.UserId] then
+Sa[Player.UserId] = nil
 end
 end
 
