@@ -3974,6 +3974,36 @@ Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
+if Connect.SendCommand("antidoors") then
+if Arg2 == "on" then
+if not AntiDoors then
+AntiDoors = true
+Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if AntiDoors then
+AntiDoors = false
+Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not AntiDoors then
+AntiDoors = true
+Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiDoors = false
+Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unantidoors") then
+if AntiDoors then
+AntiDoors = false
+Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
 
 if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
@@ -4887,6 +4917,23 @@ end
 end
 end)
 
+spawn(function()
+while wait(1.5) do
+if not DisableAdmin then
+if AntiDoors then
+pcall(function()
+if game:GetService("Lighting"):FindFirstChild("Doors") then
+game:GetService("Lighting").Doors.Parent = workspace
+end
+if game:GetService("Lighting"):FindFirstChild("doors") then
+game:GetService("Lighting").doors.Parent = workspace
+end
+end)
+end
+end
+end
+end)
+
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
@@ -5026,6 +5073,35 @@ end
 end
 end)
 
+game.RunService.Stepped:Connect(function()
+if not DisableAdmin then
+if AntiDoors then
+pcall(function()
+for i,v in pairs(workspace:FindFirstChild("Doors"):GetChildren()) do
+for i2,v2 in pairs(v:GetDescendants()) do
+if v2:FindFirstChildOfClass("Part") then
+local Distance = (v2:FindFirstChildOfClass("Part").Position - game.Players.LocalPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+workspace.Doors.Parent = game:GetService("Lighting")
+end
+end
+end
+end
+for i,v in pairs(workspace:FindFirstChild("Prison_Cellblock"):FindFirstChild("doors"):GetChildren()) do
+for i2,v2 in pairs(v:GetDescendants()) do
+if v2:FindFirstChildOfClass("Part") then
+local Distance = (v2:FindFirstChildOfClass("Part").Position - game.Players.LocalPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+workspace:FindFirstChild("Prison_Cellblock"):FindFirstChild("doors").Parent = game:GetService("Lighting")
+end
+end
+end
+end
+end)
+end
+end
+end)
+
 Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
@@ -5059,6 +5135,11 @@ wait(.3)
 ExecuteAntiPunch()
 AntiPunch = true
 Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
+
+wait(.3)
+
+AntiDoors = true
+Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
