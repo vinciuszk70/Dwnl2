@@ -5062,6 +5062,7 @@ spawn(function()
 while wait() do
 if not DisableAdmin then
 if AntiSit then
+pcall(function()
 if LPlayer.Character.Humanoid.Sit == true then
 for i,v in next, getgc() do
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
@@ -5074,6 +5075,7 @@ end
 end
 LPlayer.Character.Humanoid.Jump = true
 end
+end)
 end
 end
 end
