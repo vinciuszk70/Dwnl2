@@ -4005,6 +4005,37 @@ Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
+if Connect.SendCommand("prta") then
+if Arg2 == "on" then
+if not ProtectArrest then
+ProtectArrest = true
+Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if ProtectArrest then
+ProtectArrest = false
+Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not ProtectArrest then
+ProtectArrest = true
+Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+ProtectArrest = false
+Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unprta") then
+if ProtectArrest then
+ProtectArrest = false
+Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
 if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
@@ -4275,6 +4306,8 @@ for i2,v2 in pairs(v.Character:GetDescendants()) do
 
 if v2.Name == "handcuffedGui" then
 
+if #v2 > 1 then
+
 Number = Number + 1
 
 if Number > 1 then
@@ -4287,7 +4320,11 @@ end
 
 end
 
+end
+
 if v2.Name == "vest" then
+
+if #v2 > 1 then
 
 Number = Number + 1
 
@@ -4295,6 +4332,8 @@ if Number > 1 then
 
 for i = 1, Number - 1 do
 v2:Destroy()
+end
+
 end
 
 end
@@ -4925,11 +4964,29 @@ pcall(function()
 if game:GetService("Lighting"):FindFirstChild("Doors") then
 game:GetService("Lighting").Doors.Parent = workspace
 end
-if game:GetService("Lighting"):FindFirstChild("doors") then
+workspace["Prison_Cellblock"].doors.Parent = game:GetService("Lighting")
+end)
+else
+pcall(function()
 game:GetService("Lighting").doors.Parent = workspace
-end
 end)
 end
+end
+end
+end)
+
+Run.Stepped:Connect(function()
+if not DisableAdmin then
+if ProtectArrest then
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
+if v.Character:FindFirstChild("Handcuffs") then
+Cmds.Kill(v)
+end
+end
+end
+end)
 end
 end
 end)
@@ -5087,16 +5144,6 @@ end
 end
 end
 end
-for i,v in pairs(workspace:FindFirstChild("Prison_Cellblock"):FindFirstChild("doors"):GetChildren()) do
-for i2,v2 in pairs(v:GetDescendants()) do
-if v2:FindFirstChildOfClass("Part") then
-local Distance = (v2:FindFirstChildOfClass("Part").Position - game.Players.LocalPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
-if Distance <= 5 then
-workspace:FindFirstChild("Prison_Cellblock"):FindFirstChild("doors").Parent = game:GetService("Lighting")
-end
-end
-end
-end
 end)
 end
 end
@@ -5145,6 +5192,11 @@ wait(.3)
 
 ProtectTase = true
 Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,22)
+
+wait(.3)
+
+ProtectArrest = true
+Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
