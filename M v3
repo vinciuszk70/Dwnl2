@@ -4975,22 +4975,6 @@ end
 end
 end)
 
-Run.Stepped:Connect(function()
-if not DisableAdmin then
-if ProtectArrest then
-pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
-if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
-if v.Character:FindFirstChild("Handcuffs") then
-Cmds.Kill(v)
-end
-end
-end
-end)
-end
-end
-end)
-
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
@@ -5141,6 +5125,22 @@ local Distance = (v2:FindFirstChildOfClass("Part").Position - game.Players.Local
 if Distance <= 5 then
 workspace.Doors.Parent = game:GetService("Lighting")
 end
+end
+end
+end
+end)
+end
+end
+end)
+
+Run.Stepped:Connect(function()
+if not DisableAdmin then
+if ProtectArrest then
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
+if v.Character:FindFirstChild("Handcuffs") then
+Cmds.Kill(v)
 end
 end
 end
