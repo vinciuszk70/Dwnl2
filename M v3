@@ -4036,6 +4036,99 @@ Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
+if Connect.SendCommand("prtf") then
+if Arg2 == "on" then
+if not ProtectFps then
+ProtectFps = true
+Message("Protect Fps enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if ProtectFps then
+ProtectFps = false
+Message("Protect Fps desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not ProtectFps then
+ProtectFps = true
+Message("Protect Fps enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+ProtectFps = false
+Message("Protect Fps desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unprtf") then
+if ProtectFps then
+ProtectFps = false
+Message("Protect Fps desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+if Connect.SendCommand("antisit") then
+if Arg2 == "on" then
+if not AntiSit then
+AntiSit = true
+Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if AntiSit then
+AntiSit = false
+Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not AntiSit then
+AntiSit = true
+Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiSit = false
+Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unantisit") then
+if AntiSit then
+AntiSit = false
+Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+if Connect.SendCommand("antifling") then
+if Arg2 == "on" then
+if not AntiFling then
+AntiFling = true
+Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if AntiSit then
+AntiFling = false
+Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not AntiFling then
+AntiFling = true
+Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+AntiFling = false
+Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unantifling") then
+if AntiFling then
+AntiFling = false
+Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
 if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
@@ -4540,7 +4633,7 @@ if not DisableAdmin then
 AutoRespawn = false
 wait(.1)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-if LPlayer.Character.HumanoidRootPart.Position.Y < 80 then
+if LPlayer.Character.HumanoidRootPart.Position.Y < 40 then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
 end
 CheckDiedAutoRespawn = false
@@ -4949,7 +5042,7 @@ end
 end)
 
 spawn(function()
-while wait(1.5) do
+while wait(.3) do
 if not DisableAdmin then
 if AntiDoors then
 pcall(function()
@@ -4960,6 +5053,81 @@ if game:GetService("Lighting"):FindFirstChild("doors") then
 game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
 end
 end)
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if AntiSit then
+if LPlayer.Character.Humanoid.Sit == true then
+for i,v in next, getgc() do
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, math.huge)
+end
+end
+end
+end
+LPlayer.Character.Humanoid.Jump = true
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if ProtectFps then
+if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
+if not CheckAntiLag then
+CheckAntiLag = true
+AntiLag = true
+Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
+if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
+if CheckAntiLag then
+CheckAntiLag = false
+AntiLag = false
+Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if AntiFling then
+for i,v in pairs(game.Players:GetPlayers()) do
+pcall(function()
+if v ~= LPlayer then
+local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+CheckAntiFlingAura = true
+end
+end
+end)
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait(.4) do
+if not DisableAdmin then
+if AntiFling then
+if CheckAntiFlingAura then
+CheckAntiFlingAura = false
+end
 end
 end
 end
@@ -5147,17 +5315,23 @@ end
 end
 end)
 
+Run.Stepped:Connect(function()
+if not DisableAdmin then
+if CheckAntiFlingAura then
+pcall(function()
+LPlayer.Character:FindFirstChild("Head").CanCollide = false
+LPlayer.Character:FindFirstChild("Torso").CanCollide = false
+end)
+end
+end
+end)
+
 Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
 AutoRespawn = true
 Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
-
-wait(.3)
-
-AntiLag = true
-Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
@@ -5195,6 +5369,11 @@ wait(.3)
 
 ProtectArrest = true
 Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+
+wait(.3)
+
+ProtectFps = true
+Message("Protect Fps enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
