@@ -4956,11 +4956,9 @@ pcall(function()
 if game:GetService("Lighting"):FindFirstChild("Doors") then
 game:GetService("Lighting").Doors.Parent = workspace
 end
-workspace["Prison_Cellblock"].doors.Parent = game:GetService("Lighting")
-end)
-else
-pcall(function()
-game:GetService("Lighting").doors.Parent = workspace
+if game:GetService("Lighting"):FindFirstChild("doors") then
+game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
+end
 end)
 end
 end
@@ -5113,10 +5111,18 @@ pcall(function()
 for i,v in pairs(workspace:FindFirstChild("Doors"):GetChildren()) do
 for i2,v2 in pairs(v:GetDescendants()) do
 if v2:FindFirstChildOfClass("Part") then
-local Distance = (v2:FindFirstChildOfClass("Part").Position - game.Players.LocalPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+local Distance = (v2:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
 if Distance <= 5 then
 workspace.Doors.Parent = game:GetService("Lighting")
 end
+end
+end
+end
+for i,v in pairs(workspace["Prison_Cellblock"].doors:GetDescendants()) do
+if v:IsA("UnionOperation") then
+local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+workspace["Prison_Cellblock"].doors.Parent = game:GetService("Lighting")
 end
 end
 end
