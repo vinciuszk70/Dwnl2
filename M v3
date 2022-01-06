@@ -4,6 +4,7 @@ local Cmds = {}
 local Lk = {}
 local Sa = {}
 local UltraSa = {}
+local Safes = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -23,6 +24,7 @@ local CheckGamePass = Marketplace:UserOwnsGamePassAsync(tonumber((LPlayer.Charac
 local SayMessageRequest = Replicate.DefaultChatSystemChatEvents.SayMessageRequest
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local Owner = Players:FindFirstChild("viniciuszk70")
+local HitBoxSize = 7
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
 Box.Anchored = true
@@ -984,6 +986,7 @@ end
 if NormalKillTeam then
 for i,v in pairs(TS:GetPlayers()) do
 if v ~= LPlayer and v.Name ~= "viniciuszk70" then
+if v ~= LPlayer and v.Name ~= "viniciuszk70" then
 if v.Character:FindFirstChild("HumanoidRootPart") then
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
 
@@ -1005,6 +1008,7 @@ table.insert(Arg,GetFirePos(v))
 end
 end
 
+end
 end
 end
 end
@@ -1066,7 +1070,6 @@ pcall(function()
 if Player.Name ~= "viniciuszk70" then
 if Player.Character:FindFirstChild("HumanoidRootPart") then
 if not Player.Character:FindFirstChildOfClass("ForceField", true) and Player.Character.Humanoid.Health ~= 0 then
-
 if Player.TeamColor.Name == LPlayer.TeamColor.Name then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -3906,17 +3909,71 @@ Cmds.Respawn()
 end
 end
 
-if Connect.SendCommand("sa") then
-local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
-Sa[Player.UserId] = {Player = Player}
+if Connect.SendCommand("hitbox") then
+if Arg2 == "on" then
+if not HitBox then
+HitBox = true
+Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if HitBox then
+HitBox = false
+Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not HitBox then
+HitBox = true
+Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+HitBox = false
+Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
 end
 end
 
-if Connect.SendCommand("unsa") then
-local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70"  and Sa[Player.UserId] then
-Sa[Player.UserId] = nil
+if Connect.SendCommand("unhitbox") then
+if HitBox then
+HitBox = false
+Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+
+if Connect.SendCommand("hbsize") then
+if Arg2 ~= nil then
+HitBoxSize = Arg2
+end
+end
+
+if Connect.SendCommand("prts") then
+if Arg2 == "on" then
+if not ProtectTase then
+ProtectTase = true
+Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == "off" then
+if ProtectTase then
+ProtectTase = false
+Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+if Arg2 == nil then
+if not ProtectTase then
+ProtectTase = true
+Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,22)
+else
+ProtectTase = false
+Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
+end
+end
+end
+
+if Connect.SendCommand("unprts") then
+if ProtectTase then
+ProtectTase = false
+Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
 end
 end
 
@@ -3931,6 +3988,20 @@ if Connect.SendCommand("unultrasa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and UltraSa[Player.UserId] then
 UltraSa[Player.UserId] = nil
+end
+end
+
+if Connect.SendCommand("safe") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not Safes[Player.UserId] then
+Safes[Player.UserId] = {Player = Player}
+end
+end
+
+if Connect.SendCommand("unsafe") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70"  and Safes[Player.UserId] then
+Safes[Player.UserId] = nil
 end
 end
 
@@ -4746,6 +4817,64 @@ end
 end
 end)
 
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if HitBox then
+for i,v in next, Players:GetPlayers() do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
+v.Character.HumanoidRootPart.Transparency = 0.97
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+else
+for i,v in next, Players:GetPlayers() do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+v.Character.HumanoidRootPart.Transparency = 1
+v.Character.HumanoidRootPart.Material = "Plastic"
+v.Character.HumanoidRootPart.CanCollide = true
+end)
+end
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if ProtectTase then
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+if getsenv(LPlayer.Character.ClientInputHandler).cs.isTazed == true then
+local Taser = v.Character:FindFirstChild("Taser") or v.Backpack:FindFirstChild("Taser")
+if Taser then
+if Taser:FindFirstChild("GunStates") then
+Req = require(Taser.GunStates)
+if Req["CurrentAmmo"] < 1 then
+Cmds.Kill(v)
+end
+end
+end
+if v.Character:FindFirstChild("Taser") then
+Cmds.Kill(v)
+end
+end
+end
+end)
+end
+end
+end
+end)
+
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
@@ -4918,6 +5047,11 @@ wait(.3)
 ExecuteAntiPunch()
 AntiPunch = true
 Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
+
+wait(.3)
+
+ProtectTase = true
+Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,22)
 
 wait(.3)
 
