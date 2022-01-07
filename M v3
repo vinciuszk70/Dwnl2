@@ -4361,149 +4361,6 @@ end
 end)
 end)
 
-Run.Stepped:Connect(function()
-if not DisableAdmin then
-if ProtectBlockOwner then
-if LPlayer.Name ~= "viniciuszk70" then
-if Players:FindFirstChild("viniciuszk70") then
-pcall(function()
-Box.CFrame = Owner.Character.HumanoidRootPart.CFrame
-end)
-else
-pcall(function()
-Box.Position = Vector3.new(0,5000,0)
-end)
-end
-end
-else
-pcall(function()
-Box.Position = Vector3.new(0,5000,0)
-end)
-end
-end
-end)
-
-Run.Stepped:Connect(function()
-
-if not DisableAdmin then
-
-if AntiLag then
-
-pcall(function()
-
-for i,v in pairs(Players:GetChildren()) do
-
-Number = 0
-
-for i2,v2 in pairs(v.Character:GetDescendants()) do
-
-if v2.Name == "handcuffedGui" then
-
-Number = Number + 1
-
-if Number > 1 then
-
-for i = 1, Number - 2 do
-v2:Destroy()
-end
-
-end
-
-end
-
-if v2.Name == "vest" then
-
-Number = Number + 1
-
-if Number > 1 then
-
-for i = 1, Number - 1 do
-v2:Destroy()
-end
-
-end
-
-end
-
-end
-
-end
-
-end)
-
-end
-
-end
-
-end)
-
-spawn(function()
-Run.Stepped:Connect(function()
-if not DisableAdmin then
-if SpamToggle.Text == "Spam on" then
-coroutine.resume(coroutine.create(function()
-if SpamToggle.Text == "Spam on" then
-SpamArrest(FindPlayer(Player_2.Text))
-end
-end))
-end
-end
-end)
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-pcall(function()
-local Owner = Players:FindFirstChild("viniciuszk70")
-local Health = LPlayer.Character.Humanoid.Health
-local InnoKills = LPlayer.Status.innocentKills.Value
-local VPlayers = 0
-local Friends = 0
-
-for i,v in pairs(Players:GetPlayers()) do
-Check = 1
-repeat wait()
-Check = Check - 1
-VPlayers = VPlayers + 1
-if LPlayer:IsFriendsWith(v.UserId) then
-Friends = Friends + 1
-end
-until Check == 0
-end
-
-if Owner then
-OwnerCheck = "Yes"
-else
-OwnerCheck = "No"
-end
-
-Display.Text = "Display: "..LPlayer.DisplayName
-Nick.Text = "Nick: "..LPlayer.Name
-User_Id.Text = "User id: "..LPlayer.UserId
-Life.Text = "Life: "..Health
-Team.Text = "Team: "..LPlayer.TeamColor.Name
-Ammo.Text = "Ammo: "..PlayerGui.Home.hud.GunFrame.Magazine.Text
-Killed_innocents.Text = "Killed innocents: "..InnoKills
-Players2.Text = "Players: "..VPlayers
-Friendsontheserver.Text = "Friends on the server: "..Friends
-Theownerisontheserver.Text = "The owner is on the server: "..OwnerCheck
-end)
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-pcall(function()
-local FPS = game:GetService("Workspace"):GetRealPhysicsFPS()
-Fps2.Text = 'FPS: '..math.floor(FPS)
-end)
-end
-end
-end)
-
 Mouse.KeyDown:connect(function(Key)
 if not DisableAdmin then
 if Key:lower() == "w" then
@@ -4558,6 +4415,42 @@ spawn(function()
 while wait() do
 if not DisableAdmin then
 pcall(function()
+local Owner = Players:FindFirstChild("viniciuszk70")
+local Health = LPlayer.Character.Humanoid.Health
+local InnoKills = LPlayer.Status.innocentKills.Value
+local VPlayers = 0
+local Friends = 0
+for i,v in pairs(Players:GetPlayers()) do
+Check = 1
+repeat wait()
+Check = Check - 1
+VPlayers = VPlayers + 1
+if LPlayer:IsFriendsWith(v.UserId) then
+Friends = Friends + 1
+end
+until Check == 0
+end
+if Owner then
+OwnerCheck = "Yes"
+else
+OwnerCheck = "No"
+end
+Display.Text = "Display: "..LPlayer.DisplayName
+Nick.Text = "Nick: "..LPlayer.Name
+User_Id.Text = "User id: "..LPlayer.UserId
+Life.Text = "Life: "..Health
+Team.Text = "Team: "..LPlayer.TeamColor.Name
+Ammo.Text = "Ammo: "..PlayerGui.Home.hud.GunFrame.Magazine.Text
+Killed_innocents.Text = "Killed innocents: "..InnoKills
+Players2.Text = "Players: "..VPlayers
+Friendsontheserver.Text = "Friends on the server: "..Friends
+Theownerisontheserver.Text = "The owner is on the server: "..OwnerCheck
+end)
+pcall(function()
+local FPS = game:GetService("Workspace"):GetRealPhysicsFPS()
+Fps2.Text = 'FPS: '..math.floor(FPS)
+end)
+pcall(function()
 if ToggleFrame.Visible == true and StatusFrame.Visible == true then
 StatusFrame.Position = UDim2.new(0.625360143, 0, 0.405833313, 0)
 ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
@@ -4569,13 +4462,6 @@ if StatusFrame.Visible ~= true then
 ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
 end
 end)
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
 for i,v in pairs(Lk) do
 if v ~= nil then
 pcall(function()
@@ -4585,14 +4471,7 @@ end
 end)
 end
 end
-end
-end
-end)
-
-spawn(function()
-while wait() do
 if AutoLock then
-if not DisableAdmin then
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 pcall(function()
 if LPlayer.Character:FindFirstChild("ClientInputHandler") then
@@ -4607,75 +4486,14 @@ end
 end)
 end
 end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if AutoRespawn then
-if not DisableAdmin then
-pcall(function()
-if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
-if LPlayer.Character:FindFirstChild("Humanoid").Health ~= 0 then
-SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-end
-end
-end)
-end
-end
-end
-end)
-
-LPlayer.CharacterAdded:Connect(function()
-if AutoRespawn == true then
-if not DisableAdmin then
-AutoRespawn = false
-wait(.1)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-if LPlayer.Character.HumanoidRootPart.Position.Y < 40 then
-LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
-end
-CheckDiedAutoRespawn = false
-AutoRespawn = true
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if AutoRespawn then
-if not DisableAdmin then
-pcall(function()
-if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
-if LPlayer.Character.Humanoid.Health == 0 then
-Cmds.Respawn()
-end
-end
-end)
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
 if AntiVoid then
-if not DisableAdmin then
 pcall(function()
 if LPlayer.Character.HumanoidRootPart.Position.Y < 1 or LPlayer.Character.HumanoidRootPart.Position.Y > 700 then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
 end
 end)
 end
-end
-end
-end)
-
-spawn(function()
-while wait() do
 if AntiShield then
-if not DisableAdmin then
 for i,v in pairs(Players:GetPlayers()) do
 pcall(function()
 if v.Character.Torso:FindFirstChild("ShieldFolder") then
@@ -4684,33 +4502,7 @@ end
 end)
 end
 end
-end
-end
-end)
-
-LPlayer.CharacterAdded:Connect(function()
 if AntiArrest then
-if not DisableAdmin then
-AntiArrest = false
-wait(.1)
-if CheckDiedAntiArrest == false then
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-if LPlayer.Character.HumanoidRootPart.Position.Y < 80 then
-LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
-end
-AntiArrest = true
-else
-CheckDiedAntiArrest = false
-AntiArrest = true
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if AntiArrest then
-if not DisableAdmin then
 pcall(function()
 if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
 if not CheckAntiSpam then
@@ -4731,14 +4523,7 @@ end
 end
 end)
 end
-end
-end
-end)
-
-spawn(function()
-while wait() do
 if AntiSpam then
-if not DisableAdmin then
 pcall(function()
 if LPlayer.TeamColor.Name == "Really red" then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
@@ -4749,6 +4534,278 @@ if LPlayer.Character.Head:FindFirstChild("handcuffedGui") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
 workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
+end
+end)
+end
+for i,v in pairs(Sa) do
+pcall(function()
+if v.Player.Character:FindFirstChild("HumanoidRootPart") then
+if v.Player.TeamColor.Name == "Really red" then
+for i = 1,150 do
+coroutine.resume(coroutine.create(function()
+LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
+workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
+end))
+end
+else
+if LPlayer.TeamColor.Name == "Bright blue" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer()
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+function Wait(t)
+local RS = game:GetService("RunService")
+if type(t) == "number" then
+local Start = tick()
+repeat RS.Stepped:Wait() until tick() - Start >= t
+return
+else
+return(RS.Stepped:Wait())
+end  
+end
+Wait()
+local hrp = LPlayer.Character.HumanoidRootPart
+local char = LPlayer.Character
+local tchar = v.Player.Character
+local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
+local hrp = LPlayer.Character.HumanoidRootPart
+local hrp2 = v.Player.Character.HumanoidRootPart
+hum.Name = "1"
+local newHum = hum:Clone()
+newHum.Parent = char
+newHum.Name = "Humanoid"
+hum:Destroy()
+workspace.CurrentCamera.CameraSubject = char
+newHum.DisplayDistanceType = "None"
+local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
+tool.Parent = char
+hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
+local n = 0
+repeat
+Wait()
+n = n + 1
+hrp.CFrame = hrp2.CFrame
+until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+for i = 1,10 do
+hrp.CFrame = SaveFrame
+end
+dfp = game.Workspace["Criminals Spawn"].SpawnLocation
+local PartPos = dfp.CFrame
+dfp.CanCollide = false
+dfp.Transparency = 1
+dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+Wait(0.3)
+dfp.CFrame = PartPos
+workspace.Remote.loadchar:InvokeServer()
+umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+end)
+end
+for i,v in pairs(UltraSa) do
+pcall(function()
+if v.Player.Character:FindFirstChild("HumanoidRootPart") then
+if v.Player.TeamColor.Name == "Really red" then
+for i = 1,150 do
+coroutine.resume(coroutine.create(function()
+LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
+workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
+end))
+end
+else
+if LPlayer.TeamColor.Name == "Bright blue" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+local SaveCam = workspace.CurrentCamera.CFrame
+workspace.Remote.loadchar:InvokeServer(nil, "12")
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+workspace.CurrentCamera.CFrame = SaveCam
+end
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer()
+ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+function Wait(t)
+local RS = game:GetService("RunService")
+if type(t) == "number" then
+local Start = tick()
+repeat RS.Stepped:Wait() until tick() - Start >= t
+return
+else
+return(RS.Stepped:Wait())
+end  
+end
+Wait()
+local hrp = LPlayer.Character.HumanoidRootPart
+local char = LPlayer.Character
+local tchar = v.Player.Character
+local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
+local hrp = LPlayer.Character.HumanoidRootPart
+local hrp2 = v.Player.Character.HumanoidRootPart
+hum.Name = "1"
+local newHum = hum:Clone()
+newHum.Parent = char
+newHum.Name = "Humanoid"
+hum:Destroy()
+workspace.CurrentCamera.CameraSubject = char
+newHum.DisplayDistanceType = "None"
+local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
+tool.Parent = char
+hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
+local n = 0
+repeat
+Wait()
+n = n + 1
+hrp.CFrame = hrp2.CFrame
+until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
+for i = 1,10 do
+hrp.CFrame = SaveFrame
+end
+dfp = game.Workspace["Criminals Spawn"].SpawnLocation
+local PartPos = dfp.CFrame
+dfp.CanCollide = false
+dfp.Transparency = 1
+dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
+Wait(0.3)
+dfp.CFrame = PartPos
+workspace.Remote.loadchar:InvokeServer()
+umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
+end)
+end
+pcall(function()
+if game.CoreGui.RobloxGui.Backpack.Visible == false then
+game.CoreGui.RobloxGui.Backpack.Visible = true
+end
+end)
+if HitBox then
+for i,v in next, Players:GetPlayers() do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
+v.Character.HumanoidRootPart.Transparency = 0.97
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+else
+for i,v in next, Players:GetPlayers() do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+v.Character.HumanoidRootPart.Transparency = 1
+v.Character.HumanoidRootPart.Material = "Plastic"
+v.Character.HumanoidRootPart.CanCollide = true
+end)
+end
+end
+end
+if ProtectTase then
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+if getsenv(LPlayer.Character.ClientInputHandler).cs.isTazed == true then
+local Taser = v.Character:FindFirstChild("Taser") or v.Backpack:FindFirstChild("Taser")
+if Taser then
+if Taser:FindFirstChild("GunStates") then
+Req = require(Taser.GunStates)
+if Req["CurrentAmmo"] < 1 then
+Cmds.Kill(v)
+end
+end
+end
+if v.Character:FindFirstChild("Taser") then
+Cmds.Kill(v)
+end
+end
+end
+end)
+end
+if AntiDoors then
+pcall(function()
+if game:GetService("Lighting"):FindFirstChild("Doors") then
+game:GetService("Lighting").Doors.Parent = workspace
+end
+if game:GetService("Lighting"):FindFirstChild("doors") then
+game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
+end
+end)
+end
+if AntiSit then
+pcall(function()
+if LPlayer.Character.Humanoid.Sit == true then
+for i,v in next, getgc() do
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, math.huge)
+end
+end
+end
+end
+LPlayer.Character.Humanoid.Jump = true
+end
+end)
+end
+if ProtectFps then
+if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
+if not CheckAntiLag then
+CheckAntiLag = true
+AntiLag = true
+Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
+if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
+if CheckAntiLag then
+CheckAntiLag = false
+AntiLag = false
+Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
+end
+if AntiFling then
+for i,v in pairs(game.Players:GetPlayers()) do
+pcall(function()
+if v ~= LPlayer then
+local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+CheckAntiFlingAura = true
+end
+end
+end)
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if AutoRespawn then
+pcall(function()
+if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
+if LPlayer.Character:FindFirstChild("Humanoid").Health ~= 0 then
+SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+end
+end
+end)
+end
+if AutoRespawn then
+pcall(function()
+if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
+if LPlayer.Character.Humanoid.Health == 0 then
+Cmds.Respawn()
+end
 end
 end)
 end
@@ -4779,166 +4836,6 @@ end
 end)
 
 spawn(function()
-while wait() do
-if not DisableAdmin then
-pcall(function()
-for i,v in pairs(Sa) do
-if v.Player.Character:FindFirstChild("HumanoidRootPart") then
-if v.Player.TeamColor.Name == "Really red" then
-for i = 1,150 do
-coroutine.resume(coroutine.create(function()
-LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
-workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
-end))
-end
-else
-if LPlayer.TeamColor.Name == "Bright blue" then
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-local SaveCam = workspace.CurrentCamera.CFrame
-workspace.Remote.loadchar:InvokeServer(nil, "12")
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-workspace.CurrentCamera.CFrame = SaveCam
-end
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-workspace.Remote.loadchar:InvokeServer()
-ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-function Wait(t)
-local RS = game:GetService("RunService")
-if type(t) == "number" then
-local Start = tick()
-repeat RS.Stepped:Wait() until tick() - Start >= t
-return
-else
-return(RS.Stepped:Wait())
-end  
-end
-Wait()
-local hrp = LPlayer.Character.HumanoidRootPart
-local char = LPlayer.Character
-local tchar = v.Player.Character
-local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
-local hrp = LPlayer.Character.HumanoidRootPart
-local hrp2 = v.Player.Character.HumanoidRootPart
-hum.Name = "1"
-local newHum = hum:Clone()
-newHum.Parent = char
-newHum.Name = "Humanoid"
-hum:Destroy()
-workspace.CurrentCamera.CameraSubject = char
-newHum.DisplayDistanceType = "None"
-local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
-tool.Parent = char
-hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
-local n = 0
-repeat
-Wait()
-n = n + 1
-hrp.CFrame = hrp2.CFrame
-until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
-for i = 1,10 do
-
-hrp.CFrame = SaveFrame
-end
-dfp = game.Workspace["Criminals Spawn"].SpawnLocation
-local PartPos = dfp.CFrame
-dfp.CanCollide = false
-dfp.Transparency = 1
-dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
-Wait(0.3)
-dfp.CFrame = PartPos
-workspace.Remote.loadchar:InvokeServer()
-umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-end
-end
-end
-end)
-end
-end
-end)
-
-spawn(function()
-while wait() do
-pcall(function()
-if not DisableAdmin then
-for i,v in pairs(UltraSa) do
-if v.Player.Character:FindFirstChild("HumanoidRootPart") then
-if v.Player.TeamColor.Name == "Really red" then
-for i = 1,150 do
-coroutine.resume(coroutine.create(function()
-LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
-workspace.Remote.arrest:InvokeServer(v.Player.Character.Head)
-end))
-end
-else
-if LPlayer.TeamColor.Name == "Bright blue" then
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-local SaveCam = workspace.CurrentCamera.CFrame
-workspace.Remote.loadchar:InvokeServer(nil, "12")
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-workspace.CurrentCamera.CFrame = SaveCam
-end
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-workspace.Remote.loadchar:InvokeServer()
-ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-function Wait(t)
-local RS = game:GetService("RunService")
-if type(t) == "number" then
-local Start = tick()
-repeat RS.Stepped:Wait() until tick() - Start >= t
-return
-else
-return(RS.Stepped:Wait())
-end  
-end
-Wait()
-local hrp = LPlayer.Character.HumanoidRootPart
-local char = LPlayer.Character
-local tchar = v.Player.Character
-local hum = LPlayer.Character:FindFirstChildOfClass("Humanoid")
-local hrp = LPlayer.Character.HumanoidRootPart
-local hrp2 = v.Player.Character.HumanoidRootPart
-hum.Name = "1"
-local newHum = hum:Clone()
-newHum.Parent = char
-newHum.Name = "Humanoid"
-hum:Destroy()
-workspace.CurrentCamera.CameraSubject = char
-newHum.DisplayDistanceType = "None"
-local tool = LPlayer:FindFirstChildOfClass("Backpack"):FindFirstChild("Hammer") or LPlayer.Character:FindFirstChild("Hammer")
-tool.Parent = char
-hrp.CFrame = hrp2.CFrame * CFrame.new(0, 0, 0) * CFrame.new(math.random(-100, 100)/200,math.random(-100, 100)/200,math.random(-100, 100)/200)
-local n = 0
-repeat
-Wait()
-n = n + 1
-hrp.CFrame = hrp2.CFrame
-until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
-for i = 1,10 do
-
-hrp.CFrame = SaveFrame
-end
-dfp = game.Workspace["Criminals Spawn"].SpawnLocation
-local PartPos = dfp.CFrame
-dfp.CanCollide = false
-dfp.Transparency = 1
-dfp.CFrame = LPlayer.Character.HumanoidRootPart.CFrame
-Wait(0.3)
-dfp.CFrame = PartPos
-workspace.Remote.loadchar:InvokeServer()
-umm = SaveFrame * CFrame.Angles(math.rad(0), 0, 0)
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-end
-end
-end
-end
-end)
-end
-end)
-
-spawn(function()
 while wait(1) do
 if DisableAdmin then
 if not RemoveBlockDisableAdmin then
@@ -4957,167 +4854,8 @@ if not DisableAdmin then
 if LoopRemoveExtraLife then
 RemoveLife(100)
 end
-end
-end
-end)
-
-spawn(function()
-while wait(.1) do
-if not DisableAdmin then
 if LoopRemoveLife then
 RemoveLife(40)
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-pcall(function()
-if game.CoreGui.RobloxGui.Backpack.Visible == false then
-game.CoreGui.RobloxGui.Backpack.Visible = true
-end
-end)
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-if HitBox then
-for i,v in next, Players:GetPlayers() do
-if v ~= LPlayer then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
-v.Character.HumanoidRootPart.Transparency = 0.97
-v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
-v.Character.HumanoidRootPart.Material = "Neon"
-v.Character.HumanoidRootPart.CanCollide = false
-end)
-end
-end
-else
-for i,v in next, Players:GetPlayers() do
-if v ~= LPlayer then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
-v.Character.HumanoidRootPart.Transparency = 1
-v.Character.HumanoidRootPart.Material = "Plastic"
-v.Character.HumanoidRootPart.CanCollide = true
-end)
-end
-end
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-if ProtectTase then
-pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
-if getsenv(LPlayer.Character.ClientInputHandler).cs.isTazed == true then
-local Taser = v.Character:FindFirstChild("Taser") or v.Backpack:FindFirstChild("Taser")
-if Taser then
-if Taser:FindFirstChild("GunStates") then
-Req = require(Taser.GunStates)
-if Req["CurrentAmmo"] < 1 then
-Cmds.Kill(v)
-end
-end
-end
-if v.Character:FindFirstChild("Taser") then
-Cmds.Kill(v)
-end
-end
-end
-end)
-end
-end
-end
-end)
-
-spawn(function()
-while wait(.3) do
-if not DisableAdmin then
-if AntiDoors then
-pcall(function()
-if game:GetService("Lighting"):FindFirstChild("Doors") then
-game:GetService("Lighting").Doors.Parent = workspace
-end
-if game:GetService("Lighting"):FindFirstChild("doors") then
-game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
-end
-end)
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-if AntiSit then
-pcall(function()
-if LPlayer.Character.Humanoid.Sit == true then
-for i,v in next, getgc() do
-if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
-for i2,v2 in next, debug.getupvalues(v) do 
-if type(v2) == "number" then 
-debug.setupvalue(v, i2, math.huge)
-end
-end
-end
-end
-LPlayer.Character.Humanoid.Jump = true
-end
-end)
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-if ProtectFps then
-if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
-if not CheckAntiLag then
-CheckAntiLag = true
-AntiLag = true
-Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
-if CheckAntiLag then
-CheckAntiLag = false
-AntiLag = false
-Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-if AntiFling then
-for i,v in pairs(game.Players:GetPlayers()) do
-pcall(function()
-if v ~= LPlayer then
-local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
-if Distance <= 5 then
-CheckAntiFlingAura = true
-end
-end
-end)
-end
 end
 end
 end
@@ -5131,6 +4869,153 @@ if CheckAntiFlingAura then
 CheckAntiFlingAura = false
 end
 end
+end
+end
+end)
+
+Run.Stepped:Connect(function()
+if not DisableAdmin then
+if ProtectBlockOwner then
+if LPlayer.Name ~= "viniciuszk70" then
+if Players:FindFirstChild("viniciuszk70") then
+pcall(function()
+Box.CFrame = Owner.Character.HumanoidRootPart.CFrame
+end)
+else
+pcall(function()
+Box.Position = Vector3.new(0,5000,0)
+end)
+end
+end
+else
+pcall(function()
+Box.Position = Vector3.new(0,5000,0)
+end)
+end
+if AntiLag then
+pcall(function()
+for i,v in pairs(Players:GetChildren()) do
+Number = 0
+for i2,v2 in pairs(v.Character:GetDescendants()) do
+if v2.Name == "handcuffedGui" then
+Number = Number + 1
+if Number > 1 then
+for i = 1, Number - 2 do
+v2:Destroy()
+end
+end
+end
+if v2.Name == "vest" then
+Number = Number + 1
+if Number > 1 then
+for i = 1, Number - 1 do
+v2:Destroy()
+end
+end
+end
+end
+end
+end)
+end
+if SpamToggle.Text == "Spam on" then
+coroutine.resume(coroutine.create(function()
+if SpamToggle.Text == "Spam on" then
+SpamArrest(FindPlayer(Player_2.Text))
+end
+end))
+end
+if AntiDoors then
+pcall(function()
+for i,v in pairs(workspace:FindFirstChild("Doors"):GetChildren()) do
+for i2,v2 in pairs(v:GetDescendants()) do
+if v2:FindFirstChildOfClass("Part") then
+local Distance = (v2:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+workspace.Doors.Parent = game:GetService("Lighting")
+end
+end
+end
+end
+for i,v in pairs(workspace["Prison_Cellblock"].doors:GetDescendants()) do
+if v:IsA("UnionOperation") then
+local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+workspace["Prison_Cellblock"].doors.Parent = game:GetService("Lighting")
+end
+end
+end
+end)
+end
+if ProtectArrest then
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
+if v.Character:FindFirstChild("Handcuffs") then
+Cmds.Kill(v)
+end
+end
+end
+end)
+end
+if CheckAntiFlingAura then
+pcall(function()
+LPlayer.Character:FindFirstChild("Head").CanCollide = false
+LPlayer.Character:FindFirstChild("Torso").CanCollide = false
+end)
+end
+end
+end)
+
+LPlayer.CharacterAdded:Connect(function()
+if not DisableAdmin then
+if AntiBring then
+local PartTool = Instance.new("Part")
+PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
+PartTool.Name = "PartToolChecked"
+LPlayer.Character.ChildAdded:Connect(function(Tool)
+for i = 1,10 do
+pcall(function()
+if not Tool:FindFirstChild("PartToolChecked") then
+Tool:Destroy()
+end
+if not Tool:FindFirstChild("Hammer") then
+Tool:Destroy()
+end
+end)
+end
+end)
+end
+if AntiPunch then
+wait(.1)
+pcall(function()
+if LPlayer.Character:FindFirstChild("Humanoid") then
+ExecuteAntiPunch()
+end
+end)
+end
+if AntiArrest then
+AntiArrest = false
+wait(.1)
+if CheckDiedAntiArrest == false then
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+if LPlayer.Character.HumanoidRootPart.Position.Y < 80 then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
+end
+AntiArrest = true
+else
+CheckDiedAntiArrest = false
+AntiArrest = true
+end
+end
+if AutoRespawn == true then
+AutoRespawn = false
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+if LPlayer.Character.HumanoidRootPart.Position.Y < 40 then
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
+end
+CheckDiedAutoRespawn = false
+AutoRespawn = true
 end
 end
 end)
@@ -5149,39 +5034,8 @@ end
 if Added.Name == "DizK1ll" or Added.Name == "Alt_Operator" or Added.Name == "iPipeh" or Added.Name == "iangesantos" then
 Message(Added.Name..", retarded joined the game.",255,0,191,Enum.Font.GothamBlack,20)
 end
-if Added.Name == "XxVanessa_OmqxX" or Added.Name == "gabri3l26015h" then
+if Added.Name == "XxVanessa_OmqxX" or Added.Name == "gabri3l26015h" and Added.Name == "juliooo947" then
 Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
-end
-if Added.Name == "juliooo947" then
-if LPlayer.Name == "viniciuszk70" then
-Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
-if not AntiSpam then
-AntiSpam = true
-local PartTool = Instance.new("Part")
-PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
-PartTool.Name = "PartToolChecked"
-LPlayer.Character.ChildAdded:Connect(function(Tool)
-for i = 1,10 do
-pcall(function()
-if not Tool:FindFirstChild("PartToolChecked") then
-Tool:Destroy()
-end
-if not Tool:FindFirstChild("Hammer") then
-Tool:Destroy()
-end
-end)
-end
-end)
-AntiBring = true
-Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-if not AntiCrash then
-AntiCrash = true
-LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
-Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-Crash("little")
-end
 end
 if Added.Name ~= "viniciuszk70" and Added.Name ~= "estranha_rs" and Added.Name ~= "RCM_Mystx" and Added.Name ~= "33_night" and Added.Name ~= "GAB_LEALZINHO" and Added.Name ~= "DizK1ll" and Added.Name ~= "Alt_Operator" and Added.Name ~= "iPipeh" and Added.Name ~= "iangesantos" and Added.Name ~= "XxVanessa_OmqxX" and Added.Name ~= "gabri3l26015h" and Added.Name ~= "juliooo947" and Added.Name ~= "HisKarAlof" then
 Message(Added.Name..", joined the game.",255,255,255,Enum.Font.GothamBlack,20)
@@ -5228,103 +5082,11 @@ end
 end
 end)
 
-LPlayer.CharacterAdded:Connect(function()
-if not DisableAdmin then
-if AntiBring then
-
-local PartTool = Instance.new("Part")
-PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
-PartTool.Name = "PartToolChecked"
-
-LPlayer.Character.ChildAdded:Connect(function(Tool)
-for i = 1,10 do
-pcall(function()
-if not Tool:FindFirstChild("PartToolChecked") then
-Tool:Destroy()
-end
-if not Tool:FindFirstChild("Hammer") then
-Tool:Destroy()
-end
-end)
-end
-end)
-
-end
-end
-end)
-
 Mouse.Button1Down:connect(function()
 if ClickTp then
 local Pos = Mouse.Hit + Vector3.new(0,2.5,0)
 Pos = CFrame.new(Pos.X,Pos.Y,Pos.Z)
 LPlayer.Character.HumanoidRootPart.CFrame = Pos
-end
-end)
-
-LPlayer.CharacterAdded:Connect(function()
-if not DisableAdmin then
-if AntiPunch then
-wait(.1)
-pcall(function()
-if LPlayer.Character:FindFirstChild("Humanoid") then
-ExecuteAntiPunch()
-end
-end)
-end
-end
-end)
-
-game.RunService.Stepped:Connect(function()
-if not DisableAdmin then
-if AntiDoors then
-pcall(function()
-for i,v in pairs(workspace:FindFirstChild("Doors"):GetChildren()) do
-for i2,v2 in pairs(v:GetDescendants()) do
-if v2:FindFirstChildOfClass("Part") then
-local Distance = (v2:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
-if Distance <= 5 then
-workspace.Doors.Parent = game:GetService("Lighting")
-end
-end
-end
-end
-for i,v in pairs(workspace["Prison_Cellblock"].doors:GetDescendants()) do
-if v:IsA("UnionOperation") then
-local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
-if Distance <= 5 then
-workspace["Prison_Cellblock"].doors.Parent = game:GetService("Lighting")
-end
-end
-end
-end)
-end
-end
-end)
-
-Run.Stepped:Connect(function()
-if not DisableAdmin then
-if ProtectArrest then
-pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
-if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
-if v.Character:FindFirstChild("Handcuffs") then
-Cmds.Kill(v)
-end
-end
-end
-end)
-end
-end
-end)
-
-Run.Stepped:Connect(function()
-if not DisableAdmin then
-if CheckAntiFlingAura then
-pcall(function()
-LPlayer.Character:FindFirstChild("Head").CanCollide = false
-LPlayer.Character:FindFirstChild("Torso").CanCollide = false
-end)
-end
 end
 end)
 
@@ -5384,49 +5146,6 @@ InfAmmoToggle("on")
 wait(.3)
 
 InfStam("on")
-
-if LPlayer.Name == "GAB_LEALZINHO" then
-ProtectBlockOwner = true
-end
-
-if LPlayer.Name == "viniciuszk70" then
-AutoGuns("slot3")
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-local SaveCam = workspace.CurrentCamera.CFrame
-workspace.Remote.loadchar:InvokeServer(nil, "1003")
-LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
-workspace.CurrentCamera.CFrame = SaveCam
-end
-
-if Players:FindFirstChild("juliooo947") then
-if LPlayer.Name == "viniciuszk70" then
-if not AntiSpam then
-AntiSpam = true
-local PartTool = Instance.new("Part")
-PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
-PartTool.Name = "PartToolChecked"
-LPlayer.Character.ChildAdded:Connect(function(Tool)
-for i = 1,100 do
-pcall(function()
-if not Tool:FindFirstChild("PartToolChecked") then
-Tool:Destroy()
-end
-if not Tool:FindFirstChild("Hammer") then
-Tool:Destroy()
-end
-end)
-end
-end)
-AntiBring = true
-Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-if not AntiCrash then
-AntiCrash = true
-LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
-Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-end
-end
 
 if RemoveOldScript then
 RemoveOldScript()
