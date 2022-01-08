@@ -4537,6 +4537,116 @@ LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2
 end
 end)
 end
+pcall(function()
+if game.CoreGui.RobloxGui.Backpack.Visible == false then
+game.CoreGui.RobloxGui.Backpack.Visible = true
+end
+end)
+if HitBox then
+for i,v in next, Players:GetPlayers() do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
+v.Character.HumanoidRootPart.Transparency = 0.97
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+else
+for i,v in next, Players:GetPlayers() do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+v.Character.HumanoidRootPart.Transparency = 1
+v.Character.HumanoidRootPart.Material = "Plastic"
+v.Character.HumanoidRootPart.CanCollide = true
+end)
+end
+end
+end
+if ProtectTase then
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+if getsenv(LPlayer.Character.ClientInputHandler).cs.isTazed == true then
+local Taser = v.Character:FindFirstChild("Taser") or v.Backpack:FindFirstChild("Taser")
+if Taser then
+if Taser:FindFirstChild("GunStates") then
+Req = require(Taser.GunStates)
+if Req["CurrentAmmo"] < 1 then
+Cmds.Kill(v)
+end
+end
+end
+if v.Character:FindFirstChild("Taser") then
+Cmds.Kill(v)
+end
+end
+end
+end)
+end
+if AntiDoors then
+pcall(function()
+if game:GetService("Lighting"):FindFirstChild("Doors") then
+game:GetService("Lighting").Doors.Parent = workspace
+end
+if game:GetService("Lighting"):FindFirstChild("doors") then
+game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
+end
+end)
+end
+if AntiSit then
+pcall(function()
+if LPlayer.Character.Humanoid.Sit == true then
+for i,v in next, getgc() do
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, math.huge)
+end
+end
+end
+end
+LPlayer.Character.Humanoid.Jump = true
+end
+end)
+end
+if ProtectFps then
+if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
+if not CheckAntiLag then
+CheckAntiLag = true
+AntiLag = true
+Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
+if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
+if CheckAntiLag then
+CheckAntiLag = false
+AntiLag = false
+Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
+end
+if AntiFling then
+for i,v in pairs(game.Players:GetPlayers()) do
+pcall(function()
+if v ~= LPlayer then
+local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 5 then
+CheckAntiFlingAura = true
+end
+end
+end)
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 for i,v in pairs(Sa) do
 pcall(function()
 if v.Player.Character:FindFirstChild("HumanoidRootPart") then
@@ -4680,109 +4790,6 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 end
 end
 end)
-end
-pcall(function()
-if game.CoreGui.RobloxGui.Backpack.Visible == false then
-game.CoreGui.RobloxGui.Backpack.Visible = true
-end
-end)
-if HitBox then
-for i,v in next, Players:GetPlayers() do
-if v ~= LPlayer then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
-v.Character.HumanoidRootPart.Transparency = 0.97
-v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
-v.Character.HumanoidRootPart.Material = "Neon"
-v.Character.HumanoidRootPart.CanCollide = false
-end)
-end
-end
-else
-for i,v in next, Players:GetPlayers() do
-if v ~= LPlayer then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
-v.Character.HumanoidRootPart.Transparency = 1
-v.Character.HumanoidRootPart.Material = "Plastic"
-v.Character.HumanoidRootPart.CanCollide = true
-end)
-end
-end
-end
-if ProtectTase then
-pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
-if getsenv(LPlayer.Character.ClientInputHandler).cs.isTazed == true then
-local Taser = v.Character:FindFirstChild("Taser") or v.Backpack:FindFirstChild("Taser")
-if Taser then
-if Taser:FindFirstChild("GunStates") then
-Req = require(Taser.GunStates)
-if Req["CurrentAmmo"] < 1 then
-Cmds.Kill(v)
-end
-end
-end
-if v.Character:FindFirstChild("Taser") then
-Cmds.Kill(v)
-end
-end
-end
-end)
-end
-if AntiDoors then
-pcall(function()
-if game:GetService("Lighting"):FindFirstChild("Doors") then
-game:GetService("Lighting").Doors.Parent = workspace
-end
-if game:GetService("Lighting"):FindFirstChild("doors") then
-game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
-end
-end)
-end
-if AntiSit then
-pcall(function()
-if LPlayer.Character.Humanoid.Sit == true then
-for i,v in next, getgc() do
-if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
-for i2,v2 in next, debug.getupvalues(v) do 
-if type(v2) == "number" then 
-debug.setupvalue(v, i2, math.huge)
-end
-end
-end
-end
-LPlayer.Character.Humanoid.Jump = true
-end
-end)
-end
-if ProtectFps then
-if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
-if not CheckAntiLag then
-CheckAntiLag = true
-AntiLag = true
-Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
-if CheckAntiLag then
-CheckAntiLag = false
-AntiLag = false
-Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-end
-if AntiFling then
-for i,v in pairs(game.Players:GetPlayers()) do
-pcall(function()
-if v ~= LPlayer then
-local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
-if Distance <= 5 then
-CheckAntiFlingAura = true
-end
-end
-end)
-end
 end
 end
 end
@@ -4948,8 +4955,8 @@ end)
 end
 if ProtectArrest then
 pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
 if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
+for i,v in pairs(Players:GetPlayers()) do
 if v.Character:FindFirstChild("Handcuffs") then
 Cmds.Kill(v)
 end
