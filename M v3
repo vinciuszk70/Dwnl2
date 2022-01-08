@@ -4446,10 +4446,24 @@ Players2.Text = "Players: "..VPlayers
 Friendsontheserver.Text = "Friends on the server: "..Friends
 Theownerisontheserver.Text = "The owner is on the server: "..OwnerCheck
 end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 pcall(function()
 local FPS = game:GetService("Workspace"):GetRealPhysicsFPS()
 Fps2.Text = 'FPS: '..math.floor(FPS)
 end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 pcall(function()
 if ToggleFrame.Visible == true and StatusFrame.Visible == true then
 StatusFrame.Position = UDim2.new(0.625360143, 0, 0.405833313, 0)
@@ -4462,15 +4476,13 @@ if StatusFrame.Visible ~= true then
 ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
 end
 end)
-for i,v in pairs(Lk) do
-if v ~= nil then
-pcall(function()
-if v.Player.Character:FindFirstChild("HumanoidRootPart") then
-Cmds.Kill(v.Player)
+end
 end
 end)
-end
-end
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AutoLock then
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 pcall(function()
@@ -4486,6 +4498,13 @@ end
 end)
 end
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AntiVoid then
 pcall(function()
 if LPlayer.Character.HumanoidRootPart.Position.Y < 1 or LPlayer.Character.HumanoidRootPart.Position.Y > 700 then
@@ -4493,6 +4512,13 @@ LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2
 end
 end)
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AntiShield then
 for i,v in pairs(Players:GetPlayers()) do
 pcall(function()
@@ -4502,6 +4528,13 @@ end
 end)
 end
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AntiArrest then
 pcall(function()
 if LPlayer.Character:FindFirstChild('HumanoidRootPart') then
@@ -4523,6 +4556,13 @@ end
 end
 end)
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AntiSpam then
 pcall(function()
 if LPlayer.TeamColor.Name == "Really red" then
@@ -4537,11 +4577,25 @@ LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2
 end
 end)
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 pcall(function()
 if game.CoreGui.RobloxGui.Backpack.Visible == false then
 game.CoreGui.RobloxGui.Backpack.Visible = true
 end
 end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if HitBox then
 for i,v in next, Players:GetPlayers() do
 if v ~= LPlayer then
@@ -4566,6 +4620,13 @@ end)
 end
 end
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if ProtectTase then
 pcall(function()
 for i,v in pairs(Players:GetPlayers()) do
@@ -4586,6 +4647,13 @@ end
 end
 end)
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AntiDoors then
 pcall(function()
 if game:GetService("Lighting"):FindFirstChild("Doors") then
@@ -4596,6 +4664,13 @@ game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
 end
 end)
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AntiSit then
 pcall(function()
 if LPlayer.Character.Humanoid.Sit == true then
@@ -4612,6 +4687,13 @@ LPlayer.Character.Humanoid.Jump = true
 end
 end)
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
 if AntiFling then
 for i,v in pairs(game.Players:GetPlayers()) do
 pcall(function()
@@ -4620,6 +4702,22 @@ local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.C
 if Distance <= 5 then
 CheckAntiFlingAura = true
 end
+end
+end)
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+for i,v in pairs(Lk) do
+if v ~= nil then
+pcall(function()
+if v.Player.Character:FindFirstChild("HumanoidRootPart") then
+Cmds.Kill(v.Player)
 end
 end)
 end
