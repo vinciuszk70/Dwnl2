@@ -4612,22 +4612,6 @@ LPlayer.Character.Humanoid.Jump = true
 end
 end)
 end
-if ProtectFps then
-if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
-if not CheckAntiLag then
-CheckAntiLag = true
-AntiLag = true
-Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
-if CheckAntiLag then
-CheckAntiLag = false
-AntiLag = false
-Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-end
 if AntiFling then
 for i,v in pairs(game.Players:GetPlayers()) do
 pcall(function()
@@ -4815,6 +4799,38 @@ Cmds.Respawn()
 end
 end
 end)
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if ProtectFps then
+if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
+if not CheckAntiLag then
+CheckAntiLag = true
+AntiLag = true
+Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait(3) do
+if not DisableAdmin then
+if ProtectFps then
+if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
+if CheckAntiLag then
+CheckAntiLag = false
+AntiLag = false
+Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
+end
+end
 end
 end
 end
