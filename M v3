@@ -4267,9 +4267,7 @@ end
 end
 
 if Connect.SendCommand("getusers") then
-if LPlayer.Name ~= "viniciuszk70" then
 Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(LPlayer.Name, "All")
-end
 end
 
 if Connect.SendCommand("send") then
