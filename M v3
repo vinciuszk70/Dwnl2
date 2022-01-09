@@ -3146,7 +3146,7 @@ end
 
 function CGun(Color)
 
-if Color == "black" then
+if Color == "white" then
 ColorGun = "1001"
 end
 
@@ -5265,6 +5265,11 @@ wait(.3)
 
 AntiDoors = true
 Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+
+wait(.3)
+
+AntiBring = true
+Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
 
