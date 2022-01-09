@@ -35,10 +35,6 @@ Box.Transparency = 100
 Box.Size = Vector3.new(10,10,10)
 Box.Position = Vector3.new(0,5000,0)
 
-if LPlayer.Name == "dendock" then
-repeat until nil
-end
-
 local BrickColors = {
 'White', 'Grey', 'Light yellow', 'Brick yellow',
 'Light green (Mint)', 'Light reddish violet', 'Pastel Blue',
