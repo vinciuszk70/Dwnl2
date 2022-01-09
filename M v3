@@ -4636,8 +4636,8 @@ while wait() do
 if not DisableAdmin then
 if ProtectTase then
 pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
 if getsenv(LPlayer.Character.ClientInputHandler).cs.isTazed == true then
+for i,v in pairs(Players:GetPlayers()) do
 local Taser = v.Character:FindFirstChild("Taser") or v.Backpack:FindFirstChild("Taser")
 if Taser then
 if Taser:FindFirstChild("GunStates") then
