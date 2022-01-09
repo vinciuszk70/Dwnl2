@@ -4820,6 +4820,15 @@ end
 if game:GetService("Lighting"):FindFirstChild("doors") then
 game:GetService("Lighting").doors.Parent = workspace["Prison_Cellblock"]
 end
+if game:GetService("Lighting"):FindFirstChild("Prison_Gate") then
+game:GetService("Lighting")["Prison_Gate"].Parent = workspace["Prison_Fences"]
+end
+if game:GetService("Lighting"):FindFirstChild("leftDoor") then
+game:GetService("Lighting"):FindFirstChild("leftDoor").Parent = workspace:FindFirstChild("Warehouses")["Warehouse1"].doors
+end
+if game:GetService("Lighting"):FindFirstChild("rightDoor") then
+game:GetService("Lighting"):FindFirstChild("rightDoor").Parent = workspace:FindFirstChild("Warehouses")["Warehouse1"].doors
+end
 end)
 end
 end
@@ -5223,6 +5232,26 @@ if v:IsA("UnionOperation") then
 local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
 if Distance <= 5 then
 workspace["Prison_Cellblock"].doors.Parent = game:GetService("Lighting")
+end
+end
+end
+for i,v in pairs(workspace:FindFirstChild("Prison_Fences")["Prison_Gate"]:GetChildren()) do
+local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 11 then
+workspace["Prison_Fences"]["Prison_Gate"].Parent = game.Lighting
+end
+end
+for i,v in pairs(workspace:FindFirstChild("Warehouses")["Warehouse1"].doors:GetChildren()) do
+if v.Name == "leftDoor" then
+local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 11 then
+workspace:FindFirstChild("Warehouses")["Warehouse1"].doors.leftDoor.Parent = game.Lighting
+end
+end
+if v.Name == "rightDoor" then
+local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 11 then
+workspace:FindFirstChild("Warehouses")["Warehouse1"].doors.rightDoor.Parent = game.Lighting
 end
 end
 end
