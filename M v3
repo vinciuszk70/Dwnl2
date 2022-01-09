@@ -4,6 +4,7 @@ local Cmds = {}
 local Lk = {}
 local Sa = {}
 local UltraSa = {}
+local AimLocked = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -18,6 +19,9 @@ local RobloxGui = game.CoreGui.RobloxGui
 local StarterGui = game:GetService("StarterGui")
 local PlayerGui = LPlayer:FindFirstChild("PlayerGui")
 local Mouse = LPlayer:GetMouse()
+local Camera = workspace.CurrentCamera
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 local Marketplace = game:GetService("MarketplaceService")
 local CheckGamePass = Marketplace:UserOwnsGamePassAsync(tonumber((LPlayer.CharacterAppearance):split('=')[#((LPlayer.CharacterAppearance):split('='))]), 96651)
 local SayMessageRequest = Replicate.DefaultChatSystemChatEvents.SayMessageRequest
@@ -3196,6 +3200,96 @@ end
 
 end
 
+local function FindPlayerToAimBot(Player)
+local MaximumDistance = math.huge
+local Target = nil
+coroutine.wrap(function()
+wait(20); MaximumDistance = math.huge
+end)()
+if Player.Character ~= nil then
+if Player.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+if Player.Character:FindFirstChild("Humanoid") ~= nil and Player.Character:FindFirstChild("Humanoid").Health ~= 0 then
+local ScreenPoint = Camera:WorldToScreenPoint(Player.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
+local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
+if VectorDistance < MaximumDistance then
+Target = Player
+MaximumDistance = VectorDistance
+end
+end
+end
+end
+return Target
+end
+
+local function ExecuteESP(Plr_Char,Plr)
+if ESP then
+pcall(function()
+repeat wait()
+until Plr_Char.PrimaryPart ~= nil
+for _,Player in pairs(Plr_Char:GetChildren()) do
+if Player.Name ~= "HumanoidRootPart" and Player.ClassName == "Part" or Player.ClassName == "MeshPart" then
+if Player:FindFirstChild("BoxHandle") then
+Player.BoxHandle:Destroy()
+end
+local BoxHandle = Instance.new("BoxHandleAdornment",Player)
+BoxHandle.Name = "BoxHandle"
+BoxHandle.Size = Player.Size
+BoxHandle.Color = BrickColor.new(Plr.TeamColor.Name)
+BoxHandle.Transparency = .6
+BoxHandle.AlwaysOnTop = true    
+BoxHandle.Visible = true
+BoxHandle.Adornee = Player
+BoxHandle.ZIndex = true    
+end
+end
+end)
+end
+end
+
+function RemoveESPS()
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+for i2,v2 in pairs(v.Character:GetChildren()) do
+if v ~= game.Players.LocalPlayer then
+if v2:FindFirstChild("BoxHandle") then
+v2.BoxHandle:Destroy()
+end
+end
+end
+end
+end)
+end
+
+function ESPOn()
+ESP = true
+pcall(function()
+for i,v in pairs(Players:GetChildren()) do
+if v ~= game.Players.LocalPlayer then
+if v.Character then
+ExecuteESP(v.Character,v)
+end
+v.CharacterAdded:Connect(function(Plr)
+if not DisableAdmin then
+if ESP then
+ExecuteESP(Plr,v)
+end
+end
+end)
+end
+end
+end)
+end
+
+function ESPOff()
+ESP = false
+wait(.1)
+RemoveESPS()
+wait(.1)
+RemoveESPS()
+wait(.1)
+RemoveESPS()
+end
+
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
 
 StarterGui:SetCore("ChatMakeSystemMessage",{
@@ -4139,6 +4233,37 @@ if Connect.SendCommand("cgun") then
 CGun(Arg2:lower())
 end
 
+if Connect.SendCommand("esp") then
+if Arg2 == "on" then
+if not ESP then
+ESPOn()
+Message("ESP enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+end
+end
+if Arg2 == "off" then
+if ESP then
+ESPOff()
+Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+end
+end
+if Arg2 == nil then
+if not ESP then
+ESPOn()
+Message("ESP enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+else
+ESPOff()
+Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+end
+end
+end
+
+if Connect.SendCommand("unesp") then
+if ESP then
+ESPOff()
+Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+end
+end
+
 if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
@@ -4167,17 +4292,17 @@ UltraSa[Player.UserId] = nil
 end
 end
 
-if Connect.SendCommand("safe") then
+if Connect.SendCommand("lck") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70" and not Safes[Player.UserId] then
-Safes[Player.UserId] = {Player = Player}
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not AimLocked[Player.UserId] then
+AimLocked[Player.UserId] = {Player = Player}
 end
 end
 
-if Connect.SendCommand("unsafe") then
+if Connect.SendCommand("unlck") then
 local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70"  and Safes[Player.UserId] then
-Safes[Player.UserId] = nil
+if Player ~= nil and Player.Name ~= "viniciuszk70"  and AimLocked[Player.UserId] then
+AimLocked[Player.UserId] = nil
 end
 end
 
@@ -5121,6 +5246,7 @@ LPlayer.Character:FindFirstChild("Torso").CanCollide = false
 end)
 end
 if AntiBring then
+pcall(function()
 for i,v in pairs(game.Players:GetPlayers()) do
 if not v.Character:FindFirstChild("Humanoid") then
 if v.Backpack:FindFirstChildOfClass("Tool") then
@@ -5131,6 +5257,7 @@ v.Character:FindFirstChildOfClass("Tool"):Remove()
 end
 end
 end
+end)
 end
 end
 end)
@@ -5252,6 +5379,26 @@ LPlayer.Character.HumanoidRootPart.CFrame = Pos
 end
 end)
 
+Run.RenderStepped:Connect(function()
+if not DisableAdmin then
+for i,v in pairs(AimLocked) do
+pcall(function()
+TweenService:Create(Camera, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, FindPlayerToAimBot(v.Player).Character["Torso"].Position)}):Play()
+end)
+end
+end
+end)
+
+Players.PlayerAdded:Connect(function(Plr)
+if not DisableAdmin then
+if ESP then
+Plr.CharacterAdded:Connect(function(Char)
+ExecuteESP(Char,Plr)
+end)
+end
+end
+end)
+
 Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,21.5)
 
 wait(.3)
@@ -5317,6 +5464,7 @@ getgenv().RemoveOldScript = function()
 pcall(function()
 Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
+ESPOff()
 MsdAdminV2:Destroy()
 DisableAdmin = true
 RemoveOldScript:Destroy()
