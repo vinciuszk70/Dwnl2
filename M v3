@@ -5,7 +5,6 @@ local Lk = {}
 local Sa = {}
 local UltraSa = {}
 local AimLocked = {}
-local Spiked = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -3459,6 +3458,7 @@ MsdLabel.BackgroundColor3 = BackColor
 MsdLabel.TextColor3 = TextColor
 CmdBox.BackgroundColor3 = BackColor
 CmdBox.TextColor3 = TextColor
+CmdBox.PlaceholderColor3 = PlaceColor
 C.BackgroundColor3 = BackColor
 C.TextColor3 = TextColor
 S.BackgroundColor3 = BackColor
@@ -4576,20 +4576,6 @@ AimLocked[Player.UserId] = nil
 end
 end
 
-if Connect.SendCommand("spike") then
-local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70" and not Spiked[Player.UserId] then
-Spiked[Player.UserId] = {Player = Player}
-end
-end
-
-if Connect.SendCommand("unspike") then
-local Player = FindPlayer(Arg2)
-if Player ~= nil and Player.Name ~= "viniciuszk70" and Spiked[Player.UserId] then
-Spiked[Player.UserId] = nil
-end
-end
-
 if Connect.SendCommand("nex") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
 end
@@ -5235,20 +5221,6 @@ end)
 spawn(function()
 while wait() do
 if not DisableAdmin then
-for i,v in pairs(Spiked) do
-if v ~= nil then
-pcall(function()
-Cmds.Spike(v.Player)
-end)
-end
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
 for i,v in pairs(Sa) do
 pcall(function()
 if v.Player.Character:FindFirstChild("HumanoidRootPart") then
@@ -5513,6 +5485,60 @@ end
 end
 end)
 end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+pcall(function()
+if BackColor ~= nil and TextColor ~= nil then
+PlayerGui.Home.hud.ClockFrame.tl.TextColor3 = TextColor
+PlayerGui.Home.hud.MenuButton.tl.TextColor3 = TextColor
+PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.TextColor3 = TextColor
+PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.TextColor3 = TextColor
+PlayerGui.Home.hud.Topbar.titleBar.Title.TextColor3 = TextColor
+PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.TextColor3 = TextColor
+PlayerGui.Home.hud.StaminaFrame.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.MenuButton.MenuFrame.votekick.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.MenuButton.MenuFrame.gamepasses.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.ClockFrame.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.Topbar.Pulldownmenu.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.Topbar.titleBar.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.MenuButton.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.GunFrame.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.GunFrame.Frame.BackgroundColor3 = BackColor
+PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.Topbar.titleBar.Title.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.Font = Enum.Font.GothamBlack
+else
+PlayerGui.Home.hud.ClockFrame.tl.TextColor3 = Color3.new(255,255,255)
+PlayerGui.Home.hud.MenuButton.tl.TextColor3 = Color3.new(255,255,255)
+PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.TextColor3 = Color3.new(255,255,255)
+PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.TextColor3 = Color3.new(255,255,255)
+PlayerGui.Home.hud.Topbar.titleBar.Title.TextColor3 = Color3.new(255,255,255)
+PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.TextColor3 = Color3.new(255,255,255)
+PlayerGui.Home.hud.StaminaFrame.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.MenuButton.MenuFrame.votekick.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.MenuButton.MenuFrame.gamepasses.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.ClockFrame.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.Topbar.Pulldownmenu.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.Topbar.titleBar.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.MenuButton.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.GunFrame.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.GunFrame.Frame.BackgroundColor3 = Color3.new(0,0,0)
+PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.Topbar.titleBar.Title.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.Font = Enum.Font.GothamBlack
+end
+end)
 end
 end
 end)
