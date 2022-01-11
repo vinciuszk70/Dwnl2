@@ -5,6 +5,7 @@ local Lk = {}
 local Sa = {}
 local UltraSa = {}
 local AimLocked = {}
+local Spiked = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -30,7 +31,10 @@ local OwnerVini = Players:FindFirstChild("viniciuszk70")
 local OwnerR1 = Players:FindFirstChild("R1_NOOB")
 local OwnerNight = Players:FindFirstChild("33_Night")
 local OwnerPeka = Players:FindFirstChild("RCM_Mystx")
+local HitBoxColor = HitBoxTeamColor
+local HitBoxTransparency = 0.7
 local HitBoxSize = 7
+local HitBoxShape = Enum.PartType.Block
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
 Box.Anchored = true
@@ -313,6 +317,10 @@ Commands.Size = UDim2.new(0, 366, 0, 310)
 Commands.Visible = false
 Commands.Active = true
 Commands.Draggable = true
+
+function CommandsBackGround(Color)
+Commands.BackgroundColor3 = Color
+end
 
 CmdHandler.Name = "CmdHandler"
 CmdHandler.Parent = Commands
@@ -3290,6 +3298,236 @@ wait(.1)
 RemoveESPS()
 end
 
+function HitBoxColorFunction(Color)
+
+if Color == "white" then
+HitBoxColor = "1001"
+end
+
+if Color == "black" then
+HitBoxColor = "1003"
+end
+
+if Color == "blue" then
+HitBoxColor = "307"
+end
+
+if Color == "red" then
+HitBoxColor = "21"
+end
+
+if Color == "green" then
+HitBoxColor = "1020"
+end
+
+if Color == "yellow" then
+HitBoxColor = "1009"
+end
+
+if Color == "purple" then
+HitBoxColor = "104"
+end
+
+if Color == "pink" then
+HitBoxColor = "1032"
+end
+
+if Color == "orange" then
+HitBoxColor = "1005"
+end
+
+if Color == "grey" then
+HitBoxColor = "148"
+end
+
+if Color == "team" then
+HitBoxColor = HitBoxTeamColor
+end
+
+end
+
+Cmds.Spike = function(Player)
+pcall(function()
+if Player.Name ~= "viniciuszk70" then
+if Player.Character:FindFirstChild("HumanoidRootPart") then
+
+ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
+
+local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
+
+local Arg = {}
+
+for SendToServer = 1,20000 do
+coroutine.resume(coroutine.create(function()
+Arg[SendToServer] = {
+RayObject = Ray.new(Vector3.new(1, 1, 1), Vector3.new(1, 1, 1)), 
+Distance = 2048, 
+Cframe = CFrame.new(), 
+Hit = Player.Character.Head
+}
+end))
+end
+
+game.ReplicatedStorage.ReloadEvent:FireServer(Gun)
+
+for i, v in next, debug.getregistry() do if type(v) == "table"
+then if v.Bullets then v.CurrentAmmo = 100 v.MaxAmmo = 100
+end
+end
+end
+
+ShootEvent:FireServer(Arg,Gun)
+
+end
+end
+end)
+end
+
+function Themes(Color)
+
+if Color == "white" or Color == "black" or Color == "blue" or Color == "red" or Color == "green" or Color == "yellow" or Color == "purple" or Color == "pink" or Color == "orange" or Color == "grey" then
+
+if Color == "white" then
+BackColor = Color3.fromRGB(255,255,255)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "black" then
+BackColor = Color3.fromRGB(0,0,0)
+TextColor = Color3.fromRGB(255,255,255)
+PlaceColor = Color3.fromRGB(255,255,255)
+end
+
+if Color == "blue" then
+BackColor = Color3.fromRGB(16,42,220)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "red" then
+BackColor = Color3.fromRGB(255,0,0)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "green" then
+BackColor = Color3.fromRGB(0, 255, 0)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "yellow" then
+BackColor = Color3.fromRGB(249,214,46)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "purple" then
+BackColor = Color3.fromRGB(107,50,124)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "pink" then
+BackColor = Color3.fromRGB(255,0,191)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "orange" then
+BackColor = Color3.fromRGB(255,176,0)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "grey" then
+BackColor = Color3.fromRGB(87,88,87)
+TextColor = Color3.fromRGB(0,0,0)
+PlaceColor = Color3.fromRGB(0,0,0)
+end
+
+for i,v in pairs(CmdHandler:GetDescendants()) do
+if v.Name == "CMDS" then
+v.BackgroundColor3 = BackColor
+v.TextColor3 = TextColor
+end
+end
+
+CommandsBackGround(BackColor)
+MsdLabel.BackgroundColor3 = BackColor
+MsdLabel.TextColor3 = TextColor
+CmdBox.BackgroundColor3 = BackColor
+CmdBox.TextColor3 = TextColor
+C.BackgroundColor3 = BackColor
+C.TextColor3 = TextColor
+S.BackgroundColor3 = BackColor
+S.TextColor3 = TextColor
+T2.BackgroundColor3 = BackColor
+T2.TextColor3 = TextColor
+CmdHandler.BackgroundColor3 = BackColor
+CmdText.BackgroundColor3 = BackColor
+CmdText.TextColor3 = TextColor
+TextLabel.BackgroundColor3 = BackColor
+TextLabel.TextColor3 = TextColor
+Close_2.BackgroundColor3 = BackColor
+Close_2.TextColor3 = TextColor
+SpamGui.BackgroundColor3 = BackColor
+Crim_2.BackgroundColor3 = BackColor
+Crim_2.TextColor3 = TextColor
+SpamToggle.BackgroundColor3 = BackColor
+SpamToggle.TextColor3 = TextColor
+TextLabel_2.BackgroundColor3 = BackColor
+TextLabel_2.TextColor3 = TextColor
+Power.BackgroundColor3 = BackColor
+Power.TextColor3 = TextColor
+Power.PlaceholderColor3 = PlaceColor
+Player_2.PlaceholderColor3 = PlaceColor
+Player_2.BackgroundColor3 = BackColor
+Player_2.TextColor3 = TextColor
+Close_3.BackgroundColor3 = BackColor
+Close_3.TextColor3 = TextColor
+Crim2.BackgroundColor3 = BackColor
+Crim2.TextColor3 = TextColor
+StatusFrame.BackgroundColor3 = BackColor
+ImageLabel.BackgroundColor3 = BackColor
+Display.BackgroundColor3 = BackColor
+Display.TextColor3 = TextColor
+Nick.BackgroundColor3 = BackColor
+Nick.TextColor3 = TextColor
+User_Id.BackgroundColor3 = BackColor
+User_Id.TextColor3 = TextColor
+Life.BackgroundColor3 = BackColor
+Life.TextColor3 = TextColor
+Team.BackgroundColor3 = BackColor
+Team.TextColor3 = TextColor
+Ammo.BackgroundColor3 = BackColor
+Ammo.TextColor3 = TextColor
+Killed_innocents.BackgroundColor3 = BackColor
+Killed_innocents.TextColor3 = TextColor
+Players2.BackgroundColor3 = BackColor
+Players2.TextColor3 = TextColor
+Fps2.BackgroundColor3 = BackColor
+Fps2.TextColor3 = TextColor
+Friendsontheserver.BackgroundColor3 = BackColor
+Friendsontheserver.TextColor3 = TextColor
+Theownerisontheserver.BackgroundColor3 = BackColor
+Theownerisontheserver.TextColor3 = TextColor
+AT.BackgroundColor3 = BackColor
+AT.TextColor3 = TextColor
+WT.BackgroundColor3 = BackColor
+WT.TextColor3 = TextColor
+ST.BackgroundColor3 = BackColor
+ST.TextColor3 = TextColor
+DT.BackgroundColor3 = BackColor
+DT.TextColor3 = TextColor
+Back_Space.BackgroundColor3 = BackColor
+Back_Space.TextColor3 = TextColor
+
+end
+
+end
+
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
 
 StarterGui:SetCore("ChatMakeSystemMessage",{
@@ -4074,6 +4312,34 @@ HitBoxSize = Arg2
 end
 end
 
+if Connect.SendCommand("hbshape") then
+if Arg2 == "1" then
+HitBoxShape = Enum.PartType.Block
+end
+if Arg2 == "2" then
+HitBoxShape = Enum.PartType.Ball
+end
+if Arg2 == "3" then
+HitBoxShape = Enum.PartType.Cylinder
+end
+end
+
+if Connect.SendCommand("hbcolor") then
+HitBoxColorFunction(Arg2:lower())
+end
+
+if Connect.SendCommand("hbtrs") then
+if Arg2 == "1" then
+HitBoxTransparency = 0.7
+end
+if Arg2 == "2" then
+HitBoxTransparency = 0.95
+end
+if Arg2 == "3" then
+HitBoxTransparency = 1
+end
+end
+
 if Connect.SendCommand("prts") then
 if Arg2 == "on" then
 if not ProtectTase then
@@ -4264,6 +4530,10 @@ Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 
+if Connect.SendCommand("themes") then
+Themes(Arg2:lower())
+end
+
 if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
@@ -4303,6 +4573,20 @@ if Connect.SendCommand("unlck") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70"  and AimLocked[Player.UserId] then
 AimLocked[Player.UserId] = nil
+end
+end
+
+if Connect.SendCommand("spike") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not Spiked[Player.UserId] then
+Spiked[Player.UserId] = {Player = Player}
+end
+end
+
+if Connect.SendCommand("unspike") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70" and Spiked[Player.UserId] then
+Spiked[Player.UserId] = nil
 end
 end
 
@@ -4516,24 +4800,49 @@ end)
 Mouse.KeyDown:connect(function(Key)
 if not DisableAdmin then
 if Key:lower() == "w" then
+if BackColor ~= nil and TextColor ~= nil then
+WT.BackgroundColor3 = TextColor
+WT.TextColor3 = BackColor
+else
 WT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 WT.TextColor3 = Color3.fromRGB(0, 0, 0)
 end
+end
 if Key:lower() == "a" then
+if BackColor ~= nil and TextColor ~= nil then
+AT.BackgroundColor3 = TextColor
+AT.TextColor3 = BackColor
+else
 AT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 AT.TextColor3 = Color3.fromRGB(0, 0, 0)
 end
+end
 if Key:lower() == "s" then
+if BackColor ~= nil and TextColor ~= nil then
+ST.BackgroundColor3 = TextColor
+ST.TextColor3 = BackColor
+else
 ST.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 ST.TextColor3 = Color3.fromRGB(0, 0, 0)
 end
+end
 if Key:lower() == "d" then
+if BackColor ~= nil and TextColor ~= nil then
+DT.BackgroundColor3 = TextColor
+DT.TextColor3 = BackColor
+else
 DT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 DT.TextColor3 = Color3.fromRGB(0, 0, 0)
 end
+end
 if Key:lower() == " " then
+if BackColor ~= nil and TextColor ~= nil then
+Back_Space.BackgroundColor3 = TextColor
+Back_Space.TextColor3 = BackColor
+else
 Back_Space.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Back_Space.TextColor3 = Color3.fromRGB(0, 0, 0)
+end
 end
 end
 end)
@@ -4541,24 +4850,49 @@ end)
 Mouse.KeyUp:connect(function(Key)
 if not DisableAdmin then
 if Key:lower() == "w" then
+if BackColor ~= nil and TextColor ~= nil then
+WT.BackgroundColor3 = BackColor
+WT.TextColor3 = TextColor
+else
 WT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 WT.TextColor3 = Color3.fromRGB(255, 255, 255)
 end
+end
 if Key:lower() == "a" then
+if BackColor ~= nil and TextColor ~= nil then
+AT.BackgroundColor3 = BackColor
+AT.TextColor3 = TextColor
+else
 AT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 AT.TextColor3 = Color3.fromRGB(255, 255, 255)
 end
+end
 if Key:lower() == "s" then
+if BackColor ~= nil and TextColor ~= nil then
+ST.BackgroundColor3 = BackColor
+ST.TextColor3 = TextColor
+else
 ST.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ST.TextColor3 = Color3.fromRGB(255, 255, 255)
 end
+end
 if Key:lower() == "d" then
+if BackColor ~= nil and TextColor ~= nil then
+DT.BackgroundColor3 = BackColor
+DT.TextColor3 = TextColor
+else
 DT.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 DT.TextColor3 = Color3.fromRGB(255, 255, 255)
 end
+end
 if Key:lower() == " " then
+if BackColor ~= nil and TextColor ~= nil then
+Back_Space.BackgroundColor3 = BackColor
+Back_Space.TextColor3 = TextColor
+else
 Back_Space.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Back_Space.TextColor3 = Color3.fromRGB(255, 255, 255)
+end
 end
 end
 end)
@@ -4753,9 +5087,14 @@ for i,v in next, Players:GetPlayers() do
 if v ~= LPlayer then
 pcall(function()
 v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
-v.Character.HumanoidRootPart.Transparency = 0.97
-v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Transparency = HitBoxTransparency
+if HitBoxColor == HitBoxTeamColor then
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new(v.TeamColor.Name)
+else
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new(HitBoxColor)
+end
 v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.Shape = HitBoxShape
 v.Character.HumanoidRootPart.CanCollide = false
 end)
 end
@@ -4886,6 +5225,20 @@ pcall(function()
 if v.Player.Character:FindFirstChild("HumanoidRootPart") then
 Cmds.Kill(v.Player)
 end
+end)
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+for i,v in pairs(Spiked) do
+if v ~= nil then
+pcall(function()
+Cmds.Spike(v.Player)
 end)
 end
 end
