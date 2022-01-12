@@ -830,10 +830,6 @@ if not DisableAdmin then
 if LoadedTheAdmin then
 Themes("white")
 ThemesGui:Destroy()
-else
-wait(3.5)
-Themes("white")
-ThemesGui:Destroy()
 end
 end
 end)
@@ -852,10 +848,6 @@ Black.TextSize = 14.000
 Black.MouseButton1Click:Connect(function()
 if not DisableAdmin then
 if LoadedTheAdmin then
-Themes("black")
-ThemesGui:Destroy()
-else
-wait(3.5)
 Themes("black")
 ThemesGui:Destroy()
 end
@@ -878,10 +870,6 @@ if not DisableAdmin then
 if LoadedTheAdmin then
 Themes("blue")
 ThemesGui:Destroy()
-else
-wait(3.5)
-Themes("blue")
-ThemesGui:Destroy()
 end
 end
 end)
@@ -900,10 +888,6 @@ Red.TextSize = 14.000
 Red.MouseButton1Click:Connect(function()
 if not DisableAdmin then
 if LoadedTheAdmin then
-Themes("red")
-ThemesGui:Destroy()
-else
-wait(3.5)
 Themes("red")
 ThemesGui:Destroy()
 end
@@ -926,10 +910,6 @@ if not DisableAdmin then
 if LoadedTheAdmin then
 Themes("green")
 ThemesGui:Destroy()
-else
-wait(3.5)
-Themes("green")
-ThemesGui:Destroy()
 end
 end
 end)
@@ -948,10 +928,6 @@ Yellow.TextSize = 14.000
 Yellow.MouseButton1Click:Connect(function()
 if not DisableAdmin then
 if LoadedTheAdmin then
-Themes("yellow")
-ThemesGui:Destroy()
-else
-wait(3.5)
 Themes("yellow")
 ThemesGui:Destroy()
 end
@@ -974,10 +950,6 @@ if not DisableAdmin then
 if LoadedTheAdmin then
 Themes("purple")
 ThemesGui:Destroy()
-else
-wait(3.5)
-Themes("purple")
-ThemesGui:Destroy()
 end
 end
 end)
@@ -996,10 +968,6 @@ Pink.TextSize = 14.000
 Pink.MouseButton1Click:Connect(function()
 if not DisableAdmin then
 if LoadedTheAdmin then
-Themes("pink")
-ThemesGui:Destroy()
-else
-wait(3.5)
 Themes("pink")
 ThemesGui:Destroy()
 end
@@ -1022,10 +990,6 @@ if not DisableAdmin then
 if LoadedTheAdmin then
 Themes("orange")
 ThemesGui:Destroy()
-else
-wait(3.5)
-Themes("orange")
-ThemesGui:Destroy()
 end
 end
 end)
@@ -1044,10 +1008,6 @@ Grey.TextSize = 14.000
 Grey.MouseButton1Click:Connect(function()
 if not DisableAdmin then
 if LoadedTheAdmin then
-Themes("grey")
-ThemesGui:Destroy()
-else
-wait(3.5)
 Themes("grey")
 ThemesGui:Destroy()
 end
@@ -3549,75 +3509,6 @@ end
 return Target
 end
 
-local function ExecuteESP(Plr_Char,Plr)
-if ESP then
-pcall(function()
-repeat wait()
-until Plr_Char.PrimaryPart ~= nil
-for _,Player in pairs(Plr_Char:GetChildren()) do
-if Player.Name ~= "HumanoidRootPart" and Player.ClassName == "Part" or Player.ClassName == "MeshPart" then
-if Player:FindFirstChild("BoxHandle") then
-Player.BoxHandle:Destroy()
-end
-local BoxHandle = Instance.new("BoxHandleAdornment",Player)
-BoxHandle.Name = "BoxHandle"
-BoxHandle.Size = Player.Size
-BoxHandle.Color = BrickColor.new(Plr.TeamColor.Name)
-BoxHandle.Transparency = .6
-BoxHandle.AlwaysOnTop = true    
-BoxHandle.Visible = true
-BoxHandle.Adornee = Player
-BoxHandle.ZIndex = true    
-end
-end
-end)
-end
-end
-
-function RemoveESPS()
-pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
-for i2,v2 in pairs(v.Character:GetChildren()) do
-if v ~= game.Players.LocalPlayer then
-if v2:FindFirstChild("BoxHandle") then
-v2.BoxHandle:Destroy()
-end
-end
-end
-end
-end)
-end
-
-function ESPOn()
-ESP = true
-pcall(function()
-for i,v in pairs(Players:GetChildren()) do
-if v ~= game.Players.LocalPlayer then
-if v.Character then
-ExecuteESP(v.Character,v)
-end
-v.CharacterAdded:Connect(function(Plr)
-if not DisableAdmin then
-if ESP then
-ExecuteESP(Plr,v)
-end
-end
-end)
-end
-end
-end)
-end
-
-function ESPOff()
-ESP = false
-wait(.1)
-RemoveESPS()
-wait(.1)
-RemoveESPS()
-wait(.1)
-RemoveESPS()
-end
-
 function HitBoxColorFunction(Color)
 
 if Color == "white" then
@@ -4823,22 +4714,22 @@ end
 if Connect.SendCommand("esp") then
 if Arg2 == "on" then
 if not ESP then
-ESPOn()
+ESP = true
 Message("ESP enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == "off" then
 if ESP then
-ESPOff()
+ESP = false
 Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
 if Arg2 == nil then
 if not ESP then
-ESPOn()
+ESP = true
 Message("ESP enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 else
-ESPOff()
+ESP = false
 Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
@@ -4846,7 +4737,7 @@ end
 
 if Connect.SendCommand("unesp") then
 if ESP then
-ESPOff()
+ESP = false
 Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 end
 end
@@ -5390,9 +5281,9 @@ spawn(function()
 while wait() do
 if not DisableAdmin then
 if HitBox then
-for i,v in next, Players:GetPlayers() do
-if v ~= LPlayer and LPlayer.TeamColor.Name ~= v.TeamColor.Name then
 pcall(function()
+for i,v in next, Players:GetPlayers() do
+if v ~= LPlayer and LPlayer.TeamColor.Name ~= v.TeamColor.Name and v.Character.Humanoid.Health ~= 0 then
 v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
 v.Character.HumanoidRootPart.Transparency = HitBoxTransparency
 if HitBoxColor == HitBoxTeamColor then
@@ -5403,7 +5294,6 @@ end
 v.Character.HumanoidRootPart.Material = "Neon"
 v.Character.HumanoidRootPart.Shape = HitBoxShape
 v.Character.HumanoidRootPart.CanCollide = false
-end)
 else
 pcall(function()
 v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
@@ -5413,6 +5303,7 @@ v.Character.HumanoidRootPart.CanCollide = true
 end)
 end
 end
+end)
 else
 for i,v in next, Players:GetPlayers() do
 if v ~= LPlayer then
@@ -5965,6 +5856,58 @@ end
 end
 end)
 
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if ESP then
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer and LPlayer.TeamColor.Name ~= v.TeamColor.Name and v.Character.Humanoid.Health ~= 0 then
+local Plr_Char = v.Character
+repeat wait()
+until Plr_Char.PrimaryPart ~= nil
+for _,Player in pairs(Plr_Char:GetChildren()) do
+if Player.Name ~= "HumanoidRootPart" and Player.ClassName == "Part" or Player.ClassName == "MeshPart" then
+if Player:FindFirstChild("BoxHandle") then
+Player.BoxHandle:Destroy()
+end
+local BoxHandle = Instance.new("BoxHandleAdornment",Player)
+BoxHandle.Name = "BoxHandle"
+BoxHandle.Size = Player.Size
+BoxHandle.Color = BrickColor.new(v.TeamColor.Name)
+BoxHandle.Transparency = .6
+BoxHandle.AlwaysOnTop = true    
+BoxHandle.Visible = true
+BoxHandle.Adornee = Player
+BoxHandle.ZIndex = true
+end
+end
+else
+for i2,v2 in pairs(v.Character:GetChildren()) do
+if v2:FindFirstChild("BoxHandle") then
+v2.BoxHandle:Destroy()
+end
+end
+end
+end
+end)
+else
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+for i2,v2 in pairs(v.Character:GetChildren()) do
+if v ~= LPlayer then
+if v2:FindFirstChild("BoxHandle") then
+v2.BoxHandle:Destroy()
+end
+end
+end
+end
+end)
+end
+end
+end
+end)
+
 Run.Stepped:Connect(function()
 if not DisableAdmin then
 if ProtectBlockOwner then
@@ -6219,70 +6162,37 @@ end
 end
 end)
 
-Players.PlayerAdded:Connect(function(Plr)
-if not DisableAdmin then
-if ESP then
-Plr.CharacterAdded:Connect(function(Char)
-ExecuteESP(Char,Plr)
-end)
-end
-end
-end)
-
 Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,21.5)
-
-wait(.3)
 
 AutoRespawn = true
 Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
-wait(.3)
-
 AntiVoid = true
 Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-
-wait(.3)
 
 AntiShield = true
 Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
-
-wait(.3)
-
 AntiArrest = true
 Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-
-wait(.3)
 
 ExecuteAntiPunch()
 AntiPunch = true
 Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
-wait(.3)
-
 AntiDoors = true
 Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-
-wait(.3)
 
 AntiBring = true
 Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
-wait(.3)
-
 ProtectTase = true
 Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-
-wait(.3)
 
 ProtectArrest = true
 Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
 
-wait(.3)
-
 InfAmmoToggle("on")
-
-wait(.3)
 
 InfStam("on")
 
@@ -6296,7 +6206,6 @@ getgenv().RemoveOldScript = function()
 pcall(function()
 Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,21.5)
 Cmds.Respawn()
-ESPOff()
 MsdAdminV2:Destroy()
 ThemesGui:Destroy()
 DisableAdmin = true
