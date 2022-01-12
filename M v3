@@ -5815,6 +5815,31 @@ while wait() do
 if not DisableAdmin then
 pcall(function()
 if BackColor ~= nil and TextColor ~= nil then
+PlayerGui.Home.intro.Content.menus.premium.TextLabel.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.premium.riot.BorderColor3 = BackColor
+PlayerGui.Home.intro.Content.Buttons.premium.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.Buttons.help.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.Buttons.teamsGui.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.BorderColor3 = TextColor
+PlayerGui.Home.intro.NoticeFrame.tb1.BorderColor3 = TextColor
+PlayerGui.Home.intro.NoticeFrame.tb2.BorderColor3 = TextColor
+PlayerGui.Home.intro.okFrame.tb1.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Button.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Button.BorderColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Desc.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.premium.title.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.premium.TextLabel.TextLabel.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.help.help.title.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.help.title.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.help.help2.title.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.help.help2.content.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Title.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Desc.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Title.TextColor3 = TextColor
+PlayerGui.Home.intro.NoticeFrame.body.TextColor3 = TextColor
+PlayerGui.Home.intro.NoticeFrame.tb1.tl.TextColor3 = TextColor
+PlayerGui.Home.intro.okFrame.body.TextColor3 = TextColor
 PlayerGui.Home.hud.ClockFrame.tl.TextColor3 = TextColor
 PlayerGui.Home.hud.MenuButton.tl.TextColor3 = TextColor
 PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.TextColor3 = TextColor
@@ -5824,6 +5849,37 @@ PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.TextColor3 = TextColor
 PlayerGui.Home.hud.GunFrame.Label.TextColor3 = TextColor
 PlayerGui.Home.hud.GunFrame.Magazine.TextColor3 = TextColor
 PlayerGui.Home.hud.GunFrame.Magazine.TextLabel.TextColor3 = TextColor
+PlayerGui.Home.intro.okFrame.tb1.tl.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.Buttons.premium.TextLabel.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.Buttons.teamsGui.TextLabel.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.premium.riot.TextLabel.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Button.TextLabel.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Button.TextLabel.TextColor3 = TextColor
+PlayerGui.Home.intro.Title.etc.TextColor3 = TextColor
+PlayerGui.Home.intro.Title.version.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.menus.premium.TextLabel.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.premium.riot.TextLabel.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.premium.riot.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.Buttons.teamsGui.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.Buttons.help.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.Buttons.premium.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.help.help.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.help.help2.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Title.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Title.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Title.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Title.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.NoticeFrame.tb1.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.NoticeFrame.tb2.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.NoticeFrame.Frame.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.NoticeFrame.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.okFrame.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.okFrame.Frame.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.okFrame.tb1.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Button.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Button.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.StaminaFrame.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.MenuButton.MenuFrame.votekick.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.MenuButton.MenuFrame.gamepasses.BackgroundColor3 = BackColor
@@ -5835,37 +5891,64 @@ PlayerGui.Home.hud.MenuButton.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.GunFrame.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.GunFrame.Frame.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Title.BackgroundColor3 = BackColor
+PlayerGui.Home.intro.Content.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.titleBar.Title.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.Buttons.premium.TextLabel.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.Buttons.teamsGui.TextLabel.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.help.help.title.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.help.title.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.help.help2.title.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.help.help2.content.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Desc.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Desc.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.NoticeFrame.tb1.tl.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.NoticeFrame.tb2.tl.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.NoticeFrame.body.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.okFrame.tb1.tl.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.okFrame.body.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.premium.title.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.premium.TextLabel.TextLabel.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.premium.riot.TextLabel.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Button.TextLabel.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Title.etc.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Title.version.Font = Enum.Font.GothamBlack
+PlayerGui.Home.intro.Content.Buttons.premium.TextLabel.TextStrokeTransparency = 1
+PlayerGui.Home.intro.Content.menus.premium.riot.BackgroundTransparency = 0
+PlayerGui.Home.intro.Content.menus.premium.riot.TextLabel.BackgroundTransparency = 0
+PlayerGui.Home.intro.Content.BackgroundTransparency = .8
+PlayerGui.Home.intro.Title.BackgroundTransparency = .8
+PlayerGui.Home.intro.Content.Style = "Custom"
+PlayerGui.Home.intro.Title.Style = "Custom"
+if PlayerGui.Home.hud.GunFrame.Frame:FindFirstChild("TextLabel") then
 PlayerGui.Home.hud.GunFrame.Frame.TextLabel:Destroy()
-for i,v in pairs(PlayerGui.Home.hud.GunFrame:GetDescendants()) do
-v.BackgroundTransparency = 1
 end
-else
-PlayerGui.Home.hud.ClockFrame.tl.TextColor3 = Color3.new(255,255,255)
-PlayerGui.Home.hud.MenuButton.tl.TextColor3 = Color3.new(255,255,255)
-PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.TextColor3 = Color3.new(255,255,255)
-PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.TextColor3 = Color3.new(255,255,255)
-PlayerGui.Home.hud.Topbar.titleBar.Title.TextColor3 = Color3.new(255,255,255)
-PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.TextColor3 = Color3.new(255,255,255)
-PlayerGui.Home.hud.StaminaFrame.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.MenuButton.MenuFrame.votekick.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.MenuButton.MenuFrame.gamepasses.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.ClockFrame.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.Topbar.Pulldownmenu.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.Topbar.titleBar.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.MenuButton.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.GunFrame.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.GunFrame.Frame.BackgroundColor3 = Color3.new(0,0,0)
-PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.Font = Enum.Font.GothamBlack
-PlayerGui.Home.hud.Topbar.titleBar.Title.Font = Enum.Font.GothamBlack
-PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.Font = Enum.Font.GothamBlack
-PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.Font = Enum.Font.GothamBlack
-PlayerGui.Home.hud.GunFrame.Frame.TextLabel:Destroy()
+if PlayerGui.Home.intro.Content.Buttons.help:FindFirstChild("TextLabel") then
+PlayerGui.Home.intro.Content.Buttons.help.TextLabel.Name = "Label1"
+PlayerGui.Home.intro.Content.Buttons.help.TextLabel.Name = "Label2"
+PlayerGui.Home.intro.Content.Buttons.help.Label2:Remove()
+end
+PlayerGui.Home.intro.Content.Buttons.help.Label1.TextColor3 = TextColor
+PlayerGui.Home.intro.Content.Buttons.help.Label1.Font = Enum.Font.GothamBlack
+if PlayerGui.Home.intro.Content.menus.help:FindFirstChild("Frame") then
+PlayerGui.Home.intro.Content.menus.help.Frame.Name = "Frame1"
+PlayerGui.Home.intro.Content.menus.help.Frame.Name = "Frame2"
+end
+for i,v in pairs(PlayerGui.Home.intro.Content.menus.help.Frame1:GetDescendants()) do
+v.BorderColor3 = TextColor
+v.BackgroundColor3 = BackColor
+v.TextColor3 = TextColor
+v.Font = Enum.Font.GothamBlack
+end
+for i,v in pairs(PlayerGui.Home.intro.Content.menus.help.Frame2:GetDescendants()) do
+v.BorderColor3 = TextColor
+v.BackgroundColor3 = BackColor
+v.TextColor3 = TextColor
+v.Font = Enum.Font.GothamBlack
+end
 for i,v in pairs(PlayerGui.Home.hud.GunFrame:GetDescendants()) do
 v.BackgroundTransparency = 1
 end
