@@ -5391,7 +5391,7 @@ while wait() do
 if not DisableAdmin then
 if HitBox then
 for i,v in next, Players:GetPlayers() do
-if v ~= LPlayer then
+if v ~= LPlayer and LPlayer.TeamColor.Name ~= v.TeamColor.Name then
 pcall(function()
 v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
 v.Character.HumanoidRootPart.Transparency = HitBoxTransparency
@@ -5403,6 +5403,13 @@ end
 v.Character.HumanoidRootPart.Material = "Neon"
 v.Character.HumanoidRootPart.Shape = HitBoxShape
 v.Character.HumanoidRootPart.CanCollide = false
+end)
+else
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+v.Character.HumanoidRootPart.Transparency = 1
+v.Character.HumanoidRootPart.Material = "Plastic"
+v.Character.HumanoidRootPart.CanCollide = true
 end)
 end
 end
