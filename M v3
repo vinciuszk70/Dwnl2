@@ -5821,6 +5821,9 @@ PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.TextColor3 = TextColor
 PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.TextColor3 = TextColor
 PlayerGui.Home.hud.Topbar.titleBar.Title.TextColor3 = TextColor
 PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.TextColor3 = TextColor
+PlayerGui.Home.hud.GunFrame.Label.TextColor3 = TextColor
+PlayerGui.Home.hud.GunFrame.Magazine.TextColor3 = TextColor
+PlayerGui.Home.hud.GunFrame.Magazine.TextLabel.TextColor3 = TextColor
 PlayerGui.Home.hud.StaminaFrame.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.MenuButton.MenuFrame.votekick.BackgroundColor3 = BackColor
 PlayerGui.Home.hud.MenuButton.MenuFrame.gamepasses.BackgroundColor3 = BackColor
@@ -5836,6 +5839,10 @@ PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.titleBar.Title.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.GunFrame.Frame.TextLabel:Destroy()
+for i,v in pairs(PlayerGui.Home.hud.GunFrame:GetDescendants()) do
+v.BackgroundTransparency = 1
+end
 else
 PlayerGui.Home.hud.ClockFrame.tl.TextColor3 = Color3.new(255,255,255)
 PlayerGui.Home.hud.MenuButton.tl.TextColor3 = Color3.new(255,255,255)
@@ -5858,6 +5865,10 @@ PlayerGui.Home.hud.MenuButton.MenuFrame.respawn.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.titleBar.Title.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.Pulldownmenu.tb.Font = Enum.Font.GothamBlack
 PlayerGui.Home.hud.Topbar.Pulldownmenu.Frame.Description.Font = Enum.Font.GothamBlack
+PlayerGui.Home.hud.GunFrame.Frame.TextLabel:Destroy()
+for i,v in pairs(PlayerGui.Home.hud.GunFrame:GetDescendants()) do
+v.BackgroundTransparency = 1
+end
 end
 end)
 end
