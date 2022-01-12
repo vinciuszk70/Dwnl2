@@ -3544,7 +3544,7 @@ HitBoxColor = "1032"
 end
 
 if Color == "orange" then
-HitBoxColor = "1005"
+HitBoxColor = "123"
 end
 
 if Color == "grey" then
@@ -5650,6 +5650,7 @@ n = n + 1
 hrp.CFrame = hrp2.CFrame
 until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
 for i = 1,10 do
+
 hrp.CFrame = SaveFrame
 end
 dfp = game.Workspace["Criminals Spawn"].SpawnLocation
@@ -5722,6 +5723,7 @@ n = n + 1
 hrp.CFrame = hrp2.CFrame
 until (tool.Parent ~= char or not hrp or not hrp2 or not hrp.Parent or not hrp2.Parent or n > 250) and n > 2
 for i = 1,10 do
+
 hrp.CFrame = SaveFrame
 end
 dfp = game.Workspace["Criminals Spawn"].SpawnLocation
