@@ -31,6 +31,7 @@ local OwnerR1 = Players:FindFirstChild("R1_NOOB")
 local OwnerNight = Players:FindFirstChild("33_Night")
 local OwnerPeka = Players:FindFirstChild("RCM_Mystx")
 local HitBoxColor = HitBoxTeamColor
+local ESPColor = ESPTeamColor
 local HitBoxTransparency = 0.7
 local HitBoxSize = 7
 local HitBoxShape = Enum.PartType.Block
@@ -3569,6 +3570,7 @@ HitBoxColorFunction("white")
 TerrainColor("white")
 CGun("white")
 CustomCursor("white")
+ESPColorFunction("white")
 end
 
 if Color == "black" then
@@ -3579,6 +3581,7 @@ HitBoxColorFunction("black")
 TerrainColor("black")
 CGun("black")
 CustomCursor("black")
+ESPColorFunction("black")
 end
 
 if Color == "blue" then
@@ -3589,6 +3592,7 @@ HitBoxColorFunction("blue")
 TerrainColor("blue")
 CGun("blue")
 CustomCursor("blue")
+ESPColorFunction("blue")
 end
 
 if Color == "red" then
@@ -3599,6 +3603,7 @@ HitBoxColorFunction("red")
 TerrainColor("red")
 CGun("red")
 CustomCursor("red")
+ESPColorFunction("red")
 end
 
 if Color == "green" then
@@ -3609,6 +3614,7 @@ HitBoxColorFunction("green")
 TerrainColor("green")
 CGun("green")
 CustomCursor("green")
+ESPColorFunction("green")
 end
 
 if Color == "yellow" then
@@ -3619,6 +3625,7 @@ HitBoxColorFunction("yellow")
 TerrainColor("yellow")
 CGun("yellow")
 CustomCursor("yellow")
+ESPColorFunction("yellow")
 end
 
 if Color == "purple" then
@@ -3629,6 +3636,7 @@ HitBoxColorFunction("purple")
 TerrainColor("purple")
 CGun("purple")
 CustomCursor("purple")
+ESPColorFunction("purple")
 end
 
 if Color == "pink" then
@@ -3639,6 +3647,7 @@ HitBoxColorFunction("pink")
 TerrainColor("pink")
 CGun("pink")
 CustomCursor("pink")
+ESPColorFunction("pink")
 end
 
 if Color == "orange" then
@@ -3649,6 +3658,7 @@ HitBoxColorFunction("orange")
 TerrainColor("orange")
 CGun("orange")
 CustomCursor("orange")
+ESPColorFunction("orange")
 end
 
 if Color == "grey" then
@@ -3659,6 +3669,7 @@ HitBoxColorFunction("grey")
 TerrainColor("grey")
 CGun("grey")
 CustomCursor("grey")
+ESPColorFunction("grey")
 end
 
 for i,v in pairs(CmdHandler:GetDescendants()) do
@@ -3882,6 +3893,54 @@ end
 if Color == "grey" then
 CursorId1 = "rbxassetid://8521499984"
 CursorId2 = "http://www.roblox.com/asset/?id=8521499984"
+end
+
+end
+
+function ESPColorFunction(Color)
+
+if Color == "white" then
+ESPColor = "1001"
+end
+
+if Color == "black" then
+ESPColor = "1003"
+end
+
+if Color == "blue" then
+ESPColor = "307"
+end
+
+if Color == "red" then
+ESPColor = "21"
+end
+
+if Color == "green" then
+ESPColor = "1020"
+end
+
+if Color == "yellow" then
+ESPColor = "1009"
+end
+
+if Color == "purple" then
+ESPColor = "104"
+end
+
+if Color == "pink" then
+ESPColor = "1032"
+end
+
+if Color == "orange" then
+ESPColor = "123"
+end
+
+if Color == "grey" then
+ESPColor = "148"
+end
+
+if Color == "team" then
+ESPColor = ESPTeamColor
 end
 
 end
@@ -4704,6 +4763,10 @@ end
 
 if Connect.SendCommand("ccursor") then
 CustomCursor(Arg2:lower())
+end
+
+if Connect.SendCommand("espcolor") then
+ESPColorFunction(Arg2:lower())
 end
 
 if Connect.SendCommand("prts") then
@@ -6031,7 +6094,11 @@ end
 local BoxHandle = Instance.new("BoxHandleAdornment",Player)
 BoxHandle.Name = "BoxHandle"
 BoxHandle.Size = Player.Size
+if ESPColor == ESPTeamColor then
 BoxHandle.Color = BrickColor.new(v.TeamColor.Name)
+else
+BoxHandle.Color = BrickColor.new(ESPColor)
+end
 BoxHandle.Transparency = .6
 BoxHandle.AlwaysOnTop = true    
 BoxHandle.Visible = true
