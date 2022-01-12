@@ -5499,7 +5499,7 @@ while wait() do
 if not DisableAdmin then
 if HitBox then
 pcall(function()
-for i,v in next, Players:GetPlayers() do
+for i,v in pairs(Players:GetPlayers()) do
 if v ~= LPlayer and LPlayer.TeamColor.Name ~= v.TeamColor.Name and v.Character.Humanoid.Health ~= 0 then
 v.Character.HumanoidRootPart.Size = Vector3.new(HitBoxSize,HitBoxSize,HitBoxSize)
 v.Character.HumanoidRootPart.Transparency = HitBoxTransparency
@@ -5522,7 +5522,7 @@ end
 end
 end)
 else
-for i,v in next, Players:GetPlayers() do
+for i,v in pairs(Players:GetPlayers()) do
 if v ~= LPlayer then
 pcall(function()
 v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
