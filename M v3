@@ -5755,6 +5755,7 @@ PlayerGui.Home.intro.Content.menus.teamsGui.Guards.Button.TextLabel.TextColor3 =
 PlayerGui.Home.intro.Content.menus.teamsGui.Prisoners.Button.TextLabel.TextColor3 = TextColor
 PlayerGui.Home.intro.Title.etc.TextColor3 = TextColor
 PlayerGui.Home.intro.Title.version.TextColor3 = TextColor
+PlayerGui.Home.intro.NoticeFrame.tb2.tl.TextColor3 = TextColor
 PlayerGui.Home.intro.Content.menus.premium.TextLabel.BackgroundColor3 = BackColor
 PlayerGui.Home.intro.Content.menus.premium.riot.TextLabel.BackgroundColor3 = BackColor
 PlayerGui.Home.intro.Content.menus.premium.riot.BackgroundColor3 = BackColor
