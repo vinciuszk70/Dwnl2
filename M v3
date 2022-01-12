@@ -386,7 +386,7 @@ SpamGui.Parent = MsdAdminV2
 SpamGui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 SpamGui.BorderColor3 = Color3.fromRGB(255, 253, 253)
 SpamGui.BorderSizePixel = 0
-SpamGui.Position = UDim2.new(0.370424598, 0, 0.755729127, 0)
+SpamGui.Position = UDim2.new(0.370424598, 0, 0.705729127, 0)
 SpamGui.Size = UDim2.new(0, 260, 0, 100)
 SpamGui.Visible = false
 
@@ -501,7 +501,7 @@ StatusFrame.Parent = MsdAdminV2
 StatusFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 StatusFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
 StatusFrame.BorderSizePixel = 0
-StatusFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
+StatusFrame.Position = UDim2.new(0.65351392, 0, 0.62203125, 0)
 StatusFrame.Size = UDim2.new(0, 334, 0, 155)
 StatusFrame.Visible = false
 
@@ -3474,7 +3474,7 @@ ColorGun = "1032"
 end
 
 if Color == "orange" then
-ColorGun = "1005"
+ColorGun = "123"
 end
 
 if Color == "grey" then
@@ -3557,43 +3557,6 @@ end
 
 end
 
-Cmds.Spike = function(Player)
-pcall(function()
-if Player.Name ~= "viniciuszk70" then
-if Player.Character:FindFirstChild("HumanoidRootPart") then
-
-ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
-
-local Gun = LPlayer.Character:FindFirstChild("Remington 870") or LPlayer.Backpack:FindFirstChild("Remington 870")
-
-local Arg = {}
-
-for SendToServer = 1,20000 do
-coroutine.resume(coroutine.create(function()
-Arg[SendToServer] = {
-RayObject = Ray.new(Vector3.new(1, 1, 1), Vector3.new(1, 1, 1)), 
-Distance = 2048, 
-Cframe = CFrame.new(), 
-Hit = Player.Character.Head
-}
-end))
-end
-
-game.ReplicatedStorage.ReloadEvent:FireServer(Gun)
-
-for i, v in next, debug.getregistry() do if type(v) == "table"
-then if v.Bullets then v.CurrentAmmo = 100 v.MaxAmmo = 100
-end
-end
-end
-
-ShootEvent:FireServer(Arg,Gun)
-
-end
-end
-end)
-end
-
 function Themes(Color)
 
 if Color == "white" or Color == "black" or Color == "blue" or Color == "red" or Color == "green" or Color == "yellow" or Color == "purple" or Color == "pink" or Color == "orange" or Color == "grey" then
@@ -3602,60 +3565,100 @@ if Color == "white" then
 BackColor = Color3.fromRGB(255,255,255)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("white")
+TerrainColor("white")
+CGun("white")
+CustomCursor("white")
 end
 
 if Color == "black" then
 BackColor = Color3.fromRGB(0,0,0)
 TextColor = Color3.fromRGB(255,255,255)
 PlaceColor = Color3.fromRGB(255,255,255)
+HitBoxColorFunction("black")
+TerrainColor("black")
+CGun("black")
+CustomCursor("black")
 end
 
 if Color == "blue" then
 BackColor = Color3.fromRGB(16,42,220)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("blue")
+TerrainColor("blue")
+CGun("blue")
+CustomCursor("blue")
 end
 
 if Color == "red" then
 BackColor = Color3.fromRGB(255,0,0)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("red")
+TerrainColor("red")
+CGun("red")
+CustomCursor("red")
 end
 
 if Color == "green" then
 BackColor = Color3.fromRGB(0, 255, 0)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("green")
+TerrainColor("green")
+CGun("green")
+CustomCursor("green")
 end
 
 if Color == "yellow" then
 BackColor = Color3.fromRGB(249,214,46)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("yellow")
+TerrainColor("yellow")
+CGun("yellow")
+CustomCursor("yellow")
 end
 
 if Color == "purple" then
 BackColor = Color3.fromRGB(107,50,124)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("purple")
+TerrainColor("purple")
+CGun("purple")
+CustomCursor("purple")
 end
 
 if Color == "pink" then
 BackColor = Color3.fromRGB(255,0,191)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("pink")
+TerrainColor("pink")
+CGun("pink")
+CustomCursor("pink")
 end
 
 if Color == "orange" then
 BackColor = Color3.fromRGB(255,176,0)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("orange")
+TerrainColor("orange")
+CGun("orange")
+CustomCursor("orange")
 end
 
 if Color == "grey" then
 BackColor = Color3.fromRGB(87,88,87)
 TextColor = Color3.fromRGB(0,0,0)
 PlaceColor = Color3.fromRGB(0,0,0)
+HitBoxColorFunction("grey")
+TerrainColor("grey")
+CGun("grey")
+CustomCursor("grey")
 end
 
 for i,v in pairs(CmdHandler:GetDescendants()) do
@@ -3736,6 +3739,149 @@ DT.TextColor3 = TextColor
 Back_Space.BackgroundColor3 = BackColor
 Back_Space.TextColor3 = TextColor
 
+end
+
+end
+
+function TerrainColor(Color)
+
+if Color == "white" then
+BlockColor = BrickColor.new("1001")
+end
+
+if Color == "black" then
+BlockColor = BrickColor.new("26")
+end
+
+if Color == "blue" then
+BlockColor = BrickColor.new("102")
+end
+
+if Color == "red" then
+BlockColor = BrickColor.new("331")
+end
+
+if Color == "green" then
+BlockColor = BrickColor.new("318")
+end
+
+if Color == "yellow" then
+BlockColor = BrickColor.new("226")
+end
+
+if Color == "purple" then
+BlockColor = BrickColor.new("321")
+end
+
+if Color == "pink" then
+BlockColor = BrickColor.new("330")
+end
+
+if Color == "orange" then
+BlockColor = BrickColor.new("123")
+end
+
+if Color == "grey" then
+BlockColor = BrickColor.new("148")
+end
+
+if BlockColor ~= nil then
+
+pcall(function()
+for i,v in pairs(workspace["GAME_TERRAIN"]["Prison_Grounds"]:GetDescendants()) do
+if v.ClassName == "Part" then
+v.BrickColor = BlockColor
+end
+end
+for i,v in pairs(Workspace["GAME_TERRAIN"]:GetDescendants()) do
+if v.Name == "Wedge" then
+v.BrickColor = BlockColor
+end
+end
+for i,v in pairs(Workspace["GAME_TERRAIN"]:GetDescendants()) do
+if v.ClassName == "Part" then
+v.BrickColor = BlockColor
+end
+end
+for i,v in pairs(workspace["Prison_Trees"]["Front"]:GetDescendants()) do
+if v.ClassName == "Part" then
+v.BrickColor = BlockColor
+end
+end
+for i,v in pairs(workspace["Prison_Trees"]["Back"]:GetDescendants()) do
+if v.ClassName == "Part" then
+v.BrickColor = BlockColor
+end
+end
+for i,v in pairs(workspace["Trees"]:GetDescendants()) do
+if v.ClassName == "Part" then
+v.BrickColor = BlockColor
+end
+if v.ClassName == "MeshPart" then
+v.BrickColor = BlockColor
+end
+end
+for i,v in pairs(workspace["Square trees"]:GetDescendants()) do
+if v.ClassName == "Part" then
+v.BrickColor = BlockColor
+end
+end
+end)
+
+end
+
+end
+
+function CustomCursor(Color)
+
+if Color == "white" then
+CursorId1 = "rbxassetid://8521522877"
+CursorId2 = "http://www.roblox.com/asset/?id=8521522877"
+end
+
+if Color == "black" then
+CursorId1 = "rbxassetid://8521521576"
+CursorId2 = "http://www.roblox.com/asset/?id=8521521576"
+end
+
+if Color == "blue" then
+CursorId1 = "rbxassetid://8521514392"
+CursorId2 = "http://www.roblox.com/asset/?id=8521514392"
+end
+
+if Color == "red" then
+CursorId1 = "rbxassetid://8520911484"
+CursorId2 = "http://www.roblox.com/asset/?id=8520911484"
+end
+
+if Color == "green" then
+CursorId1 = "rbxassetid://8521064564"
+CursorId2 = "http://www.roblox.com/asset/?id=8521064564"
+end
+
+if Color == "yellow" then
+CursorId1 = "rbxassetid://8521074048"
+CursorId2 = "http://www.roblox.com/asset/?id=8521074048"
+end
+
+if Color == "purple" then
+CursorId1 = "rbxassetid://8521044025"
+CursorId2 = "http://www.roblox.com/asset/?id=8521044025"
+end
+
+if Color == "pink" then
+CursorId1 = "rbxassetid://8521085482"
+CursorId2 = "http://www.roblox.com/asset/?id=8521085482"
+end
+
+if Color == "orange" then
+CursorId1 = "rbxassetid://8521492877"
+CursorId2 = "http://www.roblox.com/asset/?id=8521492877"
+end
+
+if Color == "grey" then
+CursorId1 = "rbxassetid://8521499984"
+CursorId2 = "http://www.roblox.com/asset/?id=8521499984"
 end
 
 end
@@ -4552,6 +4698,14 @@ HitBoxTransparency = 1
 end
 end
 
+if Connect.SendCommand("tncolor") then
+TerrainColor(Arg2:lower())
+end
+
+if Connect.SendCommand("ccursor") then
+CustomCursor(Arg2:lower())
+end
+
 if Connect.SendCommand("prts") then
 if Arg2 == "on" then
 if not ProtectTase then
@@ -5151,13 +5305,13 @@ if not DisableAdmin then
 pcall(function()
 if ToggleFrame.Visible == true and StatusFrame.Visible == true then
 StatusFrame.Position = UDim2.new(0.625360143, 0, 0.405833313, 0)
-ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
+ToggleFrame.Position = UDim2.new(0.625360143, 0, 0.62203125, 0)
 end
 if ToggleFrame.Visible ~= true then
 StatusFrame.Position = UDim2.new(0.625360143, 0, 0.62203125, 0)
 end
 if StatusFrame.Visible ~= true then
-ToggleFrame.Position = UDim2.new(0.68351392, 0, 0.62203125, 0)
+ToggleFrame.Position = UDim2.new(0.625360143, 0, 0.62203125, 0)
 end
 end)
 end
@@ -6159,6 +6313,15 @@ for i,v in pairs(AimLocked) do
 pcall(function()
 TweenService:Create(Camera, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, FindPlayerToAimBot(v.Player).Character["Torso"].Position)}):Play()
 end)
+end
+end
+end)
+
+Run.Stepped:Connect(function()
+if not DisableAdmin then
+if CursorId1 ~= nil and CursorId2 ~= nil then
+Mouse.Icon = CursorId1
+Mouse.Icon = CursorId2
 end
 end
 end)
