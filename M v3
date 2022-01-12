@@ -132,7 +132,7 @@ local BrickColors = {
 '1032'
 }
 
--- Gui --
+-- Guis --
 
 local MsdAdminV2 = Instance.new("ScreenGui")
 local AdminFrame = Instance.new("Frame")
@@ -736,6 +736,327 @@ UIConer_33.Parent = Back_Space
 
 UIConer_28.Name = "UIConer_28"
 UIConer_28.Parent = ToggleFrame
+
+local ThemesGui = Instance.new("ScreenGui")
+local FullBackGround = Instance.new("Frame")
+local Label = Instance.new("TextLabel")
+local ThemesFrame = Instance.new("Frame")
+local WelcomeLabel = Instance.new("TextLabel")
+local ThemesLabel = Instance.new("TextLabel")
+local White = Instance.new("TextButton")
+local UICorner_100 = Instance.new("UICorner")
+local Black = Instance.new("TextButton")
+local UICorner_101 = Instance.new("UICorner")
+local Blue = Instance.new("TextButton")
+local UICorner_102 = Instance.new("UICorner")
+local Red = Instance.new("TextButton")
+local UICorner_103 = Instance.new("UICorner")
+local Green = Instance.new("TextButton")
+local UICorner_104 = Instance.new("UICorner")
+local Yellow = Instance.new("TextButton")
+local UICorner_105 = Instance.new("UICorner")
+local Purple = Instance.new("TextButton")
+local UICorner_106 = Instance.new("UICorner")
+local Pink = Instance.new("TextButton")
+local UICorner_107 = Instance.new("UICorner")
+local Orange = Instance.new("TextButton")
+local UICorner_108 = Instance.new("UICorner")
+local Grey = Instance.new("TextButton")
+local UICorner_109 = Instance.new("UICorner")
+local UICorner_110 = Instance.new("UICorner")
+
+ThemesGui.Name = "ThemesGui"
+
+ThemesGui.Parent = game.CoreGui
+
+ThemesGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+FullBackGround.Name = "FullBackGround"
+FullBackGround.Parent = ThemesGui
+FullBackGround.BackgroundColor3 = Color3.fromRGB(165, 165, 165)
+FullBackGround.Position = UDim2.new(-0.158857986, 0, -0.0834419802, 0)
+FullBackGround.Size = UDim2.new(0, 10000, 0, 10000)
+
+Label.Name = "Label"
+Label.Parent = ThemesGui
+Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Label.BackgroundTransparency = 100.000
+Label.Position = UDim2.new(0.386530012, 0, 0.263493868, 0)
+Label.Size = UDim2.new(0, 350, 0, 208)
+Label.Font = Enum.Font.SourceSans
+Label.Text = ""
+Label.TextColor3 = Color3.fromRGB(0, 0, 0)
+Label.TextSize = 14.000
+
+ThemesFrame.Name = "ThemesFrame"
+ThemesFrame.Parent = Label
+ThemesFrame.BackgroundColor3 = Color3.fromRGB(129, 129, 129)
+ThemesFrame.Position = UDim2.new(-0.0571428575, 0, 0.278470546, 0)
+ThemesFrame.Size = UDim2.new(0, 350, 0, 285)
+
+WelcomeLabel.Name = "WelcomeLabel"
+WelcomeLabel.Parent = ThemesFrame
+WelcomeLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+WelcomeLabel.BackgroundTransparency = 100.000
+WelcomeLabel.Position = UDim2.new(0.222857147, 0, -0.466683537, 0)
+WelcomeLabel.Size = UDim2.new(0, 200, 0, 50)
+WelcomeLabel.Font = Enum.Font.GothamBlack
+WelcomeLabel.Text = "Welcome to Msd Admin V2"
+WelcomeLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+WelcomeLabel.TextSize = 40.000
+
+ThemesLabel.Name = "ThemesLabel"
+ThemesLabel.Parent = ThemesFrame
+ThemesLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ThemesLabel.BackgroundTransparency = 1.000
+ThemesLabel.Position = UDim2.new(0.177142859, 0, 0.0491228104, 0)
+ThemesLabel.Size = UDim2.new(0, 226, 0, 55)
+ThemesLabel.Font = Enum.Font.GothamBlack
+ThemesLabel.Text = "Themes"
+ThemesLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+ThemesLabel.TextSize = 24.000
+
+White.Name = "White"
+White.Parent = ThemesFrame
+White.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+White.Position = UDim2.new(0.0457142852, 0, 0.361403525, 0)
+White.Size = UDim2.new(0, 42, 0, 38)
+White.Font = Enum.Font.SourceSans
+White.Text = ""
+White.TextColor3 = Color3.fromRGB(0, 0, 0)
+White.TextSize = 14.000
+White.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("white")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("white")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_100.Parent = White
+
+Black.Name = "Black"
+Black.Parent = ThemesFrame
+Black.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Black.Position = UDim2.new(0.24000001, 0, 0.361403525, 0)
+Black.Size = UDim2.new(0, 42, 0, 38)
+Black.Font = Enum.Font.SourceSans
+Black.Text = ""
+Black.TextColor3 = Color3.fromRGB(0, 0, 0)
+Black.TextSize = 14.000
+Black.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("black")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("black")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_101.Parent = Black
+
+Blue.Name = "Blue"
+Blue.Parent = ThemesFrame
+Blue.BackgroundColor3 = Color3.fromRGB(16, 42, 220)
+Blue.Position = UDim2.new(0.448571414, 0, 0.361403525, 0)
+Blue.Size = UDim2.new(0, 42, 0, 38)
+Blue.Font = Enum.Font.SourceSans
+Blue.Text = ""
+Blue.TextColor3 = Color3.fromRGB(0, 0, 0)
+Blue.TextSize = 14.000
+Blue.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("blue")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("blue")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_102.Parent = Blue
+
+Red.Name = "Red"
+Red.Parent = ThemesFrame
+Red.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Red.Position = UDim2.new(0.640000045, 0, 0.361403525, 0)
+Red.Size = UDim2.new(0, 42, 0, 38)
+Red.Font = Enum.Font.SourceSans
+Red.Text = ""
+Red.TextColor3 = Color3.fromRGB(0, 0, 0)
+Red.TextSize = 14.000
+Red.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("red")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("red")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_103.Parent = Red
+
+Green.Name = "Green"
+Green.Parent = ThemesFrame
+Green.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+Green.Position = UDim2.new(0.831428587, 0, 0.361403525, 0)
+Green.Size = UDim2.new(0, 42, 0, 38)
+Green.Font = Enum.Font.SourceSans
+Green.Text = ""
+Green.TextColor3 = Color3.fromRGB(0, 0, 0)
+Green.TextSize = 14.000
+Green.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("green")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("green")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_104.Parent = Green
+
+Yellow.Name = "Yellow"
+Yellow.Parent = ThemesFrame
+Yellow.BackgroundColor3 = Color3.fromRGB(249, 214, 46)
+Yellow.Position = UDim2.new(0.0457142852, 0, 0.596491277, 0)
+Yellow.Size = UDim2.new(0, 42, 0, 38)
+Yellow.Font = Enum.Font.SourceSans
+Yellow.Text = ""
+Yellow.TextColor3 = Color3.fromRGB(0, 0, 0)
+Yellow.TextSize = 14.000
+Yellow.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("yellow")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("yellow")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_105.Parent = Yellow
+
+Purple.Name = "Purple"
+Purple.Parent = ThemesFrame
+Purple.BackgroundColor3 = Color3.fromRGB(107, 50, 124)
+Purple.Position = UDim2.new(0.24000001, 0, 0.596491277, 0)
+Purple.Size = UDim2.new(0, 42, 0, 38)
+Purple.Font = Enum.Font.SourceSans
+Purple.Text = ""
+Purple.TextColor3 = Color3.fromRGB(0, 0, 0)
+Purple.TextSize = 14.000
+Purple.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("purple")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("purple")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_106.Parent = Purple
+
+Pink.Name = "Pink"
+Pink.Parent = ThemesFrame
+Pink.BackgroundColor3 = Color3.fromRGB(255, 0, 191)
+Pink.Position = UDim2.new(0.448571414, 0, 0.596491277, 0)
+Pink.Size = UDim2.new(0, 42, 0, 38)
+Pink.Font = Enum.Font.SourceSans
+Pink.Text = ""
+Pink.TextColor3 = Color3.fromRGB(0, 0, 0)
+Pink.TextSize = 14.000
+Pink.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("pink")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("pink")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_107.Parent = Pink
+
+Orange.Name = "Orange"
+Orange.Parent = ThemesFrame
+Orange.BackgroundColor3 = Color3.fromRGB(255, 176, 0)
+Orange.Position = UDim2.new(0.640000045, 0, 0.596491277, 0)
+Orange.Size = UDim2.new(0, 42, 0, 38)
+Orange.Font = Enum.Font.SourceSans
+Orange.Text = ""
+Orange.TextColor3 = Color3.fromRGB(0, 0, 0)
+Orange.TextSize = 14.000
+Orange.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("orange")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("orange")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_108.Parent = Orange
+
+Grey.Name = "Grey"
+Grey.Parent = ThemesFrame
+Grey.BackgroundColor3 = Color3.fromRGB(87, 88, 87)
+Grey.Position = UDim2.new(0.831428587, 0, 0.596491277, 0)
+Grey.Size = UDim2.new(0, 42, 0, 38)
+Grey.Font = Enum.Font.SourceSans
+Grey.Text = ""
+Grey.TextColor3 = Color3.fromRGB(0, 0, 0)
+Grey.TextSize = 14.000
+Grey.MouseButton1Click:Connect(function()
+if not DisableAdmin then
+if LoadedTheAdmin then
+Themes("grey")
+ThemesGui:Destroy()
+else
+wait(3.5)
+Themes("grey")
+ThemesGui:Destroy()
+end
+end
+end)
+
+UICorner_109.Parent = Grey
+
+UICorner_110.Parent = ThemesFrame
 
 local Commands = {
 "As the admin is not ready yet, there is",
@@ -5864,6 +6185,8 @@ wait(.3)
 
 InfStam("on")
 
+LoadedTheAdmin = true
+
 if RemoveOldScript then
 RemoveOldScript()
 end
@@ -5874,6 +6197,7 @@ Message("The script has been rerun, the old toggles and loops have been removed 
 Cmds.Respawn()
 ESPOff()
 MsdAdminV2:Destroy()
+ThemesGui:Destroy()
 DisableAdmin = true
 RemoveOldScript:Destroy()
 end)
