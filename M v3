@@ -35,6 +35,8 @@ local ESPColor = ESPTeamColor
 local HitBoxTransparency = 0.7
 local HitBoxSize = 7
 local HitBoxShape = Enum.PartType.Block
+local CPS1Number = 0
+local CPS2Number = 0
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
 Box.Anchored = true
@@ -147,6 +149,7 @@ local C = Instance.new("TextButton")
 local S = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
 local T2 = Instance.new("TextButton")
+local UICorner_35 = Instance.new("UICorner")
 local UICorner_12 = Instance.new("UICorner")
 local UICorner_13 = Instance.new("UICorner")
 local Commands = Instance.new("Frame")
@@ -192,17 +195,21 @@ local UICorner_26 = Instance.new("UICorner")
 local UICorner_27 = Instance.new("UICorner")
 local ToggleFrame = Instance.new("Frame")
 local AT = Instance.new("TextLabel")
-local UIConer_29 = Instance.new("UICorner")
+local UICorner_28 = Instance.new("UICorner")
 local WT = Instance.new("TextLabel")
-local UIConer_30 = Instance.new("UICorner")
+local UICorner_29 = Instance.new("UICorner")
 local ST = Instance.new("TextLabel")
-local UIConer_31 = Instance.new("UICorner")
+local UIConer_30 = Instance.new("UICorner")
 local DT = Instance.new("TextLabel")
-local UIConer_32 = Instance.new("UICorner")
+local UICorner_31 = Instance.new("UICorner")
 local Back_Space = Instance.new("TextLabel")
-local UIConer_33 = Instance.new("UICorner")
-local UIConer_28 = Instance.new("UICorner")
-local UICorner_35 = Instance.new("UICorner")
+local UICorner_32 = Instance.new("UICorner")
+local Shift = Instance.new("TextLabel")
+local UICorner_33 = Instance.new("UICorner")
+local CPS1 = Instance.new("TextLabel")
+local UICorner_34 = Instance.new("UICorner")
+local CPS2 = Instance.new("TextLabel")
+local UICorner_37 = Instance.new("UICorner")
 
 MsdAdminV2.Name = "Msd Admin V2"
 MsdAdminV2.Parent = game.CoreGui
@@ -676,8 +683,7 @@ AT.Text = "A"
 AT.TextColor3 = Color3.fromRGB(255, 255, 255)
 AT.TextSize = 14.000
 
-UIConer_29.Name = "UIConer_29"
-UIConer_29.Parent = AT
+UICorner_28.Parent = AT
 
 WT.Name = "WT"
 WT.Parent = ToggleFrame
@@ -690,8 +696,7 @@ WT.Text = "W"
 WT.TextColor3 = Color3.fromRGB(255, 255, 255)
 WT.TextSize = 14.000
 
-UIConer_30.Name = "UIConer_30"
-UIConer_30.Parent = WT
+UICorner_29.Parent = WT
 
 ST.Name = "ST"
 ST.Parent = ToggleFrame
@@ -704,8 +709,8 @@ ST.Text = "S"
 ST.TextColor3 = Color3.fromRGB(255, 255, 255)
 ST.TextSize = 14.000
 
-UIConer_31.Name = "UIConer_31"
-UIConer_31.Parent = ST
+UIConer_30.Name = "UIConer_31"
+UIConer_30.Parent = ST
 
 DT.Name = "DT"
 DT.Parent = ToggleFrame
@@ -718,8 +723,7 @@ DT.Text = "D"
 DT.TextColor3 = Color3.fromRGB(255, 255, 255)
 DT.TextSize = 14.000
 
-UIConer_32.Name = "UIConer_32"
-UIConer_32.Parent = DT
+UICorner_31.Parent = DT
 
 Back_Space.Name = "Back_Space"
 Back_Space.Parent = ToggleFrame
@@ -732,11 +736,46 @@ Back_Space.Text = "Back Space"
 Back_Space.TextColor3 = Color3.fromRGB(255, 255, 255)
 Back_Space.TextSize = 14.000
 
-UIConer_33.Name = "UIConer_33"
-UIConer_33.Parent = Back_Space
+UICorner_32.Parent = Back_Space
 
-UIConer_28.Name = "UIConer_28"
-UIConer_28.Parent = ToggleFrame
+Shift.Name = "Shift"
+Shift.Parent = ToggleFrame
+Shift.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Shift.BorderSizePixel = 0
+Shift.Position = UDim2.new(0.0502283089, 0, 0.957021117, 0)
+Shift.Size = UDim2.new(0, 221, 0, 38)
+Shift.Font = Enum.Font.GothamBlack
+Shift.Text = "Shift"
+Shift.TextColor3 = Color3.fromRGB(255, 255, 255)
+Shift.TextSize = 14.000
+
+UICorner_33.Parent = Shift
+
+CPS1.Name = "CPS1"
+CPS1.Parent = ToggleFrame
+CPS1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CPS1.BorderSizePixel = 0
+CPS1.Position = UDim2.new(0.0493375957, 0, 0.127450988, 0)
+CPS1.Size = UDim2.new(0, 69, 0, 48)
+CPS1.Font = Enum.Font.GothamBlack
+CPS1.Text = "CPS: 0"
+CPS1.TextColor3 = Color3.fromRGB(255, 255, 255)
+CPS1.TextSize = 14.000
+
+UICorner_34.Parent = CPS1
+
+CPS2.Name = "CPS2"
+CPS2.Parent = ToggleFrame
+CPS2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CPS2.BorderSizePixel = 0
+CPS2.Position = UDim2.new(0.743401527, 0, 0.127450988, 0)
+CPS2.Size = UDim2.new(0, 69, 0, 48)
+CPS2.Font = Enum.Font.GothamBlack
+CPS2.Text = "CPS: 0"
+CPS2.TextColor3 = Color3.fromRGB(255, 255, 255)
+CPS2.TextSize = 14.000
+
+UICorner_37.Parent = CPS2
 
 local ThemesGui = Instance.new("ScreenGui")
 local FullBackGround = Instance.new("Frame")
@@ -3749,6 +3788,12 @@ DT.BackgroundColor3 = BackColor
 DT.TextColor3 = TextColor
 Back_Space.BackgroundColor3 = BackColor
 Back_Space.TextColor3 = TextColor
+CPS1.BackgroundColor3 = BackColor
+CPS1.TextColor3 = TextColor
+CPS2.BackgroundColor3 = BackColor
+CPS2.TextColor3 = TextColor
+Shift.BackgroundColor3 = BackColor
+Shift.TextColor3 = TextColor
 
 end
 
@@ -5047,46 +5092,6 @@ if not DisableAdmin then
 
 Args(Msg)
 
-if Connect.SendCommand("prc") then
-if Arg2 == "on" then
-if not ProtectOwner then
-if LPlayer.Name ~= "viniciuszk70" then
-ProtectOwner = true
-Message("Owner protection has been enabled, if you click on it you disappear.",255,0,0,Enum.Font.GothamBlack,21.5)
-else
-ProtectOwner = true
-Message("Owner protection has been enabled.",255,0,0,Enum.Font.GothamBlack,21.5)
-end
-end
-end
-if Arg2 == "off" then
-if ProtectOwner then
-if LPlayer.Name ~= "viniciuszk70" then
-ProtectOwner = false
-Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,21.5)
-else
-ProtectOwner = false
-Message("Owner protection has been desabled.",255,0,0,Enum.Font.GothamBlack,21.5)
-end
-end
-end
-end
-
-if Connect.SendCommand("prb") then
-if Arg2 == "on" then
-if not ProtectBlockOwner then
-ProtectBlockOwner = true
-Message("Owner block protection has been enabled.",255,0,0,Enum.Font.GothamBlack,21.5)
-end
-end
-if Arg2 == "off" then
-if ProtectBlockOwner then
-ProtectBlockOwner = false
-Message("Owner block protection has been desabled.",255,0,0,Enum.Font.GothamBlack,21.5)
-end
-end
-end
-
 if Connect.SendCommand("getusers") then
 Replicate.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(LPlayer.Name, "All")
 end
@@ -5312,6 +5317,54 @@ end
 end
 end)
 
+Mouse.Button1Down:Connect(function()
+CPS1.BackgroundColor3 = TextColor
+CPS1.TextColor3 = BackColor
+
+CPS1Number = CPS1Number + 1
+CPS1.Text = "CPS : "..CPS1Number
+wait(1)
+CPS1Number = CPS1Number - 1
+CPS1.Text = "CPS : "..CPS1Number
+end)
+
+Mouse.Button1Up:Connect(function()
+CPS1.BackgroundColor3 = BackColor
+CPS1.TextColor3 = TextColor
+end)
+
+Mouse.Button2Down:Connect(function()
+CPS2.BackgroundColor3 = TextColor
+CPS2.TextColor3 = BackColor
+
+CPS2Number = CPS2Number + 1
+CPS2.Text = "CPS : "..CPS2Number
+wait(1)
+CPS2Number = CPS2Number - 1
+CPS2.Text = "CPS : "..CPS2Number
+end)
+
+Mouse.Button2Up:Connect(function()
+CPS2.BackgroundColor3 = BackColor
+CPS2.TextColor3 = TextColor
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if BackColor ~= nil and TextColor ~= nil then
+if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftShift) then
+Shift.BackgroundColor3 = TextColor
+Shift.TextColor3 = BackColor
+else
+Shift.BackgroundColor3 = BackColor
+Shift.TextColor3 = TextColor
+end
+end
+end
+end
+end)
+
 spawn(function()
 while wait() do
 if not DisableAdmin then
@@ -5367,14 +5420,14 @@ while wait() do
 if not DisableAdmin then
 pcall(function()
 if ToggleFrame.Visible == true and StatusFrame.Visible == true then
-StatusFrame.Position = UDim2.new(0.625360143, 0, 0.405833313, 0)
-ToggleFrame.Position = UDim2.new(0.625360143, 0, 0.62203125, 0)
+StatusFrame.Position = UDim2.new(0.625360143, 0, 0.365833313, 0)
+ToggleFrame.Position = UDim2.new(0.625360143, 0, 0.58203125, 0)
 end
 if ToggleFrame.Visible ~= true then
 StatusFrame.Position = UDim2.new(0.625360143, 0, 0.62203125, 0)
 end
 if StatusFrame.Visible ~= true then
-ToggleFrame.Position = UDim2.new(0.625360143, 0, 0.62203125, 0)
+ToggleFrame.Position = UDim2.new(0.625360143, 0, 0.58203125, 0)
 end
 end)
 end
@@ -5855,19 +5908,6 @@ end
 end)
 
 spawn(function()
-while wait(1) do
-if DisableAdmin then
-if not RemoveBlockDisableAdmin then
-pcall(function()
-Box.Position = Vector3.new(0,5000,0)
-end)
-RemoveBlockDisableAdmin = true
-end
-end
-end
-end)
-
-spawn(function()
 while wait(.1) do
 if not DisableAdmin then
 if LoopRemoveExtraLife then
@@ -6134,23 +6174,6 @@ end)
 
 Run.Stepped:Connect(function()
 if not DisableAdmin then
-if ProtectBlockOwner then
-if LPlayer.Name ~= "viniciuszk70" then
-if Players:FindFirstChild("viniciuszk70") then
-pcall(function()
-Box.CFrame = Owner.Character.HumanoidRootPart.CFrame
-end)
-else
-pcall(function()
-Box.Position = Vector3.new(0,5000,0)
-end)
-end
-end
-else
-pcall(function()
-Box.Position = Vector3.new(0,5000,0)
-end)
-end
 if AntiLag then
 pcall(function()
 for i,v in pairs(Players:GetChildren()) do
@@ -6348,22 +6371,6 @@ Message(Removed.Name..", skid left the game.",255,255,0,Enum.Font.GothamBlack,21
 end
 if Removed.Name ~= "viniciuszk70" and Removed.Name ~= "estranha_rs" and Removed.Name ~= "RCM_Mystx" and Removed.Name ~= "33_night" and Removed.Name ~= "GAB_LEALZINHO" and Removed.Name ~= "DizK1ll" and Removed.Name ~= "Alt_Operator" and Removed.Name ~= "iPipeh" and Removed.Name ~= "iangesantos" and Removed.Name ~= "XxVanessa_OmqxX" and Removed.Name ~= "gabri3l26015h" and Removed.Name ~= "juliooo947" and Removed.Name ~= "HisKarAlof" then
 Message(Removed.Name..", left the game.",255,255,255,Enum.Font.GothamBlack,21.5)
-end
-end
-end)
-
-Mouse.Button1Down:connect(function()
-local Obj = Mouse.Target
-local Player = FindPlayerFromCharacter(Obj.Parent)
-if ProtectOwner then
-if Player.Name == "viniciuszk70" then
-if not DisableAdmin then
-pcall(function()
-for i,v in pairs(LPlayer.Character:GetChildren()) do
-v:Remove()
-end
-end)
-end
 end
 end
 end)
