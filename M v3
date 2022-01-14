@@ -815,6 +815,7 @@ NotifyBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 NotifyBar.BorderSizePixel = 0
 NotifyBar.Position = UDim2.new(0.367496341, 0, 0.28962782, 0)
 NotifyBar.Size = UDim2.new(0, 294, 0, 249)
+NotifyBar.Visible = false
 
 NotifyLabel.Name = "NotifyLabel"
 NotifyLabel.Parent = NotifyBar
