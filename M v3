@@ -2096,24 +2096,6 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 end
 
-Run.Stepped:Connect(function()
-if InfAmmo then
-if not DisableAdmin then
-
-local j = LPlayer.Character:FindFirstChildOfClass("Tool")
-game.ReplicatedStorage.ReloadEvent:FireServer(j)
-
-for i, v in next, debug.getregistry() do
-if type(v) == "table" then
-if v.Bullets then
-v.CurrentAmmo = math.huge v.MaxAmmo = math.huge
-end
-end
-end
-
-end
-end
-end)
 end
 end
 
@@ -2154,24 +2136,6 @@ LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 end
 
-Run.Stepped:Connect(function()
-if FastAmmo then
-if not DisableAdmin then
-
-local j = LPlayer.Character:FindFirstChildOfClass("Tool")
-game.ReplicatedStorage.ReloadEvent:FireServer(j)
-
-for i, v in next, debug.getregistry() do
-if type(v) == "table" then
-if v.Bullets then
-v.ReloadTime = -math.huge v.Range = math.huge v.FireRate = -math.huge v.AutoFire = true
-end
-end
-end
-
-end
-end
-end)
 end
 end
 
@@ -5909,7 +5873,7 @@ end
 end)
 
 spawn(function()
-while wait() do
+while wait(.09) do
 if not DisableAdmin then
 if ProtectTase then
 pcall(function()
@@ -5932,6 +5896,17 @@ Cmds.Kill(v)
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
 Message(v.Name..", tased you.",142,66,133,Enum.Font.GothamBlack,21.5)
 end
+end
+end
+end
+end)
+end
+if ProtectArrest then
+pcall(function()
+if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
+for i,v in pairs(Players:GetPlayers()) do
+if v.Character:FindFirstChild("Handcuffs") then
+Cmds.Kill(v)
 end
 end
 end
@@ -6521,6 +6496,35 @@ end
 end
 end)
 
+spawn(function()
+while wait(.09) do
+if not DisableAdmin then
+if InfAmmo then
+local j = LPlayer.Character:FindFirstChildOfClass("Tool")
+game.ReplicatedStorage.ReloadEvent:FireServer(j)
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.CurrentAmmo = math.huge v.MaxAmmo = math.huge
+end
+end
+end
+end
+if FastAmmo then
+local j = LPlayer.Character:FindFirstChildOfClass("Tool")
+game.ReplicatedStorage.ReloadEvent:FireServer(j)
+for i, v in next, debug.getregistry() do
+if type(v) == "table" then
+if v.Bullets then
+v.ReloadTime = -math.huge v.Range = math.huge v.FireRate = -math.huge v.AutoFire = true
+end
+end
+end
+end
+end
+end
+end)
+
 Run.Stepped:Connect(function()
 if not DisableAdmin then
 if AntiLag then
@@ -6592,17 +6596,6 @@ if v.Name == "rightDoor" then
 local Distance = (v.Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
 if Distance <= 11 then
 workspace:FindFirstChild("Warehouses")["Warehouse1"].doors.rightDoor.Parent = game.Lighting
-end
-end
-end
-end)
-end
-if ProtectArrest then
-pcall(function()
-if getsenv(LPlayer.Character.ClientInputHandler).cs.isArrested == true then
-for i,v in pairs(Players:GetPlayers()) do
-if v.Character:FindFirstChild("Handcuffs") then
-Cmds.Kill(v)
 end
 end
 end
