@@ -37,6 +37,7 @@ local HitBoxSize = 7
 local HitBoxShape = Enum.PartType.Block
 local CPS1Number = 0
 local CPS2Number = 0
+local NotifyCanvasSize = 2
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
 Box.Anchored = true
@@ -149,6 +150,7 @@ local C = Instance.new("TextButton")
 local S = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
 local T2 = Instance.new("TextButton")
+local N = Instance.new("TextButton")
 local UICorner_35 = Instance.new("UICorner")
 local UICorner_12 = Instance.new("UICorner")
 local UICorner_13 = Instance.new("UICorner")
@@ -210,6 +212,16 @@ local CPS1 = Instance.new("TextLabel")
 local UICorner_34 = Instance.new("UICorner")
 local CPS2 = Instance.new("TextLabel")
 local UICorner_37 = Instance.new("UICorner")
+local NotifyBar = Instance.new("Frame")
+local NotifyLabel = Instance.new("TextLabel")
+local UICorner_38 = Instance.new("UICorner")
+local NotifyScrollingFrame = Instance.new("ScrollingFrame")
+local CmdLabel = Instance.new("TextLabel")
+local UIListLayout = Instance.new("UIListLayout")
+local UICorner_39 = Instance.new("UICorner")
+local Close4 = Instance.new("TextButton")
+local UICorner_40 = Instance.new("UICorner")
+local UICorner_41 = Instance.new("UICorner")
 
 MsdAdminV2.Name = "Msd Admin V2"
 MsdAdminV2.Parent = game.CoreGui
@@ -311,6 +323,26 @@ end
 end)
 
 UICorner_35.Parent = T2
+
+N.Name = "T2"
+N.Parent = AdminFrame
+N.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+N.BorderColor3 = Color3.fromRGB(255, 255, 255)
+N.Position = UDim2.new(.97, 0, 0.0647, 0)
+N.Size = UDim2.new(0, 30, 0, 20)
+N.Font = Enum.Font.GothamBlack
+N.Text = "N"
+N.TextColor3 = Color3.fromRGB(255, 255, 255)
+N.TextSize = 14.000
+N.MouseButton1Click:Connect(function()
+if NotifyBar.Visible ~= true then
+NotifyBar.Visible = true
+else
+NotifyBar.Visible = false
+end
+end)
+
+UICorner_41.Parent = N
 
 UICorner_3.Parent = AdminFrame
 
@@ -776,6 +808,62 @@ CPS2.TextColor3 = Color3.fromRGB(255, 255, 255)
 CPS2.TextSize = 14.000
 
 UICorner_37.Parent = CPS2
+
+NotifyBar.Name = "NotifyBar"
+NotifyBar.Parent = MsdAdminV2
+NotifyBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NotifyBar.BorderSizePixel = 0
+NotifyBar.Position = UDim2.new(0.367496341, 0, 0.28962782, 0)
+NotifyBar.Size = UDim2.new(0, 294, 0, 249)
+
+NotifyLabel.Name = "NotifyLabel"
+NotifyLabel.Parent = NotifyBar
+NotifyLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NotifyLabel.Size = UDim2.new(0, 266, 0, 27)
+NotifyLabel.Font = Enum.Font.GothamBlack
+NotifyLabel.Text = "Notify Bar"
+NotifyLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+NotifyLabel.TextSize = 14.000
+
+UICorner_38.Parent = NotifyLabel
+
+NotifyScrollingFrame.Name = "NotifyScrollingFrame"
+NotifyScrollingFrame.Parent = NotifyBar
+NotifyScrollingFrame.Active = true
+NotifyScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NotifyScrollingFrame.BorderSizePixel = 0
+NotifyScrollingFrame.Position = UDim2.new(0, 0, 0.108433738, 0)
+NotifyScrollingFrame.Size = UDim2.new(0, 294, 0, 213)
+NotifyScrollingFrame.CanvasSize = UDim2.new(0, 0, NotifyCanvasSize, 0)
+
+CmdLabel.Parent = NotifyScrollingFrame
+CmdLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CmdLabel.BorderSizePixel = 0
+CmdLabel.Size = UDim2.new(0, 276, 0, 26)
+CmdLabel.Text = "-- Welcome --"
+CmdLabel.Font = Enum.Font.GothamBlack
+CmdLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+CmdLabel.TextSize = 14.000
+
+UIListLayout.Parent = NotifyScrollingFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+UICorner_39.Parent = NotifyBar
+
+Close4.Name = "Close4"
+Close4.Parent = NotifyBar
+Close4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Close4.Position = UDim2.new(0.890977442, 0, 0, 0)
+Close4.Size = UDim2.new(0, 29, 0, 27)
+Close4.Font = Enum.Font.GothamBlack
+Close4.Text = "X"
+Close4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close4.TextSize = 14.000
+Close4.MouseButton1Click:Connect(function()
+NotifyBar.Visible = false
+end)
+
+UICorner_40.Parent = Close4
 
 local ThemesGui = Instance.new("ScreenGui")
 local FullBackGround = Instance.new("Frame")
@@ -1279,31 +1367,37 @@ if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or T
 if TP == "i" or TP == "inmates" then
 NormalKillTeam = true
 TS = game.Teams.Inmates
+NewCmdLabel("Killed Inmates.")
 end
 
 if TP == "g" or TP == "guards" then
 NormalKillTeam = true
 TS = game.Teams.Guards
+NewCmdLabel("Killed Guards.")
 end
 
 if TP == "n" or TP == "neutros" then
 NormalKillTeam = true
 TS = game.Teams.Neutral
+NewCmdLabel("Killed Neutros.")
 end
 
 if TP == "l" or TP == "neutrals" then
 NormalKillTeam = false
 KillNeutrals = true
+NewCmdLabel("Killed Neutrals.")
 end
 
 if TP == "c" or TP == "criminals" then
 NormalKillTeam = true
 TS = game.Teams.Criminals
+NewCmdLabel("Killed Criminals.")
 end
 
 if TP == "a" or TP == "all" then
 NormalKillTeam = true
 TS = game.Players
+NewCmdLabel("Killed All.")
 end
 
 local Arg = {}
@@ -1443,6 +1537,8 @@ end
 
 ShootEvent:FireServer(Arg,Gun)
 
+NewCmdLabel("Killed "..Player.Name..".")
+
 end
 end
 end
@@ -1463,6 +1559,8 @@ Cmds.KillTeam("i")
 end
 end
 
+NewCmdLabel("Lk Inmates added.")
+
 end
 
 if TP == "g" or TP == "guards" then
@@ -1474,6 +1572,8 @@ if not DisableAdmin then
 Cmds.KillTeam("g")
 end
 end
+
+NewCmdLabel("Lk Guards added.")
 
 end
 
@@ -1487,6 +1587,8 @@ Cmds.KillTeam("n")
 end
 end
 
+NewCmdLabel("Lk Neutros added.")
+
 end
 
 if TP == "l" or TP == "neutrals" then
@@ -1498,6 +1600,8 @@ if not DisableAdmin then
 Cmds.KillTeam("l")
 end
 end
+
+NewCmdLabel("Lk Neutrals added.")
 
 end
 
@@ -1511,6 +1615,8 @@ Cmds.KillTeam("c")
 end
 end
 
+NewCmdLabel("Lk Criminals added.")
+
 end
 
 if TP == "a" or TP == "all" then
@@ -1522,6 +1628,8 @@ if not DisableAdmin then
 Cmds.KillTeam("a")
 end
 end
+
+NewCmdLabel("Lk All added.")
 
 end
 
@@ -1536,11 +1644,15 @@ if TP == "i" or TP == "inmates" then
 
 _G.i = false
 
+NewCmdLabel("Lk Inmates removed.")
+
 end
 
 if TP == "g" or TP == "guards" then
 
 _G.g = false
+
+NewCmdLabel("Lk Guards removed.")
 
 end
 
@@ -1548,11 +1660,15 @@ if TP == "n" or TP == "neutros" then
 
 _G.n = false
 
+NewCmdLabel("Lk Neutros removed.")
+
 end
 
 if TP == "l" or TP == "neutrals" then
 
 _G.l = false
+
+NewCmdLabel("Lk Neutrals removed.")
 
 end
 
@@ -1560,11 +1676,15 @@ if TP == "c" or TP == "criminals" then
 
 _G.c = false
 
+NewCmdLabel("Lk Criminals removed.")
+
 end
 
 if TP == "a" or TP == "all" then
 
 _G.a = false
+
+NewCmdLabel("Lk All removed.")
 
 end
 
@@ -1606,6 +1726,7 @@ wait(.1)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
 end
+NewCmdLabel("Respawned.")
 end
 
 function TeamColor(Team)
@@ -1721,7 +1842,7 @@ if Toggle == "on" then
 if not Stam then
 Stam = true
 
-Message("Infinite Stamina enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Infinite Stamina enabled.")
 
 for i,v in next, getgc() do
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
@@ -1760,7 +1881,7 @@ if Stam then
 
 Stam = false
 
-Message("Infinite Stamina desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Infinite Stamina desabled.")
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1779,7 +1900,7 @@ if not _G.FF then
 
 _G.FF = true
 
-Message("Force Field enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Force Field enabled.")
 
 while _G.FF == true do wait()
 
@@ -1838,7 +1959,7 @@ if Toggle == "off" then
 if _G.FF then
 _G.FF = false
 
-Message("Force Field desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Force Field desabled.")
 
 if LPlayer.TeamColor.Name == "Medium stone grey" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
@@ -1859,7 +1980,7 @@ local GodPosition = LPlayer.Character.HumanoidRootPart.CFrame
 end
 
 if not GodMode then
-Message("God Mode enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("God Mode enabled.")
 end
 
 GodMode = true
@@ -1950,7 +2071,7 @@ function UnGodMode()
 if GodMode then
 GodMode = false
 
-Message("God Mode desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("God Mode desabled.")
 
 end
 end
@@ -1961,11 +2082,11 @@ if Toggle == "on" then
 if not InfAmmo then
 InfAmmo = true
 
-Message("Infinite Ammo enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Infinite Ammo enabled.")
 
 if FastAmmo == true then
 FastAmmo = false
-Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Fast Ammo desabled.")
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -1999,7 +2120,7 @@ if Toggle == "off" then
 if InfAmmo then
 InfAmmo = false
 
-Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Infinite Ammo desabled.")
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -2019,11 +2140,11 @@ if not FastAmmo then
 
 FastAmmo = true
 
-Message("Fast Ammo enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Fast Ammo enabled.")
 
 if InfAmmo == true then
 InfAmmo = false
-Message("Infinite Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Infinite Ammo desabled.")
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -2057,7 +2178,7 @@ if Toggle == "off" then
 if FastAmmo then
 FastAmmo = false
 
-Message("Fast Ammo desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Fast Ammo desabled.")
 
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
@@ -2110,6 +2231,8 @@ wait()
 
 CrashPlayers = false
 
+NewCmdLabel("Crash Players.")
+
 end
 
 if Cmd == "sprit" then
@@ -2150,6 +2273,8 @@ end)
 wait()
 
 CrashSprit = false
+
+NewCmdLabel("Crash Sprit.")
 
 end
 
@@ -2194,6 +2319,8 @@ wait()
 
 CrashMkan = false
 
+NewCmdLabel("Crash Mkan.")
+
 end
 
 if Cmd == "nwe" then
@@ -2226,6 +2353,8 @@ coroutine.resume(coroutine.create(function()
 CrashNwe()
 end))
 end
+
+NewCmdLabel("Crash Nwe.")
 
 end
 
@@ -2261,6 +2390,8 @@ coroutine.resume(coroutine.create(function()
 CrashPnl()
 end))
 end
+
+NewCmdLabel("Crash Pnl.")
 
 end
 
@@ -2329,6 +2460,8 @@ wait()
 
 CrashForceServerDie = false
 
+NewCmdLabel("Crash Force.")
+
 end
 
 if Cmd == "dest" then
@@ -2371,6 +2504,8 @@ end
 for ReplicateSends = 1,5 do
 ShootEvent:FireServer(Packets,Gun)
 end
+
+NewCmdLabel("Crash Dest.")
 
 end
 
@@ -2455,6 +2590,8 @@ for ReplicateSends = 1,5 do
 ShootEvent:FireServer(Packets,Gun)
 end
 
+NewCmdLabel("Crash Lest.")
+
 end
 
 if Cmd == "smite" then
@@ -2493,6 +2630,8 @@ end)
 wait()
 
 CrashSmite = false
+
+NewCmdLabel("Crash Smite.")
 
 end
 
@@ -2535,6 +2674,8 @@ wait()
 
 CrashLittle = false
 
+NewCmdLabel("Crash Little.")
+
 end
 
 if Cmd == "server" then
@@ -2548,6 +2689,8 @@ local Gun = LPlayer.Character:FindFirstChild("M9") or LPlayer.Backpack:FindFirst
 for i = 1,1000 do
 ShootEvent:FireServer(Packets,Gun)
 end
+
+NewCmdLabel("Crash Server.")
 
 end
 
@@ -2564,6 +2707,8 @@ ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 end
 
+NewCmdLabel("Guns Slot1.")
+
 end
 
 if Slot == "slot2" then
@@ -2578,6 +2723,8 @@ ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 end
+
+NewCmdLabel("Guns Slot2.")
 
 end
 
@@ -2594,6 +2741,8 @@ ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 end
 
+NewCmdLabel("Guns Slot3.")
+
 end
 
 if Slot == "slot4" then
@@ -2609,6 +2758,8 @@ ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 end
 
+NewCmdLabel("Guns Slot4.")
+
 end
 
 if Slot == "slot5" then
@@ -2623,6 +2774,8 @@ ItemHandler:InvokeServer(ItemGiver["Remington 870"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["AK-47"].ITEMPICKUP)
 ItemHandler:InvokeServer(ItemGiver["M9"].ITEMPICKUP)
 end
+
+NewCmdLabel("Guns Slot5.")
 
 end
 
@@ -2865,7 +3018,7 @@ Slot3 = false
 Slot4 = false
 Slot5 = false
 
-Message("Auto Guns desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Guns desabled.")
 
 Cmds.Respawn()
 
@@ -2877,7 +3030,7 @@ if Slot ~= "off" then
 
 if Slot1 or Slot2 or Slot3 or Slot4 or Slot5 then
 
-Message("Auto Guns enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Guns enabled.")
 
 end
 
@@ -2896,31 +3049,37 @@ if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or T
 if TP == "i" or TP == "inmates" then
 BringNormal = true
 TS = game.Teams.Inmates
+NewCmdLabel("Bring Inmates.")
 end
 
 if TP == "g" or TP == "guards" then
 BringNormal = true
 TS = game.Teams.Guards
+NewCmdLabel("Bring Guards.")
 end
 
 if TP == "n" or TP == "neutros" then
 BringNormal = true
 TS = game.Teams.Neutral
+NewCmdLabel("Bring Neutros.")
 end
 
 if TP == "l" or TP == "neutrals" then
 BringNormal = false
 BringNeutrals = true
+NewCmdLabel("Bring Neutrals.")
 end
 
 if TP == "c" or TP == "criminals" then
 BringNormal = true
 TS = game.Teams.Criminals
+NewCmdLabel("Bring Criminals.")
 end
 
 if TP == "a" or TP == "all" then
 BringNormal = true
 TS = game.Players
+NewCmdLabel("Bring All.")
 end
 
 if BringNormal then
@@ -3043,6 +3202,8 @@ function Bring(Player, Position)
 pcall(function()
 if Player == nil and Player.Name ~= "viniciuszk70" and Position == nil then return end
 
+NewCmdLabel("Bring "..Player.Name..".")
+
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 
 if LPlayer.TeamColor.Name == "Bright blue" then
@@ -3093,27 +3254,31 @@ if TP == "i" or TP == "inmates" or TP == "g" or TP == "guards" or TP == "n" or T
 if TP == "i" or TP == "inmates" then
 CrimNormal = true
 TS = game.Teams.Inmates
+NewCmdLabel("Crim Inmates.")
 end
 
 if TP == "g" or TP == "guards" then
 CrimNormal = true
 TS = game.Teams.Guards
+NewCmdLabel("Crim Guards.")
 end
 
 if TP == "n" or TP == "neutros" then
 CrimNormal = true
 TS = game.Teams.Neutral
+NewCmdLabel("Crim Neutros.")
 end
 
 if TP == "l" or TP == "neutrals" then
 CrimNormal = false
 CrimNeutrals = true
+NewCmdLabel("Crim Neutrals.")
 end
-
 
 if TP == "a" or TP == "all" then
 CrimNormal = true
 TS = game.Players
+NewCmdLabel("Crim All.")
 end
 
 if CrimNormal then
@@ -3274,6 +3439,8 @@ function Crim(Player, mebitch)
 pcall(function()
 local Player = FindPlayer(Arg2)
 
+NewCmdLabel("Crim "..Player.Name..".")
+
 if Player ~= nil and Player.Name ~= "viniciuszk70" then
 
 if LPlayer.TeamColor.Name == "Bright blue" then
@@ -3343,6 +3510,8 @@ function Arrest(Player)
 pcall(function()
 if Player then
 
+NewCmdLabel("Arrested "..Player.Name..".")
+
 local PHumanoid = Player.Character:FindFirstChild("HumanoidRootPart")
 local PCharacter = Player.Character
 
@@ -3369,6 +3538,7 @@ end)
 end
 
 function ArrestA()
+NewCmdLabel("Arrested All.")
 if LPlayer.Character:FindFirstChild("HumanoidRootPart") then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 for i,v in pairs(game.Teams.Criminals:GetPlayers()) do
@@ -3521,9 +3691,14 @@ if Color == "grey" then
 ColorGun = "148"
 end
 
+if Color ~= nil then
+NewCmdLabel("CGun enabled.")
+end
+
 if Color == "off" then
 ColorGun = nil
 Cmds.Respawn()
+NewCmdLabel("CGun desabled.")
 end
 
 end
@@ -3593,6 +3768,10 @@ end
 
 if Color == "team" then
 HitBoxColor = HitBoxTeamColor
+end
+
+if Color ~= nil then
+NewCmdLabel("New HitBoxColor.")
 end
 
 end
@@ -3794,6 +3973,18 @@ CPS2.BackgroundColor3 = BackColor
 CPS2.TextColor3 = TextColor
 Shift.BackgroundColor3 = BackColor
 Shift.TextColor3 = TextColor
+N.BackgroundColor3 = BackColor
+N.TextColor3 = TextColor
+Close4.BackgroundColor3 = BackColor
+Close4.TextColor3 = TextColor
+CmdLabel.BackgroundColor3 = BackColor
+CmdLabel.TextColor3 = TextColor
+NotifyScrollingFrame.BackgroundColor3 = BackColor
+NotifyLabel.BackgroundColor3 = BackColor
+NotifyLabel.TextColor3 = TextColor
+NotifyBar.BackgroundColor3 = BackColor
+
+NewCmdLabel("New Themes.")
 
 end
 
@@ -3884,6 +4075,8 @@ end
 end
 end)
 
+NewCmdLabel("New TerrainColor.")
+
 end
 
 end
@@ -3940,6 +4133,10 @@ CursorId1 = "rbxassetid://8521499984"
 CursorId2 = "http://www.roblox.com/asset/?id=8521499984"
 end
 
+if Color ~= nil then
+NewCmdLabel("New CursorColor.")
+end
+
 end
 
 function ESPColorFunction(Color)
@@ -3988,6 +4185,170 @@ if Color == "team" then
 ESPColor = ESPTeamColor
 end
 
+if Color ~= nil then
+NewCmdLabel("New ESPColor.")
+end
+
+end
+
+local AddDisplayName = function(Player)
+pcall(function()
+if Player:IsA('Player') and not (Player['Character'] and Player.Character ~= nil) then
+Player.CharacterAdded:wait()
+local HeadFound, HumFound = false, false
+local ChildAdded;ChildAdded = Player.Character.ChildAdded:Connect(function(v)
+if HeadFound and HumFound then ChildAdded:Disconnect() return end
+if v:IsA('BasePart') or v:IsA('MeshPart') and v.Name == 'Head' then
+if HeadFound then return end
+HeadFound = true
+if v:IsA('MeshPart') and v.MeshId == 'rbxassetid://6686307858' then
+local FakeName = Instance.new('BillboardGui')
+local Name = Instance.new('TextLabel')
+
+FakeName.Name = 'FakeName'
+FakeName.Parent = v
+FakeName.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+FakeName.Active = true
+FakeName.AlwaysOnTop = false
+FakeName.LightInfluence = 1.000
+FakeName.MaxDistance = 100.000
+FakeName.Size = UDim2.new(1, 0, 3, 0)
+FakeName.StudsOffset = Vector3.new(0, 1.7999999523163, 0)
+FakeName.Adornee = v
+
+Name.Name = 'Name'
+Name.Parent = FakeName
+Name.Active = true
+Name.AnchorPoint = Vector2.new(0.5, 0.5)
+Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name.BackgroundTransparency = 1.000
+Name.BorderSizePixel = 0
+Name.Position = UDim2.new(0.5, 0, 0.5, 0)
+Name.Size = UDim2.new(1, 30, 1, 0)
+Name.Font = Enum.Font.SourceSans
+Name.Text = Player.DisplayName..'\n['..tostring(Player.Name)..']'
+Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+Name.TextScaled = true
+Name.TextSize = 24.000
+Name.TextStrokeTransparency = 0.600
+Name.TextWrapped = true
+end
+elseif v:IsA('Humanoid') then
+if Player.Name == "viniciuszk70" or Player.Name == "33_Night" or Player.Name == "RCM_Mystx" then
+v.DisplayName = "[Owner]\n"..Player.DisplayName
+else
+v.DisplayName = Player.DisplayName.."\n(@"..tostring(Player.Name)..")"
+end
+end
+end)
+elseif Player:IsA('Player') and (Player['Character'] and Player.Character ~= nil) and Player.Character:FindFirstChildOfClass('Humanoid') and Player.Character:FindFirstChild('Head') then
+local Char = Player.Character
+
+for _, v in next, Char:GetChildren() do
+coroutine.wrap(function()
+if v.Name == 'Head' and v:IsA('MeshPart') and v.MeshId == 'rbxassetid://6686307858' then
+local FakeName = Instance.new('BillboardGui')
+local Name = Instance.new('TextLabel')
+
+FakeName.Name = 'FakeName'
+FakeName.Parent = v
+FakeName.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+FakeName.Active = true
+FakeName.AlwaysOnTop = false
+FakeName.LightInfluence = 1.000
+FakeName.MaxDistance = 100.000
+FakeName.Size = UDim2.new(1, 0, 3, 0)
+FakeName.StudsOffset = Vector3.new(0, 1.7999999523163, 0)
+FakeName.Adornee = v
+
+Name.Name = 'Name'
+Name.Parent = FakeName
+Name.Active = true
+Name.AnchorPoint = Vector2.new(0.5, 0.5)
+Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name.BackgroundTransparency = 1.000
+Name.BorderSizePixel = 0
+Name.Position = UDim2.new(0.5, 0, 0.5, 0)
+Name.Size = UDim2.new(1, 30, 1, 0)
+Name.Font = Enum.Font.SourceSans
+Name.Text = Player.DisplayName..'\n['..tostring(Player.Name)..']'
+Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+Name.TextScaled = true
+Name.TextSize = 24.000
+Name.TextStrokeTransparency = 0.600
+Name.TextWrapped = true
+elseif v:IsA('Humanoid') and v.DisplayName ~= Player.Name and not v.DisplayName:gsub(' ', ''):find(Player.Name:gsub(' ', '')) then
+if Player.Name == "viniciuszk70" or Player.Name == "33_Night" or Player.Name == "RCM_Mystx" then
+v.DisplayName = "[Owner]\n"..Player.DisplayName
+else
+v.DisplayName = Player.DisplayName.."\n(@"..tostring(Player.Name)..")"
+end
+end
+end)()
+end
+end
+Player.CharacterAdded:Connect(function()
+local HeadFound, HumFound = false, false
+local ChildAdded;ChildAdded = Player.Character.ChildAdded:Connect(function(v)
+if HeadFound and HumFound then ChildAdded:Disconnect() return end
+if v:IsA('BasePart') or v:IsA('MeshPart') and v.Name == 'Head' then
+if HeadFound then return end
+HeadFound = true
+if v:IsA('MeshPart') and v.MeshId == 'rbxassetid://6686307858' then
+local FakeName = Instance.new('BillboardGui')
+local Name = Instance.new('TextLabel')
+
+FakeName.Name = 'FakeName'
+FakeName.Parent = v
+FakeName.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+FakeName.Active = true
+FakeName.AlwaysOnTop = false
+FakeName.LightInfluence = 1.000
+FakeName.MaxDistance = 100.000
+FakeName.Size = UDim2.new(1, 0, 3, 0)
+FakeName.StudsOffset = Vector3.new(0, 1.7999999523163, 0)
+FakeName.Adornee = v
+
+Name.Name = 'Name'
+Name.Parent = FakeName
+Name.Active = true
+Name.AnchorPoint = Vector2.new(0.5, 0.5)
+Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name.BackgroundTransparency = 1.000
+Name.BorderSizePixel = 0
+Name.Position = UDim2.new(0.5, 0, 0.5, 0)
+Name.Size = UDim2.new(1, 30, 1, 0)
+Name.Font = Enum.Font.SourceSans
+Name.Text = Player.DisplayName..'\n['..tostring(Player.Name)..']'
+Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+Name.TextScaled = true
+Name.TextSize = 24.000
+Name.TextStrokeTransparency = 0.600
+Name.TextWrapped = true
+end
+elseif v:IsA('Humanoid') then
+if HumFound then return end
+HumFound = true
+if v.DisplayName ~= Player.Name and not v.DisplayName:gsub(' ', ''):find(Player.Name:gsub(' ', '')) then
+if Player.Name == "viniciuszk70" or Player.Name == "33_Night" or Player.Name == "RCM_Mystx" then
+v.DisplayName = "[Owner]\n"..Player.DisplayName
+else
+v.DisplayName = Player.DisplayName.."\n(@"..tostring(Player.Name)..")"
+end
+end
+end
+end)
+end)
+end)
+end
+
+function NewCmdLabel(Text)
+local Clone = CmdLabel:Clone()
+Clone.Text = Text
+Clone.Name = "New Cmd"
+Clone.Parent = NotifyScrollingFrame
+NotifyCanvasSize = NotifyCanvasSize  + .3
+NotifyScrollingFrame.CanvasSize = UDim2.new(0, 0, NotifyCanvasSize, 0)
 end
 
 function Message(Text,ColorD,ColorT,ColorQ,Font,TextSize)
@@ -4027,10 +4388,12 @@ Args(Msg)
 
 if Connect.SendCommand("to") then
 Cmds.Goto(FindPlayer(Arg2))
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("sagui") then
 SpamGui.Visible = true
+NewCmdLabel("Spam Gui enabled.")
 end
 
 if Connect.SendCommand("k") or Connect.SendCommand("kill") then
@@ -4055,6 +4418,7 @@ else
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not Lk[Player.UserId] then
 Lk[Player.UserId] = {Player = Player}
+NewCmdLabel("Lk "..Player.Name.." added.")
 end
 
 end
@@ -4070,6 +4434,7 @@ else
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and Lk[Player.UserId] then
 Lk[Player.UserId] = nil
+NewCmdLabel("Lk "..Player.Name.." removed.")
 end
 
 end
@@ -4080,6 +4445,8 @@ if Arg2 == "i" or Arg2 == "g" or Arg2 == "c" or Arg2 == "n" or Arg2 == "white" o
 
 TeamColor(Arg2:lower())
 
+NewCmdLabel("New Team Selected")
+
 else
 
 for i,v in pairs(BrickColors) do
@@ -4088,12 +4455,14 @@ if v == Arg2.." "..Arg3 then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 workspace.Remote.loadchar:InvokeServer(nil, Arg2.." "..Arg3)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+NewCmdLabel("New Team Selected")
 end
 else
 if v == Arg2 then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 workspace.Remote.loadchar:InvokeServer(nil, Arg2)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+NewCmdLabel("New Team Selected")
 end
 end
 end
@@ -4109,22 +4478,19 @@ if Connect.SendCommand("auto") then
 if Arg2 == "on" then
 if not AutoRespawn then
 AutoRespawn = true
-Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Respawn enabled.")
 end
 end
 if Arg2 == "off" then
 if AutoRespawn then
 AutoRespawn = false
-Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Respawn desabled.")
 end
 end
 if Arg2 == nil then
 if not AutoRespawn then
 AutoRespawn = true
-Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AutoRespawn = false
-Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Respawn enabled.")
 end
 end
 end
@@ -4132,7 +4498,7 @@ end
 if Connect.SendCommand("unauto") then
 if AutoRespawn then
 AutoRespawn = false
-Message("Auto Respawn desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Respawn desabled.")
 end
 end
 
@@ -4140,24 +4506,20 @@ if Connect.SendCommand("autolock") then
 if Arg2 == "on" then
 if not AutoLock then
 AutoLock = true
-Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Lock enabled.")
 end
 end
 if Arg2 == "off" then
 if AutoLock then
 AutoLock = false
-Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Lock desabled.")
 Cmds.Respawn()
 end
 end
 if Arg2 == nil then
 if not AutoLock then
 AutoLock = true
-Message("Auto Lock enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AutoLock = false
-Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-Cmds.Respawn()
+NewCmdLabel("Auto Lock enabled.")
 end
 end
 end
@@ -4165,7 +4527,7 @@ end
 if Connect.SendCommand("unautolock") then
 if AutoLock then
 AutoLock = false
-Message("Auto Lock desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Lock desabled.")
 Cmds.Respawn()
 end
 end
@@ -4179,8 +4541,6 @@ end
 if Arg2 == nil then
 if not Stam then
 InfStam("on")
-else
-InfStam("off")
 end
 end
 
@@ -4201,8 +4561,6 @@ end
 if Arg2 == nil then
 if not _G.FF then
 ForceField("on")
-else
-ForceField("off")
 end
 end
 
@@ -4237,8 +4595,6 @@ end
 if Arg2 == nil then
 if not GodMode then
 GodModeOn()
-else
-UnGodMode()
 end
 end
 
@@ -4263,8 +4619,6 @@ end
 if Arg2 == nil then
 if not InfAmmo then
 InfAmmoToggle("on")
-else
-InfAmmoToggle("off")
 end
 end
 
@@ -4285,8 +4639,6 @@ end
 if Arg2 == nil then
 if not FastAmmo then
 FastAmmoToggle("on")
-else
-FastAmmoToggle("off")
 end
 end
 
@@ -4314,39 +4666,20 @@ if Connect.SendCommand("antibring") then
 if Arg2 == "on" then
 if not AntiBring then
 AntiBring = true
-Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Bring enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiBring then
 AntiBring = false
-Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Bring desabled.")
 Cmds.Respawn()
 end
 end
 if Arg2 == nil then
 if not AntiBring then
-local PartTool = Instance.new("Part")
-PartTool.Parent = LPlayer.Backpack:FindFirstChildOfClass("Tool")
-PartTool.Name = "PartToolChecked"
-LPlayer.Character.ChildAdded:Connect(function(Tool)
-for i = 1,10 do
-pcall(function()
-if not Tool:FindFirstChild("PartToolChecked") then
-Tool:Destroy()
-end
-if not Tool:FindFirstChild("Hammer") then
-Tool:Destroy()
-end
-end)
-end
-end)
 AntiBring = true
-Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiBring = false
-Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-Cmds.Respawn()
+NewCmdLabel("Anti Bring desabled.")
 end
 end
 end
@@ -4354,7 +4687,7 @@ end
 if Connect.SendCommand("unantibring") then
 if AntiBring then
 AntiBring = false
-Message("Anti Bring desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Bring desabled.")
 Cmds.Respawn()
 end
 end
@@ -4363,22 +4696,19 @@ if Connect.SendCommand("antivoid") then
 if Arg2 == "on" then
 if not AntiVoid then
 AntiVoid = true
-Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Void enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiVoid then
 AntiVoid = false
-Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+Message("Anti Void desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiVoid then
 AntiVoid = true
-Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiVoid = false
-Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Void enabled.")
 end
 end
 end
@@ -4386,7 +4716,7 @@ end
 if Connect.SendCommand("unantivoid") then
 if AntiVoid then
 AntiVoid = false
-Message("Anti Void desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Void desabled.")
 end
 end
 
@@ -4394,22 +4724,19 @@ if Connect.SendCommand("antishield") then
 if Arg2 == "on" then
 if not AntiShield then
 AntiShield = true
-Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Shield enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiShield then
 AntiShield = false
-Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Shield desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiShield then
 AntiShield = true
-Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiShield = false
-Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Shield enabled.")
 end
 end
 end
@@ -4417,7 +4744,7 @@ end
 if Connect.SendCommand("unantishield") then
 if AntiShield then
 AntiShield = false
-Message("Anti Shield desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Shield desabled.")
 end
 end
 
@@ -4425,22 +4752,19 @@ if Connect.SendCommand("antiarrest") then
 if Arg2 == "on" then
 if not AntiArrest then
 AntiArrest = true
-Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Arrest enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiArrest then
 AntiArrest = false
-Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Arrest desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiArrest then
 AntiArrest = true
-Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiArrest = false
-Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Arrest enabled.")
 end
 end
 end
@@ -4448,7 +4772,7 @@ end
 if Connect.SendCommand("unantiarrest") then
 if AntiArrest then
 AntiArrest = false
-Message("Anti Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Arrest desabled.")
 end
 end
 
@@ -4457,14 +4781,14 @@ if Arg2 == "on" then
 if not AntiSpam then
 AntiSpam = true
 AntiBring = true
-Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Spam enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiSpam then
 AntiSpam = false
 AntiBring = false
-Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+Message("Anti Spam desabled.")
 Cmds.Respawn()
 end
 end
@@ -4472,12 +4796,7 @@ if Arg2 == nil then
 if not AntiSpam then
 AntiSpam = true
 AntiBring = true
-Message("Anti Spam enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiSpam = false
-AntiBring = false
-Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-Cmds.Respawn()
+NewCmdLabel("Anti Spam enabled.")
 end
 end
 end
@@ -4486,7 +4805,7 @@ if Connect.SendCommand("unantispam") then
 if AntiSpam then
 AntiSpam = false
 AntiBring = false
-Message("Anti Spam desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Spam desabled.")
 Cmds.Respawn()
 end
 end
@@ -4534,10 +4853,12 @@ end
 end
 
 if Connect.SendCommand("rj") or Connect.SendCommand("rejoin") then
+NewCmdLabel("Rejoing")
 game:GetService("TeleportService"):Teleport(game.PlaceId, LPlayer)
 end
 
 if Connect.SendCommand("quit") or Connect.SendCommand("leave") then
+NewCmdLabel("Leaving")
 game:Shutdown()
 end
 
@@ -4546,25 +4867,21 @@ if Arg2 == "on" then
 if not AntiCrash then
 AntiCrash = true
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
-Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Crash enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiCrash then
 AntiCrash = false
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
-Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Crash desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiCrash then
 AntiCrash = true
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = true
-Message("Anti Crash enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiCrash = false
-LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
-Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Crash enabled.")
 end
 end
 end
@@ -4573,7 +4890,7 @@ if Connect.SendCommand("unanticrash") then
 if AntiCrash then
 AntiCrash = false
 LPlayer.PlayerScripts.ClientGunReplicator.Disabled = false
-Message("Anti Crash desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Crash desabled.")
 end
 end
 
@@ -4581,22 +4898,19 @@ if Connect.SendCommand("clicktp") then
 if Arg2 == "on" then
 if not ClickTp then
 ClickTp = true
-Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Click Teleport enabled.")
 end
 end
 if Arg2 == "off" then
 if ClickTp then
 ClickTp = false
-Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+Message("Click Teleport desabled.")
 end
 end
 if Arg2 == nil then
 if not ClickTp then
 ClickTp = true
-Message("Click Teleport enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-ClickTp = false
-Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Click Teleport enabled.")
 end
 end
 end
@@ -4604,7 +4918,7 @@ end
 if Connect.SendCommand("unclicktp") then
 if ClickTp then
 ClickTp = false
-Message("Click Teleport desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Click Teleport desabled.")
 end
 end
 
@@ -4612,22 +4926,19 @@ if Connect.SendCommand("antilag") then
 if Arg2 == "on" then
 if not AntiLag then
 AntiLag = true
-Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Lag enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiLag then
 AntiLag = false
-Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Lag desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiLag then
 AntiLag = true
-Message("Anti Lag enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiLag = false
-Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Lag enabled.")
 end
 end
 end
@@ -4635,7 +4946,7 @@ end
 if Connect.SendCommand("unantilag") then
 if AntiLag then
 AntiLag = false
-Message("Anti Lag desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Lag desabled.")
 end
 end
 
@@ -4643,22 +4954,19 @@ if Connect.SendCommand("lrl") then
 if Arg2 == "on" then
 if not LoopRemoveLife then
 LoopRemoveLife = true
-Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Life enabled.")
 end
 end
 if Arg2 == "off" then
 if LoopRemoveLife then
 LoopRemoveLife = false
-Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Life desabled.")
 end
 end
 if Arg2 == nil then
 if not LoopRemoveLife then
 LoopRemoveLife = true
-Message("Loop Remove Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-LoopRemoveLife = false
-Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Life enabled.")
 end
 end
 end
@@ -4666,7 +4974,7 @@ end
 if Connect.SendCommand("unlrl") then
 if LoopRemoveLife then
 LoopRemoveLife = false
-Message("Loop Remove Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Life desabled.")
 end
 end
 
@@ -4674,22 +4982,19 @@ if Connect.SendCommand("lrm") then
 if Arg2 == "on" then
 if not LoopRemoveExtraLife then
 LoopRemoveExtraLife = true
-Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Swat Extra Life enabled.")
 end
 end
 if Arg2 == "off" then
 if LoopRemoveExtraLife then
 LoopRemoveExtraLife = false
-Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Swat Extra Life desabled.")
 end
 end
 if Arg2 == nil then
 if not LoopRemoveExtraLife then
 LoopRemoveExtraLife = true
-Message("Loop Remove Swat Extra Life enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-LoopRemoveExtraLife = false
-Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Swat Extra Life enabled.")
 end
 end
 end
@@ -4697,7 +5002,7 @@ end
 if Connect.SendCommand("unlrm") then
 if LoopRemoveExtraLife then
 LoopRemoveExtraLife = false
-Message("Loop Remove Swat Extra Life desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Loop Remove Swat Extra Life desabled.")
 end
 end
 
@@ -4706,13 +5011,13 @@ if Arg2 == "on" then
 if not AntiPunch then
 ExecuteAntiPunch()
 AntiPunch = true
-Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Punch enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiPunch then
 AntiPunch = false
-Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Punch desabled.")
 Cmds.Respawn()
 end
 end
@@ -4720,11 +5025,7 @@ if Arg2 == nil then
 if not AntiPunch then
 ExecuteAntiPunch()
 AntiPunch = true
-Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiPunch = false
-Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-Cmds.Respawn()
+NewCmdLabel("Anti Punch enabled.")
 end
 end
 end
@@ -4732,7 +5033,7 @@ end
 if Connect.SendCommand("unantipunch") then
 if AntiPunch then
 AntiPunch = false
-Message("Anti Punch desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Punch desabled.")
 Cmds.Respawn()
 end
 end
@@ -4741,22 +5042,19 @@ if Connect.SendCommand("hitbox") then
 if Arg2 == "on" then
 if not HitBox then
 HitBox = true
-Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("HitBox enabled.")
 end
 end
 if Arg2 == "off" then
 if HitBox then
 HitBox = false
-Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("HitBox desabled.")
 end
 end
 if Arg2 == nil then
 if not HitBox then
 HitBox = true
-Message("HitBox enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-HitBox = false
-Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("HitBox enabled.")
 end
 end
 end
@@ -4764,13 +5062,14 @@ end
 if Connect.SendCommand("unhitbox") then
 if HitBox then
 HitBox = false
-Message("HitBox desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("HitBox desabled.")
 end
 end
 
 if Connect.SendCommand("hbsize") then
 if Arg2 ~= nil then
 HitBoxSize = Arg2
+NewCmdLabel("New HitBoxSize")
 end
 end
 
@@ -4783,6 +5082,9 @@ HitBoxShape = Enum.PartType.Ball
 end
 if Arg2 == "3" then
 HitBoxShape = Enum.PartType.Cylinder
+end
+if Arg2 ~= nil then
+NewCmdLabel("New HitBoxShape")
 end
 end
 
@@ -4799,6 +5101,9 @@ HitBoxTransparency = 0.95
 end
 if Arg2 == "3" then
 HitBoxTransparency = 1
+end
+if Arg2 ~= nil then
+NewCmdLabel("New HitBoxTrarsparency")
 end
 end
 
@@ -4818,22 +5123,19 @@ if Connect.SendCommand("prts") then
 if Arg2 == "on" then
 if not ProtectTase then
 ProtectTase = true
-Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Tase enabled.")
 end
 end
 if Arg2 == "off" then
 if ProtectTase then
 ProtectTase = false
-Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Tase desabled.")
 end
 end
 if Arg2 == nil then
 if not ProtectTase then
 ProtectTase = true
-Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-ProtectTase = false
-Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Tase enabled.")
 end
 end
 end
@@ -4841,7 +5143,7 @@ end
 if Connect.SendCommand("unprts") then
 if ProtectTase then
 ProtectTase = false
-Message("Protect Tase desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Tase desabled.")
 end
 end
 
@@ -4849,22 +5151,19 @@ if Connect.SendCommand("antidoors") then
 if Arg2 == "on" then
 if not AntiDoors then
 AntiDoors = true
-Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Doors enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiDoors then
 AntiDoors = false
-Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Doors desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiDoors then
 AntiDoors = true
-Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiDoors = false
-Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Doors enabled.")
 end
 end
 end
@@ -4872,7 +5171,7 @@ end
 if Connect.SendCommand("unantidoors") then
 if AntiDoors then
 AntiDoors = false
-Message("Anti Doors desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Doors desabled.")
 end
 end
 
@@ -4880,22 +5179,19 @@ if Connect.SendCommand("prta") then
 if Arg2 == "on" then
 if not ProtectArrest then
 ProtectArrest = true
-Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Arrest enabled.")
 end
 end
 if Arg2 == "off" then
 if ProtectArrest then
 ProtectArrest = false
-Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Arrest desabled.")
 end
 end
 if Arg2 == nil then
 if not ProtectArrest then
 ProtectArrest = true
-Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-ProtectArrest = false
-Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Arrest enabled.")
 end
 end
 end
@@ -4903,7 +5199,7 @@ end
 if Connect.SendCommand("unprta") then
 if ProtectArrest then
 ProtectArrest = false
-Message("Protect Arrest desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Arrest desabled.")
 end
 end
 
@@ -4911,22 +5207,19 @@ if Connect.SendCommand("antisit") then
 if Arg2 == "on" then
 if not AntiSit then
 AntiSit = true
-Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Sit enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiSit then
 AntiSit = false
-Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Sit desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiSit then
 AntiSit = true
-Message("Anti Sit enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiSit = false
-Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Sit enabled.")
 end
 end
 end
@@ -4934,7 +5227,7 @@ end
 if Connect.SendCommand("unantisit") then
 if AntiSit then
 AntiSit = false
-Message("Anti Sit desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Sit desabled.")
 end
 end
 
@@ -4942,22 +5235,19 @@ if Connect.SendCommand("antifling") then
 if Arg2 == "on" then
 if not AntiFling then
 AntiFling = true
-Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Fling enabled.")
 end
 end
 if Arg2 == "off" then
 if AntiSit then
 AntiFling = false
-Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Fling desabled.")
 end
 end
 if Arg2 == nil then
 if not AntiFling then
 AntiFling = true
-Message("Anti Fling enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-AntiFling = false
-Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Fling enabled.")
 end
 end
 end
@@ -4965,7 +5255,7 @@ end
 if Connect.SendCommand("unantifling") then
 if AntiFling then
 AntiFling = false
-Message("Anti Fling desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Fling desabled.")
 end
 end
 
@@ -4977,22 +5267,19 @@ if Connect.SendCommand("esp") then
 if Arg2 == "on" then
 if not ESP then
 ESP = true
-Message("ESP enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("ESP enabled.")
 end
 end
 if Arg2 == "off" then
 if ESP then
 ESP = false
-Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("ESP desabled.")
 end
 end
 if Arg2 == nil then
 if not ESP then
 ESP = true
-Message("ESP enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
-else
-ESP = false
-Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("ESP enabled.")
 end
 end
 end
@@ -5000,7 +5287,7 @@ end
 if Connect.SendCommand("unesp") then
 if ESP then
 ESP = false
-Message("ESP desabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("ESP desabled.")
 end
 end
 
@@ -5012,6 +5299,7 @@ if Connect.SendCommand("sa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not Sa[Player.UserId] then
 Sa[Player.UserId] = {Player = Player}
+NewCmdLabel("Sa "..Player.Name.." added.")
 end
 end
 
@@ -5019,6 +5307,7 @@ if Connect.SendCommand("unsa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and Sa[Player.UserId] then
 Sa[Player.UserId] = nil
+NewCmdLabel("Sa "..Player.Name.." removed.")
 end
 end
 
@@ -5026,6 +5315,7 @@ if Connect.SendCommand("ultrasa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not UltraSa[Player.UserId] then
 UltraSa[Player.UserId] = {Player = Player}
+NewCmdLabel("UltraSa "..Player.Name.." added.")
 end
 end
 
@@ -5033,6 +5323,7 @@ if Connect.SendCommand("unultrasa") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and UltraSa[Player.UserId] then
 UltraSa[Player.UserId] = nil
+NewCmdLabel("UltraSa "..Player.Name.." removed.")
 end
 end
 
@@ -5040,6 +5331,7 @@ if Connect.SendCommand("lck") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70" and not AimLocked[Player.UserId] then
 AimLocked[Player.UserId] = {Player = Player}
+NewCmdLabel("LockAim "..Player.Name.." added.")
 end
 end
 
@@ -5047,39 +5339,48 @@ if Connect.SendCommand("unlck") then
 local Player = FindPlayer(Arg2)
 if Player ~= nil and Player.Name ~= "viniciuszk70"  and AimLocked[Player.UserId] then
 AimLocked[Player.UserId] = nil
+NewCmdLabel("LockAim "..Player.Name.." removed.")
 end
 end
 
 if Connect.SendCommand("nex") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("yar") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(741.261047, 97.9999466, 2492.76489, 0.763113737, -3.04473318e-08, -0.646264195, 8.35157437e-08, 1, 5.15032106e-08, 0.646264195, -9.32760429e-08, 0.763113737)
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("arm") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(785.045959, 99.9899826, 2303.15771, 0.752894104, -1.96128198e-08, -0.658141673, 2.25219967e-08, 1, -4.03582145e-09, 0.658141673, -1.17841177e-08, 0.752894104)
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("cbase") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-887.588074, 94.1287842, 2057.02002, 0.00147999532, 8.10747949e-08, 0.999998927, -7.46522844e-08, 1, -8.09643979e-08, -0.999998927, -7.45323732e-08, 0.00147999532)
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("tow") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(823.122253, 130.039902, 2591.04395, 0.999989033, -1.02459341e-09, -0.0046874485, 1.00193409e-09, 1, -4.8364055e-09, 0.0046874485, 4.83165596e-09, 0.999989033)
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("cells") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(917.017029, 99.9899673, 2495.43433, 0.999990046, 1.99618473e-08, -0.00445514917, -1.99925339e-08, 1, -6.84309587e-09, 0.00445514917, 6.93209756e-09, 0.999990046)
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("roof") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(745.16571, 123.989983, 2336.21118, -0.796045244, -6.26395824e-09, -0.605237067, 3.79174914e-08, 1, -6.02210264e-08, 0.605237067, -7.08877366e-08, -0.796045244)
+NewCmdLabel("Teleported.")
 end
 
 if Connect.SendCommand("back") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(983.116028, 99.9899826, 2304.86841, -0.999903977, -1.35454073e-07, -0.0138590187, -1.35731895e-07, 1, 1.91052276e-08, 0.0138590187, 2.09845048e-08, -0.999903977)
+NewCmdLabel("Teleported.")
 end
 
 end
@@ -5318,6 +5619,8 @@ end
 end)
 
 Mouse.Button1Down:Connect(function()
+if not DisableAdmin then
+if BackColor ~= nil and TextColor ~= nil then
 CPS1.BackgroundColor3 = TextColor
 CPS1.TextColor3 = BackColor
 
@@ -5326,14 +5629,22 @@ CPS1.Text = "CPS : "..CPS1Number
 wait(1)
 CPS1Number = CPS1Number - 1
 CPS1.Text = "CPS : "..CPS1Number
+end
+end
 end)
 
 Mouse.Button1Up:Connect(function()
+if not DisableAdmin then
+if BackColor ~= nil and TextColor ~= nil then
 CPS1.BackgroundColor3 = BackColor
 CPS1.TextColor3 = TextColor
+end
+end
 end)
 
 Mouse.Button2Down:Connect(function()
+if not DisableAdmin then
+if BackColor ~= nil and TextColor ~= nil then
 CPS2.BackgroundColor3 = TextColor
 CPS2.TextColor3 = BackColor
 
@@ -5342,11 +5653,17 @@ CPS2.Text = "CPS : "..CPS2Number
 wait(1)
 CPS2Number = CPS2Number - 1
 CPS2.Text = "CPS : "..CPS2Number
+end
+end
 end)
 
 Mouse.Button2Up:Connect(function()
+if not DisableAdmin then
+if BackColor ~= nil and TextColor ~= nil then
 CPS2.BackgroundColor3 = BackColor
 CPS2.TextColor3 = TextColor
+end
+end
 end)
 
 spawn(function()
@@ -6172,6 +6489,37 @@ end
 end
 end)
 
+spawn(function()
+while wait(.1) do
+if not DisableAdmin then
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer then
+coroutine.wrap(function()
+AddDisplayName(v)
+end)()
+end
+end
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+pcall(function()
+if BackColor ~= nil and TextColor ~= nil then
+for i,v in pairs(NotifyScrollingFrame:GetDescendants()) do
+if v.Name == "New Cmd" then
+v.BackgroundColor3 = BackColor
+v.TextColor3 = TextColor
+end
+end
+end
+end)
+end
+end
+end)
+
 Run.Stepped:Connect(function()
 if not DisableAdmin then
 if AntiLag then
@@ -6402,35 +6750,33 @@ end
 end
 end)
 
-Message("Some things will be activated.",70,70,70,Enum.Font.GothamBlack,21.5)
-
 AutoRespawn = true
-Message("Auto Respawn enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Auto Respawn enabled.")
 
 AntiVoid = true
-Message("Anti Void enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Void enabled.")
 
 AntiShield = true
-Message("Anti Shield enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Shield enabled.")
 
 AntiArrest = true
-Message("Anti Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Arrest enabled.")
 
 ExecuteAntiPunch()
 AntiPunch = true
-Message("Anti Punch enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Punch enabled.")
 
 AntiDoors = true
-Message("Anti Doors enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Doors enabled.")
 
 AntiBring = true
-Message("Anti Bring enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Anti Bring enabled.")
 
 ProtectTase = true
-Message("Protect Tase enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Tase enabled.")
 
 ProtectArrest = true
-Message("Protect Arrest enabled.",70,70,70,Enum.Font.GothamBlack,21.5)
+NewCmdLabel("Protect Arrest enabled.")
 
 InfAmmoToggle("on")
 
