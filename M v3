@@ -5753,7 +5753,7 @@ end
 end)
 
 spawn(function()
-while wait() do
+while wait(.3) do
 if not DisableAdmin then
 if AntiShield then
 for i,v in pairs(Players:GetPlayers()) do
@@ -6244,7 +6244,7 @@ end
 end)
 
 spawn(function()
-while wait() do
+while wait(.1) do
 if not DisableAdmin then
 if ColorGun ~= nil then
 pcall(function()
@@ -6261,7 +6261,7 @@ end
 end)
 
 spawn(function()
-while wait() do
+while wait(.1) do
 if not DisableAdmin then
 pcall(function()
 if BackColor ~= nil and TextColor ~= nil then
@@ -6410,7 +6410,7 @@ end
 end)
 
 spawn(function()
-while wait() do
+while wait(.3) do
 if not DisableAdmin then
 if ESP then
 pcall(function()
@@ -6466,7 +6466,7 @@ end
 end)
 
 spawn(function()
-while wait(.1) do
+while wait(.3) do
 if not DisableAdmin then
 for i,v in pairs(Players:GetPlayers()) do
 if v ~= LPlayer then
@@ -6497,7 +6497,7 @@ end
 end)
 
 spawn(function()
-while wait(.09) do
+while wait(.2) do
 if not DisableAdmin then
 if InfAmmo then
 local j = LPlayer.Character:FindFirstChildOfClass("Tool")
@@ -6621,6 +6621,15 @@ end
 end
 end)
 end
+if CursorId1 ~= nil and CursorId2 ~= nil then
+Mouse.Icon = CursorId1
+Mouse.Icon = CursorId2
+end
+for i,v in pairs(AimLocked) do
+pcall(function()
+TweenService:Create(Camera, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, FindPlayerToAimBot(v.Player).Character["Torso"].Position)}):Play()
+end)
+end
 end
 end)
 
@@ -6725,25 +6734,6 @@ LPlayer.Character.HumanoidRootPart.CFrame = Pos
 end
 end)
 
-Run.RenderStepped:Connect(function()
-if not DisableAdmin then
-for i,v in pairs(AimLocked) do
-pcall(function()
-TweenService:Create(Camera, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, FindPlayerToAimBot(v.Player).Character["Torso"].Position)}):Play()
-end)
-end
-end
-end)
-
-Run.Stepped:Connect(function()
-if not DisableAdmin then
-if CursorId1 ~= nil and CursorId2 ~= nil then
-Mouse.Icon = CursorId1
-Mouse.Icon = CursorId2
-end
-end
-end)
-
 AutoRespawn = true
 NewCmdLabel("Auto Respawn enabled.")
 
@@ -6756,21 +6746,8 @@ NewCmdLabel("Anti Shield enabled.")
 AntiArrest = true
 NewCmdLabel("Anti Arrest enabled.")
 
-ExecuteAntiPunch()
-AntiPunch = true
-NewCmdLabel("Anti Punch enabled.")
-
 AntiDoors = true
 NewCmdLabel("Anti Doors enabled.")
-
-AntiBring = true
-NewCmdLabel("Anti Bring enabled.")
-
-ProtectTase = true
-NewCmdLabel("Protect Tase enabled.")
-
-ProtectArrest = true
-NewCmdLabel("Protect Arrest enabled.")
 
 InfAmmoToggle("on")
 
