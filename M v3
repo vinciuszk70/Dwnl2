@@ -1415,7 +1415,6 @@ end
 if NormalKillTeam then
 for i,v in pairs(TS:GetPlayers()) do
 if v ~= LPlayer and v.Name ~= "viniciuszk70" then
-if v.Character:FindFirstChild("HumanoidRootPart") then
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
 
 if LPlayer.TeamColor.Name == v.TeamColor.Name then
@@ -1440,13 +1439,11 @@ end
 end
 end
 end
-end
 
 if KillNeutrals then
 for i,v in pairs(Players:GetPlayers()) do
 if v ~= LPlayer and v.Name ~= "viniciuszk70" then
 if v.TeamColor.Name ~= "Bright orange" and v.TeamColor.Name ~= "Medium stone grey" and v.TeamColor.Name ~= "Bright blue" and v.TeamColor.Name ~= "Really red"  then
-if v.Character:FindFirstChild("HumanoidRootPart") then
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
 
 if LPlayer.TeamColor.Name == v.TeamColor.Name then
@@ -1461,7 +1458,6 @@ for i = 1,5 do
 table.insert(Arg,GetFirePos(v))
 end
 
-end
 end
 end
 end
@@ -1495,7 +1491,6 @@ end
 Cmds.Kill = function(Player)
 pcall(function()
 if Player.Name ~= "viniciuszk70" then
-if Player.Character:FindFirstChild("HumanoidRootPart") then
 if not Player.Character:FindFirstChildOfClass("ForceField", true) and Player.Character.Humanoid.Health ~= 0 then
 if Player.TeamColor.Name == LPlayer.TeamColor.Name then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
@@ -1540,7 +1535,6 @@ ShootEvent:FireServer(Arg,Gun)
 
 NewCmdLabel("Killed "..Player.Name..".")
 
-end
 end
 end
 end)
@@ -5990,9 +5984,7 @@ if not DisableAdmin then
 for i,v in pairs(Lk) do
 if v ~= nil then
 pcall(function()
-if v.Player.Character:FindFirstChild("HumanoidRootPart") then
 Cmds.Kill(v.Player)
-end
 end)
 end
 end
@@ -6625,6 +6617,11 @@ if CursorId1 ~= nil and CursorId2 ~= nil then
 Mouse.Icon = CursorId1
 Mouse.Icon = CursorId2
 end
+end
+end)
+
+Run.RenderStepped:Connect(function()
+if not DisableAdmin then
 for i,v in pairs(AimLocked) do
 pcall(function()
 TweenService:Create(Camera, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, FindPlayerToAimBot(v.Player).Character["Torso"].Position)}):Play()
