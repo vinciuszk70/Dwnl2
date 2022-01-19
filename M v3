@@ -1843,7 +1843,7 @@ for i,v in next, getgc() do
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
 for i2,v2 in next, debug.getupvalues(v) do 
 if type(v2) == "number" then 
-debug.setupvalue(v, i2, math.huge)
+debug.setupvalue(v, i2, 10000)
 end
 end
 end
@@ -1852,13 +1852,13 @@ end
 LPlayer.CharacterAdded:Connect(function()
 if Stam then
 if not DisableAdmin then
-wait(.1)
+wait(.5)
 pcall(function()
 for i,v in next, getgc() do
 if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
 for i2,v2 in next, debug.getupvalues(v) do 
 if type(v2) == "number" then 
-debug.setupvalue(v, i2, math.huge)
+debug.setupvalue(v, i2, 10000)
 end
 end
 end
@@ -1867,6 +1867,7 @@ end)
 end
 end
 end)
+
 end
 end
 
@@ -6512,6 +6513,26 @@ v.ReloadTime = -math.huge v.Range = math.huge v.FireRate = -math.huge v.AutoFire
 end
 end
 end
+end
+end
+end
+end)
+
+spawn(function()
+while wait(300) do
+if not DisableAdmin then
+if Stam then
+pcall(function()
+for i,v in next, getgc() do
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, 10000)
+end
+end
+end
+end
+end)
 end
 end
 end
