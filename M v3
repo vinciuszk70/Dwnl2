@@ -40,6 +40,7 @@ local CPS2Number = 0
 local NotifyCanvasSize = 2
 local AntiFlingCheckNumber = 0
 local AntiFlingOldNumber = 0
+local BlockColor = nil
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
 Box.Anchored = true
@@ -3964,6 +3965,7 @@ TerrainColor("white")
 CGun("white")
 CustomCursor("white")
 ESPColorFunction("white")
+WindowsColor("white")
 end
 
 if Color == "black" then
@@ -3975,6 +3977,7 @@ TerrainColor("black")
 CGun("black")
 CustomCursor("black")
 ESPColorFunction("black")
+WindowsColor("black")
 end
 
 if Color == "blue" then
@@ -3986,6 +3989,7 @@ TerrainColor("blue")
 CGun("blue")
 CustomCursor("blue")
 ESPColorFunction("blue")
+WindowsColor("blue")
 end
 
 if Color == "red" then
@@ -3997,6 +4001,7 @@ TerrainColor("red")
 CGun("red")
 CustomCursor("red")
 ESPColorFunction("red")
+WindowsColor("red")
 end
 
 if Color == "green" then
@@ -4008,6 +4013,7 @@ TerrainColor("green")
 CGun("green")
 CustomCursor("green")
 ESPColorFunction("green")
+WindowsColor("green")
 end
 
 if Color == "yellow" then
@@ -4019,6 +4025,7 @@ TerrainColor("yellow")
 CGun("yellow")
 CustomCursor("yellow")
 ESPColorFunction("yellow")
+WindowsColor("yellow")
 end
 
 if Color == "purple" then
@@ -4030,6 +4037,7 @@ TerrainColor("purple")
 CGun("purple")
 CustomCursor("purple")
 ESPColorFunction("purple")
+WindowsColor("purple")
 end
 
 if Color == "pink" then
@@ -4041,6 +4049,7 @@ TerrainColor("pink")
 CGun("pink")
 CustomCursor("pink")
 ESPColorFunction("pink")
+WindowsColor("pink")
 end
 
 if Color == "orange" then
@@ -4052,6 +4061,7 @@ TerrainColor("orange")
 CGun("orange")
 CustomCursor("orange")
 ESPColorFunction("orange")
+WindowsColor("orange")
 end
 
 if Color == "grey" then
@@ -4063,6 +4073,7 @@ TerrainColor("grey")
 CGun("grey")
 CustomCursor("grey")
 ESPColorFunction("grey")
+WindowsColor("grey")
 end
 
 for i,v in pairs(CmdHandler:GetDescendants()) do
@@ -4277,7 +4288,7 @@ end
 end
 end)
 
-NewCmdLabel("New TerrainColor.")
+NewCmdLabel("New Terrain Color.")
 
 end
 
@@ -4542,6 +4553,69 @@ end
 end)
 end)
 end)
+end
+
+function WindowsColor(Color)
+
+if Color == "white" then
+BlockColor = BrickColor.new("1001")
+end
+
+if Color == "black" then
+BlockColor = BrickColor.new("26")
+end
+
+if Color == "blue" then
+BlockColor = BrickColor.new("102")
+end
+
+if Color == "red" then
+BlockColor = BrickColor.new("331")
+end
+
+if Color == "green" then
+BlockColor = BrickColor.new("318")
+end
+
+if Color == "yellow" then
+BlockColor = BrickColor.new("226")
+end
+
+if Color == "purple" then
+BlockColor = BrickColor.new("321")
+end
+
+if Color == "pink" then
+BlockColor = BrickColor.new("330")
+end
+
+if Color == "orange" then
+BlockColor = BrickColor.new("123")
+end
+
+if Color == "grey" then
+BlockColor = BrickColor.new("148")
+end
+
+if BlockColor ~= nil then
+
+for i,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Part" and v.Parent.Name ~= "Tree" and v.Transparency ~= 0 and v.Transparency ~= 0.8 and v.Transparency ~= 1 then
+v.BrickColor = BlockColor
+v.Transparency = .3
+end
+end
+
+for i,v in pairs(workspace["Prison_Guard_Outpost"]:GetDescendants()) do
+if v.Name == "Decal" then
+v:Destroy()
+end
+end
+
+NewCmdLabel("New Windows Color.")
+
+end
+
 end
 
 function NewCmdLabel(Text)
@@ -5523,6 +5597,10 @@ end
 
 if Connect.SendCommand("themes") then
 Themes(Arg2:lower())
+end
+
+if Connect.SendCommand("wndcolor") then
+WindowsColor(Arg2:lower())
 end
 
 if Connect.SendCommand("sa") then
@@ -6796,6 +6874,23 @@ CheckAntiFlingAura = false
 end
 else
 CheckAntiFlingAura = false
+end
+end
+end
+end)
+
+spawn(function()
+while wait(1) do
+if not DisableAdmin then
+if BlockColor ~= nil then
+pcall(function()
+for i,v in pairs(game:GetService("Workspace")["Doors"]:GetDescendants()) do
+if v.ClassName == "Part" and v.Transparency ~= 0 and v.Transparency ~= 0.8 and v.Transparency ~= 1 then
+v.BrickColor = BlockColor
+v.Transparency = .3
+end
+end
+end)
 end
 end
 end
