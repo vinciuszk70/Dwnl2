@@ -3947,7 +3947,7 @@ HitBoxColor = HitBoxTeamColor
 end
 
 if Color ~= nil then
-NewCmdLabel("New HitBoxColor.")
+NewCmdLabel("New HitBox Color.")
 end
 
 end
@@ -4347,7 +4347,7 @@ CursorId2 = "http://www.roblox.com/asset/?id=8521499984"
 end
 
 if Color ~= nil then
-NewCmdLabel("New CursorColor.")
+NewCmdLabel("New Cursor Color.")
 end
 
 end
