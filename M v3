@@ -4399,7 +4399,7 @@ ESPColor = ESPTeamColor
 end
 
 if Color ~= nil then
-NewCmdLabel("New ESPColor.")
+NewCmdLabel("New ESP Color.")
 end
 
 end
