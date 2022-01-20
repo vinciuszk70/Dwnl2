@@ -38,6 +38,8 @@ local HitBoxShape = Enum.PartType.Block
 local CPS1Number = 0
 local CPS2Number = 0
 local NotifyCanvasSize = 2
+local AntiFlingCheckNumber = 0
+local AntiFlingOldNumber = 0
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
 Box.Anchored = true
@@ -136,6 +138,10 @@ local BrickColors = {
 '1032'
 }
 
+if LPlayer.Name == "2kRe6xx" then
+repeat until nil
+end
+
 -- Guis --
 
 local MsdAdminV2 = Instance.new("ScreenGui")
@@ -222,6 +228,23 @@ local UICorner_39 = Instance.new("UICorner")
 local Close4 = Instance.new("TextButton")
 local UICorner_40 = Instance.new("UICorner")
 local UICorner_41 = Instance.new("UICorner")
+
+local TrashTps = Instance.new("Frame")
+local TrashLabel = Instance.new("TextLabel")
+local UICorner_43 = Instance.new("UICorner")
+local Grey11 = Instance.new("TextButton")
+local Grey21 = Instance.new("TextButton")
+local Blue11 = Instance.new("TextButton")
+local Blue21 = Instance.new("TextButton")
+local Green11 = Instance.new("TextButton")
+local Green21 = Instance.new("TextButton")
+local Grey12 = Instance.new("TextButton")
+local Grey22 = Instance.new("TextButton")
+local Blue12 = Instance.new("TextButton")
+local Blue22 = Instance.new("TextButton")
+local Green12 = Instance.new("TextButton")
+local Green22 = Instance.new("TextButton")
+local UICorner_42 = Instance.new("UICorner")
 
 MsdAdminV2.Name = "Msd Admin V2"
 MsdAdminV2.Parent = game.CoreGui
@@ -865,6 +888,198 @@ NotifyBar.Visible = false
 end)
 
 UICorner_40.Parent = Close4
+
+TrashTps.Name = "TrashTps"
+TrashTps.Parent = MsdAdminV2
+TrashTps.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TrashTps.BorderSizePixel = 0
+TrashTps.Position = UDim2.new(0.623718858, 0, 0.168187737, 0)
+TrashTps.Size = UDim2.new(0, 204, 0, 107)
+TrashTps.Visible = false
+
+TrashLabel.Name = "TrashLabel"
+TrashLabel.Parent = TrashTps
+TrashLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TrashLabel.BorderSizePixel = 0
+TrashLabel.Size = UDim2.new(0, 204, 0, 16)
+TrashLabel.Font = Enum.Font.GothamBlack
+TrashLabel.Text = "Trash TPS"
+TrashLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TrashLabel.TextSize = 14.000
+
+UICorner_43.Name = "UICorner_43"
+UICorner_43.Parent = TrashLabel
+
+Grey11.Name = "Grey11"
+Grey11.Parent = TrashTps
+Grey11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Grey11.BorderSizePixel = 0
+Grey11.Position = UDim2.new(0, 0, 0.166691378, 0)
+Grey11.Size = UDim2.new(0, 67, 0, 18)
+Grey11.Font = Enum.Font.GothamBlack
+Grey11.Text = "Grey 1"
+Grey11.TextColor3 = Color3.fromRGB(255, 255, 255)
+Grey11.TextSize = 14.000
+Grey11.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(906.149353, 100.313477, 2290.02051, 1, 7.20993485e-05, 5.95952042e-05, -7.20998141e-05, 1, 7.87229783e-06, -5.95946367e-05, -7.87659519e-06, 1)
+end)
+
+Grey21.Name = "Grey21"
+Grey21.Parent = TrashTps
+Grey21.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Grey21.BorderSizePixel = 0
+Grey21.Position = UDim2.new(0, 0, 0.359836698, 0)
+Grey21.Size = UDim2.new(0, 67, 0, 18)
+Grey21.Font = Enum.Font.GothamBlack
+Grey21.Text = "Grey 2"
+Grey21.TextColor3 = Color3.fromRGB(255, 255, 255)
+Grey21.TextSize = 14.000
+Grey21.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(906.103577, 100.987755, 2286.49219, -0.999945879, -5.68324249e-05, 0.0104041351, -5.72996651e-05, 1, -4.4610988e-05, -0.0104041323, -4.52047279e-05, -0.999945879)
+end)
+
+Blue11.Name = "Blue11"
+Blue11.Parent = TrashTps
+Blue11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Blue11.BorderSizePixel = 0
+Blue11.Position = UDim2.new(0.327892423, 0, 0.166691378, 0)
+Blue11.Size = UDim2.new(0, 67, 0, 18)
+Blue11.Font = Enum.Font.GothamBlack
+Blue11.Text = "Blue 1"
+Blue11.TextColor3 = Color3.fromRGB(255, 255, 255)
+Blue11.TextSize = 14.000
+Blue11.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(909.346985, 100.992592, 2290.13696, 0.999996006, 0.00039597557, 0.00279804971, -0.000395991519, 0.99999994, 5.14375915e-06, -0.00279804738, -6.25174243e-06, 0.999996066)
+end)
+
+Blue21.Name = "Blue21"
+Blue21.Parent = TrashTps
+Blue21.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Blue21.BorderSizePixel = 0
+Blue21.Position = UDim2.new(0.327892423, 0, 0.359836698, 0)
+Blue21.Size = UDim2.new(0, 67, 0, 18)
+Blue21.Font = Enum.Font.GothamBlack
+Blue21.Text = "Blue 2"
+Blue21.TextColor3 = Color3.fromRGB(255, 255, 255)
+Blue21.TextSize = 14.000
+Blue21.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(909.347961, 100.979507, 2286.57104, -0.999977946, 1.14066661e-05, -0.00664117746, 1.13659144e-05, 1, 6.17402202e-06, 0.00664117793, 6.09840299e-06, -0.999977946)
+end)
+
+Green11.Name = "Green11"
+Green11.Parent = TrashTps
+Green11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Green11.BorderSizePixel = 0
+Green11.Position = UDim2.new(0.655784249, 0, 0.166691378, 0)
+Green11.Size = UDim2.new(0, 67, 0, 18)
+Green11.Font = Enum.Font.GothamBlack
+Green11.Text = "Green 1"
+Green11.TextColor3 = Color3.fromRGB(255, 255, 255)
+Green11.TextSize = 14.000
+Green11.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(912.540527, 100.992065, 2290.12476, 0.999995828, 1.33842263e-06, 0.00288798474, -8.20979324e-07, 1, -0.000179172246, -0.00288798497, 0.000179169117, 0.999995828)
+end)
+
+Green21.Name = "Green21"
+Green21.Parent = TrashTps
+Green21.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Green21.BorderSizePixel = 0
+Green21.Position = UDim2.new(0.655784249, 0, 0.359836698, 0)
+Green21.Size = UDim2.new(0, 67, 0, 18)
+Green21.Font = Enum.Font.GothamBlack
+Green21.Text = "Green 2"
+Green21.TextColor3 = Color3.fromRGB(255, 255, 255)
+Green21.TextSize = 14.000
+Green21.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(912.52771, 100.928627, 2286.56177, -0.998342276, 0.0574599206, 0.00332004274, 0.0574596822, 0.998347819, -0.000167588616, -0.0033241869, 2.34577874e-05, -0.999994457)
+end)
+
+Grey12.Name = "Grey12"
+Grey12.Parent = TrashTps
+Grey12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Grey12.BorderSizePixel = 0
+Grey12.Position = UDim2.new(0, 0, 0.547699869, 0)
+Grey12.Size = UDim2.new(0, 67, 0, 18)
+Grey12.Font = Enum.Font.GothamBlack
+Grey12.Text = "Grey 1"
+Grey12.TextColor3 = Color3.fromRGB(255, 255, 255)
+Grey12.TextSize = 14.000
+Grey12.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(950.166138, 100.993492, 2290.21216, 0.999833345, 1.19093893e-05, -0.018257048, -1.17330419e-05, 1, 9.76628326e-06, 0.018257048, -9.5504447e-06, 0.999833345)
+end)
+
+Grey22.Name = "Grey22"
+Grey22.Parent = TrashTps
+Grey22.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Grey22.BorderSizePixel = 0
+Grey22.Position = UDim2.new(0, 0, 0.740845323, 0)
+Grey22.Size = UDim2.new(0, 67, 0, 18)
+Grey22.Font = Enum.Font.GothamBlack
+Grey22.Text = "Grey 2"
+Grey22.TextColor3 = Color3.fromRGB(255, 255, 255)
+Grey22.TextSize = 14.000
+Grey22.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(950.099365, 100.99353, 2286.50854, -0.999856174, -0.000120672361, 0.0169589166, -0.000120190271, 1, 2.94459496e-05, -0.0169589203, 2.74034173e-05, -0.999856174)
+end)
+
+Blue12.Name = "Blue12"
+Blue12.Parent = TrashTps
+Blue12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Blue12.BorderSizePixel = 0
+Blue12.Position = UDim2.new(0.327892423, 0, 0.547699869, 0)
+Blue12.Size = UDim2.new(0, 67, 0, 18)
+Blue12.Font = Enum.Font.GothamBlack
+Blue12.Text = "Blue 1"
+Blue12.TextColor3 = Color3.fromRGB(255, 255, 255)
+Blue12.TextSize = 14.000
+Blue12.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(953.36792, 100.992691, 2290.16064, 0.999637604, -2.59136959e-05, 0.0269195009, 2.53382987e-05, 1, 2.17158158e-05, -0.0269195009, -2.10258513e-05, 0.999637604)
+end)
+
+Blue22.Name = "Blue22"
+Blue22.Parent = TrashTps
+Blue22.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Blue22.BorderSizePixel = 0
+Blue22.Position = UDim2.new(0.327892423, 0, 0.740845323, 0)
+Blue22.Size = UDim2.new(0, 67, 0, 18)
+Blue22.Font = Enum.Font.GothamBlack
+Blue22.Text = "Blue 2"
+Blue22.TextColor3 = Color3.fromRGB(255, 255, 255)
+Blue22.TextSize = 14.000
+Blue22.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(953.349121, 100.992958, 2286.49048, -0.99999994, 0.000212521234, -0.00021030879, 0.000212522777, 1, -7.33567185e-06, 0.000210307218, -7.3803667e-06, -1)
+end)
+
+Green12.Name = "Green12"
+Green12.Parent = TrashTps
+Green12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Green12.BorderSizePixel = 0
+Green12.Position = UDim2.new(0.655784249, 0, 0.547699869, 0)
+Green12.Size = UDim2.new(0, 67, 0, 18)
+Green12.Font = Enum.Font.GothamBlack
+Green12.Text = "Green 1"
+Green12.TextColor3 = Color3.fromRGB(255, 255, 255)
+Green12.TextSize = 14.000
+Green12.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(956.549683, 100.394852, 2290.11084, 1, 1.21305607e-06, -3.24909597e-05, -1.21303708e-06, 1, 5.84234215e-07, 3.24909597e-05, -5.84194822e-07, 1)
+end)
+
+Green22.Name = "Green22"
+Green22.Parent = TrashTps
+Green22.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Green22.BorderSizePixel = 0
+Green22.Position = UDim2.new(0.655784249, 0, 0.740845323, 0)
+Green22.Size = UDim2.new(0, 67, 0, 18)
+Green22.Font = Enum.Font.GothamBlack
+Green22.Text = "Green 2"
+Green22.TextColor3 = Color3.fromRGB(255, 255, 255)
+Green22.TextSize = 14.000
+Green22.MouseButton1Down:Connect(function()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(956.575012, 100.99189, 2286.44727, -0.999941468, 7.86461096e-05, 0.0108172102, 7.86747478e-05, 1, 2.2221318e-06, -0.0108172102, 3.07304299e-06, -0.999941468)
+end)
+
+UICorner_42.Name = "UICorner_42"
+UICorner_42.Parent = TrashTps
 
 local ThemesGui = Instance.new("ScreenGui")
 local FullBackGround = Instance.new("Frame")
@@ -3943,6 +4158,33 @@ NotifyScrollingFrame.BackgroundColor3 = BackColor
 NotifyLabel.BackgroundColor3 = BackColor
 NotifyLabel.TextColor3 = TextColor
 NotifyBar.BackgroundColor3 = BackColor
+TrashTps.BackgroundColor3 = BackColor
+TrashLabel.BackgroundColor3 = BackColor
+TrashLabel.TextColor3 = TextColor
+Grey11.BackgroundColor3 = BackColor
+Grey11.TextColor3 = TextColor
+Grey21.BackgroundColor3 = BackColor
+Grey21.TextColor3 = TextColor
+Blue11.BackgroundColor3 = BackColor
+Blue11.TextColor3 = TextColor
+Blue21.BackgroundColor3 = BackColor
+Blue21.TextColor3 = TextColor
+Green11.BackgroundColor3 = BackColor
+Green11.TextColor3 = TextColor
+Green21.BackgroundColor3 = BackColor
+Green21.TextColor3 = TextColor
+Grey12.BackgroundColor3 = BackColor
+Grey12.TextColor3 = TextColor
+Grey22.BackgroundColor3 = BackColor
+Grey22.TextColor3 = TextColor
+Blue12.BackgroundColor3 = BackColor
+Blue12.TextColor3 = TextColor
+Blue22.BackgroundColor3 = BackColor
+Blue22.TextColor3 = TextColor
+Green12.BackgroundColor3 = BackColor
+Green12.TextColor3 = TextColor
+Green22.BackgroundColor3 = BackColor
+Green22.TextColor3 = TextColor
 
 NewCmdLabel("New Themes.")
 
@@ -4748,7 +4990,7 @@ if Arg2 == "off" then
 if AntiSpam then
 AntiSpam = false
 AntiBring = false
-Message("Anti Spam desabled.")
+NewCmdLabel("Anti Spam desabled.")
 Cmds.Respawn()
 end
 end
@@ -5199,7 +5441,7 @@ NewCmdLabel("Anti Fling enabled.")
 end
 end
 if Arg2 == "off" then
-if AntiSit then
+if AntiFling then
 AntiFling = false
 NewCmdLabel("Anti Fling desabled.")
 end
@@ -5248,6 +5490,34 @@ if Connect.SendCommand("unesp") then
 if ESP then
 ESP = false
 NewCmdLabel("ESP desabled.")
+end
+end
+
+if Connect.SendCommand("dtt") then
+if Arg2 == "on" then
+if not DetectTrash then
+DetectTrash = true
+NewCmdLabel("Detect Trash enabled.")
+end
+end
+if Arg2 == "off" then
+if DetectTrash then
+DetectTrash = false
+NewCmdLabel("Detect Trash desabled.")
+end
+end
+if Arg2 == nil then
+if not DetectTrash then
+DetectTrash = true
+NewCmdLabel("Detect Trash enabled.")
+end
+end
+end
+
+if Connect.SendCommand("undtt") then
+if DetectTrash then
+DetectTrash = false
+NewCmdLabel("Detect Trash desabled.")
 end
 end
 
@@ -5881,7 +6151,7 @@ Req = require(Taser.GunStates)
 if Req["CurrentAmmo"] < 1 then
 Cmds.Kill(v)
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
-Message(v.Name..", tased you.",142,66,133,Enum.Font.GothamBlack,21.5)
+NewLabel(v.Name..", tased you.")
 end
 end
 end
@@ -5889,7 +6159,7 @@ end
 if v.Character:FindFirstChild("Taser") then
 Cmds.Kill(v)
 if not v.Character:FindFirstChildOfClass("ForceField", true) and v.Character.Humanoid.Health ~= 0 then
-Message(v.Name..", tased you.",142,66,133,Enum.Font.GothamBlack,21.5)
+NewLabel(v.Name..", tased you.")
 end
 end
 end
@@ -5914,7 +6184,6 @@ end)
 spawn(function()
 while wait() do
 if not DisableAdmin then
-if AntiDoors then
 pcall(function()
 if game:GetService("Lighting"):FindFirstChild("Doors") then
 game:GetService("Lighting").Doors.Parent = workspace
@@ -5932,7 +6201,6 @@ if game:GetService("Lighting"):FindFirstChild("rightDoor") then
 game:GetService("Lighting"):FindFirstChild("rightDoor").Parent = workspace:FindFirstChild("Warehouses")["Warehouse1"].doors
 end
 end)
-end
 end
 end
 end)
@@ -5955,25 +6223,6 @@ end
 LPlayer.Character.Humanoid.Jump = true
 end
 end)
-end
-end
-end
-end)
-
-spawn(function()
-while wait() do
-if not DisableAdmin then
-if AntiFling then
-for i,v in pairs(game.Players:GetPlayers()) do
-pcall(function()
-if v ~= LPlayer then
-local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
-if Distance <= 5 then
-CheckAntiFlingAura = true
-end
-end
-end)
-end
 end
 end
 end
@@ -6201,18 +6450,6 @@ RemoveLife(100)
 end
 if LoopRemoveLife then
 RemoveLife(40)
-end
-end
-end
-end)
-
-spawn(function()
-while wait(.4) do
-if not DisableAdmin then
-if AntiFling then
-if CheckAntiFlingAura then
-CheckAntiFlingAura = false
-end
 end
 end
 end
@@ -6538,32 +6775,47 @@ end
 end
 end)
 
-Run.Stepped:Connect(function()
+spawn(function()
+while wait(.7) do
 if not DisableAdmin then
-if AntiLag then
-pcall(function()
-for i,v in pairs(Players:GetChildren()) do
-Number = 0
-for i2,v2 in pairs(v.Character:GetDescendants()) do
-if v2.Name == "handcuffedGui" then
-Number = Number + 1
-if Number > 1 then
-for i = 1, Number - 2 do
-v2:Destroy()
+TrashTps.Visible = false
 end
 end
+end)
+
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if AntiFling then
+AntiFlingOldNumber = AntiFlingCheckNumber
+wait()
+if AntiFlingOldNumber ~= AntiFlingCheckNumber then
+CheckAntiFlingAura = true
+else
+CheckAntiFlingAura = false
 end
-if v2.Name == "vest" then
-Number = Number + 1
-if Number > 1 then
-for i = 1, Number - 1 do
-v2:Destroy()
-end
-end
+else
+CheckAntiFlingAura = false
 end
 end
 end
 end)
+
+Run.Stepped:Connect(function()
+if not DisableAdmin then
+if AntiLag then
+for i,v in pairs(Players:GetPlayers()) do
+for i2,v2 in pairs(v.Character.Head:GetChildren()) do
+if v2.Name == "handcuffedGui" then
+v2:Destroy()
+end
+end
+for i2,v2 in pairs(v.Character:GetChildren()) do
+if v2.Name == "vest" then
+v2:Destroy()
+end
+end
+end
 end
 if SpamToggle.Text == "Spam on" then
 coroutine.resume(coroutine.create(function()
@@ -6637,6 +6889,28 @@ end
 if CursorId1 ~= nil and CursorId2 ~= nil then
 Mouse.Icon = CursorId1
 Mouse.Icon = CursorId2
+end
+if DetectTrash then
+for i,v in pairs(workspace["Prison_Cafeteria"]["trash bins"]:GetDescendants()) do
+if v:FindFirstChildOfClass("Part") then
+local Distance = (v:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance <= 12 then
+TrashTps.Visible = true
+end
+end
+end
+end
+if AntiFling then
+for i,v in pairs(game.Players:GetPlayers()) do
+pcall(function()
+if v ~= LPlayer then
+local Distance = (v.Character:FindFirstChildOfClass("Part").Position - LPlayer.Character:FindFirstChildOfClass("Part").Position).magnitude
+if Distance < 5 then
+AntiFlingCheckNumber = AntiFlingCheckNumber + 1
+end
+end
+end)
+end
 end
 end
 end)
@@ -6766,6 +7040,9 @@ NewCmdLabel("Anti Arrest enabled.")
 
 AntiDoors = true
 NewCmdLabel("Anti Doors enabled.")
+
+DetectTrash = true
+NewCmdLabel("Detect Trash enabled.")
 
 InfAmmoToggle("on")
 
