@@ -3966,6 +3966,8 @@ CGun("white")
 CustomCursor("white")
 ESPColorFunction("white")
 WindowsColor("white")
+ChatColor("white")
+PlayerListColor("white")
 end
 
 if Color == "black" then
@@ -3978,6 +3980,8 @@ CGun("black")
 CustomCursor("black")
 ESPColorFunction("black")
 WindowsColor("black")
+ChatColor("black")
+PlayerListColor("black")
 end
 
 if Color == "blue" then
@@ -3990,6 +3994,8 @@ CGun("blue")
 CustomCursor("blue")
 ESPColorFunction("blue")
 WindowsColor("blue")
+ChatColor("blue")
+PlayerListColor("blue")
 end
 
 if Color == "red" then
@@ -4002,6 +4008,8 @@ CGun("red")
 CustomCursor("red")
 ESPColorFunction("red")
 WindowsColor("red")
+ChatColor("red")
+PlayerListColor("red")
 end
 
 if Color == "green" then
@@ -4014,6 +4022,8 @@ CGun("green")
 CustomCursor("green")
 ESPColorFunction("green")
 WindowsColor("green")
+ChatColor("green")
+PlayerListColor("green")
 end
 
 if Color == "yellow" then
@@ -4026,6 +4036,8 @@ CGun("yellow")
 CustomCursor("yellow")
 ESPColorFunction("yellow")
 WindowsColor("yellow")
+ChatColor("yellow")
+PlayerListColor("yellow")
 end
 
 if Color == "purple" then
@@ -4038,6 +4050,8 @@ CGun("purple")
 CustomCursor("purple")
 ESPColorFunction("purple")
 WindowsColor("purple")
+ChatColor("purple")
+PlayerListColor("purple")
 end
 
 if Color == "pink" then
@@ -4050,6 +4064,8 @@ CGun("pink")
 CustomCursor("pink")
 ESPColorFunction("pink")
 WindowsColor("pink")
+ChatColor("pink")
+PlayerListColor("pink")
 end
 
 if Color == "orange" then
@@ -4062,6 +4078,8 @@ CGun("orange")
 CustomCursor("orange")
 ESPColorFunction("orange")
 WindowsColor("orange")
+ChatColor("orange")
+PlayerListColor("orange")
 end
 
 if Color == "grey" then
@@ -4074,6 +4092,8 @@ CGun("grey")
 CustomCursor("grey")
 ESPColorFunction("grey")
 WindowsColor("grey")
+ChatColor("grey")
+PlayerListColor("grey")
 end
 
 for i,v in pairs(CmdHandler:GetDescendants()) do
@@ -4614,6 +4634,122 @@ end
 
 NewCmdLabel("New Windows Color.")
 
+end
+
+end
+
+function ChatColor(Color)
+
+if Color == "white" then
+ChatBackColor = Color3.fromRGB(255,255,255)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "black" then
+ChatBackColor = Color3.fromRGB(0,0,0)
+ChatTextColor = Color3.fromRGB(255,255,255)
+end
+
+if Color == "blue" then
+ChatBackColor = Color3.fromRGB(16,42,220)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "red" then
+ChatBackColor = Color3.fromRGB(255,0,0)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "green" then
+ChatBackColor = Color3.fromRGB(0, 255, 0)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "yellow" then
+ChatBackColor = Color3.fromRGB(249,214,46)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "purple" then
+ChatBackColor = Color3.fromRGB(107,50,124)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "pink" then
+ChatBackColor = Color3.fromRGB(255,0,191)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "orange" then
+ChatBackColor = Color3.fromRGB(255,176,0)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "grey" then
+ChatBackColor = Color3.fromRGB(87,88,87)
+ChatTextColor = Color3.fromRGB(0,0,0)
+end
+
+if ChatBackColor ~= nil and ChatTextColor ~= nil then
+NewCmdLabel("New Chat Color.")
+end
+
+end
+
+function PlayerListColor(Color)
+
+if Color == "white" then
+PlayerListBackColor = Color3.fromRGB(255,255,255)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "black" then
+PlayerListBackColor = Color3.fromRGB(0,0,0)
+PlayerListTextColor = Color3.fromRGB(255,255,255)
+end
+
+if Color == "blue" then
+PlayerListBackColor = Color3.fromRGB(16,42,220)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "red" then
+PlayerListBackColor = Color3.fromRGB(255,0,0)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "green" then
+PlayerListBackColor = Color3.fromRGB(0, 255, 0)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "yellow" then
+PlayerListBackColor = Color3.fromRGB(249,214,46)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "purple" then
+PlayerListBackColor = Color3.fromRGB(107,50,124)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "pink" then
+PlayerListBackColor = Color3.fromRGB(255,0,191)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "orange" then
+PlayerListBackColor = Color3.fromRGB(255,176,0)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if Color == "grey" then
+PlayerListBackColor = Color3.fromRGB(87,88,87)
+PlayerListTextColor = Color3.fromRGB(0,0,0)
+end
+
+if PlayerListBackColor ~= nil and PlayerListTextColor ~= nil then
+NewCmdLabel("New Player List Color.")
 end
 
 end
@@ -5601,6 +5737,44 @@ end
 
 if Connect.SendCommand("wndcolor") then
 WindowsColor(Arg2:lower())
+end
+
+if Connect.SendCommand("chtcolor") then
+ChatColor(Arg2:lower())
+end
+
+if Connect.SendCommand("anticlothing") then
+if Arg2 == "on" then
+if not AntiClothing then
+AntiClothing = true
+NewCmdLabel("Anti Clothing enabled.")
+end
+end
+if Arg2 == "off" then
+if AntiClothing then
+AntiClothing = false
+NewCmdLabel("Anti Clothing desabled.")
+Cmds.Respawn()
+end
+end
+if Arg2 == nil then
+if not AntiClothing then
+AntiClothing = true
+NewCmdLabel("Anti Clothing enabled.")
+end
+end
+end
+
+if Connect.SendCommand("unanticlothing") then
+if AntiClothing then
+AntiClothing = false
+NewCmdLabel("Anti Clothing desabled.")
+Cmds.Respawn()
+end
+end
+
+if Connect.SendCommand("pllcolor") then
+PlayerListColor(Arg2:lower())
 end
 
 if Connect.SendCommand("sa") then
@@ -6896,6 +7070,33 @@ end
 end
 end)
 
+spawn(function()
+while wait() do
+if not DisableAdmin then
+if AntiClothing then
+pcall(function()
+if LPlayer.Character:FindFirstChildOfClass("Shirt") then
+if LPlayer.Character:FindFirstChildOfClass("Shirt").ShirtTemplate == "http://www.roblox.com/asset/?id=106405750" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer(nil,BrickColor.Random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+TeamEvent:FireServer("Bright orange")
+end
+end
+if LPlayer.Character:FindFirstChildOfClass("Shirt") then
+if LPlayer.Character:FindFirstChildOfClass("Shirt").ShirtTemplate == "http://www.roblox.com/asset/?id=132601069" then
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
+workspace.Remote.loadchar:InvokeServer(nil,BrickColor.Random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+TeamEvent:FireServer("Bright blue")
+end
+end
+end)
+end
+end
+end
+end)
+
 Run.Stepped:Connect(function()
 if not DisableAdmin then
 if AntiLag then
@@ -7005,6 +7206,58 @@ AntiFlingCheckNumber = AntiFlingCheckNumber + 1
 end
 end
 end)
+end
+end
+if ChatBackColor ~= nil and ChatTextColor ~= nil then
+for i,v in pairs(PlayerGui.Chat:GetDescendants()) do
+if v.ClassName == "Frame" then
+v.BackgroundColor3 = ChatBackColor
+end
+if v.ClassName == "TextLabel" then
+v.BackgroundColor3 = ChatBackColor
+v.TextColor3 = ChatTextColor
+end
+if v.ClassName == "TextButton" then
+v.BackgroundColor3 = ChatBackColor
+v.TextColor3 = ChatTextColor
+end
+if v.ClassName == "TextBox" then
+v.BackgroundColor3 = ChatBackColor
+v.TextColor3 = ChatTextColor
+v.TextStrokeColor3 = ChatTextColor
+v.TextStrokeTransparency = .9
+v.TextTransparency = 0
+end
+end
+end
+if PlayerListBackColor ~= nil and PlayerListTextColor ~= nil then
+for i,v in pairs(game.CoreGui.PlayerList:GetDescendants()) do
+if v.ClassName == "Frame" then
+v.BackgroundColor3 = PlayerListBackColor
+end
+if v.ClassName == "TextLabel" then
+v.BackgroundColor3 = PlayerListBackColor
+v.TextColor3 = PlayerListTextColor
+v.Font = Enum.Font.GothamBlack
+v.TextTransparency = 0
+end
+if v.ClassName == "TextButton" then
+v.BackgroundColor3 = PlayerListBackColor
+v.TextColor3 = PlayerListTextColor
+v.Font = Enum.Font.GothamBlack
+v.TextTransparency = 0
+end
+if v.ClassName == "TextBox" then
+v.BackgroundColor3 = PlayerListBackColor
+v.TextColor3 = PlayerListTextColor
+v.TextStrokeColor3 = PlayerListTextColor
+v.Font = Enum.Font.GothamBlack
+v.TextStrokeTransparency = .9
+v.TextTransparency = 0
+end
+if v.ClassName == "ScrollingFrame" then
+v.BackgroundColor3 = PlayerListBackColor
+end
 end
 end
 end
