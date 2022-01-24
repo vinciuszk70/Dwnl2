@@ -3966,8 +3966,6 @@ CGun("white")
 CustomCursor("white")
 ESPColorFunction("white")
 WindowsColor("white")
-ChatColor("white")
-PlayerListColor("white")
 end
 
 if Color == "black" then
@@ -3980,8 +3978,6 @@ CGun("black")
 CustomCursor("black")
 ESPColorFunction("black")
 WindowsColor("black")
-ChatColor("black")
-PlayerListColor("black")
 end
 
 if Color == "blue" then
@@ -3994,8 +3990,6 @@ CGun("blue")
 CustomCursor("blue")
 ESPColorFunction("blue")
 WindowsColor("blue")
-ChatColor("blue")
-PlayerListColor("blue")
 end
 
 if Color == "red" then
@@ -4008,8 +4002,6 @@ CGun("red")
 CustomCursor("red")
 ESPColorFunction("red")
 WindowsColor("red")
-ChatColor("red")
-PlayerListColor("red")
 end
 
 if Color == "green" then
@@ -4022,8 +4014,6 @@ CGun("green")
 CustomCursor("green")
 ESPColorFunction("green")
 WindowsColor("green")
-ChatColor("green")
-PlayerListColor("green")
 end
 
 if Color == "yellow" then
@@ -4036,8 +4026,6 @@ CGun("yellow")
 CustomCursor("yellow")
 ESPColorFunction("yellow")
 WindowsColor("yellow")
-ChatColor("yellow")
-PlayerListColor("yellow")
 end
 
 if Color == "purple" then
@@ -4050,8 +4038,6 @@ CGun("purple")
 CustomCursor("purple")
 ESPColorFunction("purple")
 WindowsColor("purple")
-ChatColor("purple")
-PlayerListColor("purple")
 end
 
 if Color == "pink" then
@@ -4064,8 +4050,6 @@ CGun("pink")
 CustomCursor("pink")
 ESPColorFunction("pink")
 WindowsColor("pink")
-ChatColor("pink")
-PlayerListColor("pink")
 end
 
 if Color == "orange" then
@@ -4078,8 +4062,6 @@ CGun("orange")
 CustomCursor("orange")
 ESPColorFunction("orange")
 WindowsColor("orange")
-ChatColor("orange")
-PlayerListColor("orange")
 end
 
 if Color == "grey" then
@@ -4092,8 +4074,6 @@ CGun("grey")
 CustomCursor("grey")
 ESPColorFunction("grey")
 WindowsColor("grey")
-ChatColor("grey")
-PlayerListColor("grey")
 end
 
 for i,v in pairs(CmdHandler:GetDescendants()) do
