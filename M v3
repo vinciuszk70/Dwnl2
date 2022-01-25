@@ -41,6 +41,8 @@ local NotifyCanvasSize = 2
 local AntiFlingCheckNumber = 0
 local AntiFlingOldNumber = 0
 local BlockColor = nil
+local FlySpeed = 2
+
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
 Box.Anchored = true
@@ -48,6 +50,19 @@ Box.CanCollide = true
 Box.Transparency = 100
 Box.Size = Vector3.new(10,10,10)
 Box.Position = Vector3.new(0,5000,0)
+
+local BodyGyro = Instance.new("BodyGyro", LPlayer.Character.Torso)
+BodyGyro.P = 0
+BodyGyro.MaxTorque = Vector3.new(0,0,0)
+BodyGyro.CFrame = LPlayer.Character.Torso.CFrame
+
+local BodyVelocity = Instance.new("BodyVelocity", LPlayer.Character.Torso)
+BodyVelocity.MaxForce = Vector3.new(0,0,0)
+BodyVelocity.Velocity = Vector3.new(0,0,0)
+
+local FlyControls = {"w","s","a","d","e","q"}
+local FlyControlInd = {1,-1,-1,1,-1,1}
+local FlyControlStatus = {w = 0, s = 0, a = 0, d = 0, e = 0, q = 0}
 
 local BrickColors = {
 'White', 'Grey', 'Light yellow', 'Brick yellow',
@@ -4738,6 +4753,74 @@ end
 
 end
 
+function StartFly()
+
+pcall(function()
+BodyGyro:Destroy()
+BodyVelocity:Destroy()
+BodyGyro = nil
+BodyVelocity = nil
+end)
+
+pcall(function()
+BodyGyro = Instance.new("BodyGyro", LPlayer.Character.Torso)
+BodyGyro.P = 0
+BodyGyro.MaxTorque = Vector3.new(0,0,0)
+BodyGyro.CFrame = LPlayer.Character.Torso.CFrame
+
+BodyVelocity = Instance.new("BodyVelocity", LPlayer.Character.Torso)
+BodyVelocity.MaxForce = Vector3.new(0,0,0)
+BodyVelocity.Velocity = Vector3.new(0,0,0)
+
+Flying = true
+BodyGyro.P = 9e4
+BodyGyro.MaxTorque = Vector3.new(9e4,9e4,9e4)
+BodyGyro.CFrame = LPlayer.Character.Torso.CFrame
+
+BodyVelocity.MaxForce = Vector3.new(9e4,9e4,9e4)
+BodyVelocity.Velocity = Vector3.new(0,0,0)
+end)
+
+end
+
+function EndFly()
+
+pcall(function()
+Flying = false
+
+BodyGyro.P = 0
+BodyGyro.MaxTorque = Vector3.new(0,0,0)
+BodyGyro.CFrame = LPlayer.Character.Torso.CFrame
+
+BodyVelocity.MaxForce = Vector3.new(0,0,0)
+BodyVelocity.Velocity = Vector3.new(0,0,0)
+LPlayer.Character.Humanoid.PlatformStand = false
+BodyGyro:Destroy()
+BodyVelocity:Destroy()
+BodyGyro = nil
+BodyVelocity = nil
+end)
+
+end
+
+function DesableAdmin()
+if ReCheckFly or Flying then
+ReCheckFly = false
+EndFly()
+end
+Cmds.Respawn()
+MsdAdminV2:Destroy()
+ThemesGui:Destroy()
+DisableAdmin = true
+RemoveOldScript:Destroy()
+end
+
+function ReloadAdmin()
+pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dwnl2/Dwnl2/main/M%20v3",true))()
+end)
+end
+
 function NewCmdLabel(Text)
 local Clone = CmdLabel:Clone()
 Clone.Text = Text
@@ -5807,6 +5890,35 @@ if Player ~= nil and Player.Name ~= "viniciuszk70"  and AimLocked[Player.UserId]
 AimLocked[Player.UserId] = nil
 NewCmdLabel("LockAim "..Player.Name.." removed.")
 end
+end
+
+if Connect.SendCommand("fly") then
+if Arg2 == "on" then
+if not Flying or not ReCheckFly then
+ReCheckFly = true
+StartFly()
+end
+end
+if Arg2 == "off" then
+if Flying or ReCheckFly then
+ReCheckFly = false
+EndFly()
+end
+end
+end
+
+if Connect.SendCommand("flyspeed") then
+if Arg2 then
+FlySpeed = Arg2
+end
+end
+
+if Connect.SendCommand("exit") then
+DesableAdmin()
+end
+
+if Connect.SendCommand("reload") then
+ReloadAdmin()
 end
 
 if Connect.SendCommand("nex") then
@@ -7254,6 +7366,11 @@ pcall(function()
 TweenService:Create(Camera, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, FindPlayerToAimBot(v.Player).Character["Torso"].Position)}):Play()
 end)
 end
+if Flying then
+BodyGyro.CFrame = CFrame.new(LPlayer.Character.Torso.Position, workspace.CurrentCamera.CFrame.p) * CFrame.Angles(0,math.rad(180),0)
+BodyVelocity.Velocity = ((BodyGyro.CFrame.lookVector + Vector3.new(0,0.25,0)) * (FlyControlStatus['w'] + FlyControlStatus['s'])) + ((BodyGyro.CFrame * CFrame.new(FlyControlStatus['a'] + FlyControlStatus['d'], (FlyControlStatus['q'] + FlyControlStatus['e']), 0).p) - (BodyGyro.CFrame.p))
+LPlayer.Character.Humanoid.PlatformStand = true
+end
 end
 end)
 
@@ -7351,10 +7468,41 @@ end
 end)
 
 Mouse.Button1Down:connect(function()
+if not DisableAdmin then
 if ClickTp then
 local Pos = Mouse.Hit + Vector3.new(0,2.5,0)
 Pos = CFrame.new(Pos.X,Pos.Y,Pos.Z)
 LPlayer.Character.HumanoidRootPart.CFrame = Pos
+end
+end
+end)
+
+Mouse.KeyDown:Connect(function(Key)
+if not DisableAdmin then
+for i,v in pairs(FlyControls) do
+if Key == v then
+FlyControlStatus[Key] = FlyControlInd[i] * FlySpeed * 25
+end
+end
+end
+end)
+
+Mouse.KeyUp:Connect(function(Key)
+if not DisableAdmin then
+for i,v in pairs(FlyControls) do
+if Key == v then
+FlyControlStatus[Key] = FlyControlInd[i] * 0
+end
+end
+end
+end)
+
+LPlayer.CharacterAdded:Connect(function()
+if not DisableAdmin then
+if ReCheckFly then
+wait()
+StartFly()
+end
 end
 end)
 
@@ -7389,10 +7537,6 @@ end
 getgenv().RemoveOldScript = function()
 pcall(function()
 Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,21.5)
-Cmds.Respawn()
-MsdAdminV2:Destroy()
-ThemesGui:Destroy()
-DisableAdmin = true
-RemoveOldScript:Destroy()
+DesableScript()
 end)
 end
