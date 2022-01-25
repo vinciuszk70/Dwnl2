@@ -5917,10 +5917,6 @@ if Connect.SendCommand("exit") then
 DesableAdmin()
 end
 
-if Connect.SendCommand("reload") then
-ReloadAdmin()
-end
-
 if Connect.SendCommand("nex") then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.266663, 99.9899826, 2397.16089, 0.726921022, -2.84909412e-08, 0.686721087, -5.75977843e-09, 1, 4.75853241e-08, -0.686721087, -3.85461334e-08, 0.726921022)
 NewCmdLabel("Teleported.")
