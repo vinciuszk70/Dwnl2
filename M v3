@@ -143,10 +143,6 @@ if LPlayer.Name == "2kRe6xx" then
 repeat until nil
 end
 
-if LPlayer.Name == "33_Night" then
-repeat until nil
-end
-
 -- Guis --
 
 local MsdAdminV2 = Instance.new("ScreenGui")
