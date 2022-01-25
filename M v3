@@ -4804,6 +4804,29 @@ end)
 end
 
 function DesableAdmin()
+HitBox = false
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+v.Character.HumanoidRootPart.Transparency = 1
+v.Character.HumanoidRootPart.Material = "Plastic"
+v.Character.HumanoidRootPart.CanCollide = true
+end)
+end
+end
+ESP = false
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+for i2,v2 in pairs(v.Character:GetChildren()) do
+if v ~= LPlayer then
+if v2:FindFirstChild("BoxHandle") then
+v2.BoxHandle:Destroy()
+end
+end
+end
+end
+end)
 if ReCheckFly or Flying then
 ReCheckFly = false
 EndFly()
@@ -4813,12 +4836,6 @@ MsdAdminV2:Destroy()
 ThemesGui:Destroy()
 DisableAdmin = true
 RemoveOldScript:Destroy()
-end
-
-function ReloadAdmin()
-pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Dwnl2/Dwnl2/main/M%20v3",true))()
-end)
 end
 
 function NewCmdLabel(Text)
@@ -5527,6 +5544,16 @@ end
 if Arg2 == "off" then
 if HitBox then
 HitBox = false
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+v.Character.HumanoidRootPart.Transparency = 1
+v.Character.HumanoidRootPart.Material = "Plastic"
+v.Character.HumanoidRootPart.CanCollide = true
+end)
+end
+end
 NewCmdLabel("HitBox desabled.")
 end
 end
@@ -5541,6 +5568,16 @@ end
 if Connect.SendCommand("unhitbox") then
 if HitBox then
 HitBox = false
+for i,v in pairs(Players:GetPlayers()) do
+if v ~= LPlayer then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+v.Character.HumanoidRootPart.Transparency = 1
+v.Character.HumanoidRootPart.Material = "Plastic"
+v.Character.HumanoidRootPart.CanCollide = true
+end)
+end
+end
 NewCmdLabel("HitBox desabled.")
 end
 end
@@ -5752,6 +5789,17 @@ end
 if Arg2 == "off" then
 if ESP then
 ESP = false
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+for i2,v2 in pairs(v.Character:GetChildren()) do
+if v ~= LPlayer then
+if v2:FindFirstChild("BoxHandle") then
+v2.BoxHandle:Destroy()
+end
+end
+end
+end
+end)
 NewCmdLabel("ESP desabled.")
 end
 end
@@ -5766,6 +5814,17 @@ end
 if Connect.SendCommand("unesp") then
 if ESP then
 ESP = false
+pcall(function()
+for i,v in pairs(Players:GetPlayers()) do
+for i2,v2 in pairs(v.Character:GetChildren()) do
+if v ~= LPlayer then
+if v2:FindFirstChild("BoxHandle") then
+v2.BoxHandle:Destroy()
+end
+end
+end
+end
+end)
 NewCmdLabel("ESP desabled.")
 end
 end
@@ -6362,7 +6421,7 @@ end
 end)
 
 spawn(function()
-while wait(.3) do
+while wait(1.5) do
 if not DisableAdmin then
 if AntiShield then
 for i,v in pairs(Players:GetPlayers()) do
@@ -6465,17 +6524,6 @@ end)
 end
 end
 end)
-else
-for i,v in pairs(Players:GetPlayers()) do
-if v ~= LPlayer then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
-v.Character.HumanoidRootPart.Transparency = 1
-v.Character.HumanoidRootPart.Material = "Plastic"
-v.Character.HumanoidRootPart.CanCollide = true
-end)
-end
-end
 end
 end
 end
@@ -7015,18 +7063,6 @@ end
 end
 else
 for i2,v2 in pairs(v.Character:GetChildren()) do
-if v2:FindFirstChild("BoxHandle") then
-v2.BoxHandle:Destroy()
-end
-end
-end
-end
-end)
-else
-pcall(function()
-for i,v in pairs(Players:GetPlayers()) do
-for i2,v2 in pairs(v.Character:GetChildren()) do
-if v ~= LPlayer then
 if v2:FindFirstChild("BoxHandle") then
 v2.BoxHandle:Destroy()
 end
