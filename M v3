@@ -143,6 +143,10 @@ if LPlayer.Name == "2kRe6xx" then
 repeat until nil
 end
 
+if LPlayer.Name == "33_Night" then
+repeat until nil
+end
+
 -- Guis --
 
 local MsdAdminV2 = Instance.new("ScreenGui")
@@ -3374,30 +3378,30 @@ end
 end)
 end
 
-function Bring(Player, Position)
+function Bring(Player,Position)
 pcall(function()
 if Player == nil and Player.Name ~= "viniciuszk70" and Position == nil then return end
-
-NewCmdLabel("Bring "..Player.Name..".")
-
-local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
-
 if LPlayer.TeamColor.Name == "Bright blue" then
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 local SaveCam = workspace.CurrentCamera.CFrame
-workspace.Remote.loadchar:InvokeServer(nil, "12")
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.Random().Name)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
 workspace.CurrentCamera.CFrame = SaveCam
-end
-
+else
+local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
 workspace.Remote.loadchar:InvokeServer()
+if LPlayer.TeamColor.Name == "Bright orange" then
 wait(.1)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+else
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
+end
 ItemHandler:InvokeServer(ItemSingle["Hammer"].ITEMPICKUP)
 LPlayer.Character.Humanoid.Name = "1"
-local C = LPlayer.Character["1"]:Clone()
-C.Name = "Humanoid"
-C.Parent = LPlayer.Character
+local HumanoidClone = LPlayer.Character["1"]:Clone()
+HumanoidClone.Name = "Humanoid"
+HumanoidClone.Parent = LPlayer.Character
 LPlayer.Character["1"]:Destroy()
 game.Workspace.CurrentCamera.CameraSubject = LPlayer.Character
 LPlayer.Character.Animate.Disabled = true
@@ -3405,19 +3409,23 @@ wait()
 LPlayer.Character.Animate.Disabled = false
 LPlayer.Character.Humanoid.DisplayDistanceType = "None"
 LPlayer:FindFirstChild("Backpack"):FindFirstChild("Hammer").Parent = LPlayer.Character
-local STOP = 0
+local Count = 0
 repeat wait(.1)
-STOP = STOP + 1
+Count = Count + 1
 LPlayer.Character.HumanoidRootPart.CFrame = Player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0.75)
-until (not LPlayer.Character:FindFirstChild("Hammer") or not LPlayer.Character.HumanoidRootPart or not Player.Character.HumanoidRootPart or not LPlayer.Character.HumanoidRootPart.Parent or not Player.Character.HumanoidRootPart.Parent or STOP > 500) and STOP > 3
-local STOP_2 = 0
+until (not LPlayer.Character:FindFirstChild("Hammer") or not LPlayer.Character.HumanoidRootPart or not Player.Character.HumanoidRootPart or not LPlayer.Character.HumanoidRootPart.Parent or not Player.Character.HumanoidRootPart.Parent or Player.Character.Humanoid.Health == 0 or Count > 500) and Count > 3
+local Count_2 = 0
 repeat wait()
-STOP_2 = STOP_2 + 1
+Count_2 = Count_2 + 1
 LPlayer.Character.HumanoidRootPart.CFrame = Position
-until STOP_2 > 10
+until Count_2 > 10
 workspace.Remote.loadchar:InvokeServer()
+if LPlayer.TeamColor.Name == "Bright orange" then
 wait(.1)
 LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+else
+LPlayer.Character.HumanoidRootPart.CFrame = SaveFrame
+end
 end)
 end
 
