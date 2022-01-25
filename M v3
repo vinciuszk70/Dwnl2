@@ -7537,6 +7537,6 @@ end
 getgenv().RemoveOldScript = function()
 pcall(function()
 Message("The script has been rerun, the old toggles and loops have been removed to prevent bugs.",70,70,200,Enum.Font.GothamBlack,21.5)
-DesableScript()
+DesableAdmin()
 end)
 end
