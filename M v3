@@ -5,6 +5,8 @@ local Lk = {}
 local Sa = {}
 local UltraSa = {}
 local AimLocked = {}
+local Follow = {}
+local View = {}
 local Players = game.Players
 local LPlayer = game.Players.LocalPlayer
 local Run = game:GetService("RunService")
@@ -23,6 +25,7 @@ local Camera = workspace.CurrentCamera
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local Marketplace = game:GetService("MarketplaceService")
+local MeleeEvent = Replicate:FindFirstChild("meleeEvent")
 local CheckGamePass = Marketplace:UserOwnsGamePassAsync(tonumber((LPlayer.CharacterAppearance):split('=')[#((LPlayer.CharacterAppearance):split('='))]), 96651)
 local SayMessageRequest = Replicate.DefaultChatSystemChatEvents.SayMessageRequest
 local SaveFrame = LPlayer.Character.HumanoidRootPart.CFrame
@@ -42,6 +45,8 @@ local AntiFlingCheckNumber = 0
 local AntiFlingOldNumber = 0
 local BlockColor = nil
 local FlySpeed = 2
+local Punching = false
+local PunchCoolDown = false
 
 local Box = Instance.new('Part',workspace)
 Box.Name = "Box"
@@ -4838,6 +4843,138 @@ DisableAdmin = true
 RemoveOldScript:Destroy()
 end
 
+function Times(Time)
+
+if Time == "day" or Time == "night" or Time == "off" then
+
+if Time == "day" then
+
+if Night then
+Night = false
+end
+
+Day = true
+
+end
+
+if Time == "night" then
+
+if Day then
+Day = false
+end
+
+Night = true
+
+end
+
+if Time == "off" then
+
+if Day or Night then
+
+Day = false
+Night = false
+
+end
+
+end
+
+NewCmdLabel("New Time")
+
+end
+
+end
+
+function Punch(Power)
+
+pcall(function()
+
+PunchCoolDown = true
+
+local PunchPart = Instance.new("Part",LPlayer.Character)
+PunchPart.Transparency = 1
+PunchPart.Size = Vector3.new(6,6,4)
+PunchPart.CanCollide = false
+
+local PunchPart_2 = Instance.new("Weld",PunchPart)
+PunchPart_2.Part0 = LPlayer.Character.Torso
+PunchPart_2.Part1 = PunchPart
+PunchPart_2.C1 = CFrame.new(0,0,2)
+
+PunchPart.Touched:connect(function(Hit)
+if Players:FindFirstChild(Hit.Parent.Name) then
+local Player = Players:FindFirstChild(Hit.Parent.Name) 
+if Player.Name ~= LPlayer.Name then
+PunchPart:Destroy()
+
+for i = 1,Power do
+MeleeEvent:FireServer(Player)
+end
+end
+end
+end)
+
+wait(.5)
+
+PunchCoolDown = false
+
+PunchPart:Destroy()
+
+end)
+
+end
+
+function BringCars()
+pcall(function()
+for i,v in next, getgc() do
+if type(v) == "function" and getfenv(v).script and getfenv(v).script == LPlayer.Character.ClientInputHandler then 
+for i2,v2 in next, debug.getupvalues(v) do 
+if type(v2) == "number" then 
+debug.setupvalue(v, i2, 10000)
+end
+end
+end
+end
+for i,v in pairs(game:GetService("Workspace")["Prison_ITEMS"].buttons:GetDescendants()) do
+if v.Parent.Name == "Car Spawner" then
+if v.Name == "Car Spawner" then
+workspace.Remote.ItemHandler:InvokeServer(v)
+end
+end
+end
+wait(1)
+TeleportCar = true
+wait(2)
+TeleportCar = false
+for i,v in pairs(game:GetService("Workspace")["CarContainer"]:GetDescendants()) do
+if v.ClassName == "Seat" then
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Jump = true
+end
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+end
+end
+for i,v in pairs(game:GetService("Workspace")["CarContainer"]:GetDescendants()) do
+if v.ClassName == "Seat" then
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Jump = true
+end
+wait(.1)
+LPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+end
+end
+wait(.3)
+if LPlayer.Character.Humanoid.Sit == true then
+LPlayer.Character.Humanoid.Jump = true
+wait()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(760,100,2474.7648925781)
+else
+wait()
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(760,100,2474.7648925781)
+end
+end)
+end
+
 function NewCmdLabel(Text)
 local Clone = CmdLabel:Clone()
 Clone.Text = Text
@@ -5328,7 +5465,15 @@ BringT(Arg2:lower())
 
 else
 
+if Arg2 == "cars" then
+
+BringCars()
+
+else
+
 Bring(FindPlayer(Arg2), LPlayer.Character.HumanoidRootPart.CFrame)
+
+end
 
 end
 
@@ -5956,24 +6101,140 @@ if Arg2 == "on" then
 if not Flying or not ReCheckFly then
 ReCheckFly = true
 StartFly()
+NewCmdLabel("Fly enabled.")
 end
 end
 if Arg2 == "off" then
 if Flying or ReCheckFly then
 ReCheckFly = false
 EndFly()
+NewCmdLabel("Fly desabled.")
 end
+end
+end
+
+if Connect.SendCommand("unfly") then
+if Flying or ReCheckFly then
+ReCheckFly = false
+EndFly()
+NewCmdLabel("Fly desabled.")
 end
 end
 
 if Connect.SendCommand("flyspeed") then
 if Arg2 then
 FlySpeed = Arg2
+NewCmdLabel("New Fly Speed.")
 end
 end
 
 if Connect.SendCommand("exit") then
 DesableAdmin()
+end
+
+if Connect.SendCommand("follow") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not Follow[Player.UserId] then
+Follow[Player.UserId] = {Player = Player}
+NewCmdLabel("Follow "..Player.Name.." added.")
+end
+end
+
+if Connect.SendCommand("unfollow") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70"  and Follow[Player.UserId] then
+Follow[Player.UserId] = nil
+NewCmdLabel("Follow "..Player.Name.." removed.")
+end
+end
+
+if Connect.SendCommand("noclip") then
+if Arg2 == "on" then
+if not Noclip then
+Noclip = true
+NewCmdLabel("Noclip enabled.")
+end
+end
+if Arg2 == "off" then
+if Noclip then
+Noclip = false
+NewCmdLabel("Noclip desabled.")
+end
+end
+end
+
+if Connect.SendCommand("clip") then
+if Noclip then
+Noclip = false
+NewCmdLabel("Noclip desabled.")
+end
+end
+
+if Connect.SendCommand("view") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70" and not View[Player.UserId] then
+View[Player.UserId] = {Player = Player}
+NewCmdLabel("Watching "..Player.Name.." added.")
+end
+end
+
+if Connect.SendCommand("unview") then
+local Player = FindPlayer(Arg2)
+if Player ~= nil and Player.Name ~= "viniciuszk70"  and View[Player.UserId] then
+View[Player.UserId] = nil
+NewCmdLabel("Watching "..Player.Name.." removed.")
+pcall(function()
+workspace.CurrentCamera.CameraSubject = LPlayer.Character.Head
+end)
+end
+end
+
+if Connect.SendCommand("time") then
+Times(Arg2:lower())
+end
+
+if Connect.SendCommand("sp") then
+if Arg2 == "on" then
+if not SuperPunch then
+SuperPunch = true
+NewCmdLabel("Super Punch enabled.")
+end
+end
+if Arg2 == "off" then
+if SuperPunch then
+SuperPunch = false
+NewCmdLabel("Super Punch desabled.")
+end
+end
+end
+
+if Connect.SendCommand("unsp") then
+if SuperPunch then
+SuperPunch = false
+NewCmdLabel("Super Punch desabled.")
+end
+end
+
+if Connect.SendCommand("fp") then
+if Arg2 == "on" then
+if not FastPunch then
+FastPunch = true
+NewCmdLabel("Fast Punch enabled.")
+end
+end
+if Arg2 == "off" then
+if FastPunch then
+FastPunch = false
+NewCmdLabel("Fast Punch desabled.")
+end
+end
+end
+
+if Connect.SendCommand("unfp") then
+if FastPunch then
+FastPunch = false
+NewCmdLabel("Fast Punch desabled.")
+end
 end
 
 if Connect.SendCommand("nex") then
@@ -6470,11 +6731,17 @@ if not DisableAdmin then
 if AntiSpam then
 pcall(function()
 if LPlayer.TeamColor.Name == "Really red" then
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
 workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
 end
 if LPlayer.Character.Head:FindFirstChild("handcuffedGui") then
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
+LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
+workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
 workspace.Remote.loadchar:InvokeServer(nil, BrickColor.random().Name)
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(984.547302, 99.9899826, 2361.12964, -0.0235612169, 3.15658717e-08, 0.999722421, 6.90367585e-08, 1, -2.99475964e-08, -0.999722421, 6.83119907e-08, -0.0235612169)
@@ -7388,6 +7655,51 @@ v.BackgroundColor3 = PlayerListBackColor
 end
 end
 end
+for i,v in pairs(Follow) do
+if v.Player ~= nil then
+pcall(function()
+LPlayer.Character.HumanoidRootPart.CFrame = v.Player.Character.HumanoidRootPart.CFrame + v.Player.Character.HumanoidRootPart.CFrame.lookVector * -1.7
+end)
+end
+end
+if Noclip then
+pcall(function()
+LPlayer.Character.Head.CanCollide = false
+LPlayer.Character.Torso.CanCollide = false
+end)
+end
+for i,v in pairs(View) do
+pcall(function()
+workspace.CurrentCamera.CameraSubject = v.Player.Character.Head
+end)
+end
+if Day then
+game.Lighting.FogEnd = 100000
+game.Lighting.FogStart = 0
+game.Lighting.ClockTime = 14
+game.Lighting.Brightness = 2
+game.Lighting.GlobalShadows = true
+end
+if Night then
+game.Lighting.FogEnd = 100000
+game.Lighting.FogStart = 0
+game.Lighting.ClockTime = 2
+game.Lighting.Brightness = 0
+end
+if FastPunch then
+pcall(function()
+getsenv(LPlayer.Character.ClientInputHandler).cs.isFighting = false
+end)
+end
+if TeleportCar then
+pcall(function()
+for i,v in pairs(game:GetService("Workspace")["CarContainer"]:GetChildren()) do
+if v.ClassName == "Model" then
+v:MoveTo(Vector3.new(745,270,2474.7648925781))
+end
+end
+end)
+end
 end
 end)
 
@@ -7534,6 +7846,25 @@ if not DisableAdmin then
 if ReCheckFly then
 wait()
 StartFly()
+end
+end
+end)
+
+Mouse.KeyDown:Connect(function(Key)
+if not DisableAdmin then
+if SuperPunch then
+if not PunchCoolDown then
+if Key:lower() == "f" then
+Punch(15)
+end
+end
+end
+if FastPunch then
+if not PunchCoolDown then
+if Key:lower() == "f" then
+Punch(1)
+end
+end
 end
 end
 end)
