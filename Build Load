@@ -11,18 +11,18 @@ Box.Transparency = 100
 Box.Size = Vector3.new(10,1,10)
 Box.Position = Vector3.new(0,5000,0)
 
-local BuildABoatGui = Instance.new("ScreenGui")
+local BuildABoatGuiV2 = Instance.new("ScreenGui")
 local BuildFrame = Instance.new("Frame")
 local BuildLabel = Instance.new("TextLabel")
 local Close = Instance.new("TextButton")
 local AutoFarmToggle = Instance.new("TextButton")
 
-BuildABoatGui.Name = "BuildABoatGui"
-BuildABoatGui.Parent = game.CoreGui
-BuildABoatGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+BuildABoatGuiV2.Name = "BuildABoatGuiV2"
+BuildABoatGuiV2.Parent = game.CoreGui
+BuildABoatGuiV2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 BuildFrame.Name = "BuildFrame"
-BuildFrame.Parent = BuildABoatGui
+BuildFrame.Parent = BuildABoatGuiV2
 BuildFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 BuildFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
 BuildFrame.BorderSizePixel = 2
@@ -36,9 +36,9 @@ BuildLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
 BuildLabel.BorderSizePixel = 2
 BuildLabel.Size = UDim2.new(0, 262, 0, 23)
 BuildLabel.Font = Enum.Font.GothamBlack
-BuildLabel.Text = "Build A Boat Auto Farm - Made By Loaded"
+BuildLabel.Text = "Build A Boat Auto Farm V2 - Made By Loaded"
 BuildLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-BuildLabel.TextSize = 12.000
+BuildLabel.TextSize = 11.000
 
 Close.Name = "Close"
 Close.Parent = BuildFrame
@@ -56,7 +56,7 @@ if AutoFarm then
 LPlayer.Character:ClearAllChildren()
 end
 AutoFarm = false
-BuildABoatGui:Destroy()
+BuildABoatGuiV2:Destroy()
 end)
 
 AutoFarmToggle.Name = "AutoFarmToggle"
@@ -120,6 +120,16 @@ Number = 800
 end
 end
 end
+end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if AutoFarm then
+pcall(function()
+workspace.ClaimRiverResultsGold:FireServer()
 end)
 end
 end
