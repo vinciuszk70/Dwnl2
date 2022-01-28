@@ -114,10 +114,15 @@ else
 NormalTPBox = false
 if LPlayer.Character.HumanoidRootPart.Position.Y < -47 then
 LPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-55.9830437, -360.406219, 9486.6543, -0.999561131, -5.08365403e-08, 0.0296240002, -5.01543518e-08, 1, 2.37712214e-08, -0.0296240002, 2.22750174e-08, -0.999561131)
-wait(16)
+wait(15)
+ClaimCoin = false
+wait(1)
 NormalTPBox = true
 Number = 800
 end
+end
+if Number > 7500 then
+ClaimCoin = true
 end
 end
 end)
@@ -128,9 +133,11 @@ end)
 spawn(function()
 while wait() do
 if AutoFarm then
+if not ClaimCoin then
 pcall(function()
 workspace.ClaimRiverResultsGold:FireServer()
 end)
+end
 end
 end
 end)
