@@ -17,7 +17,7 @@ local BuildLabel = Instance.new("TextLabel")
 local Close = Instance.new("TextButton")
 local AutoFarmToggle = Instance.new("TextButton")
 
-BuildABoatGui.Name = "BuildABotGui"
+BuildABoatGui.Name = "BuildABoatGui"
 BuildABoatGui.Parent = game.CoreGui
 BuildABoatGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
