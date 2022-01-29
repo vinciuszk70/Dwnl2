@@ -90,9 +90,9 @@ end)
 RService.Stepped:Connect(function()
 pcall(function()
 if AutoFarm then
-for i,v in pairs(workspace.tower.finishes:GetChildren()) do
-if v.Name == "Finish" then
-if v.Transparency > 0 then
+for i,v in pairs(workspace.tower.sections:GetDescendants()) do
+if v.Name == "FinishGlow" then
+if v.Transparency ~= 1 then
 LPlayer.Character.Humanoid:MoveTo(v.Position)
 LPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
 end
