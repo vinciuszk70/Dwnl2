@@ -77,16 +77,6 @@ AutoFarm = false
 end
 end)
 
-spawn(function()
-while wait(2) do
-if AutoFarm then
-pcall(function()
-LPlayer.Character:ClearAllChildren()
-end)
-end
-end
-end)
-
 RService.Stepped:Connect(function()
 pcall(function()
 if AutoFarm then
