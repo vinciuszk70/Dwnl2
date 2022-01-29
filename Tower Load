@@ -26,7 +26,7 @@ TowerLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
 TowerLabel.BorderSizePixel = 2
 TowerLabel.Size = UDim2.new(0, 262, 0, 23)
 TowerLabel.Font = Enum.Font.GothamBlack
-TowerLabel.Text = "Tower Of Hell Auto Farm - Made By Loaded"
+TowerLabel.Text = "Tower Of Hell Auto Farm V2 - Made By Loaded"
 TowerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TowerLabel.TextSize = 11.000
 
