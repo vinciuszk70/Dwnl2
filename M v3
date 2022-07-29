@@ -159,21 +159,24 @@ local BrickColors = {
 '1032'
 }
 
-if LPlayer.Name == "2kRe6xx" then
-repeat until nil
+local CTOF = "on/off"
+local CTP = "plr"
+local CTT = "i,g,c,n,l,a"
+local WhiteListed = false
+
+local WhiteList = {
+"viniciuszk70"
+}
+
+for i,v in pairs(WhiteList) do
+if LPlayer.Name == v then
+WhiteListed = true
+end
 end
 
-if LPlayer.Name == "GDALLAZUANA" then
+while WhiteListed == false do
 repeat until nil
-end
-
-if LPlayer.Name == "FLASHGOJK07077" then
-repeat until nil
-end
-
-if LPlayer.Name == "estranha_rs" then
-repeat until nil
-end
+return end
 
 -- Guis --
 
@@ -1396,9 +1399,104 @@ UICorner_109.Parent = Grey
 UICorner_110.Parent = ThemesFrame
 
 local Commands = {
-"As the admin is not ready yet, there is",
-"no list of commands, when it is ready",
-"you will have it."
+"re",
+"to ["..CTP.."]",
+"k ["..CTP..","..CTT.."]",
+"lk ["..CTP..","..CTT.."]",
+"unlk ["..CTP..","..CTT.."]",
+"auto ["..CTOF.."]",
+"autolock ["..CTOF.."]",
+"infstam ["..CTOF.."]",
+"ff ["..CTOF.."]",
+"god ["..CTOF.."]",
+"infammo ["..CTOF.."]",
+"fastammo ["..CTOF.."]",
+"crash [player,sprit,mkan,",
+"nwe,pnl,force,dest,lest,",
+"smite,little,server]",
+"guns [slot1,slot2,slot3,",
+"slot4,slot5]",
+"autoguns [slot1,slot2,slot3,",
+"slot4,slot5]",
+"antibring ["..CTOF.."]",
+"antivoid ["..CTOF.."]",
+"antishield ["..CTOF.."]",
+"antispam ["..CTOF.."]",
+"arrest ["..CTP..",a]",
+"bring ["..CTP..","..CTT..",cars]",
+"crim ["..CTP..","..CTT.."]",
+"rj",
+"quit",
+"anticrash ["..CTOF.."]",
+"clicktp ["..CTOF.."]",
+"antilag ["..CTOF.."]",
+"lrl ["..CTOF.."]",
+"lrm ["..CTOF.."]",
+"antipunch ["..CTOF.."]",
+"hitbox ["..CTOF.."]",
+"hbsize [number]",
+"hbshape [1,2,3]",
+"hbcolor [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"hbtrs [1,2,3]",
+"tncolor [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"ccursor [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"espcolor [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"prts ["..CTOF.."]",
+"antidoors ["..CTOF.."]",
+"prta ["..CTOF.."]",
+"antisit ["..CTOF.."]",
+"antifling ["..CTOF.."]",
+"cgun [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"esp ["..CTOF.."]",
+"dtt ["..CTOF.."]",
+"themes [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"wndcolor [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"chtcolor [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"anticlothing ["..CTOF.."]",
+"pllcolor [white,black,",
+"blue,red,green,yellow,",
+"purple,pink]",
+"sa ["..CTP.."]",
+"unsa ["..CTP.."]",
+"ultrasa ["..CTP.."]",
+"unultrasa ["..CTP.."]",
+"lck ["..CTP.."]",
+"unlck ["..CTP.."]",
+"fly ["..CTOF.."]",
+"flyspeed [number]",
+"follow ["..CTP.."]",
+"unfollow ["..CTP.."]",
+"noclip ["..CTOF.."]",
+"view ["..CTP.."]",
+"unview ["..CTP.."]",
+"time [day,night,off]",
+"sp ["..CTOF.."]",
+"fp ["..CTOF.."]",
+"nex",
+"yar",
+"arm",
+"cbase",
+"tow",
+"cells",
+"roof",
+"back",
+"exit"
 }
 
 for i,v in pairs(Commands) do
